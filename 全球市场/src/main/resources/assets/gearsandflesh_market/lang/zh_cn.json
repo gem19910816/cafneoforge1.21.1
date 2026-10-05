@@ -1,0 +1,7 @@
+{
+  "key.categories.gearsandflesh_market": "齿轮与腐肉",
+  "key.gearsandflesh_market.open": "打开全球市场",
+  "block.gearsandflesh_market.market_terminal": "市场终端",
+  "item.caf.money": "腐肉币",
+  "message.gearsandflesh_market.currency_missing": "全球市场钱包已停用：未找到货币 caf:money"
+}

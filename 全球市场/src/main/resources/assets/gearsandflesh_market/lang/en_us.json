@@ -1,0 +1,7 @@
+{
+  "key.categories.gearsandflesh_market": "Gears and Flesh",
+  "key.gearsandflesh_market.open": "Open Global Market",
+  "block.gearsandflesh_market.market_terminal": "Market Terminal",
+  "item.caf.money": "Flesh Coin",
+  "message.gearsandflesh_market.currency_missing": "Global Market wallet is disabled: currency caf:money was not found"
+}

@@ -1,0 +1,10 @@
+pluginManagement {
+    repositories {
+        maven { name = 'NeoForged'; url = 'https://maven.neoforged.net/releases' }
+        maven { name = 'AliyunPublic'; url = 'https://maven.aliyun.com/repository/public' }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = 'gearsandflesh-global-market'
