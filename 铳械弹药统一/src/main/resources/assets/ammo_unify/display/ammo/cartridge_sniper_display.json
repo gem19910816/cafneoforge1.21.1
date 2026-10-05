@@ -1,0 +1,29 @@
+{
+  "model": "ammo_unify:ammo/cartridge_sniper",
+  "texture": "ammo_unify:ammo/uv/cartridge_sniper",
+  "slot": "ammo_unify:ammo/slot/cartridge_sniper",
+  "shell": {
+    "model": "ammo_unify:shell/cartridge_sniper_shell",
+    "texture": "ammo_unify:shell/cartridge_sniper_shell"
+  },
+  "tracer_color": "#9CE07A",
+  "transform": {
+    "scale": {
+      "thirdperson": [
+        0.6,
+        0.6,
+        0.6
+      ],
+      "ground": [
+        0.6,
+        0.6,
+        0.6
+      ],
+      "fixed": [
+        1.2,
+        1.2,
+        1.2
+      ]
+    }
+  }
+}

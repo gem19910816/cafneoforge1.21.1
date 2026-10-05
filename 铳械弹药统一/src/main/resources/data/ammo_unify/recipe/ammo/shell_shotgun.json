@@ -1,0 +1,23 @@
+{
+  "materials": [
+    {
+      "item": {
+        "tag": "c:ingots/copper"
+      },
+      "count": 6
+    },
+    {
+      "item": {
+        "tag": "c:gunpowders"
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "type": "ammo",
+    "group": "ammo_unify_unified",
+    "id": "ammo_unify:shell_shotgun",
+    "count": 24
+  },
+  "type": "tacz:gun_smith_table_crafting"
+}

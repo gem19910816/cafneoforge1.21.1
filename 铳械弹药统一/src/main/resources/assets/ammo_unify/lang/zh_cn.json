@@ -1,0 +1,16 @@
+{
+  "pack.ammo_unify.ammo_unify_core.name": "铳械弹药统一 · 核心包",
+  "pack.ammo_unify.ammo_unify_core.desc": "通用弹药与配方，素材由本模组脚本生成",
+  "ammo_unify.ammo.cartridge_pistol.name": "通用手枪弹",
+  "ammo_unify.ammo.cartridge_pistol.tooltip": "通用弹药 · 按武器类别统一",
+  "ammo_unify.ammo.cartridge_rifle.name": "通用步枪弹",
+  "ammo_unify.ammo.cartridge_rifle.tooltip": "通用弹药 · 按武器类别统一",
+  "ammo_unify.ammo.shell_shotgun.name": "通用霰弹",
+  "ammo_unify.ammo.shell_shotgun.tooltip": "通用弹药 · 按武器类别统一",
+  "ammo_unify.ammo.cartridge_sniper.name": "通用狙击弹",
+  "ammo_unify.ammo.cartridge_sniper.tooltip": "通用弹药 · 按武器类别统一",
+  "ammo_unify.ammo.shell_barrel.name": "通用炮弹",
+  "ammo_unify.ammo.shell_barrel.tooltip": "通用弹药 · 按武器类别统一",
+  "ammo_unify.ammo.tank_fuel.name": "通用能量罐",
+  "ammo_unify.ammo.tank_fuel.tooltip": "通用弹药 · 按武器类别统一"
+}

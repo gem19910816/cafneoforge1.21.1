@@ -1,0 +1,7 @@
+{
+  "name": "ammo_unify.ammo.tank_fuel.name",
+  "display": "ammo_unify:tank_fuel_display",
+  "tooltip": "ammo_unify.ammo.tank_fuel.tooltip",
+  "stack_size": 16,
+  "sort": 6
+}

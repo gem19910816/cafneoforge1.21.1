@@ -1,0 +1,29 @@
+{
+  "model": "ammo_unify:ammo/tank_fuel",
+  "texture": "ammo_unify:ammo/uv/tank_fuel",
+  "slot": "ammo_unify:ammo/slot/tank_fuel",
+  "shell": {
+    "model": "ammo_unify:shell/tank_fuel_shell",
+    "texture": "ammo_unify:shell/tank_fuel_shell"
+  },
+  "tracer_color": "#66E0FF",
+  "transform": {
+    "scale": {
+      "thirdperson": [
+        0.6,
+        0.6,
+        0.6
+      ],
+      "ground": [
+        0.6,
+        0.6,
+        0.6
+      ],
+      "fixed": [
+        1.2,
+        1.2,
+        1.2
+      ]
+    }
+  }
+}

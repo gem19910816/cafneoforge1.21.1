@@ -1,0 +1,10 @@
+{
+  "version": "1.0.0",
+  "name": "pack.ammo_unify.ammo_unify_core.name",
+  "desc": "pack.ammo_unify.ammo_unify_core.desc",
+  "license": "AGPL-3.0-only",
+  "authors": [
+    "Ammo Unify"
+  ],
+  "date": "2025-01-01"
+}
