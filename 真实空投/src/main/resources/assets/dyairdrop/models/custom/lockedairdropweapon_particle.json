@@ -1,0 +1,7 @@
+
+{
+  "parent": "dyairdrop:displaysettings/airdropweaponblock.item",
+  "textures": {
+    "particle": "dyairdrop:block/millitaryloot"
+  }
+}

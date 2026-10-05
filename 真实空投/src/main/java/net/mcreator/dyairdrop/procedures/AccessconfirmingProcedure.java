@@ -1,0 +1,24 @@
+package net.mcreator.dyairdrop.procedures;
+
+import net.mcreator.dyairdrop.network.DyairdropModVariables;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.Level;
+
+public class AccessconfirmingProcedure {
+   public static boolean execute(LevelAccessor world, Entity entity) {
+      return entity == null
+         ? false
+         : ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                  .pw
+                  .length()
+               == 6
+            && ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                  .showlight
+               == 1.0
+            && ((Level)world).getDayTime()
+                  - ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                     .keyticking
+               < 41.0;
+   }
+}

@@ -1,0 +1,160 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:skiing_helmet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:standard_tactical_helmet"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:skiing_boots"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:standard_tactical_boots"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:improved_burning_battle_parts",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:improved_burning_charging_parts",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:primary_freezing_battle_parts",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:primary_freezing_charging_parts",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:improved_light_weighted_grip",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:primary_extend_weighted_grip",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:primary_heavy_weighted_grip",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:flare_gun"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:standard_tactical_chestplate",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:skiing_chestplate",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:standard_tactical_leggings",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:skiing_leggings",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 2,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:netherite_baseball_bat"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:triangular_thorn",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:studded_baseball_bat",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:rake",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:fire_axe",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:crowbar",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:machete",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:knife",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

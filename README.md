@@ -8,6 +8,7 @@
 | [末日装饰 (Doomsday Decoration)](末日装饰/) | 1.20.1 Forge 1.1.3 | 1.21.1 NeoForge | [jar](末日装饰/doomsday_decoration-1.1.3-neoforge-1.21.1.jar) |
 | [铳械弹药统一 (Ammo Unify)](铳械弹药统一/) | —（1.21.1 **新实现**，非移植） | 1.21.1 NeoForge | [jar](铳械弹药统一/ammo_unify-1.0.0.jar) |
 | [全球市场 (Global Market)](全球市场/) | 1.20.1 Forge（原 `MOD/global-market`） | 1.21.1 NeoForge | [jar](全球市场/gearsandflesh_market-1.0.0.jar) |
+| [真实空投 (Realistic Airdrop)](真实空投/) | 1.20.1 Forge 1.1.0-beta | 1.21.1 NeoForge | [jar](真实空投/dyairdrop-1.1.0.jar) |
 
 ## 说明
 
@@ -48,4 +49,24 @@ Tacz-Unidict（TACZ：铳械协议）。后者依赖的 TaCZ 弹药机制在 1.1
   改规则不需要玩家更新模组。
 - **验证状态**：编译通过，且已用 NeoForge 21.1.255 开发环境专用服务器实测加载（模组进入模组列表、
   货币注册成功、服务器正常启动）。**与官网 API 的实机联调、多人并发与界面视觉核对尚未进行**，
+  详见其 `移植说明.md` 第五节。
+
+## 特别标注：需要前置模组
+
+### [真实空投 (Realistic Airdrop)](真实空投/) — 1.21.1 移植
+
+从 1.20.1 Forge 版 `dyairdrop-1.1.0-1.20.1-beta.jar` 移植。运输机按设定高度与距离飞越玩家上空投下
+补给箱，箱内按等级抽取战利品并可设密码锁，空投会吸引敌人前来抢夺；另配 6 把信号枪手动召唤空投。
+
+- **前置**：GeckoLib for NeoForge 1.21.1 **4.x**（本仓库随附 `真实空投/libs/geckolib-neoforge-1.21.1-4.9.3.jar`）。
+  **不装 GeckoLib 会直接加载失败**。
+- **可选**：`zombiekit`（末日生存工具包）1.21.1 版。原模组自带 20 个引用它的掉落表，
+  未安装时 `data/zombiekit/` 下这批表会解析失败（仅日志提示，不影响启动与 `dyairdrop` 自身功能）。
+- **保留项**：方块 / 物品 / 实体 / 菜单的注册 ID 与 1.20.1 版完全一致，`assets/` 与原 jar 逐文件一致，
+  `config/dyairdrop.toml` 的分区与配置项名也未变，旧配置文件可直接沿用。
+- **服务器建议**：`Performance.forceload` 默认 `true`（会为飞机飞行路径强制加载区块），
+  原作注释亦标「服务器慎用」，服务器上建议按需关闭。
+- **验证状态**：编译通过（0 error），已用 NeoForge 21.1.255 开发环境专用服务器实测加载
+  （`Done (3.219s)!`、0 条 ERROR）、开发环境客户端实测进入主菜单，模型与贴图 0 缺失。
+  **玩法主流程（空投触发、密码面板、敌人抢夺、飞机飞行路径）与多人并发尚未实机验证**，
   详见其 `移植说明.md` 第五节。

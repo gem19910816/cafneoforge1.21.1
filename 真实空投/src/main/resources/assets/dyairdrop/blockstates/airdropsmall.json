@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "dyairdrop:block/airdropsmall"
+    },
+    "facing=east": {
+      "model": "dyairdrop:block/airdropsmall",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "dyairdrop:block/airdropsmall",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "dyairdrop:block/airdropsmall",
+      "y": 270
+    }
+  }
+}
