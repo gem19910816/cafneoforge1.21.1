@@ -1,0 +1,47 @@
+{
+  "huzai": {
+    "subtitle": "subtitles.huzai",
+    "sounds": [
+      {
+        "name": "doomsday_decoration:huzai",
+        "stream": false
+      }
+    ]
+  },
+  "otto": {
+    "subtitle": "subtitles.otto",
+    "sounds": [
+      {
+        "name": "doomsday_decoration:otto",
+        "stream": false
+      }
+    ]
+  },
+  "hhh": {
+    "subtitle": "subtitles.hhh",
+    "sounds": [
+      {
+        "name": "doomsday_decoration:hhh",
+        "stream": false
+      }
+    ]
+  },
+  "ggg": {
+    "subtitle": "subtitles.ggg",
+    "sounds": [
+      {
+        "name": "doomsday_decoration:ggg",
+        "stream": false
+      }
+    ]
+  },
+  "roblox": {
+    "subtitle": "subtitles.roblox",
+    "sounds": [
+      {
+        "name": "doomsday_decoration:roblox",
+        "stream": false
+      }
+    ]
+  }
+}

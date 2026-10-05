@@ -1,0 +1,6 @@
+# gradle / build outputs
+build/
+.gradle/
+run/
+out/
+*.log

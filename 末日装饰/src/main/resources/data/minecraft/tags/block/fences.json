@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "doomsday_decoration:errorfence",
+    "doomsday_decoration:nomapfence_2",
+    "doomsday_decoration:nomapfence"
+  ]
+}

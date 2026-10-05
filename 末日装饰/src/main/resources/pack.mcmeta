@@ -1,0 +1,10 @@
+{
+  "pack": {
+    "description": "Doomsday Decoration (末日装饰) 1.21.1 NeoForge",
+    "pack_format": 34,
+    "supported_formats": [
+      34,
+      48
+    ]
+  }
+}
