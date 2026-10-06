@@ -1,0 +1,23 @@
+# Gradle
+.gradle/
+build/
+out/
+run/
+
+# NeoForge datagen 缓存（产物 src/main/generated 下的内容保留）
+src/main/generated/.cache/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+bin/
+.eclipse/
+
+# 日志与临时文件
+*.log
+*.class
+logs/

@@ -1,0 +1,40 @@
+{
+    "itemGroup.thinair.main": "稀薄空气",
+
+    "item.thinair.respirator": "呼吸器",
+    "item.thinair.air_bladder": "空气囊",
+    "item.thinair.reinforced_air_bladder": "强化空气囊",
+    "item.thinair.soulfire_bottle": "瓶中魂火瓶",
+
+    "block.thinair.safety_lantern": "安全指示灯",
+    "block.thinair.signal_torch": "信号火把",
+    "block.thinair.wall_signal_torch": "墙壁信号火把",
+
+    "advancements.thinair.root.title": "稀薄空气",
+    "advancements.thinair.root.description": "空气并不总是可以在地球深处和其他维度呼吸",
+    "advancements.thinair.air_bladder.title": "我想要空气！",
+    "advancements.thinair.air_bladder.description": "在旅途中使用气囊补充空气供应",
+    "advancements.thinair.blue_air.title": "深蓝",
+    "advancements.thinair.blue_air.description": "呼吸瓶中魂火释放的生命力来维持你的空气（但不要增加它！）",
+    "advancements.thinair.soulfire_bottle.title": "在紧急情况下",
+    "advancements.thinair.soulfire_bottle.description": "用被困在瓶中魂火瓶中的灵魂恢复你的肺部",
+    "advancements.thinair.respirator.title": "我会深吸一口气...",
+    "advancements.thinair.respirator.description": "用呼吸器之类的东西保护自己免受窒息",
+    "advancements.thinair.water_breathing.title": "...快使用它！",
+    "advancements.thinair.water_breathing.description": "在没有空气的地方自由呼吸",
+    "advancements.thinair.safety_lantern.title": "我们的首要任务",
+    "advancements.thinair.safety_lantern.description": "使用安全灯检查周围的空气质量",
+    "advancements.thinair.disco_lantern.title": "红灯！绿灯！",
+    "advancements.thinair.disco_lantern.description": "使用一块染料手动更改安全灯的颜色（您可以用斧头刮掉颜色）",
+    "advancements.thinair.signal_torch.title": "哦，快跑！",
+    "advancements.thinair.signal_torch.description": "右键点击火炬，使其喷出颗粒，也许是为了发出洞穴出口的信号",
+
+    "effect.minecraft.water_breathing": "自由呼吸",
+    "item.minecraft.tipped_arrow.effect.water_breathing": "自由呼吸之箭",
+    "item.minecraft.potion.effect.water_breathing": "自由呼吸药剂",
+    "item.minecraft.splash_potion.effect.water_breathing": "喷溅型自由呼吸药剂",
+    "item.minecraft.lingering_potion.effect.water_breathing": "滞留型自由呼吸药剂",
+    "death.attack.drown": "%1$s 使窒息",
+    "death.attack.drown.player": "%1$s 试图逃跑时窒息 %2$s",
+    "subtitles.entity.player.hurt_drown": "玩家窒息"
+}

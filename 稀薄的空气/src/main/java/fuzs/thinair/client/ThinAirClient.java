@@ -1,0 +1,55 @@
+package fuzs.thinair.client;
+
+import fuzs.puzzleslib.api.client.core.v1.ClientModConstructor;
+import fuzs.puzzleslib.api.client.core.v1.context.ItemModelPropertiesContext;
+import fuzs.puzzleslib.api.client.core.v1.context.LayerDefinitionsContext;
+import fuzs.puzzleslib.api.client.core.v1.context.RenderTypesContext;
+import fuzs.thinair.ThinAir;
+import fuzs.thinair.api.v1.AirQualityHelper;
+import fuzs.thinair.api.v1.AirQualityLevel;
+import fuzs.thinair.client.renderer.entity.layers.RespiratorRenderer;
+import fuzs.thinair.init.ModRegistry;
+import fuzs.thinair.world.level.block.SafetyLanternBlock;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+
+public class ThinAirClient implements ClientModConstructor {
+    public static final ResourceLocation AIR_QUALITY_LEVEL_MODEL_PROPRTY = ThinAir.id("air_quality_level");
+
+    @Override
+    public void onRegisterItemModelProperties(ItemModelPropertiesContext context) {
+        context.registerItemProperty(AIR_QUALITY_LEVEL_MODEL_PROPRTY, (ItemStack itemStack, ClientLevel level, LivingEntity entity, int seed) -> {
+            Integer airQualityLevel = itemStack.get(ModRegistry.AIR_QUALITY_LEVEL_COMPONENT.value());
+            if (airQualityLevel != null && airQualityLevel < AirQualityLevel.values().length) {
+                return AirQualityLevel.values()[airQualityLevel].getItemModelProperty();
+            }
+            if (entity == null && itemStack.getEntityRepresentation() instanceof LivingEntity livingEntity) {
+                entity = livingEntity;
+            }
+            AirQualityLevel airQualityAtLocation;
+            if (entity != null) {
+                airQualityAtLocation = AirQualityHelper.INSTANCE.getAirQualityAtLocation(entity);
+            } else {
+                airQualityAtLocation = AirQualityLevel.YELLOW;
+            }
+            return airQualityAtLocation.getItemModelProperty();
+        }, ModRegistry.SAFETY_LANTERN_BLOCK.value());
+    }
+
+    @Override
+    public void onRegisterBlockRenderTypes(RenderTypesContext<Block> context) {
+        context.registerRenderType(RenderType.cutout(), ModRegistry.SIGNAL_TORCH_BLOCK.value(), ModRegistry.WALL_SIGNAL_TORCH_BLOCK.value(), ModRegistry.SAFETY_LANTERN_BLOCK.value());
+    }
+
+    @Override
+    public void onRegisterLayerDefinitions(LayerDefinitionsContext context) {
+        context.registerLayerDefinition(RespiratorRenderer.PLAYER_RESPIRATOR_LAYER, () -> LayerDefinition.create(HumanoidModel.createMesh(new CubeDeformation(1.02F), 0.0F), 64, 32));
+    }
+}

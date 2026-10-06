@@ -1,0 +1,52 @@
+modLoader = "javafml"
+loaderVersion = "*"
+license = "MIT"
+issueTrackerURL = "https://github.com/Fuzss/thinair/issues"
+
+[[mods]]
+modId = "thinair"
+displayName = "Thin Air (移植版)"
+description = "[社区移植版] 由 1.20.1 Forge 版移植至 1.21.1 NeoForge，非官方构建，原作者 Petrak, AlphaMode, Fuzs。\nThe air is not always breathable in the depths of the earth and other dimensions."
+version = "21.1.1-port"
+authors = "Petrak, AlphaMode, Fuzs (1.21.1 NeoForge 移植 by 社区)"
+logoFile = "mod_banner.png"
+logoBlur = false
+displayURL = "https://github.com/Fuzss/thinair"
+displayTest = "MATCH_VERSION"
+
+[[mixins]]
+config = "thinair.common.mixins.json"
+
+[[mixins]]
+config = "thinair.neoforge.mixins.json"
+
+[[dependencies.thinair]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1.77,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.thinair]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1]"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.thinair]]
+modId = "puzzleslib"
+type = "required"
+versionRange = "[21.1.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.thinair]]
+modId = "curios"
+type = "optional"
+versionRange = "*"
+ordering = "NONE"
+side = "BOTH"
+
+[modproperties.thinair]
+catalogueImageIcon = "mod_logo.png"

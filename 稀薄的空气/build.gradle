@@ -1,0 +1,75 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.107'
+}
+
+group = 'fuzs.thinair'
+version = '21.1.1-port'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+    withSourcesJar()
+}
+
+base {
+    archivesName = 'thinair-1.21.1-neoforge'
+}
+
+sourceSets.main.resources {
+    // datagen output (models, advancements, loot tables, recipes, tags, en_us lang)
+    srcDir 'src/main/generated'
+}
+
+tasks.named('processResources') {
+    // static pack.mcmeta in src/main/resources wins over any datagen copy
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+repositories {
+    // Puzzles Lib and Curios are local jars in libs/ (downloaded from Modrinth)
+    flatDir {
+        dirs 'libs'
+    }
+    maven {
+        name = 'Modrinth'
+        url = 'https://api.modrinth.com/maven'
+        content {
+            includeGroup 'maven.modrinth'
+        }
+    }
+}
+
+neoForge {
+    // Match the local test instance version
+    version = '21.1.227'
+
+    runs {
+        client {
+            client()
+        }
+        server {
+            server()
+        }
+        data {
+            data()
+            programArguments.addAll '--mod', 'thinair', '--all',
+                    '--output', file('src/main/generated/').getAbsolutePath(),
+                    '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+    }
+
+    mods {
+        thinair {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+dependencies {
+    // Puzzles Lib (NeoForge build for 1.21.1) - compile against it, installed separately at runtime
+    implementation name: 'puzzleslib-v21.1.62-mc1.21.1+neoforge'
+    // Curios API (compile only, optional at runtime)
+    compileOnly name: 'curios-neoforge-9.5.1+1.21.1'
+}

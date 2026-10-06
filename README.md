@@ -9,6 +9,7 @@
 | [铳械弹药统一 (Ammo Unify)](铳械弹药统一/) | —（1.21.1 **新实现**，非移植） | 1.21.1 NeoForge | [jar](铳械弹药统一/ammo_unify-1.0.0.jar) |
 | [全球市场 (Global Market)](全球市场/) | 1.20.1 Forge（原 `MOD/global-market`） | 1.21.1 NeoForge | [jar](全球市场/gearsandflesh_market-1.0.0.jar) |
 | [真实空投 (Realistic Airdrop)](真实空投/) | 1.20.1 Forge 1.1.0-beta | 1.21.1 NeoForge | [jar](真实空投/dyairdrop-1.1.0.jar) |
+| [稀薄的空气 (Thin Air)](稀薄的空气/) | 1.20.1 Forge（原 Thin Air / fuzs） | 1.21.1 NeoForge | [jar](稀薄的空气/thinair-1.21.1-neoforge-21.1.1-port.jar) |
 
 ## 说明
 
@@ -70,3 +71,20 @@ Tacz-Unidict（TACZ：铳械协议）。后者依赖的 TaCZ 弹药机制在 1.1
   （`Done (3.219s)!`、0 条 ERROR）、开发环境客户端实测进入主菜单，模型与贴图 0 缺失。
   **玩法主流程（空投触发、密码面板、敌人抢夺、飞机飞行路径）与多人并发尚未实机验证**，
   详见其 `移植说明.md` 第五节。
+
+### [稀薄的空气 (Thin Air)](稀薄的空气/) — 1.21.1 移植
+
+从 1.20.1 Forge 版 Thin Air（作者 fuzs，含 1.20.4 分支）移植。空气按区域划分品质，
+深处/密闭空间空气稀薄会持续掉氧，需靠空气囊、呼吸器、安全灯笼、信号火把等设备维持呼吸；
+另含空气品质数据组件、呼吸器盔甲、Curios 头部槽位集成与一组对应进度。
+
+- **前置**：Puzzles Lib for NeoForge 1.21.1 **≥ 21.1.x**（本仓库随附
+  `稀薄的空气/libs/puzzleslib-v21.1.62-mc1.21.1+neoforge.jar`）。**不装 Puzzles Lib 会直接加载失败**。
+- **可选**：Curios for NeoForge 1.21.1 **9.x**（随附 `libs/curios-neoforge-9.5.1+1.21.1.jar`）。
+  未安装时呼吸器的饰品槽位功能不可用，其余功能正常。
+- **保留项**：物品 / 方块注册 ID 与原版一致，`assets/` 美术资源原样保留（贴图、模型、音效未改动）。
+- **移植版声明**：`neoforge.mods.toml` 中 displayName 为 `Thin Air (移植版)`，
+  description 首行标注 `[社区移植版] 由 1.20.1 Forge 版移植至 1.21.1 NeoForge`，版本号带 `-port` 后缀。
+- **验证状态**：编译通过（仅过时警告）、`runData` 全部 provider 成功（72+ 资源文件）、
+  开发环境服务器启动至 `Done (3.882s)` 且日志无 thinair 相关错误、开发环境客户端进入标题界面零缺失模型。
+  **多人并发与长时段玩法流程尚未实机验证**，详见其 `移植说明.md` 第三节。
