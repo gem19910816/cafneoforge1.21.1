@@ -1,375 +1,135 @@
 package net.gem19910816.dyairdrop.procedures;
 
-import net.gem19910816.dyairdrop.core.Vars;
-
-import net.gem19910816.dyairdrop.core.Commands;
-
-import net.gem19910816.dyairdrop.core.Blocks;
-
-import net.gem19910816.dyairdrop.core.Nbt;
-
 import net.gem19910816.dyairdrop.DyairdropMod;
+import net.gem19910816.dyairdrop.core.Blocks;
+import net.gem19910816.dyairdrop.core.Commands;
+import net.gem19910816.dyairdrop.core.Nbt;
+import net.gem19910816.dyairdrop.core.Sounds;
+import net.gem19910816.dyairdrop.core.Vars;
+import net.gem19910816.dyairdrop.init.DyairdropModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.gem19910816.dyairdrop.init.DyairdropModSounds;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
+/**
+ * 字母密码面板 RE 的「确认（√）」逻辑：逐位揭晓 + 打字机动画 + 成功后把箱子替换成开启形态。
+ *
+ * <p>重构点（行为逐条保留，见 {@code 重构说明.md}）：
+ * <ul>
+ *   <li>原实现把「揭晓第 N 位」的同一段代码**复制了 6 份**（每份约 35 行，只差下标与延迟），
+ *       现在收敛成 {@link #revealLetter} 加一个循环；</li>
+ *   <li>输入缓存与方块实体的读写统一走 {@link Vars} / {@link Nbt}，音效统一走 {@link Sounds}，
+ *       命令统一走 {@link Commands}；</li>
+ *   <li>数值与文本逐字保留：提交哨兵 {@code "Z"}、完成标记 {@code "Y"}、延迟 7/14/21/28/35/42、
+ *       完成后 7 tick 播 PWCORRECT 并把 {@code animation} 置 1、再 20 tick 执行
+ *       {@code setblock ~ ~ ~ <block>open[facing=..]{LootTable:".."} replace} 并把 {@code animation} 置 2、
+ *       音效 CHECK 音量 1.0、消息「解锁成功！」、方块实体 {@code valid="shutdown"}。</li>
+ * </ul>
+ */
 public class CheckProcedure {
-   public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
-      if (entity != null) {
-         Entity entity1 = null;
-         double gx = 0.0;
-         double gy = 0.0;
-         double gz = 0.0;
-         double i = 0.0;
-         String input = "";
-         String PW = "";
-         String password_panel = "";
-         String j = "";
-         input = Vars.of(entity)
-            .passwordre;
-         if (!input.chars().anyMatch(Character::isUpperCase)) {
-            if (Vars.of(entity)
-                  .passwordre
-                  .length()
-               == 6) {
-               String _setval = "Z";
-               Vars.of(entity).ifPresentData(capability -> {
-                  capability.passwordre = _setval;
-                  capability.syncPlayerVariables(entity);
-               });
-               if (!world.isClientSide()) {
-                  BlockPos _bp = BlockPos.containing(x, y, z);
-                  BlockEntity _blockEntity = world.getBlockEntity(_bp);
-                  BlockState _bs = world.getBlockState(_bp);
-                  if (_blockEntity != null) {
-                     _blockEntity.getPersistentData().putString("valid", "shutdown");
-                  }
 
-                  if (world instanceof Level _level) {
-                     _level.sendBlockUpdated(_bp, _bs, _bs, 3);
-                  }
-               }
+    /** 密码位数（与原实现一致）。 */
+    private static final int PASSWORD_LENGTH = 6;
+    /** 动画中哨兵：出现它表示「正在逐位揭晓」，此时不因大写字母清空输入。 */
+    private static final String SUBMIT_SENTINEL = "Z";
+    /** 解锁成功标记（{@code PannelREticksProcedure} 据此自动关窗）。 */
+    private static final String SUCCESS_SUFFIX = "Y";
+    private static final int LETTER_STEP_TICKS = 7;
+    private static final int COMPLETE_DELAY_TICKS = 7;
+    private static final int OPEN_BLOCK_DELAY_TICKS = 20;
+    private static final float CHECK_SOUND_VOLUME = 1.0F;
+    private static final int ANIMATION_UNLOCK = 1;
+    private static final int ANIMATION_OPEN = 2;
 
-               DyairdropMod.queueServerWork(
-                  7,
-                  () -> {
-                     if (Nbt.getString(world, BlockPos.containing(x, y, z), "pw").length() >= 2) {
-                        String _setvalx = Vars.of(entity)
-                              .passwordre
-                           + Nbt.getString(world, BlockPos.containing(x, y, z), "pw").substring(0, 1);
-                        Vars.of(entity).ifPresentData(capability -> {
-                           capability.passwordre = _setvalx;
-                           capability.syncPlayerVariables(entity);
-                        });
-                        if (world instanceof Level _levelx) {
-                           if (!_levelx.isClientSide()) {
-                              _levelx.playSound(
-                                 null,
-                                 BlockPos.containing(x, y, z),
-                                 DyairdropModSounds.CHECK.get(),
-                                 SoundSource.BLOCKS,
-                                 1.0F,
-                                 1.0F
-                              );
-                           } else {
-                              _levelx.playLocalSound(
-                                 x,
-                                 y,
-                                 z,
-                                 DyairdropModSounds.CHECK.get(),
-                                 SoundSource.BLOCKS,
-                                 1.0F,
-                                 1.0F,
-                                 false
-                              );
-                           }
-                        }
-                     }
-                  }
-               );
-               DyairdropMod.queueServerWork(
-                  14,
-                  () -> {
-                     if (Nbt.getString(world, BlockPos.containing(x, y, z), "pw").length() >= 3) {
-                        String _setvalx = Vars.of(entity)
-                              .passwordre
-                           + Nbt.getString(world, BlockPos.containing(x, y, z), "pw").substring(1, 2);
-                        Vars.of(entity).ifPresentData(capability -> {
-                           capability.passwordre = _setvalx;
-                           capability.syncPlayerVariables(entity);
-                        });
-                        if (world instanceof Level _levelx) {
-                           if (!_levelx.isClientSide()) {
-                              _levelx.playSound(
-                                 null,
-                                 BlockPos.containing(x, y, z),
-                                 DyairdropModSounds.CHECK.get(),
-                                 SoundSource.BLOCKS,
-                                 1.0F,
-                                 1.0F
-                              );
-                           } else {
-                              _levelx.playLocalSound(
-                                 x,
-                                 y,
-                                 z,
-                                 DyairdropModSounds.CHECK.get(),
-                                 SoundSource.BLOCKS,
-                                 1.0F,
-                                 1.0F,
-                                 false
-                              );
-                           }
-                        }
-                     }
-                  }
-               );
-               DyairdropMod.queueServerWork(
-                  21,
-                  () -> {
-                     if (Nbt.getString(world, BlockPos.containing(x, y, z), "pw").length() >= 4) {
-                        String _setvalx = Vars.of(entity)
-                              .passwordre
-                           + Nbt.getString(world, BlockPos.containing(x, y, z), "pw").substring(2, 3);
-                        Vars.of(entity).ifPresentData(capability -> {
-                           capability.passwordre = _setvalx;
-                           capability.syncPlayerVariables(entity);
-                        });
-                        if (world instanceof Level _levelx) {
-                           if (!_levelx.isClientSide()) {
-                              _levelx.playSound(
-                                 null,
-                                 BlockPos.containing(x, y, z),
-                                 DyairdropModSounds.CHECK.get(),
-                                 SoundSource.BLOCKS,
-                                 1.0F,
-                                 1.0F
-                              );
-                           } else {
-                              _levelx.playLocalSound(
-                                 x,
-                                 y,
-                                 z,
-                                 DyairdropModSounds.CHECK.get(),
-                                 SoundSource.BLOCKS,
-                                 1.0F,
-                                 1.0F,
-                                 false
-                              );
-                           }
-                        }
-                     }
-                  }
-               );
-               DyairdropMod.queueServerWork(
-                  28,
-                  () -> {
-                     if (Nbt.getString(world, BlockPos.containing(x, y, z), "pw").length() >= 5) {
-                        String _setvalx = Vars.of(entity)
-                              .passwordre
-                           + Nbt.getString(world, BlockPos.containing(x, y, z), "pw").substring(3, 4);
-                        Vars.of(entity).ifPresentData(capability -> {
-                           capability.passwordre = _setvalx;
-                           capability.syncPlayerVariables(entity);
-                        });
-                        if (world instanceof Level _levelx) {
-                           if (!_levelx.isClientSide()) {
-                              _levelx.playSound(
-                                 null,
-                                 BlockPos.containing(x, y, z),
-                                 DyairdropModSounds.CHECK.get(),
-                                 SoundSource.BLOCKS,
-                                 1.0F,
-                                 1.0F
-                              );
-                           } else {
-                              _levelx.playLocalSound(
-                                 x,
-                                 y,
-                                 z,
-                                 DyairdropModSounds.CHECK.get(),
-                                 SoundSource.BLOCKS,
-                                 1.0F,
-                                 1.0F,
-                                 false
-                              );
-                           }
-                        }
-                     }
-                  }
-               );
-               DyairdropMod.queueServerWork(
-                  35,
-                  () -> {
-                     if (Nbt.getString(world, BlockPos.containing(x, y, z), "pw").length() >= 6) {
-                        String _setvalx = Vars.of(entity)
-                              .passwordre
-                           + Nbt.getString(world, BlockPos.containing(x, y, z), "pw").substring(4, 5);
-                        Vars.of(entity).ifPresentData(capability -> {
-                           capability.passwordre = _setvalx;
-                           capability.syncPlayerVariables(entity);
-                        });
-                        if (world instanceof Level _levelx) {
-                           if (!_levelx.isClientSide()) {
-                              _levelx.playSound(
-                                 null,
-                                 BlockPos.containing(x, y, z),
-                                 DyairdropModSounds.CHECK.get(),
-                                 SoundSource.BLOCKS,
-                                 1.0F,
-                                 1.0F
-                              );
-                           } else {
-                              _levelx.playLocalSound(
-                                 x,
-                                 y,
-                                 z,
-                                 DyairdropModSounds.CHECK.get(),
-                                 SoundSource.BLOCKS,
-                                 1.0F,
-                                 1.0F,
-                                 false
-                              );
-                           }
-                        }
-                     }
-                  }
-               );
-               DyairdropMod.queueServerWork(
-                  42,
-                  () -> {
-                     if (Nbt.getString(world, BlockPos.containing(x, y, z), "pw").length() >= 6) {
-                        String _setvalx = Vars.of(entity)
-                              .passwordre
-                           + Nbt.getString(world, BlockPos.containing(x, y, z), "pw").substring(5, 6);
-                        Vars.of(entity).ifPresentData(capability -> {
-                           capability.passwordre = _setvalx;
-                           capability.syncPlayerVariables(entity);
-                        });
-                        if (world instanceof Level _levelx) {
-                           if (!_levelx.isClientSide()) {
-                              _levelx.playSound(
-                                 null,
-                                 BlockPos.containing(x, y, z),
-                                 DyairdropModSounds.CHECK.get(),
-                                 SoundSource.BLOCKS,
-                                 1.0F,
-                                 1.0F
-                              );
-                           } else {
-                              _levelx.playLocalSound(
-                                 x,
-                                 y,
-                                 z,
-                                 DyairdropModSounds.CHECK.get(),
-                                 SoundSource.BLOCKS,
-                                 1.0F,
-                                 1.0F,
-                                 false
-                              );
-                           }
-                        }
+    public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
+        if (entity == null) {
+            return;
+        }
+        String input = Vars.of(entity).passwordre;
 
-                        DyairdropMod.queueServerWork(
-                           7,
-                           () -> {
-                              if (world instanceof Level _levelxx) {
-                                 if (!_levelxx.isClientSide()) {
-                                    _levelxx.playSound(
-                                       null,
-                                       BlockPos.containing(x, y, z),
-                                       DyairdropModSounds.PWCORRECT.get(),
-                                       SoundSource.BLOCKS,
-                                       1.0F,
-                                       1.0F
-                                    );
-                                 } else {
-                                    _levelxx.playLocalSound(
-                                       x,
-                                       y,
-                                       z,
-                                       DyairdropModSounds.PWCORRECT.get(),
-                                       SoundSource.BLOCKS,
-                                       1.0F,
-                                       1.0F,
-                                       false
-                                    );
-                                 }
-                              }
-
-                              String _setvalxx = Vars.of(entity)
-                                    .passwordre
-                                 + "Y";
-                              Vars.of(entity).ifPresentData(capability -> {
-                                 capability.passwordre = _setvalxx;
-                                 capability.syncPlayerVariables(entity);
-                              });
-                              if (entity instanceof Player _player && !_player.level().isClientSide()) {
-                                 _player.displayClientMessage(Component.literal("解锁成功！"), false);
-                              }
-
-                              int _value = 1;
-                              BlockPos _pos = BlockPos.containing(x, y, z);
-                              BlockState _bsx = world.getBlockState(_pos);
-                              if (_bsx.getBlock().getStateDefinition().getProperty("animation") instanceof IntegerProperty _integerProp
-                                 && _integerProp.getPossibleValues().contains(_value)) {
-                                 world.setBlock(_pos, (BlockState)_bsx.setValue(_integerProp, _value), 3);
-                              }
-
-                              DyairdropMod.queueServerWork(
-                                 20,
-                                 () -> {
-                                    if (world instanceof ServerLevel _levelxxx) {
-                                       Commands.run(_levelxxx, x, y, z, "setblock ~ ~ ~ "
-                                                + BuiltInRegistries.BLOCK.getKey(world.getBlockState(BlockPos.containing(x, y, z)).getBlock()).toString()
-                                                + "open[facing="
-                                                + Blocks.facingOf(world.getBlockState(BlockPos.containing(x, y, z)))
-                                                + "]{LootTable:\""
-                                                + Nbt.getString(world, BlockPos.containing(x, y, z), "loot")
-                                                + "\"} replace"
-                                          );
-                                    }
-
-                                    int _valuex = 2;
-                                    BlockPos _posx = BlockPos.containing(x, y, z);
-                                    BlockState _bsxx = world.getBlockState(_posx);
-                                    if (_bsxx.getBlock().getStateDefinition().getProperty("animation") instanceof IntegerProperty _integerPropx
-                                       && _integerPropx.getPossibleValues().contains(_valuex)) {
-                                       world.setBlock(_posx, (BlockState)_bsxx.setValue(_integerPropx, _valuex), 3);
-                                    }
-                                 }
-                              );
-                           }
-                        );
-                     }
-                  }
-               );
-            } else {
-               String _setval = "";
-               Vars.of(entity).ifPresentData(capability -> {
-                  capability.passwordre = _setval;
-                  capability.syncPlayerVariables(entity);
-               });
+        if (input.chars().anyMatch(Character::isUpperCase)) {
+            // 输错的字母是大写；动画中的哨兵 "Z" 也是大写，所以只有非动画状态才清空
+            if (!input.contains(SUBMIT_SENTINEL)) {
+                setInput(entity, "");
             }
-         } else if (!Vars.of(entity)
-            .passwordre
-            .contains("Z")) {
-            String _setval = "";
-            Vars.of(entity).ifPresentData(capability -> {
-               capability.passwordre = _setval;
-               capability.syncPlayerVariables(entity);
+            return;
+        }
+        if (input.length() != PASSWORD_LENGTH) {
+            setInput(entity, "");
+            return;
+        }
+
+        setInput(entity, SUBMIT_SENTINEL);
+        if (!world.isClientSide()) {
+            Nbt.setString(world, BlockPos.containing(x, y, z), "valid", "shutdown");
+        }
+
+        for (int index = 0; index < PASSWORD_LENGTH; index++) {
+            int letterIndex = index;
+            DyairdropMod.queueServerWork(LETTER_STEP_TICKS * (letterIndex + 1), () -> {
+                if (revealLetter(world, x, y, z, entity, letterIndex) && letterIndex == PASSWORD_LENGTH - 1) {
+                    DyairdropMod.queueServerWork(COMPLETE_DELAY_TICKS, () -> completeUnlock(world, x, y, z, entity));
+                }
             });
-         }
-      }
-   }
+        }
+    }
+
+    /**
+     * 揭晓第 {@code index} 位：把密码串里对应的字母接到输入后面并播 CHECK 音。
+     *
+     * <p>门槛与原实现一致：第 1~5 位要求密码长度 ≥ index+2，第 6 位（index=5）要求 ≥ 6。
+     *
+     * @return 是否真的揭晓了（密码长度不够时返回 false，后续完成动画也就不会触发）
+     */
+    private static boolean revealLetter(LevelAccessor world, double x, double y, double z, Entity entity, int index) {
+        String password = Nbt.getString(world, BlockPos.containing(x, y, z), "pw");
+        int requiredLength = Math.min(index + 2, PASSWORD_LENGTH);
+        if (password.length() < requiredLength) {
+            return false;
+        }
+        String letter = password.substring(index, index + 1);
+        setInput(entity, Vars.of(entity).passwordre + letter);
+        Sounds.play(world, x, y, z, DyairdropModSounds.CHECK.get(), CHECK_SOUND_VOLUME);
+        return true;
+    }
+
+    /** 解锁成功：播成功音、加 "Y" 标记、提示、置 animation=1，再延迟把方块替换成开启形态。 */
+    private static void completeUnlock(LevelAccessor world, double x, double y, double z, Entity entity) {
+        Sounds.play(world, x, y, z, DyairdropModSounds.PWCORRECT.get(), CHECK_SOUND_VOLUME);
+        setInput(entity, Vars.of(entity).passwordre + SUCCESS_SUFFIX);
+        if (entity instanceof Player player && !player.level().isClientSide()) {
+            player.displayClientMessage(Component.literal("解锁成功！"), false);
+        }
+        setAnimation(world, x, y, z, ANIMATION_UNLOCK);
+
+        DyairdropMod.queueServerWork(OPEN_BLOCK_DELAY_TICKS, () -> {
+            if (world instanceof ServerLevel) {
+                BlockPos pos = BlockPos.containing(x, y, z);
+                BlockState state = world.getBlockState(pos);
+                Commands.run(world, x, y, z, "setblock ~ ~ ~ " + Blocks.idOf(state)
+                        + "open[facing=" + Blocks.facingOf(state)
+                        + "]{LootTable:\"" + Nbt.getString(world, pos, "loot") + "\"} replace");
+            }
+            setAnimation(world, x, y, z, ANIMATION_OPEN);
+        });
+    }
+
+    private static void setAnimation(LevelAccessor world, double x, double y, double z, int value) {
+        BlockPos pos = BlockPos.containing(x, y, z);
+        BlockState state = world.getBlockState(pos);
+        if (state.getBlock().getStateDefinition().getProperty("animation") instanceof IntegerProperty animation
+                && animation.getPossibleValues().contains(value)) {
+            world.setBlock(pos, state.setValue(animation, value), 3);
+        }
+    }
+
+    private static void setInput(Entity entity, String value) {
+        Vars.of(entity).passwordre = value;
+        Vars.sync(entity);
+    }
 }
