@@ -1,0 +1,238 @@
+package me.xjqsh.lesraisinsarmor.item;
+
+import me.xjqsh.lesraisinsarmor.client.renderer.BedrockArmorRenderer;
+import me.xjqsh.lesraisinsarmor.config.CommonConfig;
+import me.xjqsh.lesraisinsarmor.resource.ArmorDataManager.ArmorDataSupplier;
+import me.xjqsh.lesraisinsarmor.resource.data.ArmorData;
+import me.xjqsh.lesraisinsarmor.resource.data.ArmorPartData;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
+import org.jetbrains.annotations.NotNull;
+import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.animatable.client.GeoRenderProvider;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.constant.DefaultAnimations;
+import software.bernie.geckolib.renderer.GeoArmorRenderer;
+import software.bernie.geckolib.util.GeckoLibUtil;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+
+
+public class LrArmorItem extends ArmorItem implements GeoItem {
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    private final String suitIdf;
+    private final @Nullable Supplier<Holder<MobEffect>> suitEffect;
+    private ArmorData armorData;
+
+    public LrArmorItem(String suitIdf, ArmorItem.Type slot, Item.Properties properties, @Nullable Supplier<Holder<MobEffect>> suitEffect) {
+        super(me.xjqsh.lesraisinsarmor.armor.LrArmorMaterial.HOLDER, slot, properties);
+        this.suitIdf = suitIdf;
+        this.suitEffect = suitEffect;
+    }
+    public String getSuitIdf() {
+        return suitIdf;
+    }
+
+    public void setArmorData(ArmorDataSupplier supplier){
+        this.armorData = supplier.get();
+    }
+
+    public int getDefense() {
+        return ArmorData.getByType(this.armorData, this.type, 0, ArmorPartData::getDefense);
+    }
+
+    public float getToughness() {
+        return ArmorData.getByType(this.armorData, this.type, 0f, ArmorPartData::getToughness);
+    }
+
+    @Override
+    public int getMaxDamage(@NotNull ItemStack stack) {
+        int configured = getMaxDurability();
+        return configured > 0 ? configured : super.getMaxDamage(stack);
+    }
+
+    public int getMaxDurability() {
+        return ArmorData.getByType(this.armorData, this.type, 0, ArmorPartData::getMaxDurability);
+    }
+
+    public float getKnockbackResistance() {
+        return ArmorData.getByType(this.armorData, this.type, 0f, ArmorPartData::getKnockbackResistance);
+    }
+
+    @Override
+    public int getEnchantmentValue() {
+        int value = ArmorData.getByType(this.armorData, this.type, -1, ArmorPartData::getEnchantmentValue);
+        return value >= 0 ? value : super.getEnchantmentValue();
+    }
+
+    @Override
+    public boolean isDamageable(@NotNull ItemStack stack) {
+        return getMaxDamage(stack) > 0;
+    }
+
+    public boolean canBeDepleted() {
+        return getMaxDurability() > 0;
+    }
+
+    public @NotNull Holder<SoundEvent> getEquipSound() {
+        return ArmorData.getByType(this.armorData, this.type,
+                SoundEvents.ARMOR_EQUIP_LEATHER,
+                ArmorPartData::getEquipSound);
+    }
+
+    @Override
+    public boolean isValidRepairItem(@NotNull ItemStack pToRepair, @NotNull ItemStack pRepair) {
+        var ingredient = getIngredient();
+        if (ingredient != null) {
+            return ingredient.test(pRepair);
+        }
+        return false;
+    }
+
+    @Nullable
+    public net.minecraft.world.item.crafting.Ingredient getIngredient() {
+        return ArmorData.getByType(this.armorData, this.type, null, ArmorPartData::getRepairIngredient);
+    }
+
+    @Override
+    public @NotNull ItemAttributeModifiers getDefaultAttributeModifiers(@NotNull ItemStack stack) {
+        if (!CommonConfig.enableArmorAttribute.get()) {
+            return ItemAttributeModifiers.EMPTY;
+        }
+        ItemAttributeModifiers mods = ArmorData.getByType(this.armorData, this.type, null, ArmorPartData::getAttributes);
+        return mods == null ? ItemAttributeModifiers.EMPTY : mods;
+    }
+
+    @Override
+    public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
+        consumer.accept(new GeoRenderProvider() {
+            private GeoArmorRenderer<?> renderer;
+
+            @Override
+            public <T extends LivingEntity> HumanoidModel<?> getGeoArmorRenderer(@Nullable T livingEntity, @NotNull ItemStack itemStack, @Nullable EquipmentSlot equipmentSlot, @Nullable HumanoidModel<T> original) {
+                if (this.renderer == null)
+                    this.renderer = new BedrockArmorRenderer(getSuitIdf());
+
+                this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
+
+                return this.renderer;
+            }
+        });
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<>(this, 20, state -> {
+            state.setAnimation(DefaultAnimations.IDLE);
+            return PlayState.CONTINUE;
+        }));
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return this.cache;
+    }
+
+    @Override
+    public void appendHoverText(@Nonnull ItemStack stack, @Nonnull TooltipContext context, @Nonnull List<Component> list, @Nonnull TooltipFlag tooltipFlag) {
+        if (Minecraft.getInstance().player != null) {
+            Player player = Minecraft.getInstance().player;
+            Component title = Component.translatable("tooltip.lramrmor.suit",
+                    Component.translatable("suit.lrarmor." + this.suitIdf),
+                    Component.literal(String.format("(%d/4)", getSuitCount(player, stack)))
+            ).withStyle(ChatFormatting.GRAY);
+            list.add(title);
+
+            boolean flag = true;
+            LrArmorItem item = (LrArmorItem) stack.getItem();
+            ItemStack equipItem = player.getItemBySlot(item.getEquipmentSlot());
+            if(!stack.equals(equipItem)){
+                flag = false;
+            }
+
+            for(ArmorItem.Type slot : ArmorItem.Type.values()){
+                MutableComponent part = Component.translatable("item.lrarmor." + this.suitIdf + "_" + slot.getName());
+
+                if(flag && isPartEquipped(player, slot)) {
+                    part.withStyle(ChatFormatting.GREEN);
+                }else {
+                    part.withStyle(ChatFormatting.GRAY);
+                }
+
+                list.add(part);
+            }
+
+        }
+    }
+
+    public ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
+        return ResourceLocation.fromNamespaceAndPath("lrarmor", "textures/item/armor/" + this.suitIdf + ".png");
+    }
+
+    public void applyEffect(Player player){
+        if(suitEffect == null) return;
+        Holder<MobEffect> effect = suitEffect.get();
+        if(effect != null){
+            player.addEffect(new MobEffectInstance(effect, 250));
+        }
+    }
+
+    public boolean isPartEquipped(Player player, ArmorItem.Type slot){
+        ItemStack equipItem = player.getItemBySlot(slot.getSlot());
+        if(equipItem.getItem() instanceof LrArmorItem item){
+            return item.getSuitIdf().equals(this.suitIdf);
+        }
+        return false;
+    }
+
+    public int getSuitCount(Player player, @Nonnull ItemStack stack){
+        if(!(stack.getItem() instanceof LrArmorItem item)) return 0;
+
+        ItemStack equipItem = player.getItemBySlot(item.getEquipmentSlot());
+        if(!stack.equals(equipItem)){
+            return 0;
+        }
+
+        return getSuitCount(player);
+    }
+
+    public int getSuitCount(Player player){
+        return getSuitCount(player, this.suitIdf);
+    }
+
+    public static int getSuitCount(Player player, String suitIdf){
+        int cnt = 0;
+
+        for(ArmorItem.Type slot : ArmorItem.Type.values()){
+            ItemStack stack1 = player.getItemBySlot(slot.getSlot());
+            if(stack1.getItem() instanceof LrArmorItem item1){
+                if(item1.getSuitIdf().equals(suitIdf)){
+                    cnt++;
+                }
+            }
+        }
+        return cnt;
+    }
+}

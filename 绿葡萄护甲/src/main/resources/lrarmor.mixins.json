@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.xjqsh.lesraisinsarmor.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "lrarmor.refmap.json",
+  "mixins": [],
+  "client": [
+    "EffectInstanceMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
