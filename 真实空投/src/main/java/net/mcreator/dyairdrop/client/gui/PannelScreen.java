@@ -1,10 +1,7 @@
 package net.mcreator.dyairdrop.client.gui;
 
-import java.util.HashMap;
-
-import com.mojang.blaze3d.systems.RenderSystem;
-import net.mcreator.dyairdrop.DyairdropMod;
-import net.mcreator.dyairdrop.world.inventory.PannelMenu;
+import net.gem19910816.dyairdrop.network.payload.PanelActionPayload;
+import net.gem19910816.dyairdrop.panel.PanelService;
 import net.mcreator.dyairdrop.procedures.AccessconfirmingProcedure;
 import net.mcreator.dyairdrop.procedures.AccessdeniedProcedure;
 import net.mcreator.dyairdrop.procedures.AccessgrantedProcedure;
@@ -21,12 +18,12 @@ import net.mcreator.dyairdrop.procedures.W3Procedure;
 import net.mcreator.dyairdrop.procedures.W4Procedure;
 import net.mcreator.dyairdrop.procedures.W5Procedure;
 import net.mcreator.dyairdrop.procedures.W6Procedure;
+import net.mcreator.dyairdrop.world.inventory.PannelMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.mcreator.dyairdrop.network.PannelButtonPayload;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -34,257 +31,166 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
 
+/**
+ * 数字密码面板（0~9 + √）的客户端屏幕。
+ *
+ * <p>重构点：
+ * <ul>
+ *   <li>按钮**只发动作包**，不再在本地调用服务端 procedure（旧实现在 {@code sendToServer(...)} 之后紧跟
+ *       {@code handleButtonAction(...)}，等于客户端与服务端各跑一遍，是冲突与状态回弹的根源）；</li>
+ *   <li>不再用静态 {@code guistate} 传递控件；</li>
+ *   <li>ESC 交回原版 {@code Screen} 流程，不再硬编码 {@code key == 256}；</li>
+ *   <li>亮灯与标签仍读已同步的玩家数据（{@code pw} / {@code showlight} / {@code keyticking}），视觉时机与原版一致。</li>
+ * </ul>
+ */
 public class PannelScreen extends AbstractContainerScreen<PannelMenu> {
-   private static final HashMap<String, Object> guistate = PannelMenu.guistate;
-   private final Level world;
-   private final int x;
-   private final int y;
-   private final int z;
-   private final Player entity;
-   EditBox password_panel;
-   Button button_2;
-   Button button_1;
-   Button button_3;
-   Button button_4;
-   Button button_5;
-   Button button_6;
-   Button button_7;
-   Button button_8;
-   Button button_9;
-   Button button_x;
-   Button button_0;
-   Button button_empty;
-   Button button_op;
-   Button button_pw;
-   Button button_save;
-   private static final ResourceLocation texture = ResourceLocation.parse("dyairdrop:textures/screens/panel.png");
 
-   public PannelScreen(PannelMenu container, Inventory inventory, Component text) {
-      super(container, inventory, text);
-      this.world = container.world;
-      this.x = container.x;
-      this.y = container.y;
-      this.z = container.z;
-      this.entity = container.entity;
-      this.imageWidth = 201;
-      this.imageHeight = 166;
-   }
+    private static final ResourceLocation TEXTURE = ResourceLocation.parse("dyairdrop:textures/screens/panel.png");
+    private static final ResourceLocation TEXTURE_CORRECT = ResourceLocation.parse("dyairdrop:textures/screens/correct.png");
+    private static final ResourceLocation TEXTURE_WRONG = ResourceLocation.parse("dyairdrop:textures/screens/wrong.png");
+    private static final ResourceLocation TEXTURE_TITLE = ResourceLocation.parse("dyairdrop:textures/screens/test3.png");
 
-   public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-      this.renderBackground(guiGraphics, mouseX, mouseY, partialTicks);
-      super.render(guiGraphics, mouseX, mouseY, partialTicks);
-      this.password_panel.render(guiGraphics, mouseX, mouseY, partialTicks);
-      this.renderTooltip(guiGraphics, mouseX, mouseY);
-   }
+    private final Level world;
+    private final int x;
+    private final int y;
+    private final int z;
+    private final Player entity;
 
-   protected void renderBg(GuiGraphics guiGraphics, float partialTicks, int gx, int gy) {
-      RenderSystem.enableBlend();
-      RenderSystem.defaultBlendFunc();
-      guiGraphics.blit(texture, this.leftPos, this.topPos, 0.0F, 0.0F, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
-      if (C1Procedure.execute(this.entity)) {
-         guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/correct.png"), this.leftPos + 25, this.topPos + 39, 0.0F, 0.0F, 8, 8, 8, 8);
-      }
+    private EditBox passwordPanel;
 
-      if (C2Procedure.execute(this.world, this.entity)) {
-         guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/correct.png"), this.leftPos + 39, this.topPos + 39, 0.0F, 0.0F, 8, 8, 8, 8);
-      }
+    public PannelScreen(PannelMenu container, Inventory inventory, Component text) {
+        super(container, inventory, text);
+        this.world = container.world;
+        this.x = container.x;
+        this.y = container.y;
+        this.z = container.z;
+        this.entity = container.entity;
+        this.imageWidth = 201;
+        this.imageHeight = 166;
+    }
 
-      if (C3Procedure.execute(this.world, this.entity)) {
-         guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/correct.png"), this.leftPos + 53, this.topPos + 39, 0.0F, 0.0F, 8, 8, 8, 8);
-      }
+    private void send(int action, String input) {
+        PacketDistributor.sendToServer(new PanelActionPayload(action, PanelService.KIND_DIGIT, new BlockPos(this.x, this.y, this.z), input));
+    }
 
-      if (C4Procedure.execute(this.world, this.entity)) {
-         guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/correct.png"), this.leftPos + 67, this.topPos + 39, 0.0F, 0.0F, 8, 8, 8, 8);
-      }
+    @Override
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+        this.renderBackground(guiGraphics, mouseX, mouseY, partialTicks);
+        super.render(guiGraphics, mouseX, mouseY, partialTicks);
+        this.passwordPanel.render(guiGraphics, mouseX, mouseY, partialTicks);
+        this.renderTooltip(guiGraphics, mouseX, mouseY);
+    }
 
-      if (C5Procedure.execute(this.world, this.entity)) {
-         guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/correct.png"), this.leftPos + 81, this.topPos + 39, 0.0F, 0.0F, 8, 8, 8, 8);
-      }
-
-      if (C6Procedure.execute(this.world, this.entity)) {
-         guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/correct.png"), this.leftPos + 95, this.topPos + 39, 0.0F, 0.0F, 8, 8, 8, 8);
-      }
-
-      if (W1Procedure.execute(this.entity)) {
-         guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/wrong.png"), this.leftPos + 25, this.topPos + 39, 0.0F, 0.0F, 8, 8, 8, 8);
-      }
-
-      if (W2Procedure.execute(this.world, this.entity)) {
-         guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/wrong.png"), this.leftPos + 39, this.topPos + 39, 0.0F, 0.0F, 8, 8, 8, 8);
-      }
-
-      if (W3Procedure.execute(this.world, this.entity)) {
-         guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/wrong.png"), this.leftPos + 53, this.topPos + 39, 0.0F, 0.0F, 8, 8, 8, 8);
-      }
-
-      if (W4Procedure.execute(this.world, this.entity)) {
-         guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/wrong.png"), this.leftPos + 67, this.topPos + 39, 0.0F, 0.0F, 8, 8, 8, 8);
-      }
-
-      if (W5Procedure.execute(this.world, this.entity)) {
-         guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/wrong.png"), this.leftPos + 81, this.topPos + 39, 0.0F, 0.0F, 8, 8, 8, 8);
-      }
-
-      if (W6Procedure.execute(this.world, this.entity)) {
-         guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/wrong.png"), this.leftPos + 95, this.topPos + 39, 0.0F, 0.0F, 8, 8, 8, 8);
-      }
-
-      guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/test3.png"), this.leftPos + 17, this.topPos + 15, 0.0F, 0.0F, 167, 22, 167, 22);
-      RenderSystem.disableBlend();
-   }
-
-   public boolean keyPressed(int key, int b, int c) {
-      if (key == 256) {
-         this.minecraft.player.closeContainer();
-         return true;
-      } else {
-         return this.password_panel.isFocused() ? this.password_panel.keyPressed(key, b, c) : super.keyPressed(key, b, c);
-      }
-   }
-
-   public void containerTick() {
-      super.containerTick();
-   }
-
-   protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-      if (AccessgrantedProcedure.execute(this.world, this.x, this.y, this.z, this.entity)) {
-         guiGraphics.drawString(this.font, Component.translatable("gui.dyairdrop.panel.label_correct"), 125, 23, -13382656, false);
-      }
-
-      if (AccessdeniedProcedure.execute(this.world, this.x, this.y, this.z, this.entity)) {
-         guiGraphics.drawString(this.font, Component.translatable("gui.dyairdrop.panel.label_denied"), 129, 22, -3407872, false);
-      }
-
-      if (AccessconfirmingProcedure.execute(this.world, this.entity)) {
-         guiGraphics.drawString(this.font, Component.translatable("gui.dyairdrop.panel.label_processing"), 124, 22, -1, false);
-      }
-   }
-
-   public void onClose() {
-      super.onClose();
-   }
-
-   public void init() {
-      super.init();
-      this.password_panel = new EditBox(
-         this.font, this.leftPos + 19, this.topPos + 17, 94, 18, Component.translatable("gui.dyairdrop.panel.password_panel")
-      );
-      this.password_panel.setMaxLength(32767);
-      guistate.put("text:password_panel", this.password_panel);
-      this.addWidget(this.password_panel);
-      this.button_2 = Button.builder(Component.translatable("gui.dyairdrop.panel.button_2"), e -> {
-         PacketDistributor.sendToServer(new PannelButtonPayload(0, this.x, this.y, this.z));
-         PannelButtonPayload.handleButtonAction(this.entity, 0, this.x, this.y, this.z);
-      }).bounds(this.leftPos + 55, this.topPos + 52, 21, 20).build();
-      guistate.put("button:button_2", this.button_2);
-      this.addRenderableWidget(this.button_2);
-      this.button_1 = Button.builder(Component.translatable("gui.dyairdrop.panel.button_1"), e -> {
-         PacketDistributor.sendToServer(new PannelButtonPayload(1, this.x, this.y, this.z));
-         PannelButtonPayload.handleButtonAction(this.entity, 1, this.x, this.y, this.z);
-      }).bounds(this.leftPos + 19, this.topPos + 52, 20, 20).build();
-      guistate.put("button:button_1", this.button_1);
-      this.addRenderableWidget(this.button_1);
-      this.button_3 = Button.builder(Component.translatable("gui.dyairdrop.panel.button_3"), e -> {
-         PacketDistributor.sendToServer(new PannelButtonPayload(2, this.x, this.y, this.z));
-         PannelButtonPayload.handleButtonAction(this.entity, 2, this.x, this.y, this.z);
-      }).bounds(this.leftPos + 91, this.topPos + 52, 20, 20).build();
-      guistate.put("button:button_3", this.button_3);
-      this.addRenderableWidget(this.button_3);
-      this.button_4 = Button.builder(Component.translatable("gui.dyairdrop.panel.button_4"), e -> {
-         PacketDistributor.sendToServer(new PannelButtonPayload(3, this.x, this.y, this.z));
-         PannelButtonPayload.handleButtonAction(this.entity, 3, this.x, this.y, this.z);
-      }).bounds(this.leftPos + 19, this.topPos + 79, 20, 20).build();
-      guistate.put("button:button_4", this.button_4);
-      this.addRenderableWidget(this.button_4);
-      this.button_5 = Button.builder(Component.translatable("gui.dyairdrop.panel.button_5"), e -> {
-         PacketDistributor.sendToServer(new PannelButtonPayload(4, this.x, this.y, this.z));
-         PannelButtonPayload.handleButtonAction(this.entity, 4, this.x, this.y, this.z);
-      }).bounds(this.leftPos + 55, this.topPos + 79, 21, 20).build();
-      guistate.put("button:button_5", this.button_5);
-      this.addRenderableWidget(this.button_5);
-      this.button_6 = Button.builder(Component.translatable("gui.dyairdrop.panel.button_6"), e -> {
-         PacketDistributor.sendToServer(new PannelButtonPayload(5, this.x, this.y, this.z));
-         PannelButtonPayload.handleButtonAction(this.entity, 5, this.x, this.y, this.z);
-      }).bounds(this.leftPos + 91, this.topPos + 79, 20, 20).build();
-      guistate.put("button:button_6", this.button_6);
-      this.addRenderableWidget(this.button_6);
-      this.button_7 = Button.builder(Component.translatable("gui.dyairdrop.panel.button_7"), e -> {
-         PacketDistributor.sendToServer(new PannelButtonPayload(6, this.x, this.y, this.z));
-         PannelButtonPayload.handleButtonAction(this.entity, 6, this.x, this.y, this.z);
-      }).bounds(this.leftPos + 19, this.topPos + 106, 20, 20).build();
-      guistate.put("button:button_7", this.button_7);
-      this.addRenderableWidget(this.button_7);
-      this.button_8 = Button.builder(Component.translatable("gui.dyairdrop.panel.button_8"), e -> {
-         PacketDistributor.sendToServer(new PannelButtonPayload(7, this.x, this.y, this.z));
-         PannelButtonPayload.handleButtonAction(this.entity, 7, this.x, this.y, this.z);
-      }).bounds(this.leftPos + 55, this.topPos + 106, 21, 20).build();
-      guistate.put("button:button_8", this.button_8);
-      this.addRenderableWidget(this.button_8);
-      this.button_9 = Button.builder(Component.translatable("gui.dyairdrop.panel.button_9"), e -> {
-         PacketDistributor.sendToServer(new PannelButtonPayload(8, this.x, this.y, this.z));
-         PannelButtonPayload.handleButtonAction(this.entity, 8, this.x, this.y, this.z);
-      }).bounds(this.leftPos + 91, this.topPos + 106, 20, 20).build();
-      guistate.put("button:button_9", this.button_9);
-      this.addRenderableWidget(this.button_9);
-      this.button_x = Button.builder(Component.translatable("gui.dyairdrop.panel.button_x"), e -> {
-         PacketDistributor.sendToServer(new PannelButtonPayload(9, this.x, this.y, this.z));
-         PannelButtonPayload.handleButtonAction(this.entity, 9, this.x, this.y, this.z);
-      }).bounds(this.leftPos + 19, this.topPos + 133, 20, 20).build();
-      guistate.put("button:button_x", this.button_x);
-      this.addRenderableWidget(this.button_x);
-      this.button_0 = Button.builder(Component.translatable("gui.dyairdrop.panel.button_0"), e -> {
-         PacketDistributor.sendToServer(new PannelButtonPayload(10, this.x, this.y, this.z));
-         PannelButtonPayload.handleButtonAction(this.entity, 10, this.x, this.y, this.z);
-      }).bounds(this.leftPos + 55, this.topPos + 133, 21, 20).build();
-      guistate.put("button:button_0", this.button_0);
-      this.addRenderableWidget(this.button_0);
-      this.button_empty = Button.builder(Component.translatable("gui.dyairdrop.panel.button_empty"), e -> {
-         PacketDistributor.sendToServer(new PannelButtonPayload(11, this.x, this.y, this.z));
-         PannelButtonPayload.handleButtonAction(this.entity, 11, this.x, this.y, this.z);
-      }).bounds(this.leftPos + 91, this.topPos + 133, 20, 20).build();
-      guistate.put("button:button_empty", this.button_empty);
-      this.addRenderableWidget(this.button_empty);
-      this.button_op = Button.builder(Component.translatable("gui.dyairdrop.panel.button_op"), e -> {
-         if (OpshowProcedure.execute(this.entity)) {
-            PacketDistributor.sendToServer(new PannelButtonPayload(12, this.x, this.y, this.z));
-            PannelButtonPayload.handleButtonAction(this.entity, 12, this.x, this.y, this.z);
-         }
-      }).bounds(this.leftPos + 136, this.topPos + 120, 54, 20).build(builder -> new Button(builder) {
-         public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
-            if (OpshowProcedure.execute(PannelScreen.this.entity)) {
-               super.render(guiGraphics, gx, gy, ticks);
+    @Override
+    protected void renderBg(GuiGraphics guiGraphics, float partialTicks, int mouseX, int mouseY) {
+        guiGraphics.blit(TEXTURE, this.leftPos, this.topPos, 0.0F, 0.0F, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
+        for (int i = 0; i < 6; i++) {
+            if (isDigitCorrect(i)) {
+                guiGraphics.blit(TEXTURE_CORRECT, this.leftPos + 25 + i * 14, this.topPos + 39, 0.0F, 0.0F, 8, 8, 8, 8);
             }
-         }
-      });
-      guistate.put("button:button_op", this.button_op);
-      this.addRenderableWidget(this.button_op);
-      this.button_pw = Button.builder(Component.translatable("gui.dyairdrop.panel.button_pw"), e -> {
-         if (OpshowProcedure.execute(this.entity)) {
-            PacketDistributor.sendToServer(new PannelButtonPayload(13, this.x, this.y, this.z));
-            PannelButtonPayload.handleButtonAction(this.entity, 13, this.x, this.y, this.z);
-         }
-      }).bounds(this.leftPos + 136, this.topPos + 102, 54, 20).build(builder -> new Button(builder) {
-         public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
-            if (OpshowProcedure.execute(PannelScreen.this.entity)) {
-               super.render(guiGraphics, gx, gy, ticks);
+            if (isDigitWrong(i)) {
+                guiGraphics.blit(TEXTURE_WRONG, this.leftPos + 25 + i * 14, this.topPos + 39, 0.0F, 0.0F, 8, 8, 8, 8);
             }
-         }
-      });
-      guistate.put("button:button_pw", this.button_pw);
-      this.addRenderableWidget(this.button_pw);
-      this.button_save = Button.builder(Component.translatable("gui.dyairdrop.panel.button_save"), e -> {
-         if (OpshowProcedure.execute(this.entity)) {
-            PacketDistributor.sendToServer(new PannelButtonPayload(14, this.x, this.y, this.z));
-            PannelButtonPayload.handleButtonAction(this.entity, 14, this.x, this.y, this.z);
-         }
-      }).bounds(this.leftPos + 136, this.topPos + 84, 54, 20).build(builder -> new Button(builder) {
-         public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
-            if (OpshowProcedure.execute(PannelScreen.this.entity)) {
-               super.render(guiGraphics, gx, gy, ticks);
-            }
-         }
-      });
-      guistate.put("button:button_save", this.button_save);
-      this.addRenderableWidget(this.button_save);
-   }
+        }
+        guiGraphics.blit(TEXTURE_TITLE, this.leftPos + 17, this.topPos + 15, 0.0F, 0.0F, 167, 22, 167, 22);
+    }
+
+    private boolean isDigitCorrect(int index) {
+        return switch (index) {
+            case 0 -> C1Procedure.execute(this.entity);
+            case 1 -> C2Procedure.execute(this.world, this.entity);
+            case 2 -> C3Procedure.execute(this.world, this.entity);
+            case 3 -> C4Procedure.execute(this.world, this.entity);
+            case 4 -> C5Procedure.execute(this.world, this.entity);
+            default -> C6Procedure.execute(this.world, this.entity);
+        };
+    }
+
+    private boolean isDigitWrong(int index) {
+        return switch (index) {
+            case 0 -> W1Procedure.execute(this.entity);
+            case 1 -> W2Procedure.execute(this.world, this.entity);
+            case 2 -> W3Procedure.execute(this.world, this.entity);
+            case 3 -> W4Procedure.execute(this.world, this.entity);
+            case 4 -> W5Procedure.execute(this.world, this.entity);
+            default -> W6Procedure.execute(this.world, this.entity);
+        };
+    }
+
+    @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        if (this.passwordPanel.isFocused() && this.passwordPanel.keyPressed(keyCode, scanCode, modifiers)) {
+            return true;
+        }
+        return super.keyPressed(keyCode, scanCode, modifiers);
+    }
+
+    @Override
+    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        if (AccessgrantedProcedure.execute(this.world, this.x, this.y, this.z, this.entity)) {
+            guiGraphics.drawString(this.font, Component.translatable("gui.dyairdrop.panel.label_correct"), 125, 23, -13382656, false);
+        }
+        if (AccessdeniedProcedure.execute(this.world, this.x, this.y, this.z, this.entity)) {
+            guiGraphics.drawString(this.font, Component.translatable("gui.dyairdrop.panel.label_denied"), 129, 22, -3407872, false);
+        }
+        if (AccessconfirmingProcedure.execute(this.world, this.entity)) {
+            guiGraphics.drawString(this.font, Component.translatable("gui.dyairdrop.panel.label_processing"), 124, 22, -1, false);
+        }
+    }
+
+    @Override
+    public void init() {
+        super.init();
+
+        this.passwordPanel = new EditBox(this.font, this.leftPos + 19, this.topPos + 17, 94, 18,
+                Component.translatable("gui.dyairdrop.panel.password_panel"));
+        this.passwordPanel.setMaxLength(64);
+        this.addWidget(this.passwordPanel);
+
+        // 数字键盘：1 2 3 / 4 5 6 / 7 8 9 / × 0 ␣
+        addKeypadButton(1, 19, 52, 20);
+        addKeypadButton(2, 55, 52, 21);
+        addKeypadButton(3, 91, 52, 20);
+        addKeypadButton(4, 19, 79, 20);
+        addKeypadButton(5, 55, 79, 21);
+        addKeypadButton(6, 91, 79, 20);
+        addKeypadButton(7, 19, 106, 20);
+        addKeypadButton(8, 55, 106, 21);
+        addKeypadButton(9, 91, 106, 20);
+
+        this.addRenderableWidget(Button.builder(Component.translatable("gui.dyairdrop.panel.button_x"),
+                e -> send(PanelService.ACTION_DELETE, "")).bounds(this.leftPos + 19, this.topPos + 133, 20, 20).build());
+        addKeypadButton(0, 55, 133, 21);
+        this.addRenderableWidget(Button.builder(Component.translatable("gui.dyairdrop.panel.button_empty"),
+                e -> send(PanelService.ACTION_CONFIRM, "")).bounds(this.leftPos + 91, this.topPos + 133, 20, 20).build());
+
+        // OP 三个按钮：仅创造模式可见（沿用 OpshowProcedure 的判定）
+        addOpButton("gui.dyairdrop.panel.button_save", 84, PanelService.ACTION_TEST);
+        addOpButton("gui.dyairdrop.panel.button_pw", 102, PanelService.ACTION_SET_PASSWORD);
+        addOpButton("gui.dyairdrop.panel.button_op", 120, PanelService.ACTION_SET_LOOT);
+    }
+
+    private void addKeypadButton(int digit, int offsetX, int offsetY, int width) {
+        this.addRenderableWidget(Button.builder(Component.translatable("gui.dyairdrop.panel.button_" + digit),
+                        e -> send(digit, ""))
+                .bounds(this.leftPos + offsetX, this.topPos + offsetY, width, 20)
+                .build());
+    }
+
+    private void addOpButton(String translationKey, int offsetY, int action) {
+        this.addRenderableWidget(Button.builder(Component.translatable(translationKey), e -> {
+                    if (OpshowProcedure.execute(this.entity)) {
+                        send(action, this.passwordPanel.getValue());
+                    }
+                })
+                .bounds(this.leftPos + 136, this.topPos + offsetY, 54, 20)
+                .build(builder -> new Button(builder) {
+                    @Override
+                    public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+                        if (OpshowProcedure.execute(PannelScreen.this.entity)) {
+                            super.renderWidget(guiGraphics, mouseX, mouseY, partialTicks);
+                        }
+                    }
+                }));
+    }
 }

@@ -1,6 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
 import java.util.Locale;
+import net.gem19910816.dyairdrop.compat.map.MapMarkerService;
 import net.mcreator.dyairdrop.configuration.AirdropconfigConfiguration;
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
@@ -101,35 +102,13 @@ public class MobairdropticksProcedure {
             }
 
             if (entity.getPersistentData().getBoolean("dymap")) {
-               name = "\""
-                  + new ItemStack((ItemLike) BuiltInRegistries.ITEM.get(ResourceLocation.parse(blockid.replace("locked", "").toLowerCase(Locale.ENGLISH))))
-                     .getDisplayName()
-                     .getString()
-                  + "\"";
-               title = name;
-               color = 6.0;
+               // 原实现这里是在服务端执行一条并不存在的命令 `addwaypointxaero`（永远静默失败），
+               // 现改为服务端权威地维护地图标记，由 MapMarkerService 下发给装了 Xaero 的玩家。
+               name = new ItemStack((ItemLike) BuiltInRegistries.ITEM.get(ResourceLocation.parse(blockid.replace("locked", "").toLowerCase(Locale.ENGLISH))))
+                  .getDisplayName()
+                  .getString();
                if (world instanceof ServerLevel _level) {
-                  _level.getServer()
-                     .getCommands()
-                     .performPrefixedCommand(
-                        new CommandSourceStack(
-                              CommandSource.NULL, new Vec3(x, ay, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null
-                           )
-                           .withSuppressedOutput(),
-                        "addwaypointxaero @a "
-                           + Math.round(x)
-                           + " "
-                           + Math.round(ay)
-                           + " "
-                           + Math.round(z)
-                           + " "
-                           + name
-                           + " "
-                           + title
-                           + " "
-                           + Math.round(color)
-                           + " 2 true"
-                     );
+                  MapMarkerService.addMarker(_level, BlockPos.containing(x, ay, z), name, MapMarkerService.colorForBlockId(blockid));
                }
             }
 

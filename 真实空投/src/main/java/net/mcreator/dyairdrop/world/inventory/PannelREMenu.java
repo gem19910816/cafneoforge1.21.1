@@ -1,105 +1,29 @@
 package net.mcreator.dyairdrop.world.inventory;
 
-import net.minecraft.network.FriendlyByteBuf;
-import net.mcreator.dyairdrop.procedures.PannelREticksProcedure;
-import net.mcreator.dyairdrop.procedures.PannelREshutProcedure;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Supplier;
-
+import net.gem19910816.dyairdrop.panel.AbstractPanelMenu;
 import net.mcreator.dyairdrop.init.DyairdropModMenus;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.Entity;
+import net.mcreator.dyairdrop.procedures.PannelREshutProcedure;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
-import net.neoforged.neoforge.items.SlotItemHandler;
 
-@EventBusSubscriber
-public class PannelREMenu extends AbstractContainerMenu implements Supplier<Map<Integer, Slot>> {
-   public static final HashMap<String, Object> guistate = new HashMap<>();
-   public final Level world;
-   public final Player entity;
-   public int x;
-   public int y;
-   public int z;
-   private ContainerLevelAccess access = ContainerLevelAccess.NULL;
-   private IItemHandler internal;
-   private final Map<Integer, Slot> customSlots = new HashMap<>();
-   private boolean bound = false;
-   private Supplier<Boolean> boundItemMatcher = null;
-   private Entity boundEntity = null;
-   private BlockEntity boundBlockEntity = null;
+/**
+ * 字母密码面板 RE（a~f）的容器。
+ *
+ * <p>注册 id 保持 {@code dyairdrop:pannel_re} 不变（{@link DyairdropModMenus#PANNEL_RE}）。
+ * 自动关窗逻辑（解锁成功后 {@code passwordre} 含 {@code Y}）已移到服务端的
+ * {@link net.gem19910816.dyairdrop.panel.PanelService}，不再依赖「每 tick 检查容器类型」。
+ */
+public class PannelREMenu extends AbstractPanelMenu {
 
-   public PannelREMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-      super(DyairdropModMenus.PANNEL_RE.get(), id);
-      this.entity = inv.player;
-      this.world = inv.player.level();
-      this.internal = new ItemStackHandler(0);
-      BlockPos pos = null;
-      if (extraData != null) {
-         pos = extraData.readBlockPos();
-         this.x = pos.getX();
-         this.y = pos.getY();
-         this.z = pos.getZ();
-         this.access = ContainerLevelAccess.create(this.world, pos);
-      }
+    public PannelREMenu(int id, Inventory inventory, FriendlyByteBuf extraData) {
+        super(DyairdropModMenus.PANNEL_RE.get(), id, inventory, extraData);
+        PannelREshutProcedure.execute(this.entity);
+    }
 
-      PannelREshutProcedure.execute(this.entity);
-   }
-
-   public boolean stillValid(Player player) {
-      if (this.bound) {
-         if (this.boundItemMatcher != null) {
-            return this.boundItemMatcher.get();
-         }
-
-         if (this.boundBlockEntity != null) {
-            return AbstractContainerMenu.stillValid(this.access, player, this.boundBlockEntity.getBlockState().getBlock());
-         }
-
-         if (this.boundEntity != null) {
-            return this.boundEntity.isAlive();
-         }
-      }
-
-      return true;
-   }
-
-   public ItemStack quickMoveStack(Player playerIn, int index) {
-      return ItemStack.EMPTY;
-   }
-
-   public void removed(Player playerIn) {
-      super.removed(playerIn);
-      PannelREshutProcedure.execute(this.entity);
-   }
-
-   public Map<Integer, Slot> get() {
-      return this.customSlots;
-   }
-
-   @SubscribeEvent
-   public static void onPlayerTick(PlayerTickEvent.Post event) {
-      Player entity = event.getEntity();
-      if (entity.containerMenu instanceof PannelREMenu) {
-         Level world = entity.level();
-         double x = entity.getX();
-         double y = entity.getY();
-         double z = entity.getZ();
-         PannelREticksProcedure.execute(entity);
-      }
-   }
+    @Override
+    public void removed(Player player) {
+        super.removed(player);
+        PannelREshutProcedure.execute(this.entity);
+    }
 }

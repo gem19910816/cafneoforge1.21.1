@@ -17,11 +17,12 @@ import net.mcreator.dyairdrop.procedures.Wrong3Procedure;
 import net.mcreator.dyairdrop.procedures.Wrong4Procedure;
 import net.mcreator.dyairdrop.procedures.Wrong5Procedure;
 import net.mcreator.dyairdrop.procedures.Wrong6Procedure;
+import net.gem19910816.dyairdrop.network.payload.PanelActionPayload;
+import net.gem19910816.dyairdrop.panel.PanelService;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.mcreator.dyairdrop.network.PannelREButtonPayload;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -30,7 +31,6 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class PannelREScreen extends AbstractContainerScreen<PannelREMenu> {
-   private static final HashMap<String, Object> guistate = PannelREMenu.guistate;
    private final Level world;
    private final int x;
    private final int y;
@@ -131,12 +131,7 @@ public class PannelREScreen extends AbstractContainerScreen<PannelREMenu> {
    }
 
    public boolean keyPressed(int key, int b, int c) {
-      if (key == 256) {
-         this.minecraft.player.closeContainer();
-         return true;
-      } else {
-         return super.keyPressed(key, b, c);
-      }
+      return super.keyPressed(key, b, c);
    }
 
    public void containerTick() {
@@ -153,81 +148,67 @@ public class PannelREScreen extends AbstractContainerScreen<PannelREMenu> {
    public void init() {
       super.init();
       this.imagebutton_a1 = Button.builder(Component.empty(), e -> {
-            PacketDistributor.sendToServer(new PannelREButtonPayload(0, this.x, this.y, this.z));
-            PannelREButtonPayload.handleButtonAction(this.entity, 0, this.x, this.y, this.z);
+            PacketDistributor.sendToServer(new PanelActionPayload(0, PanelService.KIND_LETTER_RE, new net.minecraft.core.BlockPos(this.x, this.y, this.z), ""));
          }).bounds(this.leftPos + 31, this.topPos + 29, 39, 22).build(builder -> new Button(builder) {
             @Override
             public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
                guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/atlas/imagebutton_a1.png"), this.getX(), this.getY(), 0.0F, this.isHoveredOrFocused() ? 22.0F : 0.0F, 39, 22, 39, 44);
             }
          });
-      guistate.put("button:imagebutton_a1", this.imagebutton_a1);
       this.addRenderableWidget(this.imagebutton_a1);
       this.imagebutton_b1 = Button.builder(Component.empty(), e -> {
-            PacketDistributor.sendToServer(new PannelREButtonPayload(1, this.x, this.y, this.z));
-            PannelREButtonPayload.handleButtonAction(this.entity, 1, this.x, this.y, this.z);
+            PacketDistributor.sendToServer(new PanelActionPayload(1, PanelService.KIND_LETTER_RE, new net.minecraft.core.BlockPos(this.x, this.y, this.z), ""));
          }).bounds(this.leftPos + 31, this.topPos + 59, 39, 22).build(builder -> new Button(builder) {
             @Override
             public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
                guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/atlas/imagebutton_b1.png"), this.getX(), this.getY(), 0.0F, this.isHoveredOrFocused() ? 22.0F : 0.0F, 39, 22, 39, 44);
             }
          });
-      guistate.put("button:imagebutton_b1", this.imagebutton_b1);
       this.addRenderableWidget(this.imagebutton_b1);
       this.imagebutton_c1 = Button.builder(Component.empty(), e -> {
-            PacketDistributor.sendToServer(new PannelREButtonPayload(2, this.x, this.y, this.z));
-            PannelREButtonPayload.handleButtonAction(this.entity, 2, this.x, this.y, this.z);
+            PacketDistributor.sendToServer(new PanelActionPayload(2, PanelService.KIND_LETTER_RE, new net.minecraft.core.BlockPos(this.x, this.y, this.z), ""));
          }).bounds(this.leftPos + 31, this.topPos + 88, 39, 22).build(builder -> new Button(builder) {
             @Override
             public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
                guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/atlas/imagebutton_c1.png"), this.getX(), this.getY(), 0.0F, this.isHoveredOrFocused() ? 22.0F : 0.0F, 39, 22, 39, 44);
             }
          });
-      guistate.put("button:imagebutton_c1", this.imagebutton_c1);
       this.addRenderableWidget(this.imagebutton_c1);
       this.imagebutton_d1 = Button.builder(Component.empty(), e -> {
-            PacketDistributor.sendToServer(new PannelREButtonPayload(3, this.x, this.y, this.z));
-            PannelREButtonPayload.handleButtonAction(this.entity, 3, this.x, this.y, this.z);
+            PacketDistributor.sendToServer(new PanelActionPayload(3, PanelService.KIND_LETTER_RE, new net.minecraft.core.BlockPos(this.x, this.y, this.z), ""));
          }).bounds(this.leftPos + 99, this.topPos + 29, 39, 22).build(builder -> new Button(builder) {
             @Override
             public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
                guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/atlas/imagebutton_d1.png"), this.getX(), this.getY(), 0.0F, this.isHoveredOrFocused() ? 22.0F : 0.0F, 39, 22, 39, 44);
             }
          });
-      guistate.put("button:imagebutton_d1", this.imagebutton_d1);
       this.addRenderableWidget(this.imagebutton_d1);
       this.imagebutton_e1 = Button.builder(Component.empty(), e -> {
-            PacketDistributor.sendToServer(new PannelREButtonPayload(4, this.x, this.y, this.z));
-            PannelREButtonPayload.handleButtonAction(this.entity, 4, this.x, this.y, this.z);
+            PacketDistributor.sendToServer(new PanelActionPayload(4, PanelService.KIND_LETTER_RE, new net.minecraft.core.BlockPos(this.x, this.y, this.z), ""));
          }).bounds(this.leftPos + 99, this.topPos + 59, 39, 22).build(builder -> new Button(builder) {
             @Override
             public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
                guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/atlas/imagebutton_e1.png"), this.getX(), this.getY(), 0.0F, this.isHoveredOrFocused() ? 22.0F : 0.0F, 39, 22, 39, 44);
             }
          });
-      guistate.put("button:imagebutton_e1", this.imagebutton_e1);
       this.addRenderableWidget(this.imagebutton_e1);
       this.imagebutton_f1 = Button.builder(Component.empty(), e -> {
-            PacketDistributor.sendToServer(new PannelREButtonPayload(5, this.x, this.y, this.z));
-            PannelREButtonPayload.handleButtonAction(this.entity, 5, this.x, this.y, this.z);
+            PacketDistributor.sendToServer(new PanelActionPayload(5, PanelService.KIND_LETTER_RE, new net.minecraft.core.BlockPos(this.x, this.y, this.z), ""));
          }).bounds(this.leftPos + 99, this.topPos + 88, 39, 22).build(builder -> new Button(builder) {
             @Override
             public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
                guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/atlas/imagebutton_f1.png"), this.getX(), this.getY(), 0.0F, this.isHoveredOrFocused() ? 22.0F : 0.0F, 39, 22, 39, 44);
             }
          });
-      guistate.put("button:imagebutton_f1", this.imagebutton_f1);
       this.addRenderableWidget(this.imagebutton_f1);
       this.imagebutton_check = Button.builder(Component.empty(), e -> {
-            PacketDistributor.sendToServer(new PannelREButtonPayload(6, this.x, this.y, this.z));
-            PannelREButtonPayload.handleButtonAction(this.entity, 6, this.x, this.y, this.z);
+            PacketDistributor.sendToServer(new PanelActionPayload(6, PanelService.KIND_LETTER_RE, new net.minecraft.core.BlockPos(this.x, this.y, this.z), ""));
          }).bounds(this.leftPos + 106, this.topPos + 114, 42, 24).build(builder -> new Button(builder) {
             @Override
             public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
                guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/atlas/imagebutton_check.png"), this.getX(), this.getY(), 0.0F, this.isHoveredOrFocused() ? 24.0F : 0.0F, 42, 24, 42, 48);
             }
          });
-      guistate.put("button:imagebutton_check", this.imagebutton_check);
       this.addRenderableWidget(this.imagebutton_check);
    }
 }

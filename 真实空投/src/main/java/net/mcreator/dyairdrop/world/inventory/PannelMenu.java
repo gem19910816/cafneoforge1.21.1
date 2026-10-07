@@ -1,106 +1,37 @@
 package net.mcreator.dyairdrop.world.inventory;
 
-import net.minecraft.network.FriendlyByteBuf;
-import net.mcreator.dyairdrop.procedures.ShutdownprocessProcedure;
-import net.mcreator.dyairdrop.procedures.ShutdownProcedure;
-import net.mcreator.dyairdrop.procedures.OpenProcedure;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Supplier;
 
+import net.gem19910816.dyairdrop.panel.AbstractPanelMenu;
+import net.gem19910816.dyairdrop.panel.PanelService;
 import net.mcreator.dyairdrop.init.DyairdropModMenus;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.Entity;
+import net.mcreator.dyairdrop.procedures.OpenProcedure;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
-import net.neoforged.neoforge.items.SlotItemHandler;
 
-@EventBusSubscriber
-public class PannelMenu extends AbstractContainerMenu implements Supplier<Map<Integer, Slot>> {
-   public static final HashMap<String, Object> guistate = new HashMap<>();
-   public final Level world;
-   public final Player entity;
-   public int x;
-   public int y;
-   public int z;
-   private ContainerLevelAccess access = ContainerLevelAccess.NULL;
-   private IItemHandler internal;
-   private final Map<Integer, Slot> customSlots = new HashMap<>();
-   private boolean bound = false;
-   private Supplier<Boolean> boundItemMatcher = null;
-   private Entity boundEntity = null;
-   private BlockEntity boundBlockEntity = null;
+/**
+ * 数字密码面板（0~9）的容器。
+ *
+ * <p>重构点：不再持有静态 {@code guistate}；不再在玩家 tick 里强制关闭容器；
+ * {@code stillValid()} 由 {@link AbstractPanelMenu} 真正实现；打开时仍按原行为占用 {@code valid} 锁。
+ *
+ * <p>注册 id 保持 {@code dyairdrop:panel} 不变（{@link DyairdropModMenus#PANEL}）。
+ */
+public class PannelMenu extends AbstractPanelMenu {
 
-   public PannelMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-      super(DyairdropModMenus.PANEL.get(), id);
-      this.entity = inv.player;
-      this.world = inv.player.level();
-      this.internal = new ItemStackHandler(0);
-      BlockPos pos = null;
-      if (extraData != null) {
-         pos = extraData.readBlockPos();
-         this.x = pos.getX();
-         this.y = pos.getY();
-         this.z = pos.getZ();
-         this.access = ContainerLevelAccess.create(this.world, pos);
-      }
+    public PannelMenu(int id, Inventory inventory, FriendlyByteBuf extraData) {
+        super(DyairdropModMenus.PANEL.get(), id, inventory, extraData);
+        // 原行为：打开时清空玩家输入缓存，并在 valid 为空时写入玩家名（占用锁）
+        OpenProcedure.execute(this.world, this.x, this.y, this.z, this.entity, new HashMap<>());
+    }
 
-      OpenProcedure.execute(this.world, this.x, this.y, this.z, this.entity, guistate);
-   }
-
-   public boolean stillValid(Player player) {
-      if (this.bound) {
-         if (this.boundItemMatcher != null) {
-            return this.boundItemMatcher.get();
-         }
-
-         if (this.boundBlockEntity != null) {
-            return AbstractContainerMenu.stillValid(this.access, player, this.boundBlockEntity.getBlockState().getBlock());
-         }
-
-         if (this.boundEntity != null) {
-            return this.boundEntity.isAlive();
-         }
-      }
-
-      return true;
-   }
-
-   public ItemStack quickMoveStack(Player playerIn, int index) {
-      return ItemStack.EMPTY;
-   }
-
-   public void removed(Player playerIn) {
-      super.removed(playerIn);
-      ShutdownProcedure.execute(this.world, this.x, this.y, this.z, this.entity);
-   }
-
-   public Map<Integer, Slot> get() {
-      return this.customSlots;
-   }
-
-   @SubscribeEvent
-   public static void onPlayerTick(PlayerTickEvent.Post event) {
-      Player entity = event.getEntity();
-      if (entity.containerMenu instanceof PannelMenu) {
-         Level world = entity.level();
-         double x = entity.getX();
-         double y = entity.getY();
-         double z = entity.getZ();
-         ShutdownprocessProcedure.execute(world, entity);
-      }
-   }
+    @Override
+    public void removed(Player player) {
+        super.removed(player);
+        if (player instanceof ServerPlayer serverPlayer) {
+            PanelService.onPanelClosed(serverPlayer, panelPos());
+        }
+    }
 }
