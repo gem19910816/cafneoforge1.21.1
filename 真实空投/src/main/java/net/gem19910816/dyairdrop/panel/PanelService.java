@@ -383,9 +383,7 @@ public final class PanelService {
     }
 
     private static void playAt(ServerLevel level, BlockPos pos, net.minecraft.sounds.SoundEvent sound, float volume) {
-        if (sound != null) {
-            level.playSound(null, pos, sound, SoundSource.BLOCKS, volume, 1.0F);
-        }
+        net.gem19910816.dyairdrop.core.Sounds.play(level, pos.getX(), pos.getY(), pos.getZ(), sound, volume);
     }
 
     private static void setAnimation(ServerLevel level, BlockPos pos, int value) {
