@@ -1,0 +1,69 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.107'
+}
+
+group = mod_group_id
+version = mod_version
+
+base {
+    archivesName = "${mod_id}-1.21.1-neoforge"
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+    withSourcesJar()
+}
+
+repositories {
+    // Curios 9.x 的 jar 随附在 libs\ 里。这台机器没有外网，maven.modrinth 取不到，
+    // 所以不走 maven 坐标，直接 flatDir。
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+neoForge {
+    version = project.neo_version
+
+    runs {
+        client {
+            client()
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+        server {
+            server()
+            programArgument '--nogui'
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+        data {
+            data()
+            programArguments.addAll '--mod', project.mod_id, '--all',
+                    '--output', file('src/generated/resources/').getAbsolutePath(),
+                    '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+dependencies {
+    // Curios —— 背包要挂在背部饰品栏上。
+    //
+    // compileOnly 而不是 implementation：所有调用都关在 backpack 包里，运行期由
+    // Curios 在不在场决定那条路径走不走得通。写成 implementation 会把 Curios
+    // 变成必需品，没装的玩家直接加载失败。
+    //
+    // 不写 localRuntime：开发环境要验饰品栏时，把 jar 丢进 run\mods 更直接。
+    compileOnly name: "curios-neoforge-${curios_version}"
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

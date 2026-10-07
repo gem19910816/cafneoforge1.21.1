@@ -13,6 +13,7 @@
 | [僵尸游戏 (ZombieGame:Reborn)](僵尸游戏/) | 1.20.1 Forge 2.1.0 | 1.21.1 NeoForge | [jar](僵尸游戏/zombiegamereborn-2.1.0.jar) |
 | [急救护理 (SelfAid)](急救护理/) | —（1.21.1 **新实现**，非移植） | 1.21.1 NeoForge | [jar](急救护理/selfaid-1.0.0.jar) |
 | [绿葡萄护甲 (LesRaisins Armor)](绿葡萄护甲/) | 1.20.1 Forge 0.1.4.4 | 1.21.1 NeoForge | [jar](绿葡萄护甲/lrarmor-0.1.4.4.jar) |
+| [CAF 生存核心 (CAF Survival Core)](CAF生存核心/) | 1.20.1 Forge（原 Tarkov Stamina / ChaosZ Pack） | 1.21.1 NeoForge | [jar](CAF生存核心/tarkov_stamina-1.21.1-neoforge-1.0.0-port.jar) |
 
 ## 说明
 
@@ -106,6 +107,7 @@ Tacz-Unidict（TACZ：铳械协议）。后者依赖的 TaCZ 弹药机制在 1.1
 - **验证状态**：编译通过（仅过时警告）、`runData` 全部 provider 成功（72+ 资源文件）、
   开发环境服务器启动至 `Done (3.882s)` 且日志无 thinair 相关错误、开发环境客户端进入标题界面零缺失模型。
   **多人并发与长时段玩法流程尚未实机验证**，详见其 `移植说明.md` 第三节。
+
 ### [僵尸游戏 (ZombieGame:Reborn)](僵尸游戏/) — 1.21.1 移植
 
 从 1.20.1 Forge 版 `ZombieGame:Reborn` 2.1.0 移植。僵尸会挖穿方块接近玩家、拿方块搭桥建造，
@@ -142,3 +144,25 @@ Tacz-Unidict（TACZ：铳械协议）。后者依赖的 TaCZ 弹药机制在 1.1
 - **验证状态**：仅 `./gradlew build` 通过（868 KB / 332 个条目）；
   **没有跑过客户端或服务端**（工程里连 `run/` 都没有），属性、套装、渲染均未实机验证，
   详见其 `移植说明.md` 的「验证状态」一节。
+
+### [CAF 生存核心 (CAF Survival Core)](CAF生存核心/) — 1.21.1 移植
+
+从 1.20.1 Forge 版 **Tarkov Stamina**（作者 ChaosZ Pack，包名 `com.chaosz.tarkovstamina`）移植。
+一套服务端权威的生存状态系统 + 塔科夫风格 HUD：体力、基因强化、锻炼、负重、抑郁、疾病、恐慌、
+成瘾、职业、钓鱼、排泄、军用背包与帐篷读条，配置集中在一个 TOML 里。
+
+- **前置**：Curios for NeoForge 1.21.1 **9.x**（**硬前置**，随附
+  `CAF生存核心/libs/curios-neoforge-9.5.1+1.21.1.jar`）。上游 `mods.toml` 即标 `mandatory=true`，
+  **未安装会 `NoClassDefFoundError`**（背包背部饰品槽与「从饰品栏找回背包」直接调 `CuriosApi`）。
+- **软依赖**：`simplytents`（帐篷）、`refurbished_furniture`（马桶）、`survival_instinct`（螺丝刀）、
+  `doomsday_decoration`（家具）、`create`（零件）、`harmfulsmoke`（香烟）等，装了对应内容才生效。
+- **保留项**：`mod_id` 仍是 `tarkov_stamina`，物品命名空间仍是 `caf`；
+  玩家持久化 NBT 键（`stamina` / `cooldown` / `injectionCount` / `exerciseLevel` …）与 1.20.1 版**逐键一致**，
+  旧存档的体力与技能进度可直接续用；配置文件分区与键名未变；`assets/` 原样搬运。
+  本次是**「加载器换代」而非「功能重写」**，玩法数值一行未改。
+- **验证状态**：编译 **0 error**（8 条 `EventBusSubscriber.bus` 过时警告，属有意保留）；
+  NeoForge 21.1.227 专用服务器实测加载（`Done (6.151s)!`，与本模组相关 ERROR/WARN **0 条**，
+  Curios 正常加载）；产物 jar 内的 `mods.toml`、数据包、25 张贴图与 50 个 class 已逐项核验。
+  **客户端（`runClient` 从未启动——HUD 从 `IGuiOverlay` 改为 `LayeredDraw.Layer`，是本次风险最高的一处）、
+  背包 GUI、Curios 背部渲染、玩法主流程、旧存档兼容、多人并发均尚未实机验证**，
+  详见其 `移植说明.md` 第三、四节。
