@@ -28,6 +28,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -294,6 +295,29 @@ public final class PanelService {
     }
 
     // ------------------------------------------------------------------ 生命周期
+
+    /**
+     * 面板打开时（服务端）的初始化：清空玩家输入缓存，并在 {@code valid} 为空时占用该面板。
+     *
+     * <p>对应原 {@code OpenProcedure}，但去掉了「顺手清空客户端 EditBox」这种跨端副作用。
+     */
+    public static void onPanelOpened(Player player, BlockPos pos) {
+        if (!(player instanceof ServerPlayer serverPlayer) || !(player.level() instanceof ServerLevel level)) {
+            return;
+        }
+        DyairdropModVariables.PlayerVariables vars = vars(serverPlayer);
+        vars.password = "";
+        if (vars.showlight != 0.0) {
+            vars.showlight = 0.0;
+            vars.pw = "";
+        }
+        sync(serverPlayer, vars);
+
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be != null && be.getPersistentData().getString("valid").isEmpty()) {
+            writeTag(level, pos, be, "valid", player.getDisplayName().getString());
+        }
+    }
 
     /**
      * 面板关闭（容器 removed）时清理：清空输入缓存、方块实体 {@code open="0"}、

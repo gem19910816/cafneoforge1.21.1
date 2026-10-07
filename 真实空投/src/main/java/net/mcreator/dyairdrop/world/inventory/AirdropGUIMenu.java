@@ -26,7 +26,6 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
 public class AirdropGUIMenu extends AbstractContainerMenu implements Supplier<Map<Integer, Slot>> {
-   public static final HashMap<String, Object> guistate = new HashMap<>();
    public final Level world;
    public final Player entity;
    public int x;

@@ -18,7 +18,6 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class AirdropGUIScreen extends AbstractContainerScreen<AirdropGUIMenu> {
-   private static final HashMap<String, Object> guistate = AirdropGUIMenu.guistate;
    private final Level world;
    private final int x;
    private final int y;
@@ -51,12 +50,8 @@ public class AirdropGUIScreen extends AbstractContainerScreen<AirdropGUIMenu> {
    }
 
    public boolean keyPressed(int key, int b, int c) {
-      if (key == 256) {
-         this.minecraft.player.closeContainer();
-         return true;
-      } else {
-         return super.keyPressed(key, b, c);
-      }
+      // ESC 交回原版 Screen 流程（原实现硬编码 key==256 并直接 closeContainer，会和其它模组抢 ESC 处理）
+      return super.keyPressed(key, b, c);
    }
 
    public void containerTick() {
