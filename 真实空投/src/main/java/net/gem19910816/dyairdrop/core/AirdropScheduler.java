@@ -1,5 +1,7 @@
 package net.gem19910816.dyairdrop.core;
 
+import net.gem19910816.dyairdrop.compat.zombiekit.ZombieKitCompat;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +21,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 
 /**
@@ -186,7 +187,7 @@ public final class AirdropScheduler {
     }
 
     private static String lootPrefix() {
-        return ModList.get().isLoaded("zombiekit") ? "zombiekit" : "dyairdrop";
+        return ZombieKitCompat.lootNamespace();
     }
 
     private static double clampedHeight() {

@@ -1,5 +1,7 @@
 package net.gem19910816.dyairdrop.core;
 
+import net.gem19910816.dyairdrop.compat.zombiekit.ZombieKitCompat;
+
 import net.gem19910816.dyairdrop.configuration.AirdropconfigConfiguration;
 import net.gem19910816.dyairdrop.init.DyairdropModItems;
 import net.gem19910816.dyairdrop.network.DyairdropModVariables;
@@ -15,9 +17,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.neoforged.fml.ModList;
 
 /**
  * 信号枪的全部逻辑：发射（消耗 + 冷却 + 按权重抽空投类型与战利品表）、信号弹每 tick、信号弹爆开。
@@ -121,7 +121,7 @@ public final class FlareService {
 
     /** 战利品表 id：{@code <mod>:chests/<类型>airdrop<枪号>}。 */
     private static String lootTableFor(String airdropBlock, ItemStack gun) {
-        String modName = ModList.get().isLoaded("zombiekit") ? "zombiekit" : "dyairdrop";
+        String modName = ZombieKitCompat.lootNamespace();
         String gunIndex = BuiltInRegistries.ITEM.getKey(gun.getItem()).toString().replace(FLAREGUN_ID_PREFIX, "");
         return modName + ":chests/" + airdropBlock.replace(AIRDROP_BLOCK_PREFIX, "") + "airdrop" + gunIndex;
     }

@@ -1,7 +1,7 @@
 package net.gem19910816.dyairdrop.command;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import net.gem19910816.dyairdrop.procedures.T6Procedure;
+import net.gem19910816.dyairdrop.core.StructureLocator;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.MessageArgument;
@@ -36,7 +36,7 @@ public class LocatetagCommand {
                      direction = entity.getDirection();
                   }
 
-                  T6Procedure.execute(world, arguments, entity);
+                  StructureLocator.locateAndBroadcast(world, arguments, entity);
                   return 0;
                }))
          );
