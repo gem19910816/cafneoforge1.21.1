@@ -1,5 +1,9 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.GameModes;
+
+import net.gem19910816.dyairdrop.core.Nbt;
+
 import io.netty.buffer.Unpooled;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,27 +30,12 @@ public class Safeopen2Procedure {
       if (entity != null) {
          String output = "";
          String input = "";
-         if ((new Object() {
-            public String getValue(LevelAccessor world, BlockPos pos, String tag) {
-               BlockEntity blockEntity = world.getBlockEntity(pos);
-               return blockEntity != null ? blockEntity.getPersistentData().getString(tag) : "";
-            }
-         }).getValue(world, BlockPos.containing(x, y, z), "valid").length() >= 1) {
-            if (!entity.getDisplayName().getString().equals((new Object() {
-               public String getValue(LevelAccessor world, BlockPos pos, String tag) {
-                  BlockEntity blockEntity = world.getBlockEntity(pos);
-                  return blockEntity != null ? blockEntity.getPersistentData().getString(tag) : "";
-               }
-            }).getValue(world, BlockPos.containing(x, y, z), "valid"))) {
+         if (Nbt.getString(world, BlockPos.containing(x, y, z), "valid").length() >= 1) {
+            if (!entity.getDisplayName().getString().equals(Nbt.getString(world, BlockPos.containing(x, y, z), "valid"))) {
                if (entity instanceof Player _player && !_player.level().isClientSide()) {
                   _player.displayClientMessage(Component.literal(Component.translatable("message.currentlybeingused ").getString()), true);
                }
-            } else if ("shutdown".equals((new Object() {
-               public String getValue(LevelAccessor world, BlockPos pos, String tag) {
-                  BlockEntity blockEntity = world.getBlockEntity(pos);
-                  return blockEntity != null ? blockEntity.getPersistentData().getString(tag) : "";
-               }
-            }).getValue(world, BlockPos.containing(x, y, z), "valid"))) {
+            } else if ("shutdown".equals(Nbt.getString(world, BlockPos.containing(x, y, z), "valid"))) {
                if (entity instanceof Player _player && !_player.level().isClientSide()) {
                   _player.displayClientMessage(Component.literal(Component.translatable("message.currentlybeingused ").getString()), true);
                }
@@ -75,12 +64,7 @@ public class Safeopen2Procedure {
             }, _buf -> _buf.writeBlockPos(_bpos));
          }
 
-         if ((new Object() {
-            public String getValue(LevelAccessor world, BlockPos pos, String tag) {
-               BlockEntity blockEntity = world.getBlockEntity(pos);
-               return blockEntity != null ? blockEntity.getPersistentData().getString(tag) : "";
-            }
-         }).getValue(world, BlockPos.containing(x, y, z), "pw").isEmpty()) {
+         if (Nbt.getString(world, BlockPos.containing(x, y, z), "pw").isEmpty()) {
             input = "abcdef";
             List<Character> charList = new ArrayList<>();
 
@@ -107,19 +91,7 @@ public class Safeopen2Procedure {
                }
             }
 
-            if ((new Object() {
-                     public boolean checkGamemode(Entity _ent) {
-                        if (_ent instanceof ServerPlayer _serverPlayer) {
-                           return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
-                        } else {
-                           return _ent.level().isClientSide() && _ent instanceof Player _player
-                              ? Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-                                 && Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE
-                              : false;
-                        }
-                     }
-                  })
-                  .checkGamemode(entity)
+            if (GameModes.isCreative(entity)
                && !world.isClientSide()
                && world.getServer() != null) {
                world.getServer().getPlayerList().broadcastSystemMessage(Component.literal(Component.translatable("message.creativepassword").getString() + output), false);

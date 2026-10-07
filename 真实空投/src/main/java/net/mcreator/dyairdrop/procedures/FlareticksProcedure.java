@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.GameModes;
+
 import java.text.DecimalFormat;
 import net.mcreator.dyairdrop.configuration.AirdropconfigConfiguration;
 import net.mcreator.dyairdrop.network.DyairdropModVariables;
@@ -136,19 +138,7 @@ public class FlareticksProcedure {
                         .airdropblock
                         .length()
                   <= 0
-               && !(new Object() {
-                     public boolean checkGamemode(Entity _ent) {
-                        if (_ent instanceof ServerPlayer _serverPlayer) {
-                           return _serverPlayer.gameMode.getGameModeForPlayer() == GameType.CREATIVE;
-                        } else {
-                           return _ent.level().isClientSide() && _ent instanceof Player _player
-                              ? Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()) != null
-                                 && Minecraft.getInstance().getConnection().getPlayerInfo(_player.getGameProfile().getId()).getGameMode() == GameType.CREATIVE
-                              : false;
-                        }
-                     }
-                  })
-                  .checkGamemode(entity)) {
+               && !GameModes.isCreative(entity)) {
                if (entity instanceof Player _player && !_player.level().isClientSide()) {
                   _player.displayClientMessage(Component.literal("message.airdropeventsfailure"), false);
                }

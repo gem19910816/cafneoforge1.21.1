@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.Nbt;
+
 import io.netty.buffer.Unpooled;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,12 +27,7 @@ public class RandomstringProcedure {
       if (entity != null) {
          String input = "";
          String output = "";
-         if ((new Object() {
-            public String getValue(LevelAccessor world, BlockPos pos, String tag) {
-               BlockEntity blockEntity = world.getBlockEntity(pos);
-               return blockEntity != null ? blockEntity.getPersistentData().getString(tag) : "";
-            }
-         }).getValue(world, BlockPos.containing(x, y, z), "pw").isEmpty()) {
+         if (Nbt.getString(world, BlockPos.containing(x, y, z), "pw").isEmpty()) {
             input = "abcdef";
             List<Character> charList = new ArrayList<>();
 
@@ -62,12 +59,7 @@ public class RandomstringProcedure {
             }
          }
 
-         if ((new Object() {
-            public boolean getValue(LevelAccessor world, BlockPos pos, String tag) {
-               BlockEntity blockEntity = world.getBlockEntity(pos);
-               return blockEntity != null ? blockEntity.getPersistentData().getBoolean(tag) : false;
-            }
-         }).getValue(world, BlockPos.containing(x, y, z), "isopen")) {
+         if (Nbt.getBoolean(world, BlockPos.containing(x, y, z), "isopen")) {
             if (entity instanceof ServerPlayer _ent) {
                final BlockPos _bpos = BlockPos.containing(x, y, z);
                _ent.openMenu(new MenuProvider() {

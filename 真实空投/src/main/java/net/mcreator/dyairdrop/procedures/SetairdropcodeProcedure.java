@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.CommandArgs;
+
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -13,61 +15,16 @@ import net.minecraft.world.entity.player.Player;
 public class SetairdropcodeProcedure {
    public static void execute(final CommandContext<CommandSourceStack> arguments) {
       String _setval = StringArgumentType.getString(arguments, "loot");
-      (new Object() {
-         public Entity getEntity() {
-            try {
-               return EntityArgument.getEntity(arguments, "player");
-            } catch (CommandSyntaxException e) {
-               e.printStackTrace();
-               return null;
-            }
-         }
-      }).getEntity().getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+      CommandArgs.entity(arguments, "player").getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
          capability.airdroploot = _setval;
-         capability.syncPlayerVariables((new Object() {
-            public Entity getEntity() {
-               try {
-                  return EntityArgument.getEntity(arguments, "player");
-               } catch (CommandSyntaxException e) {
-                  e.printStackTrace();
-                  return null;
-               }
-            }
-         }).getEntity());
+         capability.syncPlayerVariables(CommandArgs.entity(arguments, "player"));
       });
       String _setvalb = StringArgumentType.getString(arguments, "blockid");
-      (new Object() {
-         public Entity getEntity() {
-            try {
-               return EntityArgument.getEntity(arguments, "player");
-            } catch (CommandSyntaxException e) {
-               e.printStackTrace();
-               return null;
-            }
-         }
-      }).getEntity().getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+      CommandArgs.entity(arguments, "player").getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
          capability.airdropblock = _setval;
-         capability.syncPlayerVariables((new Object() {
-            public Entity getEntity() {
-               try {
-                  return EntityArgument.getEntity(arguments, "player");
-               } catch (CommandSyntaxException e) {
-                  e.printStackTrace();
-                  return null;
-               }
-            }
-         }).getEntity());
+         capability.syncPlayerVariables(CommandArgs.entity(arguments, "player"));
       });
-      if ((new Object() {
-         public Entity getEntity() {
-            try {
-               return EntityArgument.getEntity(arguments, "player");
-            } catch (CommandSyntaxException e) {
-               e.printStackTrace();
-               return null;
-            }
-         }
-      }).getEntity() instanceof Player _player && !_player.level().isClientSide()) {
+      if (CommandArgs.entity(arguments, "player") instanceof Player _player && !_player.level().isClientSide()) {
          _player.displayClientMessage(
             Component.literal(
                Component.translatable("message.yourloot").getString()

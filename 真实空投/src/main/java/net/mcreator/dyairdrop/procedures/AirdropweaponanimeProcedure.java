@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.Nbt;
+
 import io.netty.buffer.Unpooled;
 import net.mcreator.dyairdrop.DyairdropMod;
 import net.mcreator.dyairdrop.world.inventory.AirdropGUIMenu;
@@ -22,12 +24,7 @@ public class AirdropweaponanimeProcedure {
    public static void execute(LevelAccessor world, double x, double y, double z, BlockState blockstate, Entity entity) {
       if (entity != null) {
          if ((blockstate.getBlock().getStateDefinition().getProperty("blockstate") instanceof IntegerProperty _getip1 ? (Integer)blockstate.getValue(_getip1) : -1) == 0) {
-            if (!(new Object() {
-               public boolean getValue(LevelAccessor world, BlockPos pos, String tag) {
-                  BlockEntity blockEntity = world.getBlockEntity(pos);
-                  return blockEntity != null ? blockEntity.getPersistentData().getBoolean(tag) : false;
-               }
-            }).getValue(world, BlockPos.containing(x, y, z), "canopen")) {
+            if (!Nbt.getBoolean(world, BlockPos.containing(x, y, z), "canopen")) {
                if (!world.isClientSide()) {
                   BlockPos _bp = BlockPos.containing(x, y, z);
                   BlockEntity _blockEntity = world.getBlockEntity(_bp);

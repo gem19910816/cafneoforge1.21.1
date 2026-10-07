@@ -1,5 +1,9 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.Blocks;
+
+import net.gem19910816.dyairdrop.core.Nbt;
+
 import net.mcreator.dyairdrop.DyairdropMod;
 import net.mcreator.dyairdrop.network.DyairdropModVariables;
 import net.minecraft.commands.CommandSource;
@@ -67,20 +71,10 @@ public class CheckProcedure {
                DyairdropMod.queueServerWork(
                   7,
                   () -> {
-                     if ((new Object() {
-                        public String getValue(LevelAccessor world, BlockPos pos, String tag) {
-                           BlockEntity blockEntity = world.getBlockEntity(pos);
-                           return blockEntity != null ? blockEntity.getPersistentData().getString(tag) : "";
-                        }
-                     }).getValue(world, BlockPos.containing(x, y, z), "pw").length() >= 2) {
+                     if (Nbt.getString(world, BlockPos.containing(x, y, z), "pw").length() >= 2) {
                         String _setvalx = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
                               .passwordre
-                           + (new Object() {
-                              public String getValue(LevelAccessor world, BlockPos pos, String tag) {
-                                 BlockEntity blockEntity = world.getBlockEntity(pos);
-                                 return blockEntity != null ? blockEntity.getPersistentData().getString(tag) : "";
-                              }
-                           }).getValue(world, BlockPos.containing(x, y, z), "pw").substring(0, 1);
+                           + Nbt.getString(world, BlockPos.containing(x, y, z), "pw").substring(0, 1);
                         entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
                            capability.passwordre = _setvalx;
                            capability.syncPlayerVariables(entity);
@@ -114,20 +108,10 @@ public class CheckProcedure {
                DyairdropMod.queueServerWork(
                   14,
                   () -> {
-                     if ((new Object() {
-                        public String getValue(LevelAccessor world, BlockPos pos, String tag) {
-                           BlockEntity blockEntity = world.getBlockEntity(pos);
-                           return blockEntity != null ? blockEntity.getPersistentData().getString(tag) : "";
-                        }
-                     }).getValue(world, BlockPos.containing(x, y, z), "pw").length() >= 3) {
+                     if (Nbt.getString(world, BlockPos.containing(x, y, z), "pw").length() >= 3) {
                         String _setvalx = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
                               .passwordre
-                           + (new Object() {
-                              public String getValue(LevelAccessor world, BlockPos pos, String tag) {
-                                 BlockEntity blockEntity = world.getBlockEntity(pos);
-                                 return blockEntity != null ? blockEntity.getPersistentData().getString(tag) : "";
-                              }
-                           }).getValue(world, BlockPos.containing(x, y, z), "pw").substring(1, 2);
+                           + Nbt.getString(world, BlockPos.containing(x, y, z), "pw").substring(1, 2);
                         entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
                            capability.passwordre = _setvalx;
                            capability.syncPlayerVariables(entity);
@@ -161,20 +145,10 @@ public class CheckProcedure {
                DyairdropMod.queueServerWork(
                   21,
                   () -> {
-                     if ((new Object() {
-                        public String getValue(LevelAccessor world, BlockPos pos, String tag) {
-                           BlockEntity blockEntity = world.getBlockEntity(pos);
-                           return blockEntity != null ? blockEntity.getPersistentData().getString(tag) : "";
-                        }
-                     }).getValue(world, BlockPos.containing(x, y, z), "pw").length() >= 4) {
+                     if (Nbt.getString(world, BlockPos.containing(x, y, z), "pw").length() >= 4) {
                         String _setvalx = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
                               .passwordre
-                           + (new Object() {
-                              public String getValue(LevelAccessor world, BlockPos pos, String tag) {
-                                 BlockEntity blockEntity = world.getBlockEntity(pos);
-                                 return blockEntity != null ? blockEntity.getPersistentData().getString(tag) : "";
-                              }
-                           }).getValue(world, BlockPos.containing(x, y, z), "pw").substring(2, 3);
+                           + Nbt.getString(world, BlockPos.containing(x, y, z), "pw").substring(2, 3);
                         entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
                            capability.passwordre = _setvalx;
                            capability.syncPlayerVariables(entity);
@@ -208,20 +182,10 @@ public class CheckProcedure {
                DyairdropMod.queueServerWork(
                   28,
                   () -> {
-                     if ((new Object() {
-                        public String getValue(LevelAccessor world, BlockPos pos, String tag) {
-                           BlockEntity blockEntity = world.getBlockEntity(pos);
-                           return blockEntity != null ? blockEntity.getPersistentData().getString(tag) : "";
-                        }
-                     }).getValue(world, BlockPos.containing(x, y, z), "pw").length() >= 5) {
+                     if (Nbt.getString(world, BlockPos.containing(x, y, z), "pw").length() >= 5) {
                         String _setvalx = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
                               .passwordre
-                           + (new Object() {
-                              public String getValue(LevelAccessor world, BlockPos pos, String tag) {
-                                 BlockEntity blockEntity = world.getBlockEntity(pos);
-                                 return blockEntity != null ? blockEntity.getPersistentData().getString(tag) : "";
-                              }
-                           }).getValue(world, BlockPos.containing(x, y, z), "pw").substring(3, 4);
+                           + Nbt.getString(world, BlockPos.containing(x, y, z), "pw").substring(3, 4);
                         entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
                            capability.passwordre = _setvalx;
                            capability.syncPlayerVariables(entity);
@@ -255,20 +219,10 @@ public class CheckProcedure {
                DyairdropMod.queueServerWork(
                   35,
                   () -> {
-                     if ((new Object() {
-                        public String getValue(LevelAccessor world, BlockPos pos, String tag) {
-                           BlockEntity blockEntity = world.getBlockEntity(pos);
-                           return blockEntity != null ? blockEntity.getPersistentData().getString(tag) : "";
-                        }
-                     }).getValue(world, BlockPos.containing(x, y, z), "pw").length() >= 6) {
+                     if (Nbt.getString(world, BlockPos.containing(x, y, z), "pw").length() >= 6) {
                         String _setvalx = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
                               .passwordre
-                           + (new Object() {
-                              public String getValue(LevelAccessor world, BlockPos pos, String tag) {
-                                 BlockEntity blockEntity = world.getBlockEntity(pos);
-                                 return blockEntity != null ? blockEntity.getPersistentData().getString(tag) : "";
-                              }
-                           }).getValue(world, BlockPos.containing(x, y, z), "pw").substring(4, 5);
+                           + Nbt.getString(world, BlockPos.containing(x, y, z), "pw").substring(4, 5);
                         entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
                            capability.passwordre = _setvalx;
                            capability.syncPlayerVariables(entity);
@@ -302,20 +256,10 @@ public class CheckProcedure {
                DyairdropMod.queueServerWork(
                   42,
                   () -> {
-                     if ((new Object() {
-                        public String getValue(LevelAccessor world, BlockPos pos, String tag) {
-                           BlockEntity blockEntity = world.getBlockEntity(pos);
-                           return blockEntity != null ? blockEntity.getPersistentData().getString(tag) : "";
-                        }
-                     }).getValue(world, BlockPos.containing(x, y, z), "pw").length() >= 6) {
+                     if (Nbt.getString(world, BlockPos.containing(x, y, z), "pw").length() >= 6) {
                         String _setvalx = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
                               .passwordre
-                           + (new Object() {
-                              public String getValue(LevelAccessor world, BlockPos pos, String tag) {
-                                 BlockEntity blockEntity = world.getBlockEntity(pos);
-                                 return blockEntity != null ? blockEntity.getPersistentData().getString(tag) : "";
-                              }
-                           }).getValue(world, BlockPos.containing(x, y, z), "pw").substring(5, 6);
+                           + Nbt.getString(world, BlockPos.containing(x, y, z), "pw").substring(5, 6);
                         entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
                            capability.passwordre = _setvalx;
                            capability.syncPlayerVariables(entity);
@@ -412,26 +356,9 @@ public class CheckProcedure {
                                              "setblock ~ ~ ~ "
                                                 + BuiltInRegistries.BLOCK.getKey(world.getBlockState(BlockPos.containing(x, y, z)).getBlock()).toString()
                                                 + "open[facing="
-                                                + (new Object() {
-                                                      public Direction getDirection(BlockState _bs) {
-                                                         if (_bs.getBlock().getStateDefinition().getProperty("facing") instanceof DirectionProperty _dp) {
-                                                            return (Direction)_bs.getValue(_dp);
-                                                         } else {
-                                                            return _bs.getBlock().getStateDefinition().getProperty("axis") instanceof EnumProperty _ep
-                                                                  && _ep.getPossibleValues().toArray()[0] instanceof Axis
-                                                               ? Direction.fromAxisAndDirection((Axis)_bs.getValue(_ep), AxisDirection.POSITIVE)
-                                                               : Direction.NORTH;
-                                                         }
-                                                      }
-                                                   })
-                                                   .getDirection(world.getBlockState(BlockPos.containing(x, y, z)))
+                                                + Blocks.facingOf(world.getBlockState(BlockPos.containing(x, y, z)))
                                                 + "]{LootTable:\""
-                                                + (new Object() {
-                                                   public String getValue(LevelAccessor world, BlockPos pos, String tag) {
-                                                      BlockEntity blockEntity = world.getBlockEntity(pos);
-                                                      return blockEntity != null ? blockEntity.getPersistentData().getString(tag) : "";
-                                                   }
-                                                }).getValue(world, BlockPos.containing(x, y, z), "loot")
+                                                + Nbt.getString(world, BlockPos.containing(x, y, z), "loot")
                                                 + "\"} replace"
                                           );
                                     }

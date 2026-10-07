@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.Nbt;
+
 import io.netty.buffer.Unpooled;
 import net.mcreator.dyairdrop.world.inventory.AirdropGUIMenu;
 import net.minecraft.core.BlockPos;
@@ -19,12 +21,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class LockedairdroplargedebugProcedure {
    public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
       if (entity != null) {
-         if (!(new Object() {
-            public boolean getValue(LevelAccessor world, BlockPos pos, String tag) {
-               BlockEntity blockEntity = world.getBlockEntity(pos);
-               return blockEntity != null ? blockEntity.getPersistentData().getBoolean(tag) : false;
-            }
-         }).getValue(world, BlockPos.containing(x, y, z), "canopen")) {
+         if (!Nbt.getBoolean(world, BlockPos.containing(x, y, z), "canopen")) {
             if (!world.isClientSide()) {
                BlockPos _bp = BlockPos.containing(x, y, z);
                BlockEntity _blockEntity = world.getBlockEntity(_bp);

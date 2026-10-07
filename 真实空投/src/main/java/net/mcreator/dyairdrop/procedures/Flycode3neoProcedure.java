@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.CommandArgs;
+
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -31,16 +33,7 @@ public class Flycode3neoProcedure {
       double drmax = 0.0;
       double drmin = 0.0;
       String worldname = "";
-      player = (new Object() {
-         public Entity getEntity() {
-            try {
-               return EntityArgument.getEntity(arguments, "player");
-            } catch (CommandSyntaxException e) {
-               e.printStackTrace();
-               return null;
-            }
-         }
-      }).getEntity();
+      player = CommandArgs.entity(arguments, "player");
       if (DoubleArgumentType.getDouble(arguments, "driftmax") >= DoubleArgumentType.getDouble(arguments, "driftmin")) {
          drmax = DoubleArgumentType.getDouble(arguments, "driftmax");
          drmin = DoubleArgumentType.getDouble(arguments, "driftmin");

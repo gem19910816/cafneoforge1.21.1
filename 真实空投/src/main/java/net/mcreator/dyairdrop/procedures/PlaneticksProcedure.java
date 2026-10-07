@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.Numbers;
+
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
@@ -35,15 +37,7 @@ public class PlaneticksProcedure {
                distination = "108";
             }
 
-            entity.getPersistentData().putDouble("d", (new Object() {
-               double convert(String s) {
-                  try {
-                     return Double.parseDouble(s.trim());
-                  } catch (Exception var3) {
-                     return 0.0;
-                  }
-               }
-            }).convert(distination));
+            entity.getPersistentData().putDouble("d", Numbers.parseDouble(distination));
             entity.setCustomName(Component.literal("运输机"));
             entity.setDeltaMovement(new Vec3(3.0, 0.0, 0.0));
          }

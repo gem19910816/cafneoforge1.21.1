@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.Projectiles;
+
 import net.mcreator.dyairdrop.configuration.AirdropconfigConfiguration;
 import net.mcreator.dyairdrop.entity.FlareEntity;
 import net.mcreator.dyairdrop.init.DyairdropModEntities;
@@ -65,15 +67,7 @@ public class FlaregunlootsetProcedure {
          Entity _shootFrom = entity;
          Level projectileLevel = _shootFrom.level();
          if (!projectileLevel.isClientSide()) {
-            Projectile _entityToSpawn = (new Object() {
-               public Projectile getArrow(Level level, Entity shooter, float damage, int knockback) {
-                  AbstractArrow entityToSpawn = new FlareEntity((EntityType<? extends FlareEntity>)DyairdropModEntities.FLARE.get(), level);
-                  entityToSpawn.setOwner(shooter);
-                  entityToSpawn.setBaseDamage(damage);
-                  entityToSpawn.setSilent(true);
-                  return entityToSpawn;
-               }
-            }).getArrow(projectileLevel, entity, 5.0F, 0);
+            Projectile _entityToSpawn = Projectiles.flare(projectileLevel, entity, 5.0F);
             _entityToSpawn.setPos(_shootFrom.getX(), _shootFrom.getEyeY() - 0.1, _shootFrom.getZ());
             _entityToSpawn.shoot(_shootFrom.getLookAngle().x, _shootFrom.getLookAngle().y, _shootFrom.getLookAngle().z, 3.0F, 0.0F);
             projectileLevel.addFreshEntity(_entityToSpawn);

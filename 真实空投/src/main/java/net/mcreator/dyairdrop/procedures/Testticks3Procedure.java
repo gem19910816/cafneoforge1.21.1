@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.Nbt;
+
 import java.text.DecimalFormat;
 import net.mcreator.dyairdrop.configuration.AirdropconfigConfiguration;
 import net.minecraft.core.BlockPos;
@@ -12,12 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class Testticks3Procedure {
    public static void execute(LevelAccessor world, double x, double y, double z) {
       double i = 0.0;
-      if ((new Object() {
-         public double getValue(LevelAccessor world, BlockPos pos, String tag) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
-         }
-      }).getValue(world, BlockPos.containing(x, y, z), "timer") < 0.0) {
+      if (Nbt.getDouble(world, BlockPos.containing(x, y, z), "timer") < 0.0) {
          if (!world.isClientSide()) {
             BlockPos _bp = BlockPos.containing(x, y, z);
             BlockEntity _blockEntity = world.getBlockEntity(_bp);
@@ -36,12 +33,7 @@ public class Testticks3Procedure {
             BlockEntity _blockEntity = world.getBlockEntity(_bp);
             BlockState _bs = world.getBlockState(_bp);
             if (_blockEntity != null) {
-               _blockEntity.getPersistentData().putDouble("timer", (new Object() {
-                  public double getValue(LevelAccessor world, BlockPos pos, String tag) {
-                     BlockEntity blockEntity = world.getBlockEntity(pos);
-                     return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
-                  }
-               }).getValue(world, BlockPos.containing(x, y, z), "timer") + 1.0);
+               _blockEntity.getPersistentData().putDouble("timer", Nbt.getDouble(world, BlockPos.containing(x, y, z), "timer") + 1.0);
             }
 
             if (world instanceof Level _level) {
@@ -50,12 +42,7 @@ public class Testticks3Procedure {
          }
 
          if (!world.isClientSide() && world.getServer() != null) {
-            world.getServer().getPlayerList().broadcastSystemMessage(Component.literal(new DecimalFormat("##").format((new Object() {
-               public double getValue(LevelAccessor world, BlockPos pos, String tag) {
-                  BlockEntity blockEntity = world.getBlockEntity(pos);
-                  return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
-               }
-            }).getValue(world, BlockPos.containing(x, y, z), "timer")) + "," + (Double)AirdropconfigConfiguration.ENEMYARRIVETIME.get()), false);
+            world.getServer().getPlayerList().broadcastSystemMessage(Component.literal(new DecimalFormat("##").format(Nbt.getDouble(world, BlockPos.containing(x, y, z), "timer")) + "," + (Double)AirdropconfigConfiguration.ENEMYARRIVETIME.get()), false);
          }
       }
    }

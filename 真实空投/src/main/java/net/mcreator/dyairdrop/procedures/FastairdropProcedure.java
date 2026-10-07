@@ -1,5 +1,9 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.Blocks;
+
+import net.gem19910816.dyairdrop.core.CommandArgs;
+
 import net.minecraft.core.registries.BuiltInRegistries;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.context.CommandContext;
@@ -40,16 +44,7 @@ public class FastairdropProcedure {
       double drift = 0.0;
       double pheight = 0.0;
       double plength = 0.0;
-      player = (new Object() {
-         public Entity getEntity() {
-            try {
-               return EntityArgument.getEntity(arguments, "player");
-            } catch (CommandSyntaxException e) {
-               e.printStackTrace();
-               return null;
-            }
-         }
-      }).getEntity();
+      player = CommandArgs.entity(arguments, "player");
       if (player != null) {
          dx = player.getX();
          dz = player.getZ();

@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.CommandArgs;
+
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.commands.CommandSourceStack;
@@ -15,15 +17,7 @@ public class T6Procedure {
          String structure = "";
          Entity player = null;
          xyz = "";
-         structure = (new Object() {
-            public String getMessage() {
-               try {
-                  return MessageArgument.getMessage(arguments, "structure").getString();
-               } catch (CommandSyntaxException ignored) {
-                  return "";
-               }
-            }
-         }).getMessage();
+         structure = CommandArgs.message(arguments, "structure");
          player = entity;
          xyz = FindNearestStructureProcedure.findNearestStructure(player, structure);
          if (!world.isClientSide() && world.getServer() != null) {

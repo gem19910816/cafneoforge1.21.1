@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.Nbt;
+
 import net.mcreator.dyairdrop.network.DyairdropModVariables;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
@@ -13,13 +15,7 @@ public class Buttonre5Procedure {
          input = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
             .passwordre;
          if (!input.chars().anyMatch(Character::isUpperCase)) {
-            if ((new Object() {
-                  public String getValue(LevelAccessor world, BlockPos pos, String tag) {
-                     BlockEntity blockEntity = world.getBlockEntity(pos);
-                     return blockEntity != null ? blockEntity.getPersistentData().getString(tag) : "";
-                  }
-               })
-               .getValue(world, BlockPos.containing(x, y, z), "pw")
+            if (Nbt.getString(world, BlockPos.containing(x, y, z), "pw")
                .contains(
                   ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
                         .passwordre

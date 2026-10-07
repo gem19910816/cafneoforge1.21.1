@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.Nbt;
+
 import net.mcreator.dyairdrop.configuration.AirdropconfigConfiguration;
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
@@ -19,12 +21,7 @@ import net.minecraft.world.phys.Vec3;
 public class AirdroplargeticksProcedure {
    public static void execute(LevelAccessor world, double x, double y, double z) {
       double i = 0.0;
-      if ((new Object() {
-         public double getValue(LevelAccessor world, BlockPos pos, String tag) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
-         }
-      }).getValue(world, BlockPos.containing(x, y, z), "timer") < 0.0) {
+      if (Nbt.getDouble(world, BlockPos.containing(x, y, z), "timer") < 0.0) {
          if (!world.isClientSide()) {
             BlockPos _bp = BlockPos.containing(x, y, z);
             BlockEntity _blockEntity = world.getBlockEntity(_bp);
@@ -37,24 +34,14 @@ public class AirdroplargeticksProcedure {
                _level.sendBlockUpdated(_bp, _bs, _bs, 3);
             }
          }
-      } else if ((new Object() {
-         public double getValue(LevelAccessor world, BlockPos pos, String tag) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
-         }
-      }).getValue(world, BlockPos.containing(x, y, z), "timer") >= 20000.0) {
+      } else if (Nbt.getDouble(world, BlockPos.containing(x, y, z), "timer") >= 20000.0) {
          world.setBlock(BlockPos.containing(x, y, z), Blocks.AIR.defaultBlockState(), 3);
       } else if (!world.isClientSide()) {
          BlockPos _bp = BlockPos.containing(x, y, z);
          BlockEntity _blockEntity = world.getBlockEntity(_bp);
          BlockState _bs = world.getBlockState(_bp);
          if (_blockEntity != null) {
-            _blockEntity.getPersistentData().putDouble("timer", (new Object() {
-               public double getValue(LevelAccessor world, BlockPos pos, String tag) {
-                  BlockEntity blockEntity = world.getBlockEntity(pos);
-                  return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
-               }
-            }).getValue(world, BlockPos.containing(x, y, z), "timer") + 1.0);
+            _blockEntity.getPersistentData().putDouble("timer", Nbt.getDouble(world, BlockPos.containing(x, y, z), "timer") + 1.0);
          }
 
          if (world instanceof Level _level) {
@@ -62,12 +49,7 @@ public class AirdroplargeticksProcedure {
          }
       }
 
-      if ((new Object() {
-         public double getValue(LevelAccessor world, BlockPos pos, String tag) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
-         }
-      }).getValue(world, BlockPos.containing(x, y, z), "timer") == 1.0 && !world.isClientSide()) {
+      if (Nbt.getDouble(world, BlockPos.containing(x, y, z), "timer") == 1.0 && !world.isClientSide()) {
          BlockPos _bp = BlockPos.containing(x, y, z);
          BlockEntity _blockEntity = world.getBlockEntity(_bp);
          BlockState _bs = world.getBlockState(_bp);
@@ -80,22 +62,7 @@ public class AirdroplargeticksProcedure {
          }
       }
 
-      if ((new Object() {
-         public double getValue(LevelAccessor world, BlockPos pos, String tag) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
-         }
-      }).getValue(world, BlockPos.containing(x, y, z), "timer") % 80.0 == 0.0 && (new Object() {
-         public double getValue(LevelAccessor world, BlockPos pos, String tag) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
-         }
-      }).getValue(world, BlockPos.containing(x, y, z), "timer") <= 3000.0 && (new Object() {
-         public boolean getValue(LevelAccessor world, BlockPos pos, String tag) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            return blockEntity != null ? blockEntity.getPersistentData().getBoolean(tag) : false;
-         }
-      }).getValue(world, BlockPos.containing(x, y, z), "s") && world instanceof ServerLevel _level) {
+      if (Nbt.getDouble(world, BlockPos.containing(x, y, z), "timer") % 80.0 == 0.0 && Nbt.getDouble(world, BlockPos.containing(x, y, z), "timer") <= 3000.0 && Nbt.getBoolean(world, BlockPos.containing(x, y, z), "s") && world instanceof ServerLevel _level) {
          _level.getServer()
             .getCommands()
             .performPrefixedCommand(
@@ -105,34 +72,14 @@ public class AirdroplargeticksProcedure {
             );
       }
 
-      if ((new Object() {
-            public double getValue(LevelAccessor world, BlockPos pos, String tag) {
-               BlockEntity blockEntity = world.getBlockEntity(pos);
-               return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
-            }
-         }).getValue(world, BlockPos.containing(x, y, z), "timer") / 1200.0 == (Double)AirdropconfigConfiguration.ENEMYARRIVETIME.get()
+      if (Nbt.getDouble(world, BlockPos.containing(x, y, z), "timer") / 1200.0 == (Double)AirdropconfigConfiguration.ENEMYARRIVETIME.get()
          && (Boolean)AirdropconfigConfiguration.ENABLEENEMIES.get()) {
          SelectsummonpositionProcedure.execute(world, x, y, z);
       }
 
-      if ((new Object() {
-            public double getValue(LevelAccessor world, BlockPos pos, String tag) {
-               BlockEntity blockEntity = world.getBlockEntity(pos);
-               return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
-            }
-         }).getValue(world, BlockPos.containing(x, y, z), "timer") >= Math.round((Double)AirdropconfigConfiguration.AIRDROPSTOLENTIME.get() * 1200.0)
-         && (new Object() {
-            public boolean getValue(LevelAccessor world, BlockPos pos, String tag) {
-               BlockEntity blockEntity = world.getBlockEntity(pos);
-               return blockEntity != null ? blockEntity.getPersistentData().getBoolean(tag) : false;
-            }
-         }).getValue(world, BlockPos.containing(x, y, z), "s")
-         && (new Object() {
-                public double getValue(LevelAccessor world, BlockPos pos, String tag) {
-                   BlockEntity blockEntity = world.getBlockEntity(pos);
-                   return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
-                }
-             }).getValue(world, BlockPos.containing(x, y, z), "timer") % 20.0 == 0.0
+      if (Nbt.getDouble(world, BlockPos.containing(x, y, z), "timer") >= Math.round((Double)AirdropconfigConfiguration.AIRDROPSTOLENTIME.get() * 1200.0)
+         && Nbt.getBoolean(world, BlockPos.containing(x, y, z), "s")
+         && Nbt.getDouble(world, BlockPos.containing(x, y, z), "timer") % 20.0 == 0.0
           && world.getEntitiesOfClass(
                Player.class,
                AABB.ofSize(

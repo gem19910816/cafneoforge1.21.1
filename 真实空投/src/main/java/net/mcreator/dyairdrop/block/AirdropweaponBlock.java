@@ -52,11 +52,7 @@ public class AirdropweaponBlock extends BaseEntityBlock implements EntityBlock {
    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
    public AirdropweaponBlock() {
-      super(Properties.of().sound(SoundType.METAL).strength(3.05F, 10.0F).lightLevel(s -> (new Object() {
-         public int getLightLevel() {
-            return s.getValue(AirdropweaponBlock.BLOCKSTATE) == 1 ? 0 : 0;
-         }
-      }).getLightLevel()).requiresCorrectToolForDrops().noOcclusion().isRedstoneConductor((bs, br, bp) -> false).noLootTable());
+      super(Properties.of().sound(SoundType.METAL).strength(3.05F, 10.0F).lightLevel(s -> 0).requiresCorrectToolForDrops().noOcclusion().isRedstoneConductor((bs, br, bp) -> false).noLootTable());
       this.registerDefaultState((BlockState)((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.NORTH));
    }
 
