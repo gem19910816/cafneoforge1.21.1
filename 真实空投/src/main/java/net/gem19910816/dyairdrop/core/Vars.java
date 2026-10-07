@@ -1,6 +1,6 @@
 package net.gem19910816.dyairdrop.core;
 
-import net.mcreator.dyairdrop.network.DyairdropModVariables;
+import net.gem19910816.dyairdrop.network.DyairdropModVariables;
 import net.minecraft.world.entity.Entity;
 
 /**

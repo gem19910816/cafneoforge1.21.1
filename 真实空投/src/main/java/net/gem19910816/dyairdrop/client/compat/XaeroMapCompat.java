@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.mcreator.dyairdrop.DyairdropMod;
+import net.gem19910816.dyairdrop.DyairdropMod;
 import net.neoforged.fml.ModList;
 
 /**

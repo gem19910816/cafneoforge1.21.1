@@ -1,7 +1,7 @@
 package net.gem19910816.dyairdrop.core;
 
-import net.mcreator.dyairdrop.entity.FlareEntity;
-import net.mcreator.dyairdrop.init.DyairdropModEntities;
+import net.gem19910816.dyairdrop.entity.FlareEntity;
+import net.gem19910816.dyairdrop.init.DyairdropModEntities;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.AbstractArrow;

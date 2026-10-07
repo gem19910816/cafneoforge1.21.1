@@ -1,6 +1,6 @@
 package net.gem19910816.dyairdrop.client;
 
-import net.mcreator.dyairdrop.DyairdropMod;
+import net.gem19910816.dyairdrop.DyairdropMod;
 import net.gem19910816.dyairdrop.client.compat.MapMarkerClient;
 import net.gem19910816.dyairdrop.client.compat.XaeroMapCompat;
 import net.gem19910816.dyairdrop.network.payload.XaeroPresencePayload;

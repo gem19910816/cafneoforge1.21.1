@@ -1,0 +1,47 @@
+package net.gem19910816.dyairdrop.entity.layer;
+
+import net.gem19910816.dyairdrop.entity.MedicalairdropEntity;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.resources.ResourceLocation;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
+import software.bernie.geckolib.renderer.GeoRenderer;
+import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
+
+public class MedicalairdropLayer extends GeoRenderLayer<MedicalairdropEntity> {
+   private static final ResourceLocation LAYER = ResourceLocation.fromNamespaceAndPath("dyairdrop", "textures/entities/airdropmedical_glow.png");
+
+   public MedicalairdropLayer(GeoRenderer<MedicalairdropEntity> entityRenderer) {
+      super(entityRenderer);
+   }
+
+   public void render(
+      PoseStack poseStack,
+      MedicalairdropEntity animatable,
+      BakedGeoModel bakedModel,
+      RenderType renderType,
+      MultiBufferSource bufferSource,
+      VertexConsumer buffer,
+      float partialTick,
+      int packedLight,
+      int packedOverlay
+   ) {
+      RenderType glowRenderType = RenderType.eyes(LAYER);
+      this.getRenderer()
+         .reRender(
+            this.getDefaultBakedModel(animatable),
+            poseStack,
+            bufferSource,
+            animatable,
+            glowRenderType,
+            bufferSource.getBuffer(glowRenderType),
+            partialTick,
+            packedLight,
+            OverlayTexture.NO_OVERLAY,
+            -1
+         );
+   }
+}

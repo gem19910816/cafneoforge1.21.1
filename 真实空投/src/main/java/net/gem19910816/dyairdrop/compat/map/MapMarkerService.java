@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import net.mcreator.dyairdrop.DyairdropMod;
+import net.gem19910816.dyairdrop.DyairdropMod;
 import net.gem19910816.dyairdrop.network.payload.MapMarkerPayload;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;

@@ -8,8 +8,8 @@ import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 
-import net.mcreator.dyairdrop.DyairdropMod;
-import net.mcreator.dyairdrop.configuration.AirdropconfigConfiguration;
+import net.gem19910816.dyairdrop.DyairdropMod;
+import net.gem19910816.dyairdrop.configuration.AirdropconfigConfiguration;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
