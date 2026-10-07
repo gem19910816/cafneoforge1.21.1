@@ -110,6 +110,25 @@ public final class MapMarkerService {
         XAERO_USERS.remove(player.getUUID());
     }
 
+    /**
+     * 标记是否该回收：方块实体没了 / 不是容器 / 战利品已经被取空。
+     *
+     * <p>注意 {@code RandomizableContainerBlockEntity.isEmpty()} 会先把战利品表展开（原版行为），
+     * 所以这里先用 {@code getLootTable() == null} 判断「已经生成过战利品」，
+     * 避免空投刚落地、还没人开箱时就把标记误删。
+     */
+    private static boolean isMarkerFinished(ServerLevel level, MapMarker marker) {
+        BlockEntity be = level.getBlockEntity(marker.pos());
+        if (be == null) {
+            return true; // 箱子被破坏 / 被替换
+        }
+        if (be instanceof net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity randomizable) {
+            boolean lootGenerated = randomizable.getLootTable() == null;
+            return lootGenerated && randomizable.isEmpty();
+        }
+        return be instanceof Container container && container.isEmpty();
+    }
+
     private static void broadcast(ServerLevel level, MapMarker marker, byte action) {
         MapMarkerPayload payload = new MapMarkerPayload(
                 action,
@@ -156,8 +175,7 @@ public final class MapMarkerService {
             }
             List<Integer> stale = new ArrayList<>();
             for (MapMarker marker : entry.getValue().values()) {
-                BlockEntity be = level.getBlockEntity(marker.pos());
-                if (!(be instanceof Container container) || container.isEmpty()) {
+                if (isMarkerFinished(level, marker)) {
                     stale.add(marker.id());
                 }
             }
