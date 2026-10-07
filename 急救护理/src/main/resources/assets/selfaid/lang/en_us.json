@@ -1,0 +1,16 @@
+{
+  "itemGroup.selfaid": "SelfAid",
+  "item.selfaid.bandage": "Bandage",
+  "item.selfaid.plaster": "Adhesive Bandage",
+  "item.selfaid.morphine": "Morphine",
+  "item.selfaid.first_aid_kit": "First Aid Kit",
+  "tooltip.selfaid.bandage": "Bandages a random limb, restoring 1.5 hearts over 6s",
+  "tooltip.selfaid.plaster": "Patches your head or torso, restoring 1 heart over 3s",
+  "tooltip.selfaid.morphine": "Pain relief: clears harmful effects, restores 3 hearts over 10s",
+  "tooltip.selfaid.first_aid_kit": "Field surgery: clears harmful effects, restores 6 hearts over 15s",
+  "tooltip.selfaid.clear_effects": "Clears harmful status effects",
+  "tooltip.selfaid.generic": "Restores body part health over time",
+  "message.selfaid.head_death": "Your head lost all of its health - you did not make it.",
+  "message.selfaid.torso_death": "Your torso lost all of its health - you did not make it.",
+  "message.selfaid.all_parts_death": "Every body part gave out - you did not make it."
+}

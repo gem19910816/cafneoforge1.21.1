@@ -1,0 +1,16 @@
+{
+  "itemGroup.selfaid": "急救护理",
+  "item.selfaid.bandage": "绷带",
+  "item.selfaid.plaster": "创可贴",
+  "item.selfaid.morphine": "吗啡",
+  "item.selfaid.first_aid_kit": "急救包",
+  "tooltip.selfaid.bandage": "包扎一条随机肢体，6 秒内回复 1.5 颗心",
+  "tooltip.selfaid.plaster": "贴在头部或躯干较伤的一处，3 秒内回复 1 颗心",
+  "tooltip.selfaid.morphine": "缓解疼痛：清除负面效果，10 秒内回复 3 颗心",
+  "tooltip.selfaid.first_aid_kit": "战场急救：清除负面效果，15 秒内回复 6 颗心",
+  "tooltip.selfaid.clear_effects": "清除负面状态效果",
+  "tooltip.selfaid.generic": "随时间恢复身体部位生命值",
+  "message.selfaid.head_death": "你的头部生命值耗尽——你不治身亡。",
+  "message.selfaid.torso_death": "你的躯干生命值耗尽——你不治身亡。",
+  "message.selfaid.all_parts_death": "全身各部位都失去了生命值——你不治身亡。"
+}
