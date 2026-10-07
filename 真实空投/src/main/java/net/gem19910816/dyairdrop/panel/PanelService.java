@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import net.gem19910816.dyairdrop.DyairdropMod;
 import net.gem19910816.dyairdrop.configuration.AirdropconfigConfiguration;
+import net.gem19910816.dyairdrop.core.Blocks;
 import net.gem19910816.dyairdrop.init.DyairdropModSounds;
 import net.gem19910816.dyairdrop.network.DyairdropModVariables;
 import net.gem19910816.dyairdrop.procedures.CheckProcedure;
@@ -239,7 +240,7 @@ public final class PanelService {
         schedule((int) CONFIRM_ANIMATION_DELAY, () -> {
             if (matched) {
                 playAt(level, pos, DyairdropModSounds.PWCORRECT.get(), 5.0F);
-                setAnimation(level, pos, 1);
+                Blocks.setAnimation(level, pos, 1);
             } else {
                 player.displayClientMessage(Component.literal("密码错误"), false);
                 playAt(level, pos, DyairdropModSounds.PWWRONG.get(), 1.0F);
@@ -373,16 +374,6 @@ public final class PanelService {
 
     private static void playAt(ServerLevel level, BlockPos pos, net.minecraft.sounds.SoundEvent sound, float volume) {
         net.gem19910816.dyairdrop.core.Sounds.play(level, pos.getX(), pos.getY(), pos.getZ(), sound, volume);
-    }
-
-    private static void setAnimation(ServerLevel level, BlockPos pos, int value) {
-        BlockState state = level.getBlockState(pos);
-        // 方块自己的 animation 属性（0..2），不存在该属性就什么都不做
-        if (state.getBlock().getStateDefinition().getProperty("animation")
-                instanceof net.minecraft.world.level.block.state.properties.IntegerProperty animation
-                && animation.getPossibleValues().contains(value)) {
-            level.setBlock(pos, state.setValue(animation, value), 3);
-        }
     }
 
     /** 原实现的成功收尾：把方块整块替换成开启形态，并把战利品表塞进去。 */

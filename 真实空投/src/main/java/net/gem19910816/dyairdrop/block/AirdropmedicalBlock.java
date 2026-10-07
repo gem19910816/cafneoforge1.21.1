@@ -1,6 +1,6 @@
 package net.gem19910816.dyairdrop.block;
 
-import net.gem19910816.dyairdrop.procedures.FancyairdropguiopenProcedure;
+import net.gem19910816.dyairdrop.core.PanelOpener;
 import net.gem19910816.dyairdrop.core.ChestTicker;
 
 import javax.annotation.Nullable;
@@ -120,7 +120,7 @@ public class AirdropmedicalBlock extends BaseEntityBlock implements EntityBlock 
       double hitY = hit.getLocation().y;
       double hitZ = hit.getLocation().z;
       Direction direction = hit.getDirection();
-      FancyairdropguiopenProcedure.execute(world, x, y, z, entity);
+      PanelOpener.openLootGuiWithAnimation(world, x, y, z, entity);
       return InteractionResult.SUCCESS;
    }
 

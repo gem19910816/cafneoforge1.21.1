@@ -1,6 +1,6 @@
 package net.gem19910816.dyairdrop.block;
 
-import net.gem19910816.dyairdrop.procedures.LockedairdroplargedebugProcedure;
+import net.gem19910816.dyairdrop.core.PanelOpener;
 
 import javax.annotation.Nullable;
 
@@ -103,7 +103,7 @@ public class LockedairdroplargeopenBlock extends BaseEntityBlock implements Enti
       double hitY = hit.getLocation().y;
       double hitZ = hit.getLocation().z;
       Direction direction = hit.getDirection();
-      LockedairdroplargedebugProcedure.execute(world, x, y, z, entity);
+      PanelOpener.openDebugGui(world, x, y, z, entity);
       return InteractionResult.SUCCESS;
    }
 

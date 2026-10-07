@@ -1,7 +1,7 @@
 package net.gem19910816.dyairdrop.block;
 
 import net.gem19910816.dyairdrop.core.ChestTicker;
-import net.gem19910816.dyairdrop.procedures.AirdropGUIopenProcedure;
+import net.gem19910816.dyairdrop.core.PanelOpener;
 import net.gem19910816.dyairdrop.block.entity.LockedairdropsmallopenBlockEntity;
 
 
@@ -91,7 +91,7 @@ public class LockedairdropsmallopenBlock extends Block implements EntityBlock {
       double hitY = hit.getLocation().y;
       double hitZ = hit.getLocation().z;
       Direction direction = hit.getDirection();
-      AirdropGUIopenProcedure.execute(world, x, y, z, entity);
+      PanelOpener.openLootGui(world, x, y, z, entity);
       return InteractionResult.SUCCESS;
    }
 

@@ -1,6 +1,6 @@
 package net.gem19910816.dyairdrop.block;
 
-import net.gem19910816.dyairdrop.procedures.Safeopen2Procedure;
+import net.gem19910816.dyairdrop.core.PanelOpener;
 import net.gem19910816.dyairdrop.core.ChestTicker;
 import net.gem19910816.dyairdrop.block.entity.LockedairdropsmallBlockEntity;
 
@@ -91,7 +91,7 @@ public class LockedairdropsmallBlock extends Block implements EntityBlock {
       double hitY = hit.getLocation().y;
       double hitZ = hit.getLocation().z;
       Direction direction = hit.getDirection();
-      Safeopen2Procedure.execute(world, x, y, z, entity);
+      PanelOpener.openLetterPanel(world, x, y, z, entity, false);
       return InteractionResult.SUCCESS;
    }
 

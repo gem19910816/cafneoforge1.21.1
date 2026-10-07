@@ -1,10 +1,13 @@
 package net.gem19910816.dyairdrop.core;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 
 /**
@@ -21,6 +24,19 @@ public final class Blocks {
 
     public static String idOf(BlockState state) {
         return BuiltInRegistries.BLOCK.getKey(state.getBlock()).toString();
+    }
+
+    /**
+     * 设置方块自带的 {@code animation} 属性（0..2）：不存在该属性或取值不在允许范围时什么都不做。
+     *
+     * <p>空投箱的开箱动画（面板解锁 1、整块替换 2）依赖它，三处调用点原来各写了一份。
+     */
+    public static void setAnimation(LevelAccessor world, BlockPos pos, int value) {
+        BlockState state = world.getBlockState(pos);
+        if (state.getBlock().getStateDefinition().getProperty("animation") instanceof IntegerProperty animation
+                && animation.getPossibleValues().contains(value)) {
+            world.setBlock(pos, state.setValue(animation, value), 3);
+        }
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})

@@ -1,6 +1,6 @@
 package net.gem19910816.dyairdrop.block;
 
-import net.gem19910816.dyairdrop.procedures.RandomstringProcedure;
+import net.gem19910816.dyairdrop.core.PanelOpener;
 
 import javax.annotation.Nullable;
 
@@ -103,7 +103,7 @@ public class Safe2Block extends BaseEntityBlock implements EntityBlock {
       double hitY = hit.getLocation().y;
       double hitZ = hit.getLocation().z;
       Direction direction = hit.getDirection();
-      RandomstringProcedure.execute(world, x, y, z, entity);
+      PanelOpener.openLetterPanel(world, x, y, z, entity, true);
       return InteractionResult.SUCCESS;
    }
 

@@ -7,7 +7,7 @@ import io.netty.buffer.Unpooled;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
-import net.gem19910816.dyairdrop.procedures.AirdropGUIopenProcedure;
+import net.gem19910816.dyairdrop.core.PanelOpener;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.FaceAttachedHorizontalDirectionalBlock;
@@ -178,7 +178,7 @@ public class SafeopenBlock extends BaseEntityBlock implements EntityBlock {
       double hitY = hit.getLocation().y;
       double hitZ = hit.getLocation().z;
       Direction direction = hit.getDirection();
-      AirdropGUIopenProcedure.execute(world, x, y, z, entity);
+      PanelOpener.openLootGui(world, x, y, z, entity);
       return InteractionResult.SUCCESS;
    }
 

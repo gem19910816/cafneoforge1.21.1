@@ -105,7 +105,7 @@ public class CheckProcedure {
         if (entity instanceof Player player && !player.level().isClientSide()) {
             player.displayClientMessage(Component.literal("解锁成功！"), false);
         }
-        setAnimation(world, x, y, z, ANIMATION_UNLOCK);
+        Blocks.setAnimation(world, BlockPos.containing(x, y, z), ANIMATION_UNLOCK);
 
         DyairdropMod.queueServerWork(OPEN_BLOCK_DELAY_TICKS, () -> {
             if (world instanceof ServerLevel) {
@@ -115,7 +115,7 @@ public class CheckProcedure {
                         + "open[facing=" + Blocks.facingOf(state)
                         + "]{LootTable:\"" + Nbt.getString(world, pos, "loot") + "\"} replace");
             }
-            setAnimation(world, x, y, z, ANIMATION_OPEN);
+            Blocks.setAnimation(world, BlockPos.containing(x, y, z), ANIMATION_OPEN);
         });
     }
 
