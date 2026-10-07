@@ -1,6 +1,6 @@
 package net.gem19910816.dyairdrop.entity;
 
-import net.gem19910816.dyairdrop.procedures.PlaneticksProcedure;
+import net.gem19910816.dyairdrop.core.PlaneTicker;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -77,7 +77,7 @@ public class PlaneEntity extends PathfinderMob {
 
    public void baseTick() {
       super.baseTick();
-      PlaneticksProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
+      PlaneTicker.tick(this.level(), this.getX(), this.getY(), this.getZ(), this);
    }
 
    protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
