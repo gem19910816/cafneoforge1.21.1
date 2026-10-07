@@ -1,0 +1,24 @@
+modLoader="javafml"
+loaderVersion="[${loader_version_range},)"
+license="All Rights Reserved"
+authors="${mod_authors}"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_display_name}"
+description='''齿轮与腐肉作物扩展：像原版小麦一样可种植的药草作物。'''
+
+[[dependencies.${mod_id}]]
+modId="neoforge"
+type="required"
+versionRange="[${neo_version_range},)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.${mod_id}]]
+modId="minecraft"
+type="required"
+versionRange="${minecraft_version_range}"
+ordering="NONE"
+side="BOTH"

@@ -14,6 +14,7 @@
 | [急救护理 (SelfAid)](急救护理/) | —（1.21.1 **新实现**，非移植） | 1.21.1 NeoForge | [jar](急救护理/selfaid-1.0.0.jar) |
 | [绿葡萄护甲 (LesRaisins Armor)](绿葡萄护甲/) | 1.20.1 Forge 0.1.4.4 | 1.21.1 NeoForge | [jar](绿葡萄护甲/lrarmor-0.1.4.4.jar) |
 | [CAF 生存核心 (CAF Survival Core)](CAF生存核心/) | 1.20.1 Forge（原 Tarkov Stamina / ChaosZ Pack） | 1.21.1 NeoForge | [jar](CAF生存核心/tarkov_stamina-1.21.1-neoforge-1.0.0-port.jar) |
+| [CAF草药 (Crop Expansion)](CAF草药/) | 1.20.1 Forge（原 `1.20.1forge/药草作物`） | 1.21.1 NeoForge | [jar](CAF草药/crop_expansion-1.21.1-neoforge-1.0.0.jar) |
 
 ## 说明
 

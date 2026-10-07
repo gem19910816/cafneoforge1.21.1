@@ -1,0 +1,71 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.107'
+}
+
+version = project.mod_version
+group = project.mod_group
+
+base {
+    // 纯 ASCII 的 jar 名（规范：jar 名必须含纯 ASCII 段，纯英文最稳妥）
+    archivesName = "${project.mod_id}-${project.minecraft_version}-neoforge"
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+// 提示行刻意保持纯 ASCII：Gradle 脚本的字符集取决于平台默认编码，
+// 中文在这里可能被按 GBK 误解码、在控制台显示成乱码（不影响构建，但没必要）。
+println ">>> [crop_expansion] building ${project.mod_id} ${project.version} (NeoForge ${project.neo_version})"
+
+neoForge {
+    version = project.neo_version
+
+    runs {
+        client { client() }
+        server { server() }
+    }
+
+    mods {
+        crop_expansion {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+processResources {
+    // 把 gradle.properties 里的版本变量注入 neoforge.mods.toml
+    inputs.property 'version', project.version
+    filteringCharset = 'UTF-8'
+    filesMatching('META-INF/neoforge.mods.toml') {
+        expand(
+                'mod_id'                 : project.mod_id,
+                'mod_version'            : project.version,
+                'mod_display_name'       : project.mod_display_name,
+                'mod_authors'            : project.mod_authors,
+                'minecraft_version_range': project.minecraft_version_range,
+                'neo_version_range'      : project.neo_version_range,
+                'loader_version_range'   : project.loader_version_range
+        )
+    }
+}
+
+jar {
+    manifest {
+        attributes([
+                'Specification-Title'   : project.mod_id,
+                'Specification-Vendor'  : project.mod_authors,
+                'Specification-Version' : '1',
+                'Implementation-Title'  : project.mod_name,
+                'Implementation-Version': project.version,
+                'Implementation-Vendor' : project.mod_authors
+        ])
+    }
+}
