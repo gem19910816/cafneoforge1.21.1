@@ -1,20 +1,10 @@
 package net.gem19910816.dyairdrop.client.gui;
 
+import net.gem19910816.dyairdrop.panel.LetterPanel;
+
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.gem19910816.dyairdrop.world.inventory.PannelREMenu;
-import net.gem19910816.dyairdrop.procedures.Light1Procedure;
-import net.gem19910816.dyairdrop.procedures.Light2Procedure;
-import net.gem19910816.dyairdrop.procedures.Light3Procedure;
-import net.gem19910816.dyairdrop.procedures.Light4Procedure;
-import net.gem19910816.dyairdrop.procedures.Light5Procedure;
-import net.gem19910816.dyairdrop.procedures.Light6Procedure;
-import net.gem19910816.dyairdrop.procedures.Wrong1Procedure;
-import net.gem19910816.dyairdrop.procedures.Wrong2Procedure;
-import net.gem19910816.dyairdrop.procedures.Wrong3Procedure;
-import net.gem19910816.dyairdrop.procedures.Wrong4Procedure;
-import net.gem19910816.dyairdrop.procedures.Wrong5Procedure;
-import net.gem19910816.dyairdrop.procedures.Wrong6Procedure;
 import net.gem19910816.dyairdrop.network.payload.PanelActionPayload;
 import net.gem19910816.dyairdrop.panel.PanelService;
 import net.minecraft.client.gui.GuiGraphics;
@@ -28,6 +18,12 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class PannelREScreen extends AbstractContainerScreen<PannelREMenu> {
+   private static final int[] INDICATOR_X = {73, 73, 73, 141, 141, 141};
+   private static final int[] INDICATOR_Y = {31, 61, 90, 31, 61, 89};
+   private static final ResourceLocation TEXTURE_PANEL = ResourceLocation.parse("dyairdrop:textures/screens/pannelre.png");
+   private static final ResourceLocation TEXTURE_DARK = ResourceLocation.parse("dyairdrop:textures/screens/dark.png");
+   private static final ResourceLocation TEXTURE_GREEN = ResourceLocation.parse("dyairdrop:textures/screens/green.png");
+   private static final ResourceLocation TEXTURE_RED = ResourceLocation.parse("dyairdrop:textures/screens/red.png");
    private final Level world;
    private final int x;
    private final int y;
@@ -61,69 +57,19 @@ public class PannelREScreen extends AbstractContainerScreen<PannelREMenu> {
    protected void renderBg(GuiGraphics guiGraphics, float partialTicks, int gx, int gy) {
       RenderSystem.enableBlend();
       RenderSystem.defaultBlendFunc();
-      guiGraphics.blit(
-         ResourceLocation.parse("dyairdrop:textures/screens/pannelre.png"), this.leftPos + 1, this.topPos + -1, 0.0F, 0.0F, 197, 165, 197, 165
+      guiGraphics.blit(TEXTURE_PANEL, this.leftPos + 1, this.topPos + -1, 0.0F, 0.0F, 197, 165, 197, 165
       );
-      guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/dark.png"), this.leftPos + 73, this.topPos + 31, 0.0F, 0.0F, 19, 20, 19, 20);
-      if (Wrong1Procedure.execute(this.entity)) {
-         guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/red.png"), this.leftPos + 73, this.topPos + 31, 0.0F, 0.0F, 19, 20, 19, 20);
+      for (int slot = 0; slot < INDICATOR_X.length; slot++) {
+         int slotX = this.leftPos + INDICATOR_X[slot];
+         int slotY = this.topPos + INDICATOR_Y[slot];
+         guiGraphics.blit(TEXTURE_DARK, slotX, slotY, 0.0F, 0.0F, 19, 20, 19, 20);
+         if (LetterPanel.isWrong(this.entity, slot)) {
+            guiGraphics.blit(TEXTURE_RED, slotX, slotY, 0.0F, 0.0F, 19, 20, 19, 20);
+         }
+         if (LetterPanel.isLit(this.entity, slot)) {
+            guiGraphics.blit(TEXTURE_GREEN, slotX, slotY, 0.0F, 0.0F, 19, 20, 19, 20);
+         }
       }
-
-      if (Light1Procedure.execute(this.entity)) {
-         guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/green.png"), this.leftPos + 73, this.topPos + 31, 0.0F, 0.0F, 19, 20, 19, 20);
-      }
-
-      guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/dark.png"), this.leftPos + 73, this.topPos + 61, 0.0F, 0.0F, 19, 20, 19, 20);
-      if (Light2Procedure.execute(this.entity)) {
-         guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/green.png"), this.leftPos + 73, this.topPos + 61, 0.0F, 0.0F, 19, 20, 19, 20);
-      }
-
-      if (Wrong2Procedure.execute(this.entity)) {
-         guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/red.png"), this.leftPos + 73, this.topPos + 61, 0.0F, 0.0F, 19, 20, 19, 20);
-      }
-
-      guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/dark.png"), this.leftPos + 73, this.topPos + 90, 0.0F, 0.0F, 19, 20, 19, 20);
-      if (Wrong3Procedure.execute(this.entity)) {
-         guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/red.png"), this.leftPos + 73, this.topPos + 90, 0.0F, 0.0F, 19, 20, 19, 20);
-      }
-
-      if (Light3Procedure.execute(this.entity)) {
-         guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/green.png"), this.leftPos + 73, this.topPos + 90, 0.0F, 0.0F, 19, 20, 19, 20);
-      }
-
-      guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/dark.png"), this.leftPos + 141, this.topPos + 31, 0.0F, 0.0F, 19, 20, 19, 20);
-      if (Light4Procedure.execute(this.entity)) {
-         guiGraphics.blit(
-            ResourceLocation.parse("dyairdrop:textures/screens/green.png"), this.leftPos + 141, this.topPos + 31, 0.0F, 0.0F, 19, 20, 19, 20
-         );
-      }
-
-      if (Wrong4Procedure.execute(this.entity)) {
-         guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/red.png"), this.leftPos + 141, this.topPos + 31, 0.0F, 0.0F, 19, 20, 19, 20);
-      }
-
-      guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/dark.png"), this.leftPos + 141, this.topPos + 61, 0.0F, 0.0F, 19, 20, 19, 20);
-      if (Light5Procedure.execute(this.entity)) {
-         guiGraphics.blit(
-            ResourceLocation.parse("dyairdrop:textures/screens/green.png"), this.leftPos + 141, this.topPos + 61, 0.0F, 0.0F, 19, 20, 19, 20
-         );
-      }
-
-      if (Wrong5Procedure.execute(this.entity)) {
-         guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/red.png"), this.leftPos + 141, this.topPos + 61, 0.0F, 0.0F, 19, 20, 19, 20);
-      }
-
-      guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/dark.png"), this.leftPos + 141, this.topPos + 89, 0.0F, 0.0F, 19, 20, 19, 20);
-      if (Wrong6Procedure.execute(this.entity)) {
-         guiGraphics.blit(ResourceLocation.parse("dyairdrop:textures/screens/red.png"), this.leftPos + 141, this.topPos + 89, 0.0F, 0.0F, 19, 20, 19, 20);
-      }
-
-      if (Light6Procedure.execute(this.entity)) {
-         guiGraphics.blit(
-            ResourceLocation.parse("dyairdrop:textures/screens/green.png"), this.leftPos + 141, this.topPos + 89, 0.0F, 0.0F, 19, 20, 19, 20
-         );
-      }
-
       RenderSystem.disableBlend();
    }
 

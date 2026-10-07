@@ -2,7 +2,7 @@ package net.gem19910816.dyairdrop.world.inventory;
 
 import net.gem19910816.dyairdrop.panel.AbstractPanelMenu;
 import net.gem19910816.dyairdrop.init.DyairdropModMenus;
-import net.gem19910816.dyairdrop.procedures.PannelREshutProcedure;
+import net.gem19910816.dyairdrop.panel.LetterPanel;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -18,12 +18,12 @@ public class PannelREMenu extends AbstractPanelMenu {
 
     public PannelREMenu(int id, Inventory inventory, FriendlyByteBuf extraData) {
         super(DyairdropModMenus.PANNEL_RE.get(), id, inventory, extraData);
-        PannelREshutProcedure.execute(this.entity);
+        LetterPanel.resetInput(this.entity);
     }
 
     @Override
     public void removed(Player player) {
         super.removed(player);
-        PannelREshutProcedure.execute(this.entity);
+        LetterPanel.resetInput(this.entity);
     }
 }

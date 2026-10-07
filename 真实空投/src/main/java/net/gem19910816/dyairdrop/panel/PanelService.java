@@ -1,5 +1,7 @@
 package net.gem19910816.dyairdrop.panel;
 
+import net.gem19910816.dyairdrop.panel.LetterPanel;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -8,15 +10,9 @@ import net.gem19910816.dyairdrop.DyairdropMod;
 import net.gem19910816.dyairdrop.configuration.AirdropconfigConfiguration;
 import net.gem19910816.dyairdrop.init.DyairdropModSounds;
 import net.gem19910816.dyairdrop.network.DyairdropModVariables;
-import net.gem19910816.dyairdrop.procedures.Buttonre1Procedure;
-import net.gem19910816.dyairdrop.procedures.Buttonre2Procedure;
-import net.gem19910816.dyairdrop.procedures.Buttonre3Procedure;
-import net.gem19910816.dyairdrop.procedures.Buttonre4Procedure;
-import net.gem19910816.dyairdrop.procedures.Buttonre5Procedure;
-import net.gem19910816.dyairdrop.procedures.Buttonre6Procedure;
 import net.gem19910816.dyairdrop.procedures.CheckProcedure;
 import net.gem19910816.dyairdrop.procedures.ChecknewliteProcedure;
-import net.gem19910816.dyairdrop.procedures.PannelREticksProcedure;
+
 import net.gem19910816.dyairdrop.world.inventory.PannelMenu;
 import net.gem19910816.dyairdrop.world.inventory.PannelRE2Menu;
 import net.gem19910816.dyairdrop.world.inventory.PannelREMenu;
@@ -273,15 +269,8 @@ public final class PanelService {
         double x = pos.getX();
         double y = pos.getY();
         double z = pos.getZ();
-        if (action >= 0 && action <= 5) {
-            switch (action) {
-                case 0 -> Buttonre1Procedure.execute(level, x, y, z, player);
-                case 1 -> Buttonre2Procedure.execute(level, x, y, z, player);
-                case 2 -> Buttonre3Procedure.execute(level, x, y, z, player);
-                case 3 -> Buttonre4Procedure.execute(level, x, y, z, player);
-                case 4 -> Buttonre5Procedure.execute(level, x, y, z, player);
-                default -> Buttonre6Procedure.execute(level, x, y, z, player);
-            }
+        if (action >= 0 && action < LetterPanel.letterCount()) {
+            LetterPanel.press(level, pos, player, action);
             return;
         }
         if (action == 6 || action == ACTION_CONFIRM) {
@@ -348,7 +337,7 @@ public final class PanelService {
             return;
         }
         if (player.containerMenu instanceof PannelREMenu || player.containerMenu instanceof PannelRE2Menu) {
-            PannelREticksProcedure.execute(player);
+            LetterPanel.tickAutoClose(player);
             return;
         }
         if (player.containerMenu instanceof PannelMenu) {

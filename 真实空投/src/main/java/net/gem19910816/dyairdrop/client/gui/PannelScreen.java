@@ -5,7 +5,7 @@ import net.gem19910816.dyairdrop.core.Vars;
 import net.gem19910816.dyairdrop.network.payload.PanelActionPayload;
 import net.gem19910816.dyairdrop.panel.PanelService;
 import net.gem19910816.dyairdrop.network.DyairdropModVariables;
-import net.gem19910816.dyairdrop.procedures.OpshowProcedure;
+import net.gem19910816.dyairdrop.core.GameModes;
 import net.gem19910816.dyairdrop.world.inventory.PannelMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -164,7 +164,7 @@ public class PannelScreen extends AbstractContainerScreen<PannelMenu> {
         this.addRenderableWidget(Button.builder(Component.translatable("gui.dyairdrop.panel.button_empty"),
                 e -> send(PanelService.ACTION_CONFIRM, "")).bounds(this.leftPos + 91, this.topPos + 133, 20, 20).build());
 
-        // OP 三个按钮：仅创造模式可见（沿用 OpshowProcedure 的判定）
+        // OP 三个按钮：仅创造模式可见
         addOpButton("gui.dyairdrop.panel.button_save", 84, PanelService.ACTION_TEST);
         addOpButton("gui.dyairdrop.panel.button_pw", 102, PanelService.ACTION_SET_PASSWORD);
         addOpButton("gui.dyairdrop.panel.button_op", 120, PanelService.ACTION_SET_LOOT);
@@ -179,7 +179,7 @@ public class PannelScreen extends AbstractContainerScreen<PannelMenu> {
 
     private void addOpButton(String translationKey, int offsetY, int action) {
         this.addRenderableWidget(Button.builder(Component.translatable(translationKey), e -> {
-                    if (OpshowProcedure.execute(this.entity)) {
+                    if (GameModes.isCreative(this.entity)) {
                         send(action, this.passwordPanel.getValue());
                     }
                 })
@@ -187,7 +187,7 @@ public class PannelScreen extends AbstractContainerScreen<PannelMenu> {
                 .build(builder -> new Button(builder) {
                     @Override
                     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-                        if (OpshowProcedure.execute(PannelScreen.this.entity)) {
+                        if (GameModes.isCreative(PannelScreen.this.entity)) {
                             super.renderWidget(guiGraphics, mouseX, mouseY, partialTicks);
                         }
                     }
