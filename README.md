@@ -10,6 +10,9 @@
 | [全球市场 (Global Market)](全球市场/) | 1.20.1 Forge（原 `MOD/global-market`） | 1.21.1 NeoForge | [jar](全球市场/gearsandflesh_market-1.0.0.jar) |
 | [真实空投 (Realistic Airdrop)](真实空投/) | 1.20.1 Forge 1.1.0-beta | 1.21.1 NeoForge | [jar](真实空投/dyairdrop-1.1.0.jar) |
 | [稀薄的空气 (Thin Air)](稀薄的空气/) | 1.20.1 Forge（原 Thin Air / fuzs） | 1.21.1 NeoForge | [jar](稀薄的空气/thinair-1.21.1-neoforge-21.1.1-port.jar) |
+| [僵尸游戏 (ZombieGame:Reborn)](僵尸游戏/) | 1.20.1 Forge 2.1.0 | 1.21.1 NeoForge | [jar](僵尸游戏/zombiegamereborn-2.1.0.jar) |
+| [急救护理 (SelfAid)](急救护理/) | —（1.21.1 **新实现**，非移植） | 1.21.1 NeoForge | [jar](急救护理/selfaid-1.0.0.jar) |
+| [绿葡萄护甲 (LesRaisins Armor)](绿葡萄护甲/) | 1.20.1 Forge 0.1.4.4 | 1.21.1 NeoForge | [jar](绿葡萄护甲/lrarmor-0.1.4.4.jar) |
 
 ## 说明
 
@@ -33,6 +36,21 @@ Tacz-Unidict（TACZ：铳械协议）。后者依赖的 TaCZ 弹药机制在 1.1
   **尚未做运行时实机测试**。验证范围与首要风险项见其 `移植说明.md` 第四节。
 - **素材**：该模组的贴图、Bedrock 模型与数据 JSON 全部由 `tools/generate_assets.py` 生成，
   不含 TaCZ 或 Tacz-Unidict 的任何美术资源。
+
+### [急救护理 (SelfAid)](急救护理/) — 1.21.1 新实现
+
+也不是移植：它是按 First Aid（ichttt）的玩法概念（分部位生命值 + 急救物品 + 死亡规则）
+**从零重写**的原创实现，代码约 8 个类，**没有复制 FirstAid 的任何代码**。
+
+- **玩法**：玩家分 6 个部位（头 20% / 躯干 30% / 双臂各 10% / 双腿各 15%），
+  弹射物按命中高度判定爆头/躯干/四肢，摔落集中在腿；头、躯干或全身清空即死亡；
+  部分清空给虚弱/缓慢惩罚；共 4 件急救物品（绷带、创可贴、吗啡、急救包）+ 可配置的六格血量 HUD。
+- **素材许可**：物品贴图（`bandage` / `plaster` / `morphine`）与 HUD 身体贴图取自
+  [ichttt/FirstAid](https://github.com/ichttt/FirstAid)（**GPL-3.0**），按其许可证引用；
+  急救包贴图与全部代码为原创。分发时请保留该声明。
+- **不要与 FirstAid 同时安装**：两者都会重分配玩家伤害，会互相干扰。
+- **验证状态**：编译通过；**尚未进世界实测**（伤害分配、死亡判定、物品回血、HUD 均未实机验证），
+  详见其 `移植说明.md` 第四节。
 
 ## 特别标注：架构改造条目
 
@@ -88,3 +106,39 @@ Tacz-Unidict（TACZ：铳械协议）。后者依赖的 TaCZ 弹药机制在 1.1
 - **验证状态**：编译通过（仅过时警告）、`runData` 全部 provider 成功（72+ 资源文件）、
   开发环境服务器启动至 `Done (3.882s)` 且日志无 thinair 相关错误、开发环境客户端进入标题界面零缺失模型。
   **多人并发与长时段玩法流程尚未实机验证**，详见其 `移植说明.md` 第三节。
+### [僵尸游戏 (ZombieGame:Reborn)](僵尸游戏/) — 1.21.1 移植
+
+从 1.20.1 Forge 版 `ZombieGame:Reborn` 2.1.0 移植。僵尸会挖穿方块接近玩家、拿方块搭桥建造，
+随存活天数推进**阶段**逐步变强；带感染机制（村民/猪灵）、时间播报与铃声，
+另有一层与枪械模组联动的「外交层」（Diplomat）。
+
+- **硬前置**：无（只要求 NeoForge 21.1.150+ / MC 1.21.1）。
+- **可选联动（全是软依赖，缺了照常启动）**：TaCZ 1.1.8（1.21.1 移植版）、PointBlank 1.11.1、
+  MusketMod 1.5.4、Enhanced Celestials 6.x / 2-Core 2.x（血月）、GuardVillagers（纯反射）。
+  运行时用 `ModList.get().isLoaded(...)` 守卫。
+- **不随附编译期依赖**：`libs/` 下 7 个第三方 jar（TaCZ 57MB、PointBlank 17.5MB 等共约 78MB）
+  与 NeoForge 反编译参考 `refsrc/` 都不入仓库；要重编请按 `僵尸游戏/README.md` 的清单自备。
+- **本仓库侧的修正**：交付包把 9 个成就放在 `data/zombiegamereborn/advancements/`（复数），
+  而 1.21.1 的数据目录是单数（`advancement`），复数会被静默忽略 → 成就一个都拿不到。
+  已改名并同步改 jar 内条目，**jar 其余内容逐个 SHA256 比对未变**。
+- **验证状态**：编译通过；专用服务器实测 `Done (2.238s)!`、**0 条 ERROR**，
+  开发环境客户端 0 条 ERROR（`Sound engine started`）。
+  **玩法（挖掘/建造、阶段推进、血月、枪械联动）与多人并发尚未实机验证**，
+  详见其 `移植说明.md` 第四节。
+
+### [绿葡萄护甲 (LesRaisins Armor)](绿葡萄护甲/) — 1.21.1 移植
+
+从 1.20.1 Forge 版 `LesRaisinsArmor` 0.1.4.4 移植。数据包驱动的护甲模组：
+16 套 / 64 件护甲（名字与贴图沿用原作），属性、套装效果、渲染配置全部由
+`data/lrarmor/armor_data/*.json` 定义，配 GeckoLib 基岩模型渲染。
+
+- **前置**：GeckoLib for NeoForge 1.21.1 **4.x**（`neoforge.mods.toml` 里是 required）。
+  本仓库不含该 jar，重编前请放进 `绿葡萄护甲/libs/`。
+- **未迁移**：EpicFight 兼容（`EpicFightCompat`）与 JEI 兼容均未包含在移植版内。
+- **本仓库侧的修正**：交付包把 62 个配方放在 `data/lrarmor/recipes/`（复数），
+  1.21.1 的目录是单数（`recipe`），复数会被静默忽略 → 16 套护甲一件都合不出来。
+  已改名并同步改 jar 内条目，**jar 其余内容逐个 SHA256 比对未变**。
+  （`armor_data/` 是模组自定义扫描目录，不受影响。）
+- **验证状态**：仅 `./gradlew build` 通过（868 KB / 332 个条目）；
+  **没有跑过客户端或服务端**（工程里连 `run/` 都没有），属性、套装、渲染均未实机验证，
+  详见其 `移植说明.md` 的「验证状态」一节。
