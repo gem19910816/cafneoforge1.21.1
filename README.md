@@ -8,7 +8,7 @@
 | [末日装饰 (Doomsday Decoration)](末日装饰/) | 1.20.1 Forge 1.1.3 | 1.21.1 NeoForge | [jar](末日装饰/doomsday_decoration-1.1.3-neoforge-1.21.1.jar) |
 | [铳械弹药统一 (Ammo Unify)](铳械弹药统一/) | —（1.21.1 **新实现**，非移植） | 1.21.1 NeoForge | [jar](铳械弹药统一/ammo_unify-1.0.0.jar) |
 | [全球市场 (Global Market)](全球市场/) | 1.20.1 Forge（原 `MOD/global-market`） | 1.21.1 NeoForge | [jar](全球市场/gearsandflesh_market-1.0.0.jar) |
-| [真实空投 (Realistic Airdrop)](真实空投/) | 1.20.1 Forge 1.1.0-beta | 1.21.1 NeoForge | [jar](真实空投/dyairdrop-1.1.0.jar) |
+| [真实空投 (Realistic Airdrop)](真实空投/) | 1.20.1 Forge 1.1.0-beta | 1.21.1 NeoForge | [jar](真实空投/dyairdrop-1.2.0.jar) |
 | [稀薄的空气 (Thin Air)](稀薄的空气/) | 1.20.1 Forge（原 Thin Air / fuzs） | 1.21.1 NeoForge | [jar](稀薄的空气/thinair-1.21.1-neoforge-21.1.1-port.jar) |
 | [僵尸游戏 (ZombieGame:Reborn)](僵尸游戏/) | 1.20.1 Forge 2.1.0 | 1.21.1 NeoForge | [jar](僵尸游戏/zombiegamereborn-2.1.0.jar) |
 | [急救护理 (SelfAid)](急救护理/) | —（1.21.1 **新实现**，非移植） | 1.21.1 NeoForge | [jar](急救护理/selfaid-1.0.0.jar) |
@@ -90,6 +90,12 @@ Tacz-Unidict（TACZ：铳械协议）。后者依赖的 TaCZ 弹药机制在 1.1
   （`Done (3.219s)!`、0 条 ERROR）、开发环境客户端实测进入主菜单，模型与贴图 0 缺失。
   **玩法主流程（空投触发、密码面板、敌人抢夺、飞机飞行路径）与多人并发尚未实机验证**，
   详见其 `移植说明.md` 第五节。
+- **1.2.0 重构**：密码面板改为**服务端权威**——此前服务端拿不到客户端输入串，解锁分支恒不可达，
+  导致「多人开不了箱」并与其它模组在容器 / 键位上互相干扰；Xaero 地图标记从「调用并不存在的命令
+  `addwaypointxaero`（永久静默失败）」改为服务端下发 + 客户端反射加**临时路点**，小地图与世界地图都生效，
+  箱子被搜空 / 移除时自动回收。共删除 45 个死代码文件（260 → 215 个类），
+  **注册 ID / NBT 键 / 配置键 / 战利品表路径全部未变**，旧存档可直接沿用。
+- **许可**：1.2.0 起为 **MIT 全开源**（原作者已把模组交给 gem19910816 接手），详见 `真实空投/LICENSE`。
 
 ### [稀薄的空气 (Thin Air)](稀薄的空气/) — 1.21.1 移植
 

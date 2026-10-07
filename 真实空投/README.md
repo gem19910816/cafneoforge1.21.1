@@ -10,7 +10,7 @@ Minecraft **1.21.1 / NeoForge** 版。从 1.20.1 Forge 版 `dyairdrop-1.1.0-1.20
 
 ## 安装
 
-1. 把 `dyairdrop-1.1.0.jar` 放进 `mods/`。
+1. 把 `dyairdrop-1.2.0.jar` 放进 `mods/`。
 2. **前置**：GeckoLib for NeoForge 1.21.1（**4.x**，本仓库附带 `libs/geckolib-neoforge-1.21.1-4.9.3.jar`）。
    不装 GeckoLib 会直接加载失败。
 3. 可选：`zombiekit`（末日生存工具包）1.21.1 版。装了之后 `data/zombiekit/` 下的 20 个专属掉落表才会生效。
@@ -25,7 +25,7 @@ Minecraft **1.21.1 / NeoForge** 版。从 1.20.1 Forge 版 `dyairdrop-1.1.0-1.20
 |---|---|
 | 全局空投 | 默认每 3 天一次（`gap`），距玩家 50~100 格，飞机高度 200，自动空投在 `minecraft:overworld` |
 | 空投等级 | 默认 5 级（`maxlevel`），等级越高战利品越好 |
-| 密码锁 | `enablelock` 开启后空投箱需密码解锁，输错按 `attemptpunishment` 扣血 |
+| 密码锁 | `enablelock` 开启后空投箱需密码解锁，输错按 `attemptpunishment` 扣血（1.2.0 起改为服务端权威校验） |
 | 吸引敌人 | `enableenemies` 开启后敌人会在 `enemyarrivetime` 分钟内赶来，玩家离得太远空投会被抢走 |
 | 信号枪 | 6 把枪（`flaregun0`~`flaregun5`），手持右键蓄力发射信号弹，按权重召唤武器 / 医疗 / 小型空投 |
 | 保险箱 | `safe` / `safe_2` / `safeopen`，带密码面板 |
@@ -97,6 +97,21 @@ Minecraft **1.21.1 / NeoForge** 版。从 1.20.1 Forge 版 `dyairdrop-1.1.0-1.20
 并专项修复 **密码面板与其它模组的冲突** 与 **Xaero 地图不显示空投** 两个问题。
 兼容契约（注册 ID / NBT 键 / 配置键 / 战利品表路径全部不变）、诊断证据与阶段计划见
 [`重构说明.md`](重构说明.md)；`dyairdrop-1.1.0-port-1to1` 标签保存着重构前的 1:1 版本。
+
+### 1.2.0 已完成的改动
+
+- **密码面板改为服务端权威**：客户端只发「动作 + 文本」（`panel_action` 包），服务端校验
+  （面板类型与坐标一致、8 格距离、动作频率）后执行；删除「客户端本地再跑一遍服务端逻辑」、
+  静态 `guistate`、每 tick 强制关容器、ESC 硬编码。**解锁逻辑此前在服务端恒不可达（服务端拿不到输入串），
+  现已真正生效** —— 这是与其它模组冲突、以及多人下开不了箱的共同根因。
+- **Xaero 地图标记真正可用**：原实现执行的服务端命令 `addwaypointxaero` 并不存在（全实例无人提供，
+  Xaero 只有聊天前缀 `xaero-waypoint:`），且被 `withSuppressedOutput` 吞掉报错，属永久静默失败的死代码。
+  现改为服务端维护标记 + `map_marker` 包下发给装了 Xaero 的玩家，客户端**反射调用 Xaero 26.5.0 / 1.46.0
+  实测签名**加入**临时路点**（小地图与世界地图共用），空投箱被搜空或被移除时自动回收；
+  颜色按空投类型区分（大型金 / 医疗红 / 武器暗红 / 小型绿）。
+- **性能**：面板渲染每帧只读一次玩家数据与方块实体 NBT（原为 15 次 procedure 调用、每次各读一遍）。
+- **清理**：删除 45 个死代码 / 旧实现文件（含确认无调用点的 `ChecknewProcedure`、不可达的 TestGUI2 面板链路、
+  6 个无引用的航线历史版本、15 个已并入面板服务的展示判定类），源码从 260 个类降到 215 个。
 
 ---
 

@@ -2,22 +2,8 @@ package net.mcreator.dyairdrop.client.gui;
 
 import net.gem19910816.dyairdrop.network.payload.PanelActionPayload;
 import net.gem19910816.dyairdrop.panel.PanelService;
-import net.mcreator.dyairdrop.procedures.AccessconfirmingProcedure;
-import net.mcreator.dyairdrop.procedures.AccessdeniedProcedure;
-import net.mcreator.dyairdrop.procedures.AccessgrantedProcedure;
-import net.mcreator.dyairdrop.procedures.C1Procedure;
-import net.mcreator.dyairdrop.procedures.C2Procedure;
-import net.mcreator.dyairdrop.procedures.C3Procedure;
-import net.mcreator.dyairdrop.procedures.C4Procedure;
-import net.mcreator.dyairdrop.procedures.C5Procedure;
-import net.mcreator.dyairdrop.procedures.C6Procedure;
+import net.mcreator.dyairdrop.network.DyairdropModVariables;
 import net.mcreator.dyairdrop.procedures.OpshowProcedure;
-import net.mcreator.dyairdrop.procedures.W1Procedure;
-import net.mcreator.dyairdrop.procedures.W2Procedure;
-import net.mcreator.dyairdrop.procedures.W3Procedure;
-import net.mcreator.dyairdrop.procedures.W4Procedure;
-import net.mcreator.dyairdrop.procedures.W5Procedure;
-import net.mcreator.dyairdrop.procedures.W6Procedure;
 import net.mcreator.dyairdrop.world.inventory.PannelMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -58,6 +44,14 @@ public class PannelScreen extends AbstractContainerScreen<PannelMenu> {
 
     private EditBox passwordPanel;
 
+    // 每帧缓存一次展示状态（见 refreshPanelState），避免逐帧重复读玩家数据与方块实体 NBT
+    private boolean submitted;
+    private String digitResult = "";
+    private String enteredPassword = "";
+    private String blockKey = "";
+    private double keyTicking;
+    private long elapsedTicks;
+
     public PannelScreen(PannelMenu container, Inventory inventory, Component text) {
         super(container, inventory, text);
         this.world = container.world;
@@ -75,10 +69,28 @@ public class PannelScreen extends AbstractContainerScreen<PannelMenu> {
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+        refreshPanelState();
         this.renderBackground(guiGraphics, mouseX, mouseY, partialTicks);
         super.render(guiGraphics, mouseX, mouseY, partialTicks);
         this.passwordPanel.render(guiGraphics, mouseX, mouseY, partialTicks);
         this.renderTooltip(guiGraphics, mouseX, mouseY);
+    }
+
+    /**
+     * 每帧只读一次玩家数据与方块实体的密码，避免原实现「每帧调用 15 个 procedure、
+     * 每个都 getData/getPersistentData 一遍」的重复开销。
+     */
+    private void refreshPanelState() {
+        DyairdropModVariables.PlayerVariables vars = this.entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get());
+        this.submitted = vars.showlight == 1.0;
+        this.digitResult = this.submitted ? vars.pw : "";
+        this.enteredPassword = vars.password;
+        this.keyTicking = vars.keyticking;
+        this.blockKey = "";
+        if (this.world.getBlockEntity(new BlockPos(this.x, this.y, this.z)) instanceof net.minecraft.world.level.block.entity.BlockEntity be) {
+            this.blockKey = be.getPersistentData().getString("key");
+        }
+        this.elapsedTicks = (long) (this.world.getDayTime() - this.keyTicking);
     }
 
     @Override
@@ -87,8 +99,7 @@ public class PannelScreen extends AbstractContainerScreen<PannelMenu> {
         for (int i = 0; i < 6; i++) {
             if (isDigitCorrect(i)) {
                 guiGraphics.blit(TEXTURE_CORRECT, this.leftPos + 25 + i * 14, this.topPos + 39, 0.0F, 0.0F, 8, 8, 8, 8);
-            }
-            if (isDigitWrong(i)) {
+            } else if (isDigitWrong(i)) {
                 guiGraphics.blit(TEXTURE_WRONG, this.leftPos + 25 + i * 14, this.topPos + 39, 0.0F, 0.0F, 8, 8, 8, 8);
             }
         }
@@ -96,25 +107,11 @@ public class PannelScreen extends AbstractContainerScreen<PannelMenu> {
     }
 
     private boolean isDigitCorrect(int index) {
-        return switch (index) {
-            case 0 -> C1Procedure.execute(this.entity);
-            case 1 -> C2Procedure.execute(this.world, this.entity);
-            case 2 -> C3Procedure.execute(this.world, this.entity);
-            case 3 -> C4Procedure.execute(this.world, this.entity);
-            case 4 -> C5Procedure.execute(this.world, this.entity);
-            default -> C6Procedure.execute(this.world, this.entity);
-        };
+        return this.submitted && index < this.digitResult.length() && this.digitResult.charAt(index) == '1';
     }
 
     private boolean isDigitWrong(int index) {
-        return switch (index) {
-            case 0 -> W1Procedure.execute(this.entity);
-            case 1 -> W2Procedure.execute(this.world, this.entity);
-            case 2 -> W3Procedure.execute(this.world, this.entity);
-            case 3 -> W4Procedure.execute(this.world, this.entity);
-            case 4 -> W5Procedure.execute(this.world, this.entity);
-            default -> W6Procedure.execute(this.world, this.entity);
-        };
+        return this.submitted && index < this.digitResult.length() && this.digitResult.charAt(index) == '0';
     }
 
     @Override
@@ -127,14 +124,15 @@ public class PannelScreen extends AbstractContainerScreen<PannelMenu> {
 
     @Override
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        if (AccessgrantedProcedure.execute(this.world, this.x, this.y, this.z, this.entity)) {
-            guiGraphics.drawString(this.font, Component.translatable("gui.dyairdrop.panel.label_correct"), 125, 23, -13382656, false);
+        if (!this.submitted || this.digitResult.length() != 6) {
+            return;
         }
-        if (AccessdeniedProcedure.execute(this.world, this.x, this.y, this.z, this.entity)) {
-            guiGraphics.drawString(this.font, Component.translatable("gui.dyairdrop.panel.label_denied"), 129, 22, -3407872, false);
-        }
-        if (AccessconfirmingProcedure.execute(this.world, this.entity)) {
+        if (this.elapsedTicks < 41) {
             guiGraphics.drawString(this.font, Component.translatable("gui.dyairdrop.panel.label_processing"), 124, 22, -1, false);
+        } else if (this.enteredPassword.equals(this.blockKey)) {
+            guiGraphics.drawString(this.font, Component.translatable("gui.dyairdrop.panel.label_correct"), 125, 23, -13382656, false);
+        } else {
+            guiGraphics.drawString(this.font, Component.translatable("gui.dyairdrop.panel.label_denied"), 129, 22, -3407872, false);
         }
     }
 

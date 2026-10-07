@@ -127,7 +127,13 @@ public class AirdroplargeticksProcedure {
                return blockEntity != null ? blockEntity.getPersistentData().getBoolean(tag) : false;
             }
          }).getValue(world, BlockPos.containing(x, y, z), "s")
-         && world.getEntitiesOfClass(
+         && (new Object() {
+                public double getValue(LevelAccessor world, BlockPos pos, String tag) {
+                   BlockEntity blockEntity = world.getBlockEntity(pos);
+                   return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
+                }
+             }).getValue(world, BlockPos.containing(x, y, z), "timer") % 20.0 == 0.0
+          && world.getEntitiesOfClass(
                Player.class,
                AABB.ofSize(
                   new Vec3(x, y, z),
