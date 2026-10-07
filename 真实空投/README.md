@@ -95,4 +95,9 @@ Minecraft **1.21.1 / NeoForge** 版。从 1.20.1 Forge 版 `dyairdrop-1.1.0-1.20
 
 ## 许可
 
-`All Rights Reserved`（沿用原模组）。
+**MIT**（全文见 [`LICENSE`](LICENSE)）。
+
+原模组 dyairdrop（1.20.1 Forge 版，作者 **Ian**，MCreator 制作）的著作权人已明确将本项目
+**完整开源授权**给 **gem19910816** 接手；1.21.1 / NeoForge 版本的移植、重构与后续维护均由
+gem19910816 负责。因此本模组已从原先的「All Rights Reserved（沿用原模组）」改为 MIT 全开源，
+任何人都可以自由使用、修改、再分发（保留版权与许可声明即可）。
