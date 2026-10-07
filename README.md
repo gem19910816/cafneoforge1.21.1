@@ -8,7 +8,7 @@
 | [末日装饰 (Doomsday Decoration)](末日装饰/) | 1.20.1 Forge 1.1.3 | 1.21.1 NeoForge | [jar](末日装饰/doomsday_decoration-1.1.3-neoforge-1.21.1.jar) |
 | [铳械弹药统一 (Ammo Unify)](铳械弹药统一/) | —（1.21.1 **新实现**，非移植） | 1.21.1 NeoForge | [jar](铳械弹药统一/ammo_unify-1.0.0.jar) |
 | [全球市场 (Global Market)](全球市场/) | 1.20.1 Forge（原 `MOD/global-market`） | 1.21.1 NeoForge | [jar](全球市场/gearsandflesh_market-1.0.0.jar) |
-| [真实空投 (Realistic Airdrop)](真实空投/) | 1.20.1 Forge 1.1.0-beta | 1.21.1 NeoForge | [jar](真实空投/dyairdrop-1.3.0.jar) |
+| [真实空投 (Realistic Airdrop)](真实空投/) | 1.20.1 Forge 1.1.0-beta | 1.21.1 NeoForge | [jar](真实空投/dyairdrop-1.4.0.jar) |
 | [稀薄的空气 (Thin Air)](稀薄的空气/) | 1.20.1 Forge（原 Thin Air / fuzs） | 1.21.1 NeoForge | [jar](稀薄的空气/thinair-1.21.1-neoforge-21.1.1-port.jar) |
 | [僵尸游戏 (ZombieGame:Reborn)](僵尸游戏/) | 1.20.1 Forge 2.1.0 | 1.21.1 NeoForge | [jar](僵尸游戏/zombiegamereborn-2.1.0.jar) |
 | [急救护理 (SelfAid)](急救护理/) | —（1.21.1 **新实现**，非移植） | 1.21.1 NeoForge | [jar](急救护理/selfaid-1.0.0.jar) |
@@ -100,7 +100,11 @@ Tacz-Unidict（TACZ：铳械协议）。后者依赖的 TaCZ 弹药机制在 1.1
   `Numbers` / `CommandArgs` / `GameModes` / `Projectiles`），4 个航线过程合并为 `FlightService`、
   两种飞机 tick 合并为 `PlaneTicker`、两个字母面板校验过程各去掉 6 份复制粘贴（375→128、339→82 行），
   整包迁到 `net.gem19910816.dyairdrop`；顺带修掉 `/setairdropcode` 参数丢失等 bug。玩法与存档兼容性未变。
-- **许可**：1.2.0 起为 **MIT 全开源**（原作者已把模组交给 gem19910816 接手），详见 `真实空投/LICENSE`。
+- **1.4.0 收尾**：**MCreator 的 `procedures` 包被整个删除**（53 个过程类 → 0），全部逻辑收敛成
+  `FlightService` / `PlaneTicker` / `ChestTicker` / `CrateTicker` / `FlareService` / `AirdropScheduler` /
+  `EnemySpawner` / `LetterPanel`（21 个类合成 1 个）/ `LetterPanelConfirm` / `PanelOpener` /
+  `StructureLocator` 等服务类；顺手修掉 `/locatetag` 的 NPE、信号弹失败提示显示语言键、
+  `/setairdropcode` 参数丢失等问题。**注册 ID / NBT 键 / 配置键 / 战利品表路径全部未变**。- **许可**：1.2.0 起为 **MIT 全开源**（原作者已把模组交给 gem19910816 接手），详见 `真实空投/LICENSE`。
 
 ### [稀薄的空气 (Thin Air)](稀薄的空气/) — 1.21.1 移植
 

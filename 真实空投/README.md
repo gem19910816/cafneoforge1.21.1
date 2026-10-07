@@ -10,7 +10,7 @@ Minecraft **1.21.1 / NeoForge** 版。从 1.20.1 Forge 版 `dyairdrop-1.1.0-1.20
 
 ## 安装
 
-1. 把 `dyairdrop-1.3.0.jar` 放进 `mods/`。
+1. 把 `dyairdrop-1.4.0.jar` 放进 `mods/`。
 2. **前置**：GeckoLib for NeoForge 1.21.1（**4.x**，本仓库附带 `libs/geckolib-neoforge-1.21.1-4.9.3.jar`）。
    不装 GeckoLib 会直接加载失败。
 3. 可选：`zombiekit`（末日生存工具包）1.21.1 版。装了之后 `data/zombiekit/` 下的 20 个专属掉落表才会生效。
@@ -71,7 +71,7 @@ Minecraft **1.21.1 / NeoForge** 版。从 1.20.1 Forge 版 `dyairdrop-1.1.0-1.20
 需要 **JDK 21**。
 
 ```bash
-./gradlew build        # 产物 → build/libs/dyairdrop-1.3.0.jar
+./gradlew build        # 产物 → build/libs/dyairdrop-1.4.0.jar
 ./gradlew runServer    # 开发环境专用服务器
 ./gradlew runClient    # 开发环境客户端
 ```
@@ -98,26 +98,46 @@ Minecraft **1.21.1 / NeoForge** 版。从 1.20.1 Forge 版 `dyairdrop-1.1.0-1.20
 兼容契约（注册 ID / NBT 键 / 配置键 / 战利品表路径全部不变）、诊断证据与阶段计划见
 [`重构说明.md`](重构说明.md)；`dyairdrop-1.1.0-port-1to1` 标签保存着重构前的 1:1 版本。
 
-### 1.3.0 已完成的改动（代码质量专项）
+### 1.4.0：MCreator 过程层彻底消失
 
-在 1.2.0 的功能修复之上，把整个模块按 Java 最佳实践重写了一遍（**玩法机制、注册 ID、NBT 键、配置键全部未动**）：
+**原本 53 个 `*Procedure` 静态类、18,028 行、260 个类，现在 `procedures` 包已被整个删除**——所有逻辑按职责
+收敛成一批服务类（`core/` 14 个 + `panel/` 4 个 + `compat/` 1 个），188 个类、13,000 余行：
+
+| 原先的过程类 | 现在 | 说明 |
+|---|---|---|
+| `Flycode2neo` / `2neomap` / `3neo` / `3neomap`（349 行） | `core/FlightService` | 4 个历史版本航线合并，两个入口 |
+| `Planeticks` + `Fancyplaneticks`（256 行） | `core/PlaneTicker` | 普通飞机与运输机共用一条主流程 |
+| `Airdroplargeticks`（94 行，名字叫 large 却是 9 种箱子共用） | `core/ChestTicker` | 计时 / 信号烟 / 放敌人 / 判被抢走拆成 4 个方法 |
+| `Mobairdropticks`（113 行） | `core/CrateTicker` | 落地成箱、写战利品表、登记地图标记 |
+| `Flaregunlootset` + `Flareticks` + `Flareburst`（352 行） | `core/FlareService` | 烟花表原本写了两遍，现只有一份 |
+| `Worldairdropevents` + `Randomworldairdrop` + `Fastairdrop` + `Getrandomplayer`（约 360 行） | `core/AirdropScheduler` | 定时空投 / `/airdrop` / `/airdrop world` |
+| `Selectsummonposition`（77 行） | `core/EnemySpawner` | 候选点不再构造 4851 个 `double[]`，改 BlockPos + Fisher–Yates |
+| `Buttonre1..6` + `Light1..6` + `Wrong1..6` + `PannelREticks` + `PannelREshut`（约 400 行） | `panel/LetterPanel` | 21 个类其实只是一张字母表 |
+| `CheckProcedure`（375 行）+ `ChecknewliteProcedure`（339 行） | `panel/LetterPanelConfirm` | 各自去掉 6 份复制粘贴，合并为一个类两个方法 |
+| `Safetest` + `Safeopen2` + `Randomstring` + `AirdropGUIopen` + `Fancyairdropguiopen` + `Lockedairdroplargedebug`（约 420 行） | `core/PanelOpener` | 匿名 MenuProvider 原来复制了 10 遍 |
+| `T6` + `FindNearestStructure`（48 行） | `core/StructureLocator` | 顺带修掉「找不到结构时 NPE」 |
+| `Unlockflaregun`（41 行） | `compat/zombiekit/ZombieKitCompat` | zombiekit 判断集中一处 |
+| `Opshow` / `Tests` / `Setairdropcode` 等 | `core/GameModes` / 命令类内联 | 纯转调的壳类直接删除 |
+
+新增的工具层：`Nbt`（方块实体读写，值未变则不发包）、`Commands`（命令执行，全模块只剩 2 处
+`performPrefixedCommand`）、`Vars`、`Sounds`（含音源重载）、`Chat`（广播 / 私聊）、`Blocks`（朝向 / id / 动画）、
+`Numbers`、`CommandArgs`、`GameModes`、`Projectiles`。
+
+**顺带修掉的原实现 bug**（都写进了对应类的 Javadoc）：`/setairdropcode` 的 `blockid` 参数被丢弃；
+`/locatetag` 找不到结构时 NPE；信号弹失败提示把语言键当文本显示；地图标记落地约 1 秒后被误删。
+
+**保留未改的历史写法**（属玩法数值，已在 Javadoc 注明）：信号枪权重归一化复用被改写过的分母；
+RE2 面板生成密码后无条件广播（RE 只在创造模式广播）。
+
+### 1.3.0 已完成的改动（代码质量专项）
 
 - **消灭 MCreator 生成物**：清除全部 70 处 `new Object() { ... }` 匿名类惯用法（每次调用都 new 一个实例，
   在 tick 路径上是纯垃圾对象）、41 处 `CommandSourceStack + performPrefixedCommand` 样板、
   123 处 `((PlayerVariables) x.getData(...))` 强制转换、787 条无用 import。
-- **新增 `core` 工具层**：`Nbt`（方块实体读写，写入时值未变则不发包）、`Commands`（虚拟命令源 / 以实体为上下文执行命令）、
-  `Vars`（玩家数据）、`Sounds`、`Blocks`、`Numbers`、`CommandArgs`、`GameModes`、`Projectiles`。
-- **结构合并（P3）**：
-  - 4 个航线过程（`Flycode2neo / 2neomap / 3neo / 3neomap`，349 行）→ `core/FlightService`（两个入口）；
-  - 飞机与运输机的每 tick 逻辑（`Planeticks` + `Fancyplaneticks`，256 行）→ `core/PlaneTicker`
-    （NBT 由每 tick 反复读 8+ 次改为只读一次、只写回一次）；
-  - `CheckProcedure` 375 → 128 行、`ChecknewliteProcedure` 339 → 82 行（各自去掉 6 份复制粘贴的打字机动画）；
-  - 整包从 `net.mcreator.dyairdrop` 迁到 `net.gem19910816.dyairdrop`（210 个文件）。
-- **顺手修掉的原实现 bug**：`/setairdropcode` 的第二个参数 `blockid` 被丢弃（旧代码把 `loot` 写进了 `airdropblock`，
-  而那是信号枪决定召唤哪种空投箱时真正读取的字段）。
-- **主动统一的历史分叉**（都写在对应类的 Javadoc 里）：飞机音效统一为距离受限的版本；
-  `driftmax < driftmin` 时按 min/max 取界（原来把上下界都写成了 `driftmin`）。
-- 源码规模：260 个类 / 18,028 行 → **224 个类**，删除 45 个死代码文件与 4 个重复过程。
+- **整包迁移**：`net.mcreator.dyairdrop` → `net.gem19910816.dyairdrop`（210 个文件），
+  MCreator 的 `*Procedure` 静态工具类不再散落在 `net.mcreator` 命名空间下。
+- **清理**：删除 45 个死代码 / 旧实现文件（含确认无调用点的 `ChecknewProcedure`、不可达的 TestGUI2 面板链路、
+  6 个无引用的航线历史版本、15 个已并入面板服务的展示判定类），随后又删掉约 30 个零调用方的过程类。
 
 ### 1.2.0 已完成的改动
 
