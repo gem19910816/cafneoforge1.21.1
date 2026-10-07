@@ -3,7 +3,7 @@ package net.gem19910816.dyairdrop.entity;
 import net.minecraft.world.entity.Entity;
 import software.bernie.geckolib.animation.AnimationController.State;
 import javax.annotation.Nullable;
-import net.gem19910816.dyairdrop.procedures.FancyplaneticksProcedure;
+import net.gem19910816.dyairdrop.core.PlaneTicker;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -173,7 +173,7 @@ public class TransportplaneEntity extends PathfinderMob implements GeoEntity {
 
    public void baseTick() {
       super.baseTick();
-      FancyplaneticksProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
+      PlaneTicker.tickTransport(this.level(), this.getX(), this.getY(), this.getZ(), this);
       this.refreshDimensions();
    }
 
