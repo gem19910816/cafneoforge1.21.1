@@ -2,7 +2,7 @@ package net.gem19910816.dyairdrop.entity;
 
 import net.minecraft.world.entity.Entity;
 import software.bernie.geckolib.animation.AnimationController.State;
-import net.gem19910816.dyairdrop.procedures.MobairdropticksProcedure;
+import net.gem19910816.dyairdrop.core.CrateTicker;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -121,7 +121,7 @@ public class WeaponairdropEntity extends PathfinderMob implements GeoEntity {
 
    public void baseTick() {
       super.baseTick();
-      MobairdropticksProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
+      CrateTicker.tick(this.level(), this.getX(), this.getY(), this.getZ(), this);
       this.refreshDimensions();
    }
 

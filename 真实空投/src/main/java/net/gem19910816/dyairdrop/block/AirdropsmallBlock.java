@@ -1,6 +1,6 @@
 package net.gem19910816.dyairdrop.block;
 
-import net.gem19910816.dyairdrop.procedures.AirdroplargeticksProcedure;
+import net.gem19910816.dyairdrop.core.ChestTicker;
 import net.gem19910816.dyairdrop.procedures.AirdropGUIopenProcedure;
 import net.gem19910816.dyairdrop.block.entity.AirdropsmallBlockEntity;
 
@@ -78,7 +78,7 @@ public class AirdropsmallBlock extends Block implements EntityBlock {
       int x = pos.getX();
       int y = pos.getY();
       int z = pos.getZ();
-      AirdroplargeticksProcedure.execute(world, x, y, z);
+      ChestTicker.tick(world, x, y, z);
       world.scheduleTick(pos, this, 1);
    }
 
