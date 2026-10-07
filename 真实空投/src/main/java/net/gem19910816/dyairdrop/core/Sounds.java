@@ -18,14 +18,19 @@ public final class Sounds {
     }
 
     public static void play(LevelAccessor world, double x, double y, double z, SoundEvent sound, float volume) {
+        play(world, x, y, z, sound, SoundSource.BLOCKS, volume);
+    }
+
+    /** 指定音源版本（例如信号枪用的是 {@link SoundSource#NEUTRAL}）。 */
+    public static void play(LevelAccessor world, double x, double y, double z, SoundEvent sound, SoundSource source, float volume) {
         if (sound == null || !(world instanceof Level level)) {
             return;
         }
         BlockPos pos = BlockPos.containing(x, y, z);
         if (!level.isClientSide()) {
-            level.playSound(null, pos, sound, SoundSource.BLOCKS, volume, 1.0F);
+            level.playSound(null, pos, sound, source, volume, 1.0F);
         } else {
-            level.playLocalSound(x, y, z, sound, SoundSource.BLOCKS, volume, 1.0F, false);
+            level.playLocalSound(x, y, z, sound, source, volume, 1.0F, false);
         }
     }
 }

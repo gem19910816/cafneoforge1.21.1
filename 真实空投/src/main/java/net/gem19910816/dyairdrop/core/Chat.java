@@ -1,6 +1,7 @@
 package net.gem19910816.dyairdrop.core;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LevelAccessor;
 
@@ -28,10 +29,15 @@ public final class Chat {
         broadcast(world, Component.literal(Component.translatable(translationKey).getString()));
     }
 
-    /** 只对某个玩家说话（服务端调用）。 */
-    public static void tell(Player player, String text) {
-        if (player != null && !player.level().isClientSide()) {
+    /** 只对某个玩家说话（服务端调用）；非玩家实体自动忽略。 */
+    public static void tell(Entity entity, String text) {
+        if (entity instanceof Player player && !player.level().isClientSide()) {
             player.displayClientMessage(Component.literal(text), false);
         }
+    }
+
+    /** 只对某个玩家说一句语言文件里的文本（服务端调用）。 */
+    public static void tellKey(Entity entity, String translationKey) {
+        tell(entity, Component.translatable(translationKey).getString());
     }
 }

@@ -2,8 +2,8 @@ package net.gem19910816.dyairdrop.entity;
 
 import net.gem19910816.dyairdrop.init.DyairdropModItems;
 import net.gem19910816.dyairdrop.init.DyairdropModEntities;
-import net.gem19910816.dyairdrop.procedures.FlareburstProcedure;
-import net.gem19910816.dyairdrop.procedures.FlareticksProcedure;
+import net.gem19910816.dyairdrop.core.FlareService;
+import net.gem19910816.dyairdrop.core.FlareService;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -49,12 +49,12 @@ public class FlareEntity extends AbstractArrow implements ItemSupplier {
 
    public void onHitEntity(EntityHitResult entityHitResult) {
       super.onHitEntity(entityHitResult);
-      FlareburstProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), entityHitResult.getEntity(), this);
+      FlareService.burst(this.level(), this.getX(), this.getY(), this.getZ(), entityHitResult.getEntity(), this);
    }
 
    public void onHitBlock(BlockHitResult blockHitResult) {
       super.onHitBlock(blockHitResult);
-      FlareburstProcedure.execute(
+      FlareService.burst(
          this.level(),
          blockHitResult.getBlockPos().getX(),
          blockHitResult.getBlockPos().getY(),
@@ -66,7 +66,7 @@ public class FlareEntity extends AbstractArrow implements ItemSupplier {
 
    public void tick() {
       super.tick();
-      FlareticksProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this.getOwner(), this);
+      FlareService.tick(this.level(), this.getX(), this.getY(), this.getZ(), this.getOwner(), this);
       if (this.inGround) {
          this.discard();
       }

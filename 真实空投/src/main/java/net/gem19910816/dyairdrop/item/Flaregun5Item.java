@@ -1,7 +1,7 @@
 package net.gem19910816.dyairdrop.item;
 
 
-import net.gem19910816.dyairdrop.procedures.FlaregunlootsetProcedure;
+import net.gem19910816.dyairdrop.core.FlareService;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,7 +24,7 @@ public class Flaregun5Item extends Item {
 
    public InteractionResultHolder<ItemStack> use(Level world, Player entity, InteractionHand hand) {
       InteractionResultHolder<ItemStack> ar = super.use(world, entity, hand);
-      FlaregunlootsetProcedure.execute(world, entity.getX(), entity.getY(), entity.getZ(), entity, (ItemStack)ar.getObject());
+      FlareService.useFlareGun(world, entity.getX(), entity.getY(), entity.getZ(), entity, (ItemStack)ar.getObject());
       return ar;
    }
 }
