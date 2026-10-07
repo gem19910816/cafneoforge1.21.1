@@ -1,0 +1,11 @@
+{
+  "parent": "dyairdrop:custom/airdrop2",
+  "textures": {
+    "all": "dyairdrop:block/mgreen",
+    "particle": "dyairdrop:block/mgreen",
+    "0": "dyairdrop:block/mgreen",
+    "2": "dyairdrop:block/mgreen",
+    "3": "dyairdrop:block/mgreen"
+  },
+  "render_type": "cutout"
+}

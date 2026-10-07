@@ -1,0 +1,183 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:flare_gun",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:wrench"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:napalm_fuel_canister",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": 3
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:high_temperature_fuel_canister",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 3
+              }
+            }
+          ],
+          "conditions": []
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:advanced_burning_battle_parts",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:advanced_burning_charging_parts",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:advanced_freezing_battle_parts",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:advanced_freezing_charging_parts",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:advanced_light_weighted_grip",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:advanced_extend_weighted_grip",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:advanced_heavy_weighted_grip",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:flamethrower"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:exo_chestplate",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:exo_boots",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:exo_leggings",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:exo_helmet",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 2,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:netherite_baseball_bat"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:triangular_thorn",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:netherite_rake",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:netherite_fire_axe",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:netherite_crowbar",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:netherite_machete",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:netherite_knife",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

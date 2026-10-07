@@ -1,0 +1,57 @@
+{
+  "variants": {
+    "face=floor,facing=north": {
+      "model": "dyairdrop:custom/safeopen_particle"
+    },
+    "face=floor,facing=east": {
+      "model": "dyairdrop:custom/safeopen_particle",
+      "y": 90
+    },
+    "face=floor,facing=south": {
+      "model": "dyairdrop:custom/safeopen_particle",
+      "y": 180
+    },
+    "face=floor,facing=west": {
+      "model": "dyairdrop:custom/safeopen_particle",
+      "y": 270
+    },
+    "face=wall,facing=north": {
+      "model": "dyairdrop:custom/safeopen_particle",
+      "x": 90
+    },
+    "face=wall,facing=east": {
+      "model": "dyairdrop:custom/safeopen_particle",
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=south": {
+      "model": "dyairdrop:custom/safeopen_particle",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=west": {
+      "model": "dyairdrop:custom/safeopen_particle",
+      "x": 90,
+      "y": 270
+    },
+    "face=ceiling,facing=north": {
+      "model": "dyairdrop:custom/safeopen_particle",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=east": {
+      "model": "dyairdrop:custom/safeopen_particle",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=south": {
+      "model": "dyairdrop:custom/safeopen_particle",
+      "x": 180
+    },
+    "face=ceiling,facing=west": {
+      "model": "dyairdrop:custom/safeopen_particle",
+      "x": 180,
+      "y": 90
+    }
+  }
+}

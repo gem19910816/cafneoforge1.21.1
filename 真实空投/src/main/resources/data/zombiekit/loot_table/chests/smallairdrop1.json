@@ -1,0 +1,63 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 1,
+        "max": 2
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:canned_fish_in_black_bean_sauce"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:canned_tomatoes"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:canned_yellow_peach"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:canned_beef_hotpot"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:canned_bread"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:canned_bread"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:canned_beans"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:canned_luncheon_meat"
+        }
+      ]
+    },
+    {
+      "rolls": 3,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bread"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:compressed_biscuit"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "zombiekit:chocolate"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,155 @@
+package net.gem19910816.dyairdrop.block.entity;
+
+import net.gem19910816.dyairdrop.block.Safe2Block;
+import software.bernie.geckolib.util.GeckoLibUtil;
+import software.bernie.geckolib.animation.RawAnimation;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationController.State;
+import software.bernie.geckolib.animation.AnimatableManager.ControllerRegistrar;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animatable.GeoBlockEntity;
+import java.util.stream.IntStream;
+
+import javax.annotation.Nullable;
+
+import net.gem19910816.dyairdrop.init.DyairdropModBlockEntities;
+import net.gem19910816.dyairdrop.world.inventory.AirdropGUIMenu;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import io.netty.buffer.Unpooled;
+import net.minecraft.network.FriendlyByteBuf;
+
+public class Safe2TileEntity extends RandomizableContainerBlockEntity implements GeoBlockEntity, WorldlyContainer {
+   private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+   private NonNullList<ItemStack> stacks = NonNullList.withSize(27, ItemStack.EMPTY);
+
+   public Safe2TileEntity(BlockPos pos, BlockState state) {
+      super((BlockEntityType)DyairdropModBlockEntities.SAFE_2.get(), pos, state);
+   }
+
+   private PlayState predicate(AnimationState event) {
+      String animationprocedure = this.getBlockState().getValue(Safe2Block.ANIMATION) + "";
+      return animationprocedure.equals("0") ? event.setAndContinue(RawAnimation.begin().thenLoop(animationprocedure)) : PlayState.STOP;
+   }
+
+   private PlayState procedurePredicate(AnimationState event) {
+      String animationprocedure = this.getBlockState().getValue(Safe2Block.ANIMATION) + "";
+      if (!animationprocedure.equals("0") && event.getController().getAnimationState() == State.STOPPED) {
+         event.getController().setAnimation(RawAnimation.begin().thenPlay(animationprocedure));
+         if (event.getController().getAnimationState() == State.STOPPED) {
+            if (this.getBlockState().getBlock().getStateDefinition().getProperty("animation") instanceof IntegerProperty _integerProp) {
+               this.level.setBlock(this.getBlockPos(), (BlockState)this.getBlockState().setValue(_integerProp, 0), 3);
+            }
+
+            event.getController().forceAnimationReset();
+         }
+      } else if (animationprocedure.equals("0")) {
+         return PlayState.STOP;
+      }
+
+      return PlayState.CONTINUE;
+   }
+
+   public void registerControllers(ControllerRegistrar data) {
+      data.add(new AnimationController[]{new AnimationController(this, "controller", 0, this::predicate)});
+      data.add(new AnimationController[]{new AnimationController(this, "procedurecontroller", 0, this::procedurePredicate)});
+   }
+
+   public AnimatableInstanceCache getAnimatableInstanceCache() {
+      return this.cache;
+   }
+
+   public void loadAdditional(CompoundTag compound, HolderLookup.Provider provider) {
+      super.loadAdditional(compound, provider);
+      if (!this.tryLoadLootTable(compound)) {
+         this.stacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+      }
+
+      ContainerHelper.loadAllItems(compound, this.stacks, provider);
+   }
+
+   public void saveAdditional(CompoundTag compound, HolderLookup.Provider provider) {
+      super.saveAdditional(compound, provider);
+      if (!this.trySaveLootTable(compound)) {
+         ContainerHelper.saveAllItems(compound, this.stacks, provider);
+      }
+   }
+
+   public ClientboundBlockEntityDataPacket getUpdatePacket() {
+      return ClientboundBlockEntityDataPacket.create(this);
+   }
+
+   public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+      return this.saveWithFullMetadata(registries);
+   }
+
+   public int getContainerSize() {
+      return this.stacks.size();
+   }
+
+   public boolean isEmpty() {
+      for (ItemStack itemstack : this.stacks) {
+         if (!itemstack.isEmpty()) {
+            return false;
+         }
+      }
+
+      return true;
+   }
+
+   public Component getDefaultName() {
+      return Component.literal("safe_2");
+   }
+
+   public int getMaxStackSize() {
+      return 64;
+   }
+
+   public AbstractContainerMenu createMenu(int id, Inventory inventory) {
+      return new AirdropGUIMenu(id, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(this.worldPosition));
+   }
+
+   public Component getDisplayName() {
+      return Component.literal("Safe2");
+   }
+
+   protected NonNullList<ItemStack> getItems() {
+      return this.stacks;
+   }
+
+   protected void setItems(NonNullList<ItemStack> stacks) {
+      this.stacks = stacks;
+   }
+
+   public boolean canPlaceItem(int index, ItemStack stack) {
+      return true;
+   }
+
+   public int[] getSlotsForFace(Direction side) {
+      return IntStream.range(0, this.getContainerSize()).toArray();
+   }
+
+   public boolean canPlaceItemThroughFace(int index, ItemStack stack, @Nullable Direction direction) {
+      return this.canPlaceItem(index, stack);
+   }
+
+   public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
+      return true;
+   }
+}

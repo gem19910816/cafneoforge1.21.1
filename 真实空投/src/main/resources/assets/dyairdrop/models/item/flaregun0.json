@@ -1,0 +1,7 @@
+{
+  "parent": "dyairdrop:custom/flare_gun",
+  "textures": {
+    "4": "dyairdrop:block/flare_gunneo",
+    "particle": "dyairdrop:item/flare_gunneo"
+  }
+}
