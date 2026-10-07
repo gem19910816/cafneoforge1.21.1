@@ -169,11 +169,6 @@ public class DyairdropModVariables {
 			this.keyre = keyre;
 		}
 
-		/** Compatibility helper: keeps MCreator-style ifPresent writes working with attachments. */
-		public void ifPresentData(java.util.function.Consumer<PlayerVariables> action) {
-			action.accept(this);
-		}
-
 		public void syncPlayerVariables(Entity entity) {
 			if (entity instanceof ServerPlayer serverPlayer) {
 				PacketDistributor.sendToPlayer(serverPlayer, new PlayerVariablesSyncPayload(this.serializeNBT(serverPlayer.registryAccess())));

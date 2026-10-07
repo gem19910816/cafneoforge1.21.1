@@ -2,7 +2,7 @@ package net.gem19910816.dyairdrop.command;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import net.gem19910816.dyairdrop.procedures.SetairdropcodeProcedure;
+import net.gem19910816.dyairdrop.command.SetairdropcodeHandler;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
@@ -41,7 +41,7 @@ public class SetairdroplootCommand {
                                  direction = entity.getDirection();
                               }
 
-                              SetairdropcodeProcedure.execute(arguments);
+                              SetairdropcodeHandler.execute(arguments);
                               return 0;
                            }))
                      )

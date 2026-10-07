@@ -1,4 +1,4 @@
-package net.gem19910816.dyairdrop.procedures;
+package net.gem19910816.dyairdrop.command;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
@@ -24,7 +24,7 @@ import net.minecraft.world.entity.player.Player;
  *   <li>参数解析失败时（{@code player} 不存在）安全返回，不再 NPE。</li>
  * </ul>
  */
-public class SetairdropcodeProcedure {
+public class SetairdropcodeHandler {
 
     public static void execute(final CommandContext<CommandSourceStack> arguments) {
         String loot = StringArgumentType.getString(arguments, "loot");

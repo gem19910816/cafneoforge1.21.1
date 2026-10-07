@@ -1,5 +1,7 @@
 package net.gem19910816.dyairdrop.panel;
 
+import net.gem19910816.dyairdrop.core.Commands;
+
 import net.gem19910816.dyairdrop.panel.LetterPanel;
 
 import java.util.HashMap;
@@ -11,14 +13,12 @@ import net.gem19910816.dyairdrop.configuration.AirdropconfigConfiguration;
 import net.gem19910816.dyairdrop.core.Blocks;
 import net.gem19910816.dyairdrop.init.DyairdropModSounds;
 import net.gem19910816.dyairdrop.network.DyairdropModVariables;
-import net.gem19910816.dyairdrop.procedures.CheckProcedure;
-import net.gem19910816.dyairdrop.procedures.ChecknewliteProcedure;
+
+
 
 import net.gem19910816.dyairdrop.world.inventory.PannelMenu;
 import net.gem19910816.dyairdrop.world.inventory.PannelRE2Menu;
 import net.gem19910816.dyairdrop.world.inventory.PannelREMenu;
-import net.minecraft.commands.CommandSource;
-import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -28,7 +28,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -275,9 +274,9 @@ public final class PanelService {
         }
         if (action == 6 || action == ACTION_CONFIRM) {
             if (re2) {
-                ChecknewliteProcedure.execute(level, x, y, z, player);
+                LetterPanelConfirm.confirmRe2(level, x, y, z, player);
             } else {
-                CheckProcedure.execute(level, x, y, z, player);
+                LetterPanelConfirm.confirmRe(level, x, y, z, player);
             }
         }
     }
@@ -389,10 +388,7 @@ public final class PanelService {
             facing = "[facing=" + state.getValue(BlockStateProperties.HORIZONTAL_FACING).getName() + "]";
         }
         String command = "setblock ~ ~ ~ " + blockId + "open" + facing + "{LootTable:\"" + loot + "\"} replace";
-        CommandSourceStack source = new CommandSourceStack(
-                CommandSource.NULL, Vec3.atCenterOf(pos), Vec2.ZERO, level, 4, "", Component.literal(""), level.getServer(), null)
-                .withSuppressedOutput();
-        level.getServer().getCommands().performPrefixedCommand(source, command);
+        Commands.run(level, pos, command);
     }
 
     private static void schedule(int delayTicks, Runnable action) {
