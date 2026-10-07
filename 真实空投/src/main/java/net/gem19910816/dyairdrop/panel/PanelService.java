@@ -156,10 +156,13 @@ public final class PanelService {
 
         switch (action) {
             case ACTION_DELETE -> {
-                if (vars.showlight == 0.0 && !vars.password.isEmpty()) {
+                // 原 ButtondelateProcedure 的行为：删除最后一位，并把提交状态复位（玩家借此重试）
+                if (!vars.password.isEmpty()) {
                     vars.password = vars.password.substring(0, vars.password.length() - 1);
-                    sync(player, vars);
                 }
+                vars.showlight = 0.0;
+                vars.pw = "";
+                sync(player, vars);
             }
             case ACTION_CLEAR -> {
                 vars.password = "";
