@@ -2,8 +2,8 @@ package net.gem19910816.dyairdrop.command;
 
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import net.gem19910816.dyairdrop.procedures.FastairdropProcedure;
-import net.gem19910816.dyairdrop.procedures.RandomworldairdropProcedure;
+import net.gem19910816.dyairdrop.core.AirdropScheduler;
+
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
@@ -33,17 +33,7 @@ public class ReAirdropCommand {
                                  double x = ((CommandSourceStack)arguments.getSource()).getPosition().x();
                                  double y = ((CommandSourceStack)arguments.getSource()).getPosition().y();
                                  double z = ((CommandSourceStack)arguments.getSource()).getPosition().z();
-                                 Entity entity = ((CommandSourceStack)arguments.getSource()).getEntity();
-                                 if (entity == null && world instanceof ServerLevel _servLevel) {
-                                    entity = FakePlayerFactory.getMinecraft(_servLevel);
-                                 }
-
-                                 Direction direction = Direction.DOWN;
-                                 if (entity != null) {
-                                    direction = entity.getDirection();
-                                 }
-
-                                 FastairdropProcedure.execute(world, arguments);
+                                 AirdropScheduler.reAirdrop(world, arguments);
                                  return 0;
                               }))
                         )
@@ -53,17 +43,7 @@ public class ReAirdropCommand {
                   double x = ((CommandSourceStack)arguments.getSource()).getPosition().x();
                   double y = ((CommandSourceStack)arguments.getSource()).getPosition().y();
                   double z = ((CommandSourceStack)arguments.getSource()).getPosition().z();
-                  Entity entity = ((CommandSourceStack)arguments.getSource()).getEntity();
-                  if (entity == null && world instanceof ServerLevel _servLevel) {
-                     entity = FakePlayerFactory.getMinecraft(_servLevel);
-                  }
-
-                  Direction direction = Direction.DOWN;
-                  if (entity != null) {
-                     direction = entity.getDirection();
-                  }
-
-                  RandomworldairdropProcedure.execute(world);
+                  AirdropScheduler.randomWorldAirdrop(world);
                   return 0;
                }))
          );
