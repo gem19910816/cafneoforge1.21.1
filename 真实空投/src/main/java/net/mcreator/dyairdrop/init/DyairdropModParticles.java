@@ -1,7 +1,6 @@
 package net.mcreator.dyairdrop.init;
 
 import net.mcreator.dyairdrop.client.particle.SignalairParticle;
-import net.mcreator.dyairdrop.DyairdropMod;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;

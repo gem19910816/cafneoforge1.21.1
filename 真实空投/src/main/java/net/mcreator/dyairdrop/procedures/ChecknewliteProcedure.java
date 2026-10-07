@@ -3,12 +3,9 @@ package net.mcreator.dyairdrop.procedures;
 import net.gem19910816.dyairdrop.core.Vars;
 
 import net.mcreator.dyairdrop.DyairdropMod;
-import net.mcreator.dyairdrop.network.DyairdropModVariables;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.mcreator.dyairdrop.init.DyairdropModSounds;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;

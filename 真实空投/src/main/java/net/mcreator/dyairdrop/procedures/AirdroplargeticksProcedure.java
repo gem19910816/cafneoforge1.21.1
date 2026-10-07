@@ -5,8 +5,6 @@ import net.gem19910816.dyairdrop.core.Commands;
 import net.gem19910816.dyairdrop.core.Nbt;
 
 import net.mcreator.dyairdrop.configuration.AirdropconfigConfiguration;
-import net.minecraft.commands.CommandSource;
-import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -17,7 +15,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 
 public class AirdroplargeticksProcedure {

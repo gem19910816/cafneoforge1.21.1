@@ -1,9 +1,7 @@
 package net.mcreator.dyairdrop.client.gui;
 
-import java.util.HashMap;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.mcreator.dyairdrop.DyairdropMod;
 import net.mcreator.dyairdrop.world.inventory.PannelREMenu;
 import net.mcreator.dyairdrop.procedures.Light1Procedure;
 import net.mcreator.dyairdrop.procedures.Light2Procedure;
@@ -21,7 +19,6 @@ import net.gem19910816.dyairdrop.network.payload.PanelActionPayload;
 import net.gem19910816.dyairdrop.panel.PanelService;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

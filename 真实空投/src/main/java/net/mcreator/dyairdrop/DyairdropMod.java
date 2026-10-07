@@ -7,7 +7,6 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import net.mcreator.dyairdrop.init.DyairdropModBlockEntities;
-import net.mcreator.dyairdrop.init.DyairdropModCapabilities;
 import net.mcreator.dyairdrop.init.DyairdropModBlocks;
 import net.mcreator.dyairdrop.init.DyairdropModConfigs;
 import net.mcreator.dyairdrop.init.DyairdropModEntities;
@@ -17,7 +16,6 @@ import net.mcreator.dyairdrop.init.DyairdropModParticleTypes;
 import net.mcreator.dyairdrop.init.DyairdropModSounds;
 import net.mcreator.dyairdrop.init.DyairdropModTabs;
 import net.mcreator.dyairdrop.network.DyairdropModVariables;
-import net.mcreator.dyairdrop.network.NetworkSetup;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;

@@ -5,8 +5,6 @@ import net.gem19910816.dyairdrop.core.Commands;
 import java.util.Locale;
 import net.gem19910816.dyairdrop.compat.map.MapMarkerService;
 import net.mcreator.dyairdrop.configuration.AirdropconfigConfiguration;
-import net.minecraft.commands.CommandSource;
-import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -20,11 +18,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec2;
-import net.minecraft.world.phys.Vec3;
 
 public class MobairdropticksProcedure {
    public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {

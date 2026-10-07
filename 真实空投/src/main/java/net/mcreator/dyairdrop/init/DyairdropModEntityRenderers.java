@@ -7,7 +7,6 @@ import net.mcreator.dyairdrop.client.renderer.PlaneRenderer;
 import net.mcreator.dyairdrop.client.renderer.SmallairdropRenderer;
 import net.mcreator.dyairdrop.client.renderer.TransportplaneRenderer;
 import net.mcreator.dyairdrop.client.renderer.WeaponairdropRenderer;
-import net.mcreator.dyairdrop.DyairdropMod;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;

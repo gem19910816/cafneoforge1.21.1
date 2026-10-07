@@ -8,21 +8,13 @@ import net.gem19910816.dyairdrop.core.GameModes;
 
 import java.text.DecimalFormat;
 import net.mcreator.dyairdrop.configuration.AirdropconfigConfiguration;
-import net.mcreator.dyairdrop.network.DyairdropModVariables;
-import net.minecraft.client.Minecraft;
-import net.minecraft.commands.CommandSource;
-import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.phys.Vec2;
-import net.minecraft.world.phys.Vec3;
 
 public class FlareticksProcedure {
    public static void execute(LevelAccessor world, double x, double y, double z, Entity entity, Entity immediatesourceentity) {

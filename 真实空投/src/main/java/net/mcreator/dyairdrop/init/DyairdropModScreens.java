@@ -1,6 +1,5 @@
 package net.mcreator.dyairdrop.init;
 
-import net.mcreator.dyairdrop.DyairdropMod;
 import net.mcreator.dyairdrop.client.gui.AirdropGUIScreen;
 import net.mcreator.dyairdrop.client.gui.PannelRE2Screen;
 import net.mcreator.dyairdrop.client.gui.PannelREScreen;

@@ -1,20 +1,5 @@
 package net.mcreator.dyairdrop.init;
 
-import net.mcreator.dyairdrop.block.entity.AirdropmedicalTileEntity;
-import net.mcreator.dyairdrop.block.entity.AirdropsmallBlockEntity;
-import net.mcreator.dyairdrop.block.entity.AirdropweaponTileEntity;
-import net.mcreator.dyairdrop.block.entity.AirdroplargeTileEntity;
-import net.mcreator.dyairdrop.block.entity.LockedairdroplargeTileEntity;
-import net.mcreator.dyairdrop.block.entity.LockedairdroplargeopenTileEntity;
-import net.mcreator.dyairdrop.block.entity.LockedairdropmedicalTileEntity;
-import net.mcreator.dyairdrop.block.entity.LockedairdropmedicalopenTileEntity;
-import net.mcreator.dyairdrop.block.entity.LockedairdropsmallBlockEntity;
-import net.mcreator.dyairdrop.block.entity.LockedairdropsmallopenBlockEntity;
-import net.mcreator.dyairdrop.block.entity.LockedairdropweaponTileEntity;
-import net.mcreator.dyairdrop.block.entity.LockedairdropweaponopenTileEntity;
-import net.mcreator.dyairdrop.block.entity.Safe2TileEntity;
-import net.mcreator.dyairdrop.block.entity.SafeTileEntity;
-import net.mcreator.dyairdrop.block.entity.SafeopenTileEntity;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;

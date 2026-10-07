@@ -9,19 +9,11 @@ import net.gem19910816.dyairdrop.core.Blocks;
 import net.gem19910816.dyairdrop.core.Nbt;
 
 import net.mcreator.dyairdrop.DyairdropMod;
-import net.mcreator.dyairdrop.network.DyairdropModVariables;
-import net.minecraft.commands.CommandSource;
-import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.Direction.Axis;
-import net.minecraft.core.Direction.AxisDirection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.mcreator.dyairdrop.init.DyairdropModSounds;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -29,11 +21,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.phys.Vec2;
-import net.minecraft.world.phys.Vec3;
 
 public class CheckProcedure {
    public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
