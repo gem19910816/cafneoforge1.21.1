@@ -11,8 +11,8 @@ Minecraft **1.21.1 / NeoForge** 版。从 1.20.1 Forge 版 `dyairdrop-1.1.0-1.20
 ## 安装
 
 1. 把 `dyairdrop-1.4.0.jar` 放进 `mods/`。
-2. **前置**：GeckoLib for NeoForge 1.21.1（**4.x**，本仓库附带 `libs/geckolib-neoforge-1.21.1-4.9.3.jar`）。
-   不装 GeckoLib 会直接加载失败。
+2. **前置**：GeckoLib for NeoForge 1.21.1（**4.x**）。本模组在 `neoforge.mods.toml` 里声明了对它的依赖，
+   不装会直接加载失败；构建时从 GeckoLib 官方 Maven 拉取，仓库里不再附带 jar。
 3. 可选：`zombiekit`（末日生存工具包）1.21.1 版。装了之后 `data/zombiekit/` 下的 20 个专属掉落表才会生效。
 
 适用于 Minecraft 1.21.1 / NeoForge 21.1.150 以上。
@@ -83,15 +83,15 @@ Minecraft **1.21.1 / NeoForge** 版。从 1.20.1 Forge 版 `dyairdrop-1.1.0-1.20
 | ModDevGradle | 2.0.148 |
 | Gradle | 9.5.0 |
 | Parchment | 2024.11.17 |
-| GeckoLib | 4.9.3（`libs/` 内置） |
+| GeckoLib | 4.9.3（编译期从官方 Maven 拉取） |
 
 ---
 
-## 移植说明
+## 重构记录
 
-改动清单、验证范围与尚未验证的风险项，见 [`移植说明.md`](移植说明.md)。
+改动清单、逐条对照、验证范围与尚未验证的风险项，见 [`重构说明.md`](重构说明.md)。
 
-## 重构（进行中）
+## 重构（已完成）
 
 本模组正按 Java 最佳实践整体重写：分层架构、服务端权威、去掉 MCreator 的静态 procedure 与历史并列版本，
 并专项修复 **密码面板与其它模组的冲突** 与 **Xaero 地图不显示空投** 两个问题。
