@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.client.gui;
 
+import net.gem19910816.dyairdrop.core.Vars;
+
 import net.gem19910816.dyairdrop.network.payload.PanelActionPayload;
 import net.gem19910816.dyairdrop.panel.PanelService;
 import net.mcreator.dyairdrop.network.DyairdropModVariables;
@@ -81,7 +83,7 @@ public class PannelScreen extends AbstractContainerScreen<PannelMenu> {
      * 每个都 getData/getPersistentData 一遍」的重复开销。
      */
     private void refreshPanelState() {
-        DyairdropModVariables.PlayerVariables vars = this.entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get());
+        DyairdropModVariables.PlayerVariables vars = Vars.of(this.entity);
         this.submitted = vars.showlight == 1.0;
         this.digitResult = this.submitted ? vars.pw : "";
         this.enteredPassword = vars.password;

@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.Commands;
+
 import net.gem19910816.dyairdrop.core.Nbt;
 
 import net.mcreator.dyairdrop.configuration.AirdropconfigConfiguration;
@@ -63,12 +65,7 @@ public class AirdroplargeticksProcedure {
       }
 
       if (Nbt.getDouble(world, BlockPos.containing(x, y, z), "timer") % 80.0 == 0.0 && Nbt.getDouble(world, BlockPos.containing(x, y, z), "timer") <= 3000.0 && Nbt.getBoolean(world, BlockPos.containing(x, y, z), "s") && world instanceof ServerLevel _level) {
-         _level.getServer()
-            .getCommands()
-            .performPrefixedCommand(
-               new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null)
-                  .withSuppressedOutput(),
-               "particle dyairdrop:signalsmoke " + x + " " + (y + 17.0) + " " + z + " 2 6 2 0 2000 force"
+         Commands.run(_level, x, y, z, "particle dyairdrop:signalsmoke " + x + " " + (y + 17.0) + " " + z + " 2 6 2 0 2000 force"
             );
       }
 

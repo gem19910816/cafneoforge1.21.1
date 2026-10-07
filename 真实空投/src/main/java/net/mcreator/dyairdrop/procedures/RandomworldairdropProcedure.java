@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.Commands;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -117,20 +119,7 @@ public class RandomworldairdropProcedure {
             if ((Boolean)AirdropconfigConfiguration.ENABLELOCK.get()) {
                Entity _ent = var28;
                if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-                  _ent.getServer()
-                     .getCommands()
-                     .performPrefixedCommand(
-                        new CommandSourceStack(
-                           CommandSource.NULL,
-                           _ent.position(),
-                           _ent.getRotationVector(),
-                           _ent.level() instanceof ServerLevel ? (ServerLevel)_ent.level() : null,
-                           4,
-                           _ent.getName().getString(),
-                           _ent.getDisplayName(),
-                           _ent.level().getServer(),
-                           _ent
-                        ),
+                  Commands.runAs(_ent,
                         "setairdrop random @s "
                            + new DecimalFormat("##").format(height)
                            + " "
@@ -147,20 +136,7 @@ public class RandomworldairdropProcedure {
             } else {
                Entity _ent = var28;
                if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-                  _ent.getServer()
-                     .getCommands()
-                     .performPrefixedCommand(
-                        new CommandSourceStack(
-                           CommandSource.NULL,
-                           _ent.position(),
-                           _ent.getRotationVector(),
-                           _ent.level() instanceof ServerLevel ? (ServerLevel)_ent.level() : null,
-                           4,
-                           _ent.getName().getString(),
-                           _ent.getDisplayName(),
-                           _ent.level().getServer(),
-                           _ent
-                        ),
+                  Commands.runAs(_ent,
                         "setairdrop random @s "
                            + new DecimalFormat("##").format(height)
                            + " "

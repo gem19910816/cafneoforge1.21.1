@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.Commands;
+
 import net.gem19910816.dyairdrop.core.Blocks;
 
 import net.gem19910816.dyairdrop.core.CommandArgs;
@@ -85,20 +87,7 @@ public class FastairdropProcedure {
          if (BoolArgumentType.getBool(arguments, "pin")) {
             Entity _ent = player;
             if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-               _ent.getServer()
-                  .getCommands()
-                  .performPrefixedCommand(
-                     new CommandSourceStack(
-                        CommandSource.NULL,
-                        _ent.position(),
-                        _ent.getRotationVector(),
-                        _ent.level() instanceof ServerLevel ? (ServerLevel)_ent.level() : null,
-                        4,
-                        _ent.getName().getString(),
-                        _ent.getDisplayName(),
-                        _ent.level().getServer(),
-                        _ent
-                     ),
+               Commands.runAs(_ent,
                      "/setairdrop free "
                         + new DecimalFormat("##").format(dx)
                         + " "
@@ -117,20 +106,7 @@ public class FastairdropProcedure {
          } else {
             Entity _ent = player;
             if (!_ent.level().isClientSide() && _ent.getServer() != null) {
-               _ent.getServer()
-                  .getCommands()
-                  .performPrefixedCommand(
-                     new CommandSourceStack(
-                        CommandSource.NULL,
-                        _ent.position(),
-                        _ent.getRotationVector(),
-                        _ent.level() instanceof ServerLevel ? (ServerLevel)_ent.level() : null,
-                        4,
-                        _ent.getName().getString(),
-                        _ent.getDisplayName(),
-                        _ent.level().getServer(),
-                        _ent
-                     ),
+               Commands.runAs(_ent,
                      "/setairdrop free "
                         + new DecimalFormat("##").format(dx)
                         + " "

@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.Vars;
+
 import net.gem19910816.dyairdrop.core.Nbt;
 
 import net.mcreator.dyairdrop.network.DyairdropModVariables;
@@ -12,27 +14,27 @@ public class Buttonre6Procedure {
    public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
       if (entity != null) {
          String input = "";
-         input = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+         input = Vars.of(entity)
             .passwordre;
          if (!input.chars().anyMatch(Character::isUpperCase)) {
             if (Nbt.getString(world, BlockPos.containing(x, y, z), "pw")
                .contains(
-                  ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                  Vars.of(entity)
                         .passwordre
                      + "f"
                )) {
-               String _setval = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+               String _setval = Vars.of(entity)
                      .passwordre
                   + "f";
-               entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+               Vars.of(entity).ifPresentData(capability -> {
                   capability.passwordre = _setval;
                   capability.syncPlayerVariables(entity);
                });
             } else {
-               String _setval = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+               String _setval = Vars.of(entity)
                      .passwordre
                   + "F";
-               entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+               Vars.of(entity).ifPresentData(capability -> {
                   capability.passwordre = _setval;
                   capability.syncPlayerVariables(entity);
                });

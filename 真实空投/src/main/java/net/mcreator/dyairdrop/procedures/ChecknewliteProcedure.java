@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.Vars;
+
 import net.mcreator.dyairdrop.DyairdropMod;
 import net.mcreator.dyairdrop.network.DyairdropModVariables;
 import net.minecraft.core.BlockPos;
@@ -27,33 +29,33 @@ public class ChecknewliteProcedure {
          String PW = "";
          String password_panel = "";
          String j = "";
-         input = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+         input = Vars.of(entity)
             .passwordre;
          if (!input.chars().anyMatch(Character::isUpperCase)) {
-            if (((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+            if (Vars.of(entity)
                   .passwordre
                   .length()
                == 6) {
-               String _setval = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+               String _setval = Vars.of(entity)
                   .passwordre;
-               entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+               Vars.of(entity).ifPresentData(capability -> {
                   capability.keyre = _setval;
                   capability.syncPlayerVariables(entity);
                });
                String _setvalb = "Z";
-               entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+               Vars.of(entity).ifPresentData(capability -> {
                   capability.passwordre = _setvalb;
                   capability.syncPlayerVariables(entity);
                });
                DyairdropMod.queueServerWork(
                   7,
                   () -> {
-                     String _setvalx = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                     String _setvalx = Vars.of(entity)
                            .passwordre
-                        + ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                        + Vars.of(entity)
                            .keyre
                            .substring(0, 1);
-                     entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+                     Vars.of(entity).ifPresentData(capability -> {
                         capability.passwordre = _setvalx;
                         capability.syncPlayerVariables(entity);
                      });
@@ -85,12 +87,12 @@ public class ChecknewliteProcedure {
                DyairdropMod.queueServerWork(
                   14,
                   () -> {
-                     String _setvalx = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                     String _setvalx = Vars.of(entity)
                            .passwordre
-                        + ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                        + Vars.of(entity)
                            .keyre
                            .substring(1, 2);
-                     entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+                     Vars.of(entity).ifPresentData(capability -> {
                         capability.passwordre = _setvalx;
                         capability.syncPlayerVariables(entity);
                      });
@@ -122,12 +124,12 @@ public class ChecknewliteProcedure {
                DyairdropMod.queueServerWork(
                   21,
                   () -> {
-                     String _setvalx = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                     String _setvalx = Vars.of(entity)
                            .passwordre
-                        + ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                        + Vars.of(entity)
                            .keyre
                            .substring(2, 3);
-                     entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+                     Vars.of(entity).ifPresentData(capability -> {
                         capability.passwordre = _setvalx;
                         capability.syncPlayerVariables(entity);
                      });
@@ -159,12 +161,12 @@ public class ChecknewliteProcedure {
                DyairdropMod.queueServerWork(
                   28,
                   () -> {
-                     String _setvalx = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                     String _setvalx = Vars.of(entity)
                            .passwordre
-                        + ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                        + Vars.of(entity)
                            .keyre
                            .substring(3, 4);
-                     entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+                     Vars.of(entity).ifPresentData(capability -> {
                         capability.passwordre = _setvalx;
                         capability.syncPlayerVariables(entity);
                      });
@@ -196,12 +198,12 @@ public class ChecknewliteProcedure {
                DyairdropMod.queueServerWork(
                   35,
                   () -> {
-                     String _setvalx = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                     String _setvalx = Vars.of(entity)
                            .passwordre
-                        + ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                        + Vars.of(entity)
                            .keyre
                            .substring(4, 5);
-                     entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+                     Vars.of(entity).ifPresentData(capability -> {
                         capability.passwordre = _setvalx;
                         capability.syncPlayerVariables(entity);
                      });
@@ -233,12 +235,12 @@ public class ChecknewliteProcedure {
                DyairdropMod.queueServerWork(
                   42,
                   () -> {
-                     String _setvalx = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                     String _setvalx = Vars.of(entity)
                            .passwordre
-                        + ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                        + Vars.of(entity)
                            .keyre
                            .substring(5, 6);
-                     entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+                     Vars.of(entity).ifPresentData(capability -> {
                         capability.passwordre = _setvalx;
                         capability.syncPlayerVariables(entity);
                      });
@@ -294,10 +296,10 @@ public class ChecknewliteProcedure {
                         }
                      }
 
-                     String _setvalx = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                     String _setvalx = Vars.of(entity)
                            .passwordre
                         + "Y";
-                     entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+                     Vars.of(entity).ifPresentData(capability -> {
                         capability.passwordre = _setvalx;
                         capability.syncPlayerVariables(entity);
                      });
@@ -321,16 +323,16 @@ public class ChecknewliteProcedure {
                );
             } else {
                String _setval = "";
-               entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+               Vars.of(entity).ifPresentData(capability -> {
                   capability.passwordre = _setval;
                   capability.syncPlayerVariables(entity);
                });
             }
-         } else if (!((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+         } else if (!Vars.of(entity)
             .passwordre
             .contains("Z")) {
             String _setval = "";
-            entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+            Vars.of(entity).ifPresentData(capability -> {
                capability.passwordre = _setval;
                capability.syncPlayerVariables(entity);
             });

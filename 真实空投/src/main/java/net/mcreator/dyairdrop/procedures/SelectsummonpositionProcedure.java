@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.Commands;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -61,14 +63,7 @@ public class SelectsummonpositionProcedure {
          if (world.canSeeSkyFromBelowWater(BlockPos.containing(bx, by + 1.0, bz)) && world.getBlockState(BlockPos.containing(bx, by, bz)).canOcclude()) {
             mobname = enemylist[(int)n];
             if (world instanceof ServerLevel _level) {
-               _level.getServer()
-                  .getCommands()
-                  .performPrefixedCommand(
-                     new CommandSourceStack(
-                           CommandSource.NULL, new Vec3(bx, by + 1.0, bz), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null
-                        )
-                        .withSuppressedOutput(),
-                     "summon " + mobname + " ~ ~ ~"
+               Commands.run(_level, bx, by + 1.0, bz, "summon " + mobname + " ~ ~ ~"
                   );
             }
 
@@ -76,14 +71,7 @@ public class SelectsummonpositionProcedure {
          } else if (world.canSeeSkyFromBelowWater(BlockPos.containing(bx, by + 1.0, bz)) && world.getBlockState(BlockPos.containing(bx, by, bz)).getFluidState().isSource()) {
             mobname = enemylist[(int)n];
             if (world instanceof ServerLevel _level) {
-               _level.getServer()
-                  .getCommands()
-                  .performPrefixedCommand(
-                     new CommandSourceStack(
-                           CommandSource.NULL, new Vec3(bx, by + 1.0, bz), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null
-                        )
-                        .withSuppressedOutput(),
-                     "summon " + mobname + " ~ ~ ~"
+               Commands.run(_level, bx, by + 1.0, bz, "summon " + mobname + " ~ ~ ~"
                   );
             }
 

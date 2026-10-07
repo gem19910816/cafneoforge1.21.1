@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.Commands;
+
 import java.util.Locale;
 import net.gem19910816.dyairdrop.compat.map.MapMarkerService;
 import net.mcreator.dyairdrop.configuration.AirdropconfigConfiguration;
@@ -90,14 +92,7 @@ public class MobairdropticksProcedure {
                   }
                }
             } else if (world instanceof ServerLevel _level) {
-               _level.getServer()
-                  .getCommands()
-                  .performPrefixedCommand(
-                     new CommandSourceStack(
-                           CommandSource.NULL, new Vec3(x, ay, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null
-                        )
-                        .withSuppressedOutput(),
-                     "setblock ~ ~ ~ " + blockid + "{LootTable:\"" + loot + "\"} destroy"
+               Commands.run(_level, x, ay, z, "setblock ~ ~ ~ " + blockid + "{LootTable:\"" + loot + "\"} destroy"
                   );
             }
 

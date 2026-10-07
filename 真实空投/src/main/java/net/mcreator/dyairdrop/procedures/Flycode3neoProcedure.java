@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.Commands;
+
 import net.gem19910816.dyairdrop.core.CommandArgs;
 
 import com.mojang.brigadier.arguments.BoolArgumentType;
@@ -65,14 +67,7 @@ public class Flycode3neoProcedure {
 
          if (BoolArgumentType.getBool(arguments, "pin")) {
             if (world instanceof ServerLevel _level) {
-               _level.getServer()
-                  .getCommands()
-                  .performPrefixedCommand(
-                     new CommandSourceStack(
-                           CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null
-                        )
-                        .withSuppressedOutput(),
-                     "/setairdrop free "
+               Commands.run(_level, x, y, z, "/setairdrop free "
                         + new DecimalFormat("##").format(dx)
                         + " "
                         + new DecimalFormat("##").format(dz)
@@ -88,14 +83,7 @@ public class Flycode3neoProcedure {
                   );
             }
          } else if (world instanceof ServerLevel _level) {
-            _level.getServer()
-               .getCommands()
-               .performPrefixedCommand(
-                  new CommandSourceStack(
-                        CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null
-                     )
-                     .withSuppressedOutput(),
-                  "/setairdrop free "
+            Commands.run(_level, x, y, z, "/setairdrop free "
                      + new DecimalFormat("##").format(dx)
                      + " "
                      + new DecimalFormat("##").format(dz)

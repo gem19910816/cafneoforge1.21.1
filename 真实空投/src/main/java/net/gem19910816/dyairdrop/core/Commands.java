@@ -51,4 +51,29 @@ public final class Commands {
     public static boolean canRun(LevelAccessor world) {
         return world instanceof Level level && !level.isClientSide() && level.getServer() != null;
     }
+
+    /**
+     * 以**某个实体**为上下文执行命令：位置、朝向、名称都取自该实体（模组用来执行
+     * {@code /setairdrop ...} 这类需要玩家上下文的命令），权限等级 4、静默输出。
+     */
+    public static void runAs(net.minecraft.world.entity.Entity entity, String command) {
+        if (entity == null || command == null || command.isEmpty()) {
+            return;
+        }
+        if (!(entity.level() instanceof ServerLevel level) || level.getServer() == null) {
+            return;
+        }
+        CommandSourceStack source = new CommandSourceStack(
+                CommandSource.NULL,
+                entity.position(),
+                entity.getRotationVector(),
+                level,
+                4,
+                entity.getName().getString(),
+                entity.getDisplayName(),
+                level.getServer(),
+                entity)
+                .withSuppressedOutput();
+        level.getServer().getCommands().performPrefixedCommand(source, command);
+    }
 }

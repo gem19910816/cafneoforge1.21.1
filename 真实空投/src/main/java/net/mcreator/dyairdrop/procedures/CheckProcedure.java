@@ -1,5 +1,9 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.Vars;
+
+import net.gem19910816.dyairdrop.core.Commands;
+
 import net.gem19910816.dyairdrop.core.Blocks;
 
 import net.gem19910816.dyairdrop.core.Nbt;
@@ -43,15 +47,15 @@ public class CheckProcedure {
          String PW = "";
          String password_panel = "";
          String j = "";
-         input = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+         input = Vars.of(entity)
             .passwordre;
          if (!input.chars().anyMatch(Character::isUpperCase)) {
-            if (((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+            if (Vars.of(entity)
                   .passwordre
                   .length()
                == 6) {
                String _setval = "Z";
-               entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+               Vars.of(entity).ifPresentData(capability -> {
                   capability.passwordre = _setval;
                   capability.syncPlayerVariables(entity);
                });
@@ -72,10 +76,10 @@ public class CheckProcedure {
                   7,
                   () -> {
                      if (Nbt.getString(world, BlockPos.containing(x, y, z), "pw").length() >= 2) {
-                        String _setvalx = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                        String _setvalx = Vars.of(entity)
                               .passwordre
                            + Nbt.getString(world, BlockPos.containing(x, y, z), "pw").substring(0, 1);
-                        entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+                        Vars.of(entity).ifPresentData(capability -> {
                            capability.passwordre = _setvalx;
                            capability.syncPlayerVariables(entity);
                         });
@@ -109,10 +113,10 @@ public class CheckProcedure {
                   14,
                   () -> {
                      if (Nbt.getString(world, BlockPos.containing(x, y, z), "pw").length() >= 3) {
-                        String _setvalx = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                        String _setvalx = Vars.of(entity)
                               .passwordre
                            + Nbt.getString(world, BlockPos.containing(x, y, z), "pw").substring(1, 2);
-                        entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+                        Vars.of(entity).ifPresentData(capability -> {
                            capability.passwordre = _setvalx;
                            capability.syncPlayerVariables(entity);
                         });
@@ -146,10 +150,10 @@ public class CheckProcedure {
                   21,
                   () -> {
                      if (Nbt.getString(world, BlockPos.containing(x, y, z), "pw").length() >= 4) {
-                        String _setvalx = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                        String _setvalx = Vars.of(entity)
                               .passwordre
                            + Nbt.getString(world, BlockPos.containing(x, y, z), "pw").substring(2, 3);
-                        entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+                        Vars.of(entity).ifPresentData(capability -> {
                            capability.passwordre = _setvalx;
                            capability.syncPlayerVariables(entity);
                         });
@@ -183,10 +187,10 @@ public class CheckProcedure {
                   28,
                   () -> {
                      if (Nbt.getString(world, BlockPos.containing(x, y, z), "pw").length() >= 5) {
-                        String _setvalx = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                        String _setvalx = Vars.of(entity)
                               .passwordre
                            + Nbt.getString(world, BlockPos.containing(x, y, z), "pw").substring(3, 4);
-                        entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+                        Vars.of(entity).ifPresentData(capability -> {
                            capability.passwordre = _setvalx;
                            capability.syncPlayerVariables(entity);
                         });
@@ -220,10 +224,10 @@ public class CheckProcedure {
                   35,
                   () -> {
                      if (Nbt.getString(world, BlockPos.containing(x, y, z), "pw").length() >= 6) {
-                        String _setvalx = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                        String _setvalx = Vars.of(entity)
                               .passwordre
                            + Nbt.getString(world, BlockPos.containing(x, y, z), "pw").substring(4, 5);
-                        entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+                        Vars.of(entity).ifPresentData(capability -> {
                            capability.passwordre = _setvalx;
                            capability.syncPlayerVariables(entity);
                         });
@@ -257,10 +261,10 @@ public class CheckProcedure {
                   42,
                   () -> {
                      if (Nbt.getString(world, BlockPos.containing(x, y, z), "pw").length() >= 6) {
-                        String _setvalx = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                        String _setvalx = Vars.of(entity)
                               .passwordre
                            + Nbt.getString(world, BlockPos.containing(x, y, z), "pw").substring(5, 6);
-                        entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+                        Vars.of(entity).ifPresentData(capability -> {
                            capability.passwordre = _setvalx;
                            capability.syncPlayerVariables(entity);
                         });
@@ -315,10 +319,10 @@ public class CheckProcedure {
                                  }
                               }
 
-                              String _setvalxx = ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                              String _setvalxx = Vars.of(entity)
                                     .passwordre
                                  + "Y";
-                              entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+                              Vars.of(entity).ifPresentData(capability -> {
                                  capability.passwordre = _setvalxx;
                                  capability.syncPlayerVariables(entity);
                               });
@@ -338,22 +342,7 @@ public class CheckProcedure {
                                  20,
                                  () -> {
                                     if (world instanceof ServerLevel _levelxxx) {
-                                       _levelxxx.getServer()
-                                          .getCommands()
-                                          .performPrefixedCommand(
-                                             new CommandSourceStack(
-                                                   CommandSource.NULL,
-                                                   new Vec3(x, y, z),
-                                                   Vec2.ZERO,
-                                                   _levelxxx,
-                                                   4,
-                                                   "",
-                                                   Component.literal(""),
-                                                   _levelxxx.getServer(),
-                                                   null
-                                                )
-                                                .withSuppressedOutput(),
-                                             "setblock ~ ~ ~ "
+                                       Commands.run(_levelxxx, x, y, z, "setblock ~ ~ ~ "
                                                 + BuiltInRegistries.BLOCK.getKey(world.getBlockState(BlockPos.containing(x, y, z)).getBlock()).toString()
                                                 + "open[facing="
                                                 + Blocks.facingOf(world.getBlockState(BlockPos.containing(x, y, z)))
@@ -379,16 +368,16 @@ public class CheckProcedure {
                );
             } else {
                String _setval = "";
-               entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+               Vars.of(entity).ifPresentData(capability -> {
                   capability.passwordre = _setval;
                   capability.syncPlayerVariables(entity);
                });
             }
-         } else if (!((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+         } else if (!Vars.of(entity)
             .passwordre
             .contains("Z")) {
             String _setval = "";
-            entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+            Vars.of(entity).ifPresentData(capability -> {
                capability.passwordre = _setval;
                capability.syncPlayerVariables(entity);
             });

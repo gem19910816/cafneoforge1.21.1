@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.Commands;
+
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -18,22 +20,7 @@ import net.minecraft.world.phys.Vec3;
 public class Flycode2neoProcedure {
    public static void execute(LevelAccessor world, CommandContext<CommandSourceStack> arguments) {
       if (world instanceof ServerLevel _level) {
-         _level.getServer()
-            .getCommands()
-            .performPrefixedCommand(
-               new CommandSourceStack(
-                     CommandSource.NULL,
-                     new Vec3(DoubleArgumentType.getDouble(arguments, "x"), 74.0, DoubleArgumentType.getDouble(arguments, "z")),
-                     Vec2.ZERO,
-                     _level,
-                     4,
-                     "",
-                     Component.literal(""),
-                     _level.getServer(),
-                     null
-                  )
-                  .withSuppressedOutput(),
-               "/playsound dyairdrop:planesound ambient @a ~ ~ ~ 25 0"
+         Commands.run(_level, DoubleArgumentType.getDouble(arguments, "x"), 74.0, DoubleArgumentType.getDouble(arguments, "z"), "/playsound dyairdrop:planesound ambient @a ~ ~ ~ 25 0"
             );
       }
 
@@ -43,26 +30,11 @@ public class Flycode2neoProcedure {
             () -> {
                if ((Boolean)AirdropconfigConfiguration.FORCELOAD.get()) {
                   if (world instanceof ServerLevel _levelxx) {
-                     _levelxx.getServer()
-                        .getCommands()
-                        .performPrefixedCommand(
-                           new CommandSourceStack(
-                                 CommandSource.NULL,
-                                 new Vec3(
+                     Commands.run(_levelxx, 
                                     Math.round(DoubleArgumentType.getDouble(arguments, "x") - DoubleArgumentType.getDouble(arguments, "length")),
                                     Math.round(DoubleArgumentType.getDouble(arguments, "height")),
                                     Math.round(DoubleArgumentType.getDouble(arguments, "z"))
-                                 ),
-                                 Vec2.ZERO,
-                                 _levelxx,
-                                 4,
-                                 "",
-                                 Component.literal(""),
-                                 _levelxx.getServer(),
-                                 null
-                              )
-                              .withSuppressedOutput(),
-                           "summon dyairdrop:transportplane ~ ~ ~ {CustomName:'{\"text\":\"dyairdrop:locked"
+                                 , "summon dyairdrop:transportplane ~ ~ ~ {CustomName:'{\"text\":\"dyairdrop:locked"
                               + StringArgumentType.getString(arguments, "blockid").replace("dyairdrop:", "")
                               + ","
                               + StringArgumentType.getString(arguments, "loot_table")
@@ -72,26 +44,11 @@ public class Flycode2neoProcedure {
                         );
                   }
                } else if (world instanceof ServerLevel _levelx) {
-                  _levelx.getServer()
-                     .getCommands()
-                     .performPrefixedCommand(
-                        new CommandSourceStack(
-                              CommandSource.NULL,
-                              new Vec3(
+                  Commands.run(_levelx, 
                                  Math.round(DoubleArgumentType.getDouble(arguments, "x") - DoubleArgumentType.getDouble(arguments, "length")),
                                  Math.round(DoubleArgumentType.getDouble(arguments, "height")),
                                  Math.round(DoubleArgumentType.getDouble(arguments, "z"))
-                              ),
-                              Vec2.ZERO,
-                              _levelx,
-                              4,
-                              "",
-                              Component.literal(""),
-                              _levelx.getServer(),
-                              null
-                           )
-                           .withSuppressedOutput(),
-                        "summon dyairdrop:plane ~ ~ ~ {CustomName:'{\"text\":\"dyairdrop:locked"
+                              , "summon dyairdrop:plane ~ ~ ~ {CustomName:'{\"text\":\"dyairdrop:locked"
                            + StringArgumentType.getString(arguments, "blockid").replace("dyairdrop:", "")
                            + ","
                            + StringArgumentType.getString(arguments, "loot_table")
@@ -107,26 +64,11 @@ public class Flycode2neoProcedure {
             60,
             () -> {
                if (world instanceof ServerLevel _levelx) {
-                  _levelx.getServer()
-                     .getCommands()
-                     .performPrefixedCommand(
-                        new CommandSourceStack(
-                              CommandSource.NULL,
-                              new Vec3(
+                  Commands.run(_levelx, 
                                  Math.round(DoubleArgumentType.getDouble(arguments, "x") - DoubleArgumentType.getDouble(arguments, "length")),
                                  Math.round(DoubleArgumentType.getDouble(arguments, "height")),
                                  Math.round(DoubleArgumentType.getDouble(arguments, "z"))
-                              ),
-                              Vec2.ZERO,
-                              _levelx,
-                              4,
-                              "",
-                              Component.literal(""),
-                              _levelx.getServer(),
-                              null
-                           )
-                           .withSuppressedOutput(),
-                        "summon dyairdrop:transportplane ~ ~ ~ {CustomName:'{\"text\":\""
+                              , "summon dyairdrop:transportplane ~ ~ ~ {CustomName:'{\"text\":\""
                            + StringArgumentType.getString(arguments, "blockid")
                            + ","
                            + StringArgumentType.getString(arguments, "loot_table")
@@ -142,26 +84,11 @@ public class Flycode2neoProcedure {
             60,
             () -> {
                if (world instanceof ServerLevel _levelx) {
-                  _levelx.getServer()
-                     .getCommands()
-                     .performPrefixedCommand(
-                        new CommandSourceStack(
-                              CommandSource.NULL,
-                              new Vec3(
+                  Commands.run(_levelx, 
                                  Math.round(DoubleArgumentType.getDouble(arguments, "x") - DoubleArgumentType.getDouble(arguments, "length")),
                                  Math.round(DoubleArgumentType.getDouble(arguments, "height")),
                                  Math.round(DoubleArgumentType.getDouble(arguments, "z"))
-                              ),
-                              Vec2.ZERO,
-                              _levelx,
-                              4,
-                              "",
-                              Component.literal(""),
-                              _levelx.getServer(),
-                              null
-                           )
-                           .withSuppressedOutput(),
-                        "summon dyairdrop:plane ~ ~ ~ {CustomName:'{\"text\":\""
+                              , "summon dyairdrop:plane ~ ~ ~ {CustomName:'{\"text\":\""
                            + StringArgumentType.getString(arguments, "blockid")
                            + ","
                            + StringArgumentType.getString(arguments, "loot_table")

@@ -5,6 +5,7 @@ import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import java.text.DecimalFormat;
+import net.gem19910816.dyairdrop.core.Commands;
 import net.mcreator.dyairdrop.DyairdropMod;
 import net.mcreator.dyairdrop.configuration.AirdropconfigConfiguration;
 import net.minecraft.commands.CommandSource;
@@ -45,10 +46,6 @@ public class Flycode2neomapProcedure {
    }
 
    private static void runCmd(ServerLevel level, Vec3 pos, String cmd) {
-      level.getServer()
-         .getCommands()
-         .performPrefixedCommand(
-            new CommandSourceStack(CommandSource.NULL, pos, Vec2.ZERO, level, 4, "", Component.literal(""), level.getServer(), null).withSuppressedOutput(), cmd
-         );
+      Commands.run(level, pos.x, pos.y, pos.z, cmd);
    }
 }

@@ -1,5 +1,9 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.Vars;
+
+import net.gem19910816.dyairdrop.core.Commands;
+
 import net.gem19910816.dyairdrop.core.GameModes;
 
 import java.text.DecimalFormat;
@@ -49,92 +53,50 @@ public class FlareticksProcedure {
 
          immediatesourceentity.getPersistentData().putDouble("counter1", immediatesourceentity.getPersistentData().getDouble("counter1") + 1.0);
          if (immediatesourceentity.getPersistentData().getDouble("counter1") == 35.0) {
-            if (((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+            if (Vars.of(entity)
                .airdroploot
                .endsWith("1")) {
                if (world instanceof ServerLevel _level) {
-                  _level.getServer()
-                     .getCommands()
-                     .performPrefixedCommand(
-                        new CommandSourceStack(
-                              CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null
-                           )
-                           .withSuppressedOutput(),
-                        "/summon minecraft:firework_rocket ~ ~1 ~ {FireworksItem:{tag:{Fireworks:{Flight:2,Explosions:[{Trail:1b,Flicker:1b,Type:0,Colors:[I;64375],FadeColors:[I;3798784]},{Trail:1b,Flicker:1b,Type:1,Colors:[I;3668224],FadeColors:[I;64667]}]}},id:\"minecraft:firework_rocket\",Count:1},LifeTime:1}"
+                  Commands.run(_level, x, y, z, "/summon minecraft:firework_rocket ~ ~1 ~ {FireworksItem:{tag:{Fireworks:{Flight:2,Explosions:[{Trail:1b,Flicker:1b,Type:0,Colors:[I;64375],FadeColors:[I;3798784]},{Trail:1b,Flicker:1b,Type:1,Colors:[I;3668224],FadeColors:[I;64667]}]}},id:\"minecraft:firework_rocket\",Count:1},LifeTime:1}"
                      );
                }
-            } else if (((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+            } else if (Vars.of(entity)
                .airdroploot
                .endsWith("2")) {
                if (world instanceof ServerLevel _level) {
-                  _level.getServer()
-                     .getCommands()
-                     .performPrefixedCommand(
-                        new CommandSourceStack(
-                              CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null
-                           )
-                           .withSuppressedOutput(),
-                        "/summon minecraft:firework_rocket ~ ~1 ~ {FireworksItem:{tag:{Fireworks:{Flight:2,Explosions:[{Trail:1b,Flicker:1b,Type:0,Colors:[I;58619],FadeColors:[I;13303]},{Trail:1b,Flicker:1b,Type:1,Colors:[I;12793],FadeColors:[I;55548]}]}},id:\"minecraft:firework_rocket\",Count:1},LifeTime:1}"
+                  Commands.run(_level, x, y, z, "/summon minecraft:firework_rocket ~ ~1 ~ {FireworksItem:{tag:{Fireworks:{Flight:2,Explosions:[{Trail:1b,Flicker:1b,Type:0,Colors:[I;58619],FadeColors:[I;13303]},{Trail:1b,Flicker:1b,Type:1,Colors:[I;12793],FadeColors:[I;55548]}]}},id:\"minecraft:firework_rocket\",Count:1},LifeTime:1}"
                      );
                }
-            } else if (((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+            } else if (Vars.of(entity)
                .airdroploot
                .endsWith("3")) {
                if (world instanceof ServerLevel _level) {
-                  _level.getServer()
-                     .getCommands()
-                     .performPrefixedCommand(
-                        new CommandSourceStack(
-                              CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null
-                           )
-                           .withSuppressedOutput(),
-                        "/summon minecraft:firework_rocket ~ ~1 ~ {FireworksItem:{tag:{Fireworks:{Flight:2,Explosions:[{Trail:1b,Flicker:1b,Type:0,Colors:[I;11796731],FadeColors:[I;16187633]},{Trail:1b,Flicker:1b,Type:1,Colors:[I;16318671],FadeColors:[I;10551548]}]}},id:\"minecraft:firework_rocket\",Count:1},LifeTime:1}"
+                  Commands.run(_level, x, y, z, "/summon minecraft:firework_rocket ~ ~1 ~ {FireworksItem:{tag:{Fireworks:{Flight:2,Explosions:[{Trail:1b,Flicker:1b,Type:0,Colors:[I;11796731],FadeColors:[I;16187633]},{Trail:1b,Flicker:1b,Type:1,Colors:[I;16318671],FadeColors:[I;10551548]}]}},id:\"minecraft:firework_rocket\",Count:1},LifeTime:1}"
                      );
                }
-            } else if (((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+            } else if (Vars.of(entity)
                .airdroploot
                .endsWith("4")) {
                if (world instanceof ServerLevel _level) {
-                  _level.getServer()
-                     .getCommands()
-                     .performPrefixedCommand(
-                        new CommandSourceStack(
-                              CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null
-                           )
-                           .withSuppressedOutput(),
-                        "/summon minecraft:firework_rocket ~ ~1 ~ {FireworksItem:{tag:{Fireworks:{Flight:2,Explosions:[{Trail:1b,Flicker:1b,Type:0,Colors:[I;14786560],FadeColors:[I;16758272]},{Trail:1b,Flicker:1b,Type:1,Colors:[I;16361728],FadeColors:[I;14519814]}]}},id:\"minecraft:firework_rocket\",Count:1},LifeTime:1}"
+                  Commands.run(_level, x, y, z, "/summon minecraft:firework_rocket ~ ~1 ~ {FireworksItem:{tag:{Fireworks:{Flight:2,Explosions:[{Trail:1b,Flicker:1b,Type:0,Colors:[I;14786560],FadeColors:[I;16758272]},{Trail:1b,Flicker:1b,Type:1,Colors:[I;16361728],FadeColors:[I;14519814]}]}},id:\"minecraft:firework_rocket\",Count:1},LifeTime:1}"
                      );
                }
-            } else if (((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+            } else if (Vars.of(entity)
                .airdroploot
                .endsWith("5")) {
                if (world instanceof ServerLevel _level) {
-                  _level.getServer()
-                     .getCommands()
-                     .performPrefixedCommand(
-                        new CommandSourceStack(
-                              CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null
-                           )
-                           .withSuppressedOutput(),
-                        "/summon minecraft:firework_rocket ~ ~1 ~ {FireworksItem:{tag:{Fireworks:{Flight:2,Explosions:[{Trail:1b,Flicker:1b,Type:0,Colors:[I;16333056],FadeColors:[I;13503243]},{Trail:1b,Flicker:1b,Type:1,Colors:[I;13501444],FadeColors:[I;16202496]}]}},id:\"minecraft:firework_rocket\",Count:1},LifeTime:1}"
+                  Commands.run(_level, x, y, z, "/summon minecraft:firework_rocket ~ ~1 ~ {FireworksItem:{tag:{Fireworks:{Flight:2,Explosions:[{Trail:1b,Flicker:1b,Type:0,Colors:[I;16333056],FadeColors:[I;13503243]},{Trail:1b,Flicker:1b,Type:1,Colors:[I;13501444],FadeColors:[I;16202496]}]}},id:\"minecraft:firework_rocket\",Count:1},LifeTime:1}"
                      );
                }
             } else if (world instanceof ServerLevel _level) {
-               _level.getServer()
-                  .getCommands()
-                  .performPrefixedCommand(
-                     new CommandSourceStack(
-                           CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null
-                        )
-                        .withSuppressedOutput(),
-                     "/summon minecraft:firework_rocket ~ ~ ~ {FireworksItem:{tag:{Fireworks:{Flight:2,Explosions:[{Trail:1b,Flicker:1b,Type:1,Colors:[I;15952396],FadeColors:[I;16582625]},{Trail:1b,Flicker:1b,Type:1,Colors:[I;16059086],FadeColors:[I;16221952]}]}},id:\"minecraft:firework_rocket\",Count:1},LifeTime:1}"
+               Commands.run(_level, x, y, z, "/summon minecraft:firework_rocket ~ ~ ~ {FireworksItem:{tag:{Fireworks:{Flight:2,Explosions:[{Trail:1b,Flicker:1b,Type:1,Colors:[I;15952396],FadeColors:[I;16582625]},{Trail:1b,Flicker:1b,Type:1,Colors:[I;16059086],FadeColors:[I;16221952]}]}},id:\"minecraft:firework_rocket\",Count:1},LifeTime:1}"
                   );
             }
 
-            if (((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+            if (Vars.of(entity)
                         .airdroploot
                         .length()
-                     * ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                     * Vars.of(entity)
                         .airdropblock
                         .length()
                   <= 0
@@ -145,22 +107,7 @@ public class FlareticksProcedure {
             } else if (world.canSeeSkyFromBelowWater(BlockPos.containing(x, y, z))) {
                if ((Boolean)AirdropconfigConfiguration.ENABLELOCK.get()) {
                   if (world instanceof ServerLevel _level) {
-                     _level.getServer()
-                        .getCommands()
-                        .performPrefixedCommand(
-                           new CommandSourceStack(
-                                 CommandSource.NULL,
-                                 new Vec3(immediatesourceentity.getX(), immediatesourceentity.getY(), immediatesourceentity.getZ()),
-                                 Vec2.ZERO,
-                                 _level,
-                                 4,
-                                 "",
-                                 Component.literal(""),
-                                 _level.getServer(),
-                                 null
-                              )
-                              .withSuppressedOutput(),
-                           "/setairdrop free "
+                     Commands.run(_level, immediatesourceentity.getX(), immediatesourceentity.getY(), immediatesourceentity.getZ(), "/setairdrop free "
                               + new DecimalFormat("##").format(immediatesourceentity.getX())
                               + " "
                               + new DecimalFormat("##").format(immediatesourceentity.getZ())
@@ -169,31 +116,16 @@ public class FlareticksProcedure {
                               + " "
                               + new DecimalFormat("##").format(position)
                               + " \""
-                              + ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                              + Vars.of(entity)
                                  .airdropblock
                               + "\" \""
-                              + ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                              + Vars.of(entity)
                                  .airdroploot
                               + "\" true true"
                         );
                   }
                } else if (world instanceof ServerLevel _level) {
-                  _level.getServer()
-                     .getCommands()
-                     .performPrefixedCommand(
-                        new CommandSourceStack(
-                              CommandSource.NULL,
-                              new Vec3(immediatesourceentity.getX(), immediatesourceentity.getY(), immediatesourceentity.getZ()),
-                              Vec2.ZERO,
-                              _level,
-                              4,
-                              "",
-                              Component.literal(""),
-                              _level.getServer(),
-                              null
-                           )
-                           .withSuppressedOutput(),
-                        "/setairdrop free "
+                  Commands.run(_level, immediatesourceentity.getX(), immediatesourceentity.getY(), immediatesourceentity.getZ(), "/setairdrop free "
                            + new DecimalFormat("##").format(immediatesourceentity.getX())
                            + " "
                            + new DecimalFormat("##").format(immediatesourceentity.getZ())
@@ -202,10 +134,10 @@ public class FlareticksProcedure {
                            + " "
                            + new DecimalFormat("##").format(position)
                            + " \""
-                           + ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                           + Vars.of(entity)
                               .airdropblock
                            + "\" \""
-                           + ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+                           + Vars.of(entity)
                               .airdroploot
                            + "\" false true"
                      );
@@ -216,12 +148,12 @@ public class FlareticksProcedure {
                }
 
                String _setval = "";
-               entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+               Vars.of(entity).ifPresentData(capability -> {
                   capability.airdropblock = _setval;
                   capability.syncPlayerVariables(entity);
                });
                String _setvalb = "";
-               entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+               Vars.of(entity).ifPresentData(capability -> {
                   capability.airdroploot = _setvalb;
                   capability.syncPlayerVariables(entity);
                });

@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.Vars;
+
 import net.gem19910816.dyairdrop.core.Projectiles;
 
 import net.mcreator.dyairdrop.configuration.AirdropconfigConfiguration;
@@ -82,19 +84,19 @@ public class FlaregunlootsetProcedure {
          random = Mth.nextDouble(RandomSource.create(), 0.0, 10.0);
          if (random < s) {
             String _setval = "dyairdrop:airdropsmall";
-            entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+            Vars.of(entity).ifPresentData(capability -> {
                capability.airdropblock = _setval;
                capability.syncPlayerVariables(entity);
             });
          } else if (random < w + s) {
             String _setval = "dyairdrop:airdropweapon";
-            entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+            Vars.of(entity).ifPresentData(capability -> {
                capability.airdropblock = _setval;
                capability.syncPlayerVariables(entity);
             });
          } else {
             String _setval = "dyairdrop:airdropmedical";
-            entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+            Vars.of(entity).ifPresentData(capability -> {
                capability.airdropblock = _setval;
                capability.syncPlayerVariables(entity);
             });
@@ -102,12 +104,12 @@ public class FlaregunlootsetProcedure {
 
          String _setval = modname
             + ":chests/"
-            + ((DyairdropModVariables.PlayerVariables)entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()))
+            + Vars.of(entity)
                .airdropblock
                .replace("dyairdrop:airdrop", "")
             + "airdrop"
             + BuiltInRegistries.ITEM.getKey(itemstack.getItem()).toString().replace("dyairdrop:flaregun", "");
-         entity.getData(DyairdropModVariables.PLAYER_VARIABLES_ATTACHMENT.get()).ifPresentData(capability -> {
+         Vars.of(entity).ifPresentData(capability -> {
             capability.airdroploot = _setval;
             capability.syncPlayerVariables(entity);
          });

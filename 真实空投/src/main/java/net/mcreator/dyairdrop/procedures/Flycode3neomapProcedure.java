@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.Commands;
+
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -88,12 +90,7 @@ public class Flycode3neomapProcedure {
          }
 
          if (world instanceof ServerLevel level) {
-            level.getServer()
-               .getCommands()
-               .performPrefixedCommand(
-                  new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, level, 4, "", Component.literal(""), level.getServer(), null)
-                     .withSuppressedOutput(),
-                  cmd.toString()
+            Commands.run(level, x, y, z, cmd.toString()
                );
          }
       }

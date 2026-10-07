@@ -1,5 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
+import net.gem19910816.dyairdrop.core.Commands;
+
 import net.gem19910816.dyairdrop.core.Numbers;
 
 import net.minecraft.commands.CommandSource;
@@ -85,41 +87,11 @@ public class PlaneticksProcedure {
 
             if (entity.getPersistentData().getBoolean("dymap")) {
                if (world instanceof ServerLevel _level) {
-                  _level.getServer()
-                     .getCommands()
-                     .performPrefixedCommand(
-                        new CommandSourceStack(
-                              CommandSource.NULL,
-                              new Vec3(Math.round(x), Math.round(y), Math.round(z)),
-                              Vec2.ZERO,
-                              _level,
-                              4,
-                              "",
-                              Component.literal(""),
-                              _level.getServer(),
-                              null
-                           )
-                           .withSuppressedOutput(),
-                        "summon " + mobname + " ~ ~ ~ {CustomName:'{\"text\":\"" + entity.getPersistentData().getString("name") + "\"}',ForgeData:{dymap:1b}}"
+                  Commands.run(_level, Math.round(x), Math.round(y), Math.round(z), "summon " + mobname + " ~ ~ ~ {CustomName:'{\"text\":\"" + entity.getPersistentData().getString("name") + "\"}',ForgeData:{dymap:1b}}"
                      );
                }
             } else if (world instanceof ServerLevel _level) {
-               _level.getServer()
-                  .getCommands()
-                  .performPrefixedCommand(
-                     new CommandSourceStack(
-                           CommandSource.NULL,
-                           new Vec3(Math.round(x), Math.round(y), Math.round(z)),
-                           Vec2.ZERO,
-                           _level,
-                           4,
-                           "",
-                           Component.literal(""),
-                           _level.getServer(),
-                           null
-                        )
-                        .withSuppressedOutput(),
-                     "summon " + mobname + " ~ ~ ~ {CustomName:'{\"text\":\"" + entity.getPersistentData().getString("name") + "\"}'}"
+               Commands.run(_level, Math.round(x), Math.round(y), Math.round(z), "summon " + mobname + " ~ ~ ~ {CustomName:'{\"text\":\"" + entity.getPersistentData().getString("name") + "\"}'}"
                   );
             }
          }
@@ -135,22 +107,7 @@ public class PlaneticksProcedure {
             }
 
             if (world instanceof ServerLevel _level) {
-               _level.getServer()
-                  .getCommands()
-                  .performPrefixedCommand(
-                     new CommandSourceStack(
-                           CommandSource.NULL,
-                           new Vec3(Math.round(x), Math.round(y), Math.round(z)),
-                           Vec2.ZERO,
-                           _level,
-                           4,
-                           "",
-                           Component.literal(""),
-                           _level.getServer(),
-                           null
-                        )
-                        .withSuppressedOutput(),
-                     "/stopsound @a[distance=..200] ambient dyairdrop:planesound"
+               Commands.run(_level, Math.round(x), Math.round(y), Math.round(z), "/stopsound @a[distance=..200] ambient dyairdrop:planesound"
                   );
             }
          }
