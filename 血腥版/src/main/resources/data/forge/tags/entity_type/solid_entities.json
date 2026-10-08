@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "skeleton",
+    "skeleton_horse",
+    "wither_skeleton",
+    "wither",
+    "ravager",
+    "blaze",
+    "elder_guardian",
+    "guardian",
+    "warden",
+    "ender_dragon"
+  ]
+}

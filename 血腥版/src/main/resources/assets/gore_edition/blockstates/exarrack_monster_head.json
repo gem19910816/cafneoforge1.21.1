@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "gore_edition:block/exarrack_monster_head"
+    },
+    "facing=east": {
+      "model": "gore_edition:block/exarrack_monster_head",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "gore_edition:block/exarrack_monster_head",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "gore_edition:block/exarrack_monster_head",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "gore_edition:valley_of_exarrack",
+  "spawners": [
+    {
+      "weight": 11,
+      "minCount": 1,
+      "maxCount": 1,
+      "type": "gore_edition:ns_exarack_demon"
+    }
+  ]
+}

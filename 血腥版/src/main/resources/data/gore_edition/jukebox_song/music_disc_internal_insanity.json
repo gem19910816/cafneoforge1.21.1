@@ -1,0 +1,8 @@
+{
+  "sound_event": "gore_edition:music_disc.internal_insanity",
+  "description": {
+    "translate": "item.gore_edition.music_disc_internal_insanity.desc"
+  },
+  "length_in_seconds": 192.05,
+  "comparator_output": 1
+}

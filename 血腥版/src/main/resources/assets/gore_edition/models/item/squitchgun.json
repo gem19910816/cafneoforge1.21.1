@@ -1,0 +1,6 @@
+{
+  "parent": "gore_edition:displaysettings/squitchgun.item",
+  "textures": {
+    "layer0": "gore_edition:item/squitchgun"
+  }
+}

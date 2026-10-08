@@ -1,0 +1,44 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "gore_edition:item/voodoo_bunny_0"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "gore_edition:voodoo_rabbit_blood": 0
+      },
+      "model": "gore_edition:item/voodoo_rabbit_0"
+    },
+    {
+      "predicate": {
+        "gore_edition:voodoo_rabbit_blood": 1
+      },
+      "model": "gore_edition:item/voodoo_rabbit_1"
+    },
+    {
+      "predicate": {
+        "gore_edition:voodoo_rabbit_blood": 2
+      },
+      "model": "gore_edition:item/voodoo_rabbit_2"
+    },
+    {
+      "predicate": {
+        "gore_edition:voodoo_rabbit_blood": 3
+      },
+      "model": "gore_edition:item/voodoo_rabbit_3"
+    },
+    {
+      "predicate": {
+        "gore_edition:voodoo_rabbit_blood": 4
+      },
+      "model": "gore_edition:item/voodoo_rabbit_4"
+    },
+    {
+      "predicate": {
+        "gore_edition:voodoo_rabbit_blood": 5
+      },
+      "model": "gore_edition:item/voodoo_rabbit_5"
+    }
+  ]
+}

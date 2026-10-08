@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    "gore_edition:disarmed_husk",
+    "gore_edition:headless_husk",
+    "gore_edition:severed_legs_and_arm_husk",
+    "gore_edition:severedlegs_husk",
+    "husk",
+    "gore_edition:disarmed_zombie",
+    "gore_edition:headless_zombie",
+    "gore_edition:severed_legs_and_arm_zombie",
+    "gore_edition:severedlegs_zombie",
+    "zombie",
+    "gore_edition:dismembered_spider_i",
+    "gore_edition:dismembered_spider_ii",
+    "gore_edition:dismembered_spider_iii",
+    "spider",
+    "gore_edition:disarmed_skeleton_right_arm",
+    "gore_edition:disarmed_skeleton_left_arm",
+    "skeleton",
+    "creeper"
+  ]
+}

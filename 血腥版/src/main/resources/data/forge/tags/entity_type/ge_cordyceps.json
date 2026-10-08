@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "gore_edition:cordyceps_zombie",
+    "gore_edition:severed_legs_cordyceps_zombie",
+    "gore_edition:zombie_cordyceps_headless",
+    "gore_edition:severed_legs_and_one_arm_cordyceps_zombie",
+    "gore_edition:disarmed_cordyceps_zombie",
+    "gore_edition:cordyceps_headless_husk",
+    "gore_edition:cordyceps_husk",
+    "gore_edition:disarmed_cordyceps_husk",
+    "gore_edition:severed_legs_and_one_arm_cordyceps_husk",
+    "gore_edition:severed_legs_cordyceps_husk"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "goreedition:block/voidstone",
+    "particle": "goreedition:block/voidstone"
+  },
+  "render_type": "solid"
+}

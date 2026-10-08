@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "gore_edition:item/voodoo_bunny_0"
+  }
+}

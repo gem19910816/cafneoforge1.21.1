@@ -1,0 +1,14 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "gore_edition:item/spectral_gift_1"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "gore_edition:spectral_gift_texture": 1
+      },
+      "model": "gore_edition:item/spectral_gift_0"
+    }
+  ]
+}

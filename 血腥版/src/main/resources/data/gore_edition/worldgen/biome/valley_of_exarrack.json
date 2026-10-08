@@ -1,0 +1,64 @@
+{
+  "has_precipitation": false,
+  "temperature": 1.5,
+  "downfall": 0,
+  "effects": {
+    "ambient_sound": "gore_edition:ambient.valley_of_ashes",
+    "mood_sound": {
+      "sound": "gore_edition:ambient.ashes",
+      "tick_delay": 6000,
+      "offset": 8,
+      "block_search_extent": 2
+    },
+    "music": {
+      "sound": "gore_edition:music.ashes",
+      "min_delay": 12000,
+      "max_delay": 24000,
+      "replace_current_music": true
+    },
+    "foliage_color": 10387789,
+    "grass_color": 9470285,
+    "sky_color": -16777216,
+    "fog_color": -16777216,
+    "water_color": 4159204,
+    "water_fog_color": 329011
+  },
+  "spawners": {
+    "monster": [
+      {
+        "type": "gore_edition:lux_sycaride",
+        "weight": 1,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "gore_edition:nowind",
+        "weight": 1,
+        "minCount": 5,
+        "maxCount": 8
+      }
+    ],
+    "creature": [],
+    "ambient": [],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {},
+  "carvers": {},
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "the_geart_in_a_beast_0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "gore_edition:geart"
+            ],
+            "count": {
+              "min": 1,
+              "max": 1
+            }
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 0,
+    "recipes": [
+      "gore_edition:ashtray_cycle_recipe",
+      "gore_edition:ashtray_cycle_recipe_ii"
+    ]
+  },
+  "parent": "gore_edition:the_path_of_the_light"
+}

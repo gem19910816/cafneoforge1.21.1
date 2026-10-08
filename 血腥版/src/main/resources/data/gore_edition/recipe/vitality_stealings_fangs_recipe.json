@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aba",
+    "aca"
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:bone"
+    },
+    "b": {
+      "item": "minecraft:zombie_head"
+    },
+    "c": {
+      "item": "minecraft:skeleton_skull"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "gore_edition:vitality_stealings_fangs"
+  }
+}

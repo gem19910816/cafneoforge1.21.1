@@ -1,0 +1,7 @@
+{
+  "parent": "gore_edition:custom/wither_skull",
+  "textures": {
+    "0": "gore_edition:block/wither_skull",
+    "particle": "gore_edition:item/wither_skull"
+  }
+}

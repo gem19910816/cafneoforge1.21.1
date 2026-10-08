@@ -1,0 +1,23 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "gore_edition:item/ashes_black_hole"
+  },
+  "display": {
+    "gui": {
+      "scale": [4.0, 4.0, 4.0]
+    },
+    "ground": {
+      "scale": [4.0, 4.0, 4.0]
+    },
+    "fixed": {
+      "scale": [4.0, 4.0, 4.0]
+    },
+    "thirdperson_righthand": {
+      "scale": [4.0, 4.0, 4.0]
+    },
+    "firstperson_righthand": {
+      "scale": [4.0, 4.0, 4.0]
+    }
+  }
+}

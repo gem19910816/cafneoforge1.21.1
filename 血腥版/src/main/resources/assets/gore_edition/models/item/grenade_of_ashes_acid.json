@@ -1,0 +1,14 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "gore_edition:item/insured_acid_grenade"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "gore_edition:grenade_of_ashes_acid_gh": 1
+      },
+      "model": "gore_edition:item/grenade_of_ashes_acid_0"
+    }
+  ]
+}

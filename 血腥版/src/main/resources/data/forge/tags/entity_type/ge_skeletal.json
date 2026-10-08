@@ -1,0 +1,27 @@
+{
+  "replace": false,
+  "values": [
+    "skeleton",
+    "skeleton_horse",
+    "stray",
+    "gore_edition:skeleton_spinal_column",
+    "gore_edition:skeleton_ribs",
+    "gore_edition:skeleton_head",
+    "gore_edition:skeleton_left_arm",
+    "gore_edition:skeleton_left_leg",
+    "gore_edition:skeleton_pelvis",
+    "gore_edition:skeleton_right_arm",
+    "gore_edition:skeleton_right_leg",
+    "gore_edition:disarmed_skeleton_right_arm",
+    "gore_edition:collapsing_skeleton",
+    "gore_edition:skeleton_corpse",
+    "gore_edition:skeleton_corpse_iii",
+    "gore_edition:skeleton_corpse_ii",
+    "gore_edition:skeleton_without_arm_arm_projectile",
+    "gore_edition:skeleton_without_arm_head_projectile",
+    "gore_edition:disarmed_skeleton_left_arm",
+    "gore_edition:crushing_skeleton",
+    "gore_edition:severed_legs_skeleton",
+    "gore_edition:vertically_cutted_skeleton"
+  ]
+}

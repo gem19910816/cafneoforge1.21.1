@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "gore_edition:block/exarrack",
+    "particle": "gore_edition:block/exarrack"
+  },
+  "render_type": "solid"
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "experience": 10,
+  "cookingtime": 600,
+  "ingredient": {
+    "item": "gore_edition:geart"
+  },
+  "result": {
+    "id": "gore_edition:ashtray_cycle",
+    "count": 1
+  }
+}

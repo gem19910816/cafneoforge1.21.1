@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "abc",
+    "adb",
+    "c  "
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:iron_block"
+    },
+    "b": {
+      "item": "gore_edition:cordyceps_fungus"
+    },
+    "c": {
+      "item": "minecraft:stick"
+    },
+    "d": {
+      "item": "minecraft:stone_hoe"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "gore_edition:needle_scythe_cordyceps"
+  }
+}

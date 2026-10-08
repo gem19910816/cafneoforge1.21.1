@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "gore_edition:ashes_flower"
+    },
+    {
+      "item": "gore_edition:ashes"
+    },
+    {
+      "item": "gore_edition:ashes"
+    },
+    {
+      "item": "gore_edition:ashes_flower"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "gore_edition:ash_sand"
+  }
+}

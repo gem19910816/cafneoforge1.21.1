@@ -1,0 +1,21 @@
+{
+  "anvil_cost": 4,
+  "max_cost": {
+    "base": 50,
+    "per_level_above_first": 9
+  },
+  "min_cost": {
+    "base": 15,
+    "per_level_above_first": 9
+  },
+  "max_level": 5,
+  "weight": 1,
+  "primary_items": "#minecraft:enchantable/weapon",
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#minecraft:enchantable/weapon",
+  "description": {
+    "translate": "enchantment.gore_edition.explosive_contact"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "aaa",
+    "aba",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:gold_ingot"
+    },
+    "b": {
+      "item": "minecraft:rabbit_foot"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "gore_edition:voodoo_rabbit"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "gore_edition:custom/exarrack_monster_head",
+  "textures": {
+    "all": "gore_edition:block/exarrack_monster_head",
+    "particle": "gore_edition:block/exarrack_monster_head",
+    "0": "gore_edition:block/exarrack_monster_head"
+  },
+  "render_type": "cutout"
+}

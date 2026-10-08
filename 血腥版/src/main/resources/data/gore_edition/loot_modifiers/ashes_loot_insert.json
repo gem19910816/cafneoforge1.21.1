@@ -1,0 +1,10 @@
+{
+  "type": "gore_edition:gore_edition_loot_modifier",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:chests/simple_dungeon"
+    }
+  ],
+  "lootTable": "gore_edition:chests/ashes_loot_table_to_insert"
+}

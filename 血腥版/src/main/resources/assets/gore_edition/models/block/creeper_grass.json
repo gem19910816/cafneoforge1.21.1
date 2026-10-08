@@ -1,0 +1,8 @@
+{
+  "parent": "block/tinted_cross",
+  "textures": {
+    "cross": "gore_edition:block/creeper_grass",
+    "particle": "gore_edition:block/creeper_grass"
+  },
+  "render_type": "cutout"
+}

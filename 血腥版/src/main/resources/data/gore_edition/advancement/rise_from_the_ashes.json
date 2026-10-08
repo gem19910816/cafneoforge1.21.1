@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:blaze_powder"
+    },
+    "title": {
+      "translate": "advancements.rise_from_the_ashes.title"
+    },
+    "description": {
+      "translate": "advancements.rise_from_the_ashes.descr"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": true
+  },
+  "criteria": {
+    "rise_from_the_ashes_0": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "from": "gore_edition:the_xash"
+      }
+    }
+  },
+  "rewards": {
+    "experience": 0,
+    "recipes": [
+      "gore_edition:spiral_recipe",
+      "gore_edition:sword_of_ashes_recipe"
+    ]
+  },
+  "parent": "gore_edition:the_exit"
+}

@@ -1,0 +1,1943 @@
+{
+  "gore_hurt_sound": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore_real_hurt_sound_1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_real_hurt_sound_2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_real_hurt_sound_3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_real_hurt_sound_4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_real_hurt_sound_5",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_real_hurt_sound_6",
+        "stream": false
+      }
+    ]
+  },
+  "gore_50_sound": {
+    "sounds": [
+      {
+        "name": "gore_edition:generic_50-1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:generic_50-2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:generic_50-3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:generic_50-4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:generic_50-5",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:generic_50-6",
+        "stream": false
+      }
+    ]
+  },
+  "gore_50_blood_sound": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore_50_blood_sound.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_50_blood_sound.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_50_blood_sound.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_50_blood_sound.4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_50_blood_sound.5",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_50_blood_sound.6",
+        "stream": false
+      }
+    ]
+  },
+  "gore_severe_damage_sound": {
+    "sounds": [
+      {
+        "name": "gore_edition:severe_damage_gore_sound.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:severe_damage_gore_sound.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:severe_damage_gore_sound.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:severe_damage_gore_sound.4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:severe_damage_gore_sound.5",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:severe_damage_gore_sound.6",
+        "stream": false
+      }
+    ]
+  },
+  "gore.skeleton_hurt_sound": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore.skeleton_hurt_1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.skeleton_hurt_2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.skeleton_hurt_3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.skeleton_hurt_4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.skeleton_hurt_5",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.skeleton_hurt_6",
+        "stream": false
+      }
+    ]
+  },
+  "gore.skeleton_50_sound": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore.skeleton_50_1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.skeleton_50_2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.skeleton_50_3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.skeleton_50_4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.skeleton_50_5",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.skeleton_50_6",
+        "stream": false
+      }
+    ]
+  },
+  "gore.skeleton_death_pieces_sound": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore.skeleton_death_1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.skeleton_death_2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.skeleton_death_3",
+        "stream": false
+      }
+    ]
+  },
+  "gore_concentred_damage_in_one_piece_sound": {
+    "sounds": [
+      {
+        "name": "gore_edition:concentred_damage_in_one_piece_gore_sound_1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:concentred_damage_in_one_piece_gore_sound_2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:concentred_damage_in_one_piece_gore_sound_3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:concentred_damage_in_one_piece_gore_sound_4",
+        "stream": false
+      }
+    ]
+  },
+  "extra_smashed": {
+    "subtitle": "subtitles.extra_smashed",
+    "sounds": [
+      {
+        "name": "gore_edition:extra_smashed",
+        "stream": false
+      }
+    ]
+  },
+  "gore.infernal_machine_explode": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore-machine_explode.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore-machine_explode.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore-machine_explode.3",
+        "stream": false
+      }
+    ]
+  },
+  "gore.slime_hurt_sound": {
+    "sounds": [
+      {
+        "name": "gore_edition:extra_slime_hurt_1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:extra_slime_hurt_2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:extra_slime_hurt_3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:extra_slime_hurt_4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:extra_slime_hurt_5",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:extra_slime_hurt_6",
+        "stream": false
+      }
+    ]
+  },
+  "gore.slime_50_sound": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore.slime.50.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.slime.50.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.slime.50.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.slime.50.4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.slime.50.5",
+        "stream": false
+      }
+    ]
+  },
+  "gore.skeleton_concentred_damage_in_one_piece_sound": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore.concentred_damage_in_one_piece_of_skeleton.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.concentred_damage_in_one_piece_of_skeleton.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.concentred_damage_in_one_piece_of_skeleton.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.concentred_damage_in_one_piece_of_skeleton.4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.concentred_damage_in_one_piece_of_skeleton.5",
+        "stream": false
+      }
+    ]
+  },
+  "gore.metal_death_pieces": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore.blaze_death_pieces_sound.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.blaze_death_pieces_sound.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.blaze_death_pieces_sound.3",
+        "stream": false
+      }
+    ]
+  },
+  "gore.iron_golem_death_sound": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore.iron_golem_death_1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.iron_golem_death_2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.iron_golem_death_3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.iron_golem_death_4",
+        "stream": false
+      }
+    ]
+  },
+  "dukeplus.squished": {
+    "sounds": [
+      {
+        "name": "gore_edition:dukeplus.squished1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:dukeplus.squished2",
+        "stream": false
+      }
+    ]
+  },
+  "dukeplus.gore_bounce": {
+    "sounds": [
+      {
+        "name": "gore_edition:dukeplus.gore_bounce1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:dukeplus.gore_bounce2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:dukeplus.gore_bounce3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:dukeplus.gore_bounce4",
+        "stream": false
+      }
+    ]
+  },
+  "gore.skull_destroy": {
+    "sounds": [
+      {
+        "name": "gore_edition:skull_destroy_sfx",
+        "stream": false
+      }
+    ]
+  },
+  "gore.short_pouring_out_blood": {
+    "sounds": [
+      {
+        "name": "gore_edition:short.pouring_out_blood.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:short.pouring_out_blood.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:short.pouring_out_blood.3",
+        "stream": false
+      }
+    ]
+  },
+  "gore_multiple_cuts_sound": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore_several_cuts_sfx",
+        "stream": false
+      }
+    ]
+  },
+  "gore_disarmed_zombie_ambient": {
+    "sounds": [
+      {
+        "name": "gore_edition:disarmed_zombie.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:disarmed_zombie.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:disarmed_zombie.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:disarmed_zombie.4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:disarmed_zombie.5",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:disarmed_zombie.6",
+        "stream": false
+      }
+    ]
+  },
+  "gore_big_pouring_out_blood": {
+    "sounds": [
+      {
+        "name": "gore_edition:big.pouring_out_blood.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:big.pouring_out_blood.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:big.pouring_out_blood.3",
+        "stream": false
+      }
+    ]
+  },
+  "gore_big_blood_splash": {
+    "sounds": [
+      {
+        "name": "gore_edition:big_blood_splash.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:big_blood_splash.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:big_blood_splash.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:big_blood_splash.4",
+        "stream": false
+      }
+    ]
+  },
+  "gore_old_exploded_sound": {
+    "sounds": [
+      {
+        "name": "gore_edition:bones_exploded_1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:bones_exploded_2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:bones_exploded_3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:bones_exploded_4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:bones_exploded_5",
+        "stream": false
+      }
+    ]
+  },
+  "gore_death_sound": {
+    "sounds": [
+      {
+        "name": "gore_edition:messy-splat-0-2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:messy-splat-0-3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:messy-splat-0-5",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:messy-splat-0-6",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:messy-splat-0-9",
+        "stream": false
+      }
+    ]
+  },
+  "gore_brutal_hurt_sound": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore_brutal_hurt_1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_brutal_hurt_2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_brutal_hurt_3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_brutal_hurt_4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_brutal_hurt_5",
+        "stream": false
+      }
+    ]
+  },
+  "gore_incinerated_sound": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore_incinerated.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_incinerated.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_incinerated.3",
+        "stream": false
+      }
+    ]
+  },
+  "gore_external_burning_hurt_sound": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore_burning_external_hurt.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_burning_external_hurt.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_burning_external_hurt.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_burning_external_hurt.4",
+        "stream": false
+      }
+    ]
+  },
+  "gore_execute_mob_ready_cooldown_sound": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore_execute_mob_ready_cooldown_sound.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_execute_mob_ready_cooldown_sound.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_execute_mob_ready_cooldown_sound.3",
+        "stream": false
+      }
+    ]
+  },
+  "gore_hurt_severe_sound": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore_hurt_severe.1_sound",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_hurt_severe.2_sound",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_hurt_severe.3_sound",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_hurt_severe.4_sound",
+        "stream": false
+      }
+    ]
+  },
+  "gore_needle": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore_needle_i_0",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_needle_i_1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_needle_i_2",
+        "stream": false
+      }
+    ]
+  },
+  "gore_needle_ii": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore_needle_ii_1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_needle_ii_2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_needle_ii_3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_needle_ii_4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_needle_ii_5",
+        "stream": false
+      }
+    ]
+  },
+  "gore_needle_iii": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore_needle_iii_0",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_needle_iii_1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_needle_iii_2",
+        "stream": false
+      }
+    ]
+  },
+  "gore_needle_iii_v": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore_needle_iii_0_v",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_needle_iii_1_v",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore_needle_iii_2_v",
+        "stream": false
+      }
+    ]
+  },
+  "gore.legacy_death_sound": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore.legacy_death_sound.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.legacy_death_sound.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.legacy_death_sound.3",
+        "stream": false
+      }
+    ]
+  },
+  "gore.legacy_hurt_sound": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore.legacy_hurt_sound.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.legacy_hurt_sound.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.legacy_hurt_sound.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.legacy_hurt_sound.4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.legacy_hurt_sound.5",
+        "stream": false
+      }
+    ]
+  },
+  "gore.brutality_series.1": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore.brutality_series.1_0",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.brutality_series.1_1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.brutality_series.1_2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.brutality_series.1_3",
+        "stream": false
+      }
+    ]
+  },
+  "gore.bite": {
+    "sounds": [
+      {
+        "name": "gore_edition:entity.flesh_eater.bite.0",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.flesh_eater.bite.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.flesh_eater.bite.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.flesh_eater.bite.3",
+        "stream": false
+      }
+    ]
+  },
+  "entity.flesh_eater.death": {
+    "sounds": [
+      {
+        "name": "gore_edition:entity.flesh_eater.death.0",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.flesh_eater.death.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.flesh_eater.death.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.flesh_eater.death.3",
+        "stream": false
+      }
+    ]
+  },
+  "entity.flesh_eater.steps": {
+    "sounds": [
+      {
+        "name": "gore_edition:entity.flesh_eater.step.0",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.flesh_eater.step.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.flesh_eater.step.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.flesh_eater.step.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.flesh_eater.step.4",
+        "stream": false
+      }
+    ]
+  },
+  "gore.brutality_series.2": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore.brutality_series.2.0",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.brutality_series.2.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.brutality_series.2.2",
+        "stream": false
+      }
+    ]
+  },
+  "gore.devoration": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore.devoration.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.devoration.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.devoration.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.devoration.4",
+        "stream": false
+      }
+    ]
+  },
+  "octarm_spectral_gift_open": {
+    "sounds": [
+      {
+        "name": "gore_edition:spectral_gift.open_0",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:spectral_gift.open_1",
+        "stream": false
+      }
+    ]
+  },
+  "gift_open": {
+    "sounds": [
+      {
+        "name": "gore_edition:gift_open_sound.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gift_open_sound.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gift_open_sound.3",
+        "stream": false
+      }
+    ]
+  },
+  "squitchgun.shooting": {
+    "sounds": [
+      {
+        "name": "gore_edition:squitchgun_shoting_1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:squitchgun_shoting_2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:squitchgun_shoting_3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:squitchgun_shoting_4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:squitchgun_shoting_5",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:squitchgun_shoting_6",
+        "stream": false
+      }
+    ]
+  },
+  "squitchgun.receive_heart": {
+    "sounds": [
+      {
+        "name": "gore_edition:squitchgun_receive_heart_1",
+        "stream": false
+      }
+    ]
+  },
+  "squitchgun.heart_impact": {
+    "sounds": [
+      {
+        "name": "gore_edition:squitchgun_heart_impact_1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:squitchgun_heart_impact_2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:squitchgun_heart_impact_3",
+        "stream": false
+      }
+    ]
+  },
+  "gore.vomit": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore.vomit.0",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.vomit.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.vomit.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.vomit.3",
+        "stream": false
+      }
+    ]
+  },
+  "item.grenade.pin_pull": {
+    "sounds": [
+      {
+        "name": "gore_edition:grenade.pin_pull.0",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:grenade.pin_pull.1",
+        "stream": false
+      }
+    ]
+  },
+  "skeleton.bounce": {
+    "sounds": [
+      {
+        "name": "gore_edition:bounce.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:bounce.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:bounce.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:bounce.4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:bounce.5",
+        "stream": false
+      }
+    ]
+  },
+  "grenade_of_greek_fire_shoot": {
+    "sounds": [
+      {
+        "name": "gore_edition:squitchgun_shoting_flame.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:squitchgun_shoting_flame.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:squitchgun_shoting_flame.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:squitchgun_shoting_flame.4",
+        "stream": false
+      }
+    ]
+  },
+  "gore.brutality_stab": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore.brutality_series_knife.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.brutality_series_knife.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.brutality_series_knife.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.brutality_series_knife.4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.brutality_series_knife.5",
+        "stream": false
+      }
+    ]
+  },
+  "aluxination.ambient": {
+    "sounds": [
+      {
+        "name": "gore_edition:aluxination.ambient.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:aluxination.ambient.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:aluxination.ambient.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:aluxination.ambient.4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:aluxination.ambient.5",
+        "stream": false
+      }
+    ]
+  },
+  "entity.nowind_preparing": {
+    "sounds": [
+      {
+        "name": "gore_edition:nowind_preparing_1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:nowind_preparing_2",
+        "stream": false
+      }
+    ]
+  },
+  "entity.nowind_explode": {
+    "sounds": [
+      {
+        "name": "gore_edition:nowind_explode_1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:nowind_explode_2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:nowind_explode_3",
+        "stream": false
+      }
+    ]
+  },
+  "entity.nowind_hurt": {
+    "sounds": [
+      {
+        "name": "gore_edition:nowind_hurt_1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:nowind_hurt_2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:nowind_hurt_3",
+        "stream": false
+      }
+    ]
+  },
+  "entity.hengeyon_ambient": {
+    "sounds": [
+      {
+        "name": "gore_edition:entity.hengeyon_ambient_0",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.hengeyon_ambient_1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.hengeyon_ambient_2-001",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.hengeyon_ambient_3-001",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.hengeyon_ambient_4-001",
+        "stream": false
+      }
+    ]
+  },
+  "entity.hengeyon_die": {
+    "sounds": [
+      {
+        "name": "gore_edition:hengeyon_die_0",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:hengeyon_die_1",
+        "stream": false
+      }
+    ]
+  },
+  "item.lightning_orb_activate": {
+    "sounds": [
+      {
+        "name": "gore_edition:lightning_orb_activate_1-002",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:lightning_orb_activate_2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:lightning_orb_activate_3",
+        "stream": false
+      }
+    ]
+  },
+  "entity.exarrack_monster_jumpscare": {
+    "sounds": [
+      {
+        "name": "gore_edition:exarrack_monster_jumpscare",
+        "stream": false
+      }
+    ]
+  },
+  "item.cordyceps_propagating": {
+    "sounds": [
+      {
+        "name": "gore_edition:cordyceps_propagating_0",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:cordyceps_propagating_1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:cordyceps_propagating_2",
+        "stream": false
+      }
+    ]
+  },
+  "item.cordyceps_finish": {
+    "sounds": [
+      {
+        "name": "gore_edition:cordyceps_finish_0",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:cordyceps_finish_1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:cordyceps_finish_2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:cordyceps_finish_3",
+        "stream": false
+      }
+    ]
+  },
+  "entity.hengeyon_hurt": {
+    "sounds": [
+      {
+        "name": "gore_edition:hengeyon.hurt_0",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:hengeyon.hurt_1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:hengeyon.hurt_2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:hengeyon.hurt_3",
+        "stream": false
+      }
+    ]
+  },
+  "entity.hengeyon_warning": {
+    "sounds": [
+      {
+        "name": "gore_edition:hengeyon.warning.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:hengeyon.warning.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:hengeyon.warning.3",
+        "stream": false
+      }
+    ]
+  },
+  "entity.hengeyon_shot": {
+    "sounds": [
+      {
+        "name": "gore_edition:hengeyon.shoot.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:hengeyon.shoot.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:hengeyon.shoot.3",
+        "stream": false
+      }
+    ]
+  },
+  "entity.the_exarrack_monster_scream": {
+    "sounds": [
+      {
+        "name": "gore_edition:entity.the_exarrack_monster_scream.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.the_exarrack_monster_scream.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.the_exarrack_monster_scream.3",
+        "stream": false
+      }
+    ]
+  },
+  "entity.deformity.ambient": {
+    "sounds": [
+      {
+        "name": "gore_edition:deformity.sound_1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:deformity.sound_2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:deformity.sound_3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:deformity.sound_4",
+        "stream": false
+      }
+    ]
+  },
+  "entity.deformity.hurt": {
+    "sounds": [
+      {
+        "name": "gore_edition:deformity.hurt.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:deformity.hurt.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:deformity.hurt.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:deformity.hurt.4",
+        "stream": false
+      }
+    ]
+  },
+  "entity.deformity.die": {
+    "sounds": [
+      {
+        "name": "gore_edition:deformity.die.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:deformity.die.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:deformity.die.3",
+        "stream": false
+      }
+    ]
+  },
+  "entity.deformity.spawn": {
+    "sounds": [
+      {
+        "name": "gore_edition:deformity.spawn.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:deformity.spawn.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:deformity.spawn.3",
+        "stream": false
+      }
+    ]
+  },
+  "gore.stucked": {
+    "sounds": [
+      {
+        "name": "gore_edition:stucked.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:stucked.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:stucked.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:stucked.4",
+        "stream": false
+      }
+    ]
+  },
+  "entity.hengeyon_aggro": {
+    "sounds": [
+      {
+        "name": "gore_edition:hengeyon.aggro.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:hengeyon.aggro.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:hengeyon_aggro.1",
+        "stream": false
+      }
+    ]
+  },
+  "music_disc.shop": {
+    "sounds": [
+      {
+        "name": "gore_edition:music_disc.shop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.ashes": {
+    "sounds": [
+      {
+        "name": "gore_edition:ashes_ambient",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:ashes_ambient_2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:ashes_ambient_3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:ashes_ambient_4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:ashes_ambient_5",
+        "stream": false
+      }
+    ]
+  },
+  "entity.deformity_for_ashes.scream": {
+    "sounds": [
+      {
+        "name": "gore_edition:deformity_for_ashes.scream.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:deformity_for_ashes.scream.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:deformity_for_ashes.scream.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:deformity_for_ashes.scream.4",
+        "stream": false
+      }
+    ]
+  },
+  "music_disc.internal_insanity": {
+    "sounds": [
+      {
+        "name": "gore_edition:music_disc.internal_insanity",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.collapse": {
+    "sounds": [
+      {
+        "name": "gore_edition:music_disc.collapse",
+        "stream": true
+      }
+    ]
+  },
+  "gore.brutality_series.3": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore.brutality_series.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.brutality_series.3_2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.brutality_series.3_3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.brutality_series.3_4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.brutality_series.3_5",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.brutality_series.3_6",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.brutality_series.3_7",
+        "stream": false
+      }
+    ]
+  },
+  "ambient.ashes_wind": {
+    "sounds": [
+      {
+        "name": "gore_edition:ambient.ashes_wind_1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:ambient.ashes_wind_2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:ambient.ashes_wind_3-001",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:ambient.ashes_wind_3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:ambient.ashes_wind_4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:ambient.ashes_wind_5-001",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:ambient.ashes_wind_6",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:ambient.ashes_wind_7",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:ambient.ashes_wind_8",
+        "stream": false
+      }
+    ]
+  },
+  "entity.exarrack_things.idle": {
+    "sounds": [
+      {
+        "name": "gore_edition:exarrack_things.idle.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:exarrack_things.idle.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:exarrack_things.idle",
+        "stream": false
+      }
+    ]
+  },
+  "entity.exarrack_demon.idle": {
+    "sounds": [
+      {
+        "name": "gore_edition:exarrack_demon.idle.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:exarrack_demon.idle.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:exarrack_demon.idle.3",
+        "stream": false
+      }
+    ]
+  },
+  "entity.exarrack_monster.angry": {
+    "sounds": [
+      {
+        "name": "gore_edition:entity.exarrack_monster_angry.1-001",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.exarrack_monster_angry.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.exarrack_monster_angry.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.exarrack_monster_angry.4",
+        "stream": false
+      }
+    ]
+  },
+  "gore.brutality_series.4": {
+    "sounds": [
+      {
+        "name": "gore_edition:gore.brutality_series.iv.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.brutality_series.iv.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.brutality_series.iv.4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.brutality_series.iv.5",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:gore.brutality_series.iv",
+        "stream": false
+      }
+    ]
+  },
+  "portal.ashes_gateway.ambient": {
+    "sounds": [
+      {
+        "name": "gore_edition:ashes_gateway.ambient-2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:ashes_gateway.ambient-3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:ashes_gateway.ambient-4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:ashes_gateway.ambient-5",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:ashes_gateway.ambient-6",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:ashes_gateway.ambient",
+        "stream": false
+      }
+    ]
+  },
+  "portal.ashes_gateway.open": {
+    "sounds": [
+      {
+        "name": "gore_edition:ashes_gateway.open-2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:ashes_gateway.open-3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:ashes_gateway.open",
+        "stream": false
+      }
+    ]
+  },
+  "music_disc.-0": {
+    "sounds": [
+      {
+        "name": "gore_edition:music_disc.-0",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.valley_of_ashes": {
+    "sounds": [
+      {
+        "name": "gore_edition:ambient.valley_of_ashes",
+        "stream": false
+      }
+    ]
+  },
+  "music.ashes": {
+    "sounds": [
+      {
+        "name": "gore_edition:ashes.music.call",
+        "stream": true
+      },
+      {
+        "name": "gore_edition:ashes.music.hengeyon",
+        "stream": true
+      }
+    ]
+  },
+  "entity.exarrack_hydra.scream": {
+    "sounds": [
+      {
+        "name": "gore_edition:entity.exarrack_hydra.scream.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.exarrack_hydra.scream.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.exarrack_hydra.scream.4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.exarrack_hydra.scream",
+        "stream": false
+      }
+    ]
+  },
+  "damage.spiral_twisted.die": {
+    "sounds": [
+      {
+        "name": "gore_edition:damage.spiraltwisted.die.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:damage.spiraltwisted.die.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:damage.spiraltwisted.die.4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:damage.spiraltwisted.die.5",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:damage.spiraltwisted.die",
+        "stream": false
+      }
+    ]
+  },
+  "damage.spiral_twisted.hurt": {
+    "sounds": [
+      {
+        "name": "gore_edition:damage.spiraltwisted.hurt.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:damage.spiraltwisted.hurt.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:damage.spiraltwisted.hurt.4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:damage.spiraltwisted.hurt.5",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:damage.spiraltwisted.hurt",
+        "stream": false
+      }
+    ]
+  },
+  "item.spiral.tornado_summoned": {
+    "sounds": [
+      {
+        "name": "gore_edition:item.spiral.tornado_summon.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:item.spiral.tornado_summon.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:item.spiral.tornado_summon.4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:item.spiral.tornado_summon",
+        "stream": false
+      }
+    ]
+  },
+  "entity.spiral_tornado.idle": {
+    "sounds": [
+      {
+        "name": "gore_edition:entity.spiral_tornado.idle.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.spiral_tornado.idle.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.spiral_tornado.idle.4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.spiral_tornado.idle",
+        "stream": false
+      }
+    ]
+  },
+  "entity.spiral_tornado.hurt": {
+    "sounds": [
+      {
+        "name": "gore_edition:entity.spiral_tornado.hurt.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.spiral_tornado.hurt.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.spiral_tornado.hurt.4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.spiral_tornado.hurt",
+        "stream": false
+      }
+    ]
+  },
+  "entity.spiral_tornado.die": {
+    "sounds": [
+      {
+        "name": "gore_edition:entity.spiral_tornado.die.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.spiral_tornado.die.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.spiral_tornado.die",
+        "stream": false
+      }
+    ]
+  },
+  "item.spiral.release": {
+    "sounds": [
+      {
+        "name": "gore_edition:item.spiral.release.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:item.spiral.release.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:item.spiral.release.4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:item.spiral.release.5",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:item.spiral.release.6",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:item.spiral.release",
+        "stream": false
+      }
+    ]
+  },
+  "item.spiral.attract": {
+    "sounds": [
+      {
+        "name": "gore_edition:item.spiral.catch.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:item.spiral.catch.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:item.spiral.catch.4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:item.spiral.catch",
+        "stream": false
+      }
+    ]
+  },
+  "block.ashtray_cycle.charged": {
+    "sounds": [
+      {
+        "name": "gore_edition:block.ashtray_cycle.charged.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:block.ashtray_cycle.charged.4",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:block.ashtray_cycle.charged.5",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:block.ashtray_cycle.charged.6",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:block.ashtray_cycle.charged.7",
+        "stream": false
+      }
+    ]
+  },
+  "entity.hengeyon.scream": {
+    "sounds": [
+      {
+        "name": "gore_edition:entity.hengeyon_scream.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.hengeyon_scream.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:entity.hengeyon_scream.3",
+        "stream": false
+      }
+    ]
+  },
+  "entity.ashes_black_hole.spawn": {
+    "sounds": [
+      {
+        "name": "gore_edition:ashes_black_hole.spawn.1-001",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:ashes_black_hole.spawn.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:ashes_black_hole.spawn.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:ashes_black_hole.spawn.4",
+        "stream": false
+      }
+    ]
+  },
+  "block.exarrack.step": {
+    "sounds": [
+      {
+        "name": "gore_edition:block.exarrack.step.1",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:block.exarrack.step.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:block.exarrack.step.3",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:block.exarrack.step.4",
+        "stream": false
+      }
+    ]
+  },
+  "block.exarrack.place": {
+    "sounds": [
+      {
+        "name": "gore_edition:block.exarrack.place.1-002",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:block.exarrack.place.2",
+        "stream": false
+      },
+      {
+        "name": "gore_edition:block.exarrack.place.3",
+        "stream": false
+      }
+    ]
+  }
+}

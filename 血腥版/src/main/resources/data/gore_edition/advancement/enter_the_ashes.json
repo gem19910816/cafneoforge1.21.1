@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "gore_edition:exarrack"
+    },
+    "title": {
+      "translate": "advancements.enter_the_ashes.title"
+    },
+    "description": {
+      "translate": "advancements.enter_the_ashes.descr"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": true
+  },
+  "criteria": {
+    "enter_the_ashes_0": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "gore_edition:the_xash"
+      }
+    }
+  },
+  "parent": "gore_edition:use_the_ashes"
+}

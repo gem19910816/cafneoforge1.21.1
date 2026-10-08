@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "gore_edition:creeper_corpse",
+    "gore_edition:severed_legs_zombie_corpse",
+    "gore_edition:zombie_corpse",
+    "gore_edition:zombie_without_legs_and_arm_corpse",
+    "chicken",
+    "pig",
+    "gore_edition:baby_spider",
+    "gore_edition:dismembered_spider_i",
+    "gore_edition:dismembered_spider_ii",
+    "gore_edition:exploded_head_spider",
+    "gore_edition:horizontally_cutted_spider",
+    "gore_edition:vertically_cutted_spider",
+    "cave_spider",
+    "spider",
+    "axolotl",
+    "bat",
+    "gore_edition:disarmed_zombie_corpse"
+  ]
+}

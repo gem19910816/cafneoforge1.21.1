@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "gore_edition:block/exarrack",
+    "up": "gore_edition:block/exarrack",
+    "north": "gore_edition:block/exarrack_art_top_left",
+    "east": "gore_edition:block/exarrack",
+    "south": "gore_edition:block/exarrack",
+    "west": "gore_edition:block/exarrack",
+    "particle": "gore_edition:block/exarrack"
+  },
+  "render_type": "solid"
+}

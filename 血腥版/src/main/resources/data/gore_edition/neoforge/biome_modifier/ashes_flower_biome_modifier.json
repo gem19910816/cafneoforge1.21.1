@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "gore_edition:valley_of_exarrack",
+  "features": "gore_edition:ashes_flower",
+  "step": "vegetal_decoration"
+}

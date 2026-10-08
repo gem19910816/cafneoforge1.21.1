@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "gore_edition:crushed_husk",
+    "gore_edition:disarmed_husk",
+    "gore_edition:headless_husk",
+    "gore_edition:horizontally_cutted_husk",
+    "gore_edition:husk_about_to_die",
+    "gore_edition:severed_legs_and_arm_husk",
+    "gore_edition:severedlegs_husk",
+    "gore_edition:verticalcutted_husk",
+    "gore_edition:cordyceps_headless_husk",
+    "gore_edition:cordyceps_husk",
+    "gore_edition:disarmed_cordyceps_husk",
+    "gore_edition:severed_legs_and_one_arm_cordyceps_husk",
+    "gore_edition:severed_legs_cordyceps_husk"
+  ]
+}

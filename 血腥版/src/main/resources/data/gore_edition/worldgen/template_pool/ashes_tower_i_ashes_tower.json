@@ -1,0 +1,26 @@
+{
+  "name": "gore_edition:ashes_tower_i_ashes_tower",
+  "fallback": "gore_edition:ashes_tower_i_ashes_tower",
+  "elements": [
+    {
+      "weight": 100,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "gore_edition:ashes_random_tower_i2",
+        "projection": "rigid",
+        "processors": {
+          "processors": [
+            {
+              "processor_type": "minecraft:block_ignore",
+              "blocks": [
+                {
+                  "Name": "minecraft:oak_planks"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

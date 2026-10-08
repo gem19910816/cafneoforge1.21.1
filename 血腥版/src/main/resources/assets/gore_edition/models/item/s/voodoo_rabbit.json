@@ -1,0 +1,45 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "gore_edition:item/voodoo_bunny_0"
+	},
+	"overrides": [
+		{"predicate": {"gore_edition:voodoo_rabbit_blood": 0}, "model": "gore_edition:item/voodoo_rabbit_0"},
+		{"predicate": {"gore_edition:voodoo_rabbit_blood": 1}, "model": "gore_edition:item/voodoo_rabbit_1"},
+		{"predicate": {"gore_edition:voodoo_rabbit_blood": 2}, "model": "gore_edition:item/voodoo_rabbit_2"},
+		{"predicate": {"gore_edition:voodoo_rabbit_blood": 3}, "model": "gore_edition:item/voodoo_rabbit_3"},
+		{"predicate": {"gore_edition:voodoo_rabbit_blood": 4}, "model": "gore_edition:item/voodoo_rabbit_4"}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [0, 180, 0],
+			"translation": [0, 2.75, 1.5],
+			"scale": [0.55, 0.55, 0.55]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [0, 180, 0],
+			"translation": [0, 2.75, 1.5],
+			"scale": [0.55, 0.55, 0.55]
+		},
+		"firstperson_righthand": {
+			"rotation": [-5, -24, 24],
+			"translation": [1.25, 3.5, -3.75]
+		},
+		"firstperson_lefthand": {
+			"rotation": [-5, -24, 24],
+			"translation": [1.25, 3.5, -3.75]
+		},
+		"ground": {
+			"translation": [0, 2, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"head": {
+			"rotation": [0, 180, 0],
+			"translation": [0, 13, 7]
+		},
+		"fixed": {
+			"rotation": [0, 180, 0]
+		}
+	}
+}

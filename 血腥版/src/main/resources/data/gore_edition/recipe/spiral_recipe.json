@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "ab",
+    " c"
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:nautilus_shell"
+    },
+    "b": {
+      "item": "minecraft:soul_sand"
+    },
+    "c": {
+      "item": "gore_edition:ash_sand"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "gore_edition:spiral"
+  }
+}

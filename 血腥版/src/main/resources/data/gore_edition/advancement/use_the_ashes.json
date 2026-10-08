@@ -1,0 +1,23 @@
+{
+  "display": {
+    "background": "gore_edition:textures/screens/black_screen.png",
+    "icon": {
+      "item": "gore_edition:ashes"
+    },
+    "title": {
+      "translate": "advancements.use_the_ashes.title"
+    },
+    "description": {
+      "translate": "advancements.use_the_ashes.descr"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": true
+  },
+  "criteria": {
+    "use_the_ashes_0": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

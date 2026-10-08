@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "gore_edition:block/dust_lamp",
+    "particle": "gore_edition:block/dust_lamp"
+  },
+  "render_type": "solid"
+}

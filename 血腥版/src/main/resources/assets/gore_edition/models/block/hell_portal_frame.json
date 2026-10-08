@@ -1,0 +1,9 @@
+{
+  "parent": "goreedition:custom/hellportalframe",
+  "textures": {
+    "all": "goreedition:block/hell_portal_frame",
+    "particle": "goreedition:block/hell_portal_frame",
+    "missing": "goreedition:block/hell_portal_frame"
+  },
+  "render_type": "solid"
+}

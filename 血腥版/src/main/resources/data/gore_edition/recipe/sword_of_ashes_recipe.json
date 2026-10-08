@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "aaa",
+    "aba",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "gore_edition:lightning_orb"
+    },
+    "b": {
+      "item": "gore_edition:exarrack_sword"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "gore_edition:sword_of_ashes"
+  }
+}

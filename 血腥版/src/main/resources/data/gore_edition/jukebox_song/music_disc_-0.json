@@ -1,0 +1,8 @@
+{
+  "sound_event": "gore_edition:music_disc.-0",
+  "description": {
+    "translate": "item.gore_edition.music_disc_-0.desc"
+  },
+  "length_in_seconds": 167.0,
+  "comparator_output": 1
+}

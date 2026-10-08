@@ -1,0 +1,45 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "gore_edition:item/spinesaw"
+	},
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [-69.17, 8.18, 99.63],
+			"translation": [-11.25, 2.5, -4.75],
+			"scale": [1.5, 1.5, 1.5]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [-25.05, -12.36, 18.5],
+			"translation": [-12.5, 2.25, -3],
+			"scale": [1.5, 1.5, 1.5]
+		},
+		"firstperson_righthand": {
+			"rotation": [22.88, -61.14, 110.87],
+			"translation": [8.63, -8.05, -11.37],
+			"scale": [2, 2, 2]
+		},
+		"firstperson_lefthand": {
+			"rotation": [172.31, 70.54, 95.75],
+			"translation": [8.63, -8.05, -11.37],
+			"scale": [2, 2, 2]
+		},
+		"ground": {
+			"translation": [0, 2, 0]
+		},
+		"gui": {
+			"rotation": [-25.59, 28.64, 0.26],
+			"scale": [1.1, 1.1, 1.1]
+		},
+		"head": {
+			"rotation": [118.77, 86.48, -179.69],
+			"translation": [0, 4, -5.5],
+			"scale": [2, 2, 2]
+		},
+		"fixed": {
+			"rotation": [0, 180, 0],
+			"scale": [1.2, 1.2, 1.2]
+		}
+	}
+}

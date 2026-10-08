@@ -1,0 +1,8 @@
+Normal toughness Zombie 00A58D 7B804B
+Die animation Zombie 188C61 805D4A
+
+Normal toughness Husk 564D44 E6A485
+Die animation Husk 3F3A33 C9988A
+
+Normal toughness Spider 343227 A81C0D
+Die animation Spider 1F2118 7C2A09

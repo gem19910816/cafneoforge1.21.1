@@ -1,0 +1,90 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "bone",
+					"pivot": [0, 17, 0]
+				},
+				{
+					"name": "right_leg",
+					"parent": "bone",
+					"pivot": [-1.9, 12, 0],
+					"cubes": [
+						{"origin": [-4, 0, -2], "size": [4, 12, 4], "uv": [0, 16]}
+					]
+				},
+				{
+					"name": "left_leg",
+					"parent": "bone",
+					"pivot": [1.9, 12, 0],
+					"mirror": true,
+					"cubes": [
+						{"origin": [0, 0, -2], "size": [4, 12, 4], "uv": [0, 16]}
+					]
+				},
+				{
+					"name": "body2",
+					"parent": "bone",
+					"pivot": [0, 12, 0]
+				},
+				{
+					"name": "body",
+					"parent": "body2",
+					"pivot": [0, 12, 0],
+					"cubes": [
+						{"origin": [-4, 12, -2], "size": [8, 12, 4], "uv": [16, 16]}
+					]
+				},
+				{
+					"name": "left_arm",
+					"parent": "body",
+					"pivot": [5, 22, 0],
+					"mirror": true,
+					"cubes": [
+						{"origin": [4, 12, -2], "size": [4, 12, 4], "uv": [40, 16]}
+					]
+				},
+				{
+					"name": "right_arm",
+					"parent": "body",
+					"pivot": [-5, 22, 0],
+					"cubes": [
+						{"origin": [-8, 12, -2], "size": [4, 12, 4], "uv": [40, 16]}
+					]
+				},
+				{
+					"name": "head",
+					"parent": "body",
+					"pivot": [0, 24, 0],
+					"cubes": [
+						{"origin": [-1, 24, -1], "size": [2, 3, 2], "uv": [0, 0]},
+						{
+							"origin": [-1.25, 19.60195, -4.77164],
+							"size": [0.5, 0.5, 6],
+							"pivot": [-1, 19.85195, -1.77164],
+							"rotation": [-22.5, 22.5, 0],
+							"uv": {
+								"north": {"uv": [8, 0], "uv_size": [0.5, 0.5]},
+								"east": {"uv": [8, 0], "uv_size": [6, 0.5]},
+								"south": {"uv": [8, 0], "uv_size": [0.5, 0.5]},
+								"west": {"uv": [8, 0], "uv_size": [6, 0.5]},
+								"up": {"uv": [8.5, 6], "uv_size": [-0.5, -6]},
+								"down": {"uv": [8.5, 6], "uv_size": [-0.5, -6]}
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

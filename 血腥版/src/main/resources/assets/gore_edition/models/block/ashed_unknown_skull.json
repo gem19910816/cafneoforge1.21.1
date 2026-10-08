@@ -1,0 +1,9 @@
+{
+  "parent": "gore_edition:custom/ashed_unknown_skull",
+  "textures": {
+    "all": "gore_edition:block/ashes_wither",
+    "particle": "gore_edition:block/ashes_wither",
+    "0": "gore_edition:block/ashes_wither"
+  },
+  "render_type": "cutout"
+}

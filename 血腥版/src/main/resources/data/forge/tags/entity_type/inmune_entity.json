@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "gore_edition:burning_death_necesary",
+    "gore_edition:fire_death_necesary",
+    "gore_edition:old_fire_death_necesary",
+    "gore_edition:creeper_generator",
+    "gore_edition:creeper_grass_generator",
+    "gore_edition:grenade_of_greek_fire_greek_fire",
+    "gore_edition:ns_hengeyon",
+    "gore_edition:ashes_torch_remover",
+    "gore_edition:magma_grenade_explode"
+  ]
+}
