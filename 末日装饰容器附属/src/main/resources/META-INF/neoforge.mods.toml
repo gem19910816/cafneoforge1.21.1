@@ -1,0 +1,47 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "All Rights Reserved"
+
+[[mods]]
+modId = "doomsdaycontainers"
+version = "1.0.0"
+displayName = "末日装饰：真实容器 (Doomsday Containers)"
+authors = "齿轮与腐肉制作组"
+description = '''
+把《末日装饰》里所有看起来像容器的装饰方块（箱子、柜子、货架、垃圾桶、行李箱、售货机、
+冰箱、弹药箱、保险箱、储物柜……共 83 种）变成真正的容器：
+
+- 右键打开原版箱子界面（按方块大小 1~6 行）
+- 内容随存档持久保存，支持命名、战利品表
+- 暴露物品处理器能力：漏斗、溜槽、物流管道、其他模组自动化都能存取
+- 比较器按装满程度输出红石信号
+- 破坏方块时完整掉落里面的物品
+- 潜行右键仍然保持方块原本的装饰交互
+
+原理是给原模组的方块类混入 EntityBlock 接口，**不修改原模组任何文件**，
+原模组照常升级，删掉了某个方块也只是少一个容器。
+'''
+
+[[mixins]]
+config = "doomsdaycontainers.mixins.json"
+
+[[dependencies.doomsdaycontainers]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1,21.2)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.doomsdaycontainers]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,1.21.2)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.doomsdaycontainers]]
+modId = "doomsday_decoration"
+type = "required"
+versionRange = "[1.1,)"
+ordering = "AFTER"
+side = "BOTH"

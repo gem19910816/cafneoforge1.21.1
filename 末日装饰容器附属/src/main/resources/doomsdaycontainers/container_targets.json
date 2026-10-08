@@ -1,0 +1,690 @@
+{
+    "_comment":  "末日装饰：容器附属 — 目标方块清单。slots 必须为 9 的倍数(9..54)。可自由增删条目：运行时按 id 查找方块，找不到的条目会被跳过。",
+    "targets":  {
+                    "accessorybox_1":  {
+                                           "@class":  "Accessorybox1Block",
+                                           "slots":  18,
+                                           "name":  "手枪配件箱",
+                                           "sound":  "metal_lid"
+                                       },
+                    "accessorybox_2":  {
+                                           "@class":  "Accessorybox2Block",
+                                           "slots":  18,
+                                           "name":  "步枪配件箱",
+                                           "sound":  "metal_lid"
+                                       },
+                    "acrate":  {
+                                   "@class":  "AcrateBlock",
+                                   "slots":  9,
+                                   "name":  "板条箱",
+                                   "sound":  "wood_crate",
+                                   "native":  true
+                               },
+                    "acrate_2":  {
+                                     "@class":  "Acrate2Block",
+                                     "slots":  9,
+                                     "name":  "板条箱",
+                                     "sound":  "wood_crate"
+                                 },
+                    "acrate_3":  {
+                                     "@class":  "Acrate3Block",
+                                     "slots":  9,
+                                     "name":  "板条箱",
+                                     "sound":  "wood_crate"
+                                 },
+                    "ammunitionbox":  {
+                                          "@class":  "AmmunitionboxBlock",
+                                          "slots":  18,
+                                          "name":  "弹药箱",
+                                          "sound":  "metal_lid"
+                                      },
+                    "atm":  {
+                                "@class":  "ATMBlock",
+                                "slots":  9,
+                                "name":  "自动取款机",
+                                "sound":  "vault"
+                            },
+                    "atm_2":  {
+                                  "@class":  "ATM2Block",
+                                  "slots":  9,
+                                  "name":  "自动取款机",
+                                  "sound":  "vault"
+                              },
+                    "blackluggage":  {
+                                         "@class":  "BlackluggageBlock",
+                                         "slots":  27,
+                                         "name":  "黑色行李箱",
+                                         "sound":  "luggage"
+                                     },
+                    "blueluggage":  {
+                                        "@class":  "BlueluggageBlock",
+                                        "slots":  27,
+                                        "name":  "蓝色行李箱",
+                                        "sound":  "luggage"
+                                    },
+                    "bodybag":  {
+                                    "@class":  "BodybagBlock",
+                                    "slots":  9,
+                                    "name":  "裹尸袋",
+                                    "sound":  "body_bag"
+                                },
+                    "cabinet":  {
+                                    "@class":  "CabinetBlock",
+                                    "slots":  27,
+                                    "name":  "柜子",
+                                    "sound":  "wood_cabinet"
+                                },
+                    "cabinet_2":  {
+                                      "@class":  "Cabinet2Block",
+                                      "slots":  27,
+                                      "name":  "玻璃柜子",
+                                      "sound":  "glass_cabinet"
+                                  },
+                    "cabinet_3":  {
+                                      "@class":  "Cabinet3Block",
+                                      "slots":  27,
+                                      "name":  "玻璃柜子(打开)",
+                                      "sound":  "glass_cabinet"
+                                  },
+                    "cart":  {
+                                 "@class":  "CartBlock",
+                                 "slots":  27,
+                                 "name":  "小推车",
+                                 "sound":  "cart"
+                             },
+                    "cart_2":  {
+                                   "@class":  "Cart2Block",
+                                   "slots":  27,
+                                   "name":  "小推车",
+                                   "sound":  "cart"
+                               },
+                    "carton":  {
+                                   "@class":  "CartonBlock",
+                                   "slots":  27,
+                                   "name":  "纸箱",
+                                   "sound":  "cardboard"
+                               },
+                    "carton_2":  {
+                                     "@class":  "Carton2Block",
+                                     "slots":  27,
+                                     "name":  "纸箱(打开)",
+                                     "sound":  "cardboard"
+                                 },
+                    "carton_3":  {
+                                     "@class":  "Carton3Block",
+                                     "slots":  27,
+                                     "name":  "纸箱",
+                                     "sound":  "cardboard"
+                                 },
+                    "cashregister":  {
+                                         "@class":  "CashregisterBlock",
+                                         "slots":  9,
+                                         "name":  "收银台",
+                                         "sound":  "vault"
+                                     },
+                    "coffee_machine":  {
+                                           "@class":  "CoffeeMachineBlock",
+                                           "slots":  9,
+                                           "name":  "咖啡机",
+                                           "sound":  "appliance"
+                                       },
+                    "constanttemperatureincubator":  {
+                                                         "@class":  "ConstanttemperatureincubatorBlock",
+                                                         "slots":  27,
+                                                         "name":  "恒温培养箱",
+                                                         "sound":  "metal_door"
+                                                     },
+                    "firstaidkit":  {
+                                        "@class":  "FirstaidkitBlock",
+                                        "slots":  9,
+                                        "name":  "急救包",
+                                        "sound":  "metal_lid"
+                                    },
+                    "freezer":  {
+                                    "@class":  "FreezerBlock",
+                                    "slots":  27,
+                                    "name":  "冰柜",
+                                    "sound":  "metal_door"
+                                },
+                    "fridge":  {
+                                   "@class":  "FridgeBlock",
+                                   "slots":  27,
+                                   "name":  "冰箱",
+                                   "sound":  "metal_door"
+                               },
+                    "fridge_2":  {
+                                     "@class":  "Fridge2Block",
+                                     "slots":  27,
+                                     "name":  "冰箱(打开)",
+                                     "sound":  "metal_door"
+                                 },
+                    "goodsshelves":  {
+                                         "@class":  "GoodsshelvesBlock",
+                                         "slots":  27,
+                                         "name":  "空货架",
+                                         "sound":  "wood_shelf"
+                                     },
+                    "goodsshelves_2":  {
+                                           "@class":  "Goodsshelves2Block",
+                                           "slots":  27,
+                                           "name":  "有物资的货架",
+                                           "sound":  "wood_shelf"
+                                       },
+                    "goodsshelves_3":  {
+                                           "@class":  "Goodsshelves3Block",
+                                           "slots":  27,
+                                           "name":  "有物资的货架",
+                                           "sound":  "wood_shelf"
+                                       },
+                    "goodsshelves_4":  {
+                                           "@class":  "Goodsshelves4Block",
+                                           "slots":  27,
+                                           "name":  "有物资的货架",
+                                           "sound":  "wood_shelf"
+                                       },
+                    "goodsshelves_5":  {
+                                           "@class":  "Goodsshelves5Block",
+                                           "slots":  27,
+                                           "name":  "有物资的货架",
+                                           "sound":  "wood_shelf"
+                                       },
+                    "goodsshelves_6":  {
+                                           "@class":  "Goodsshelves6Block",
+                                           "slots":  27,
+                                           "name":  "有物资的货架",
+                                           "sound":  "wood_shelf"
+                                       },
+                    "greenluggage":  {
+                                         "@class":  "GreenluggageBlock",
+                                         "slots":  27,
+                                         "name":  "绿色行李箱",
+                                         "sound":  "luggage"
+                                     },
+                    "greyluggage":  {
+                                        "@class":  "GreyluggageBlock",
+                                        "slots":  27,
+                                        "name":  "灰色行李箱",
+                                        "sound":  "luggage"
+                                    },
+                    "indoorgarbagebin":  {
+                                             "@class":  "IndoorgarbagebinBlock",
+                                             "slots":  27,
+                                             "name":  "室内垃圾桶",
+                                             "sound":  "metal_lid"
+                                         },
+                    "insulationcabinet":  {
+                                              "@class":  "InsulationcabinetBlock",
+                                              "slots":  27,
+                                              "name":  "保温柜",
+                                              "sound":  "metal_door"
+                                          },
+                    "khakiluggage":  {
+                                         "@class":  "KhakiluggageBlock",
+                                         "slots":  27,
+                                         "name":  "卡其色行李箱",
+                                         "sound":  "luggage"
+                                     },
+                    "lockers":  {
+                                    "@class":  "LockersBlock",
+                                    "slots":  54,
+                                    "name":  "储物柜",
+                                    "sound":  "metal_door"
+                                },
+                    "lockers_2":  {
+                                      "@class":  "Lockers2Block",
+                                      "slots":  54,
+                                      "name":  "储物柜(打开)",
+                                      "sound":  "metal_door"
+                                  },
+                    "luggage":  {
+                                    "@class":  "LuggageBlock",
+                                    "slots":  27,
+                                    "name":  "白色行李箱",
+                                    "sound":  "luggage"
+                                },
+                    "mailbox_1":  {
+                                      "@class":  "Mailbox1Block",
+                                      "slots":  9,
+                                      "name":  "邮箱",
+                                      "sound":  "metal_flap"
+                                  },
+                    "mailbox_2":  {
+                                      "@class":  "Mailbox2Block",
+                                      "slots":  9,
+                                      "name":  "邮箱",
+                                      "sound":  "metal_flap"
+                                  },
+                    "medicalbox":  {
+                                       "@class":  "MedicalboxBlock",
+                                       "slots":  18,
+                                       "name":  "医疗箱",
+                                       "sound":  "metal_lid"
+                                   },
+                    "metalcabinet":  {
+                                         "@class":  "MetalcabinetBlock",
+                                         "slots":  27,
+                                         "name":  "金属柜",
+                                         "sound":  "metal_door"
+                                     },
+                    "metalcabinet_2":  {
+                                           "@class":  "Metalcabinet2Block",
+                                           "slots":  27,
+                                           "name":  "金属柜(打开)",
+                                           "sound":  "metal_door"
+                                       },
+                    "metaldrawer":  {
+                                        "@class":  "MetaldrawerBlock",
+                                        "slots":  18,
+                                        "name":  "金属抽屉",
+                                        "sound":  "metal_lid"
+                                    },
+                    "metaldrawer_2":  {
+                                          "@class":  "Metaldrawer2Block",
+                                          "slots":  18,
+                                          "name":  "金属抽屉(打开)",
+                                          "sound":  "metal_lid"
+                                      },
+                    "microwaveoven":  {
+                                          "@class":  "MicrowaveovenBlock",
+                                          "slots":  9,
+                                          "name":  "微波炉",
+                                          "sound":  "metal_lid"
+                                      },
+                    "officedrawers_1":  {
+                                            "@class":  "Officedrawers1Block",
+                                            "slots":  27,
+                                            "name":  "文件柜(开)",
+                                            "sound":  "metal_lid"
+                                        },
+                    "officedrawers_2":  {
+                                            "@class":  "Officedrawers2Block",
+                                            "slots":  27,
+                                            "name":  "文件柜(关)",
+                                            "sound":  "metal_lid"
+                                        },
+                    "oildrum":  {
+                                    "@class":  "OildrumBlock",
+                                    "slots":  27,
+                                    "name":  "金属桶",
+                                    "sound":  "metal_lid"
+                                },
+                    "oiltank":  {
+                                    "@class":  "OiltankBlock",
+                                    "slots":  27,
+                                    "name":  "油桶",
+                                    "sound":  "metal_lid"
+                                },
+                    "oiltank_2":  {
+                                      "@class":  "Oiltank2Block",
+                                      "slots":  27,
+                                      "name":  "油桶",
+                                      "sound":  "metal_lid"
+                                  },
+                    "plasticbox":  {
+                                       "@class":  "PlasticboxBlock",
+                                       "slots":  27,
+                                       "name":  "塑料箱",
+                                       "sound":  "plastic"
+                                   },
+                    "plasticbox_2":  {
+                                         "@class":  "Plasticbox2Block",
+                                         "slots":  27,
+                                         "name":  "塑料箱",
+                                         "sound":  "plastic"
+                                     },
+                    "plasticbox_3":  {
+                                         "@class":  "Plasticbox3Block",
+                                         "slots":  27,
+                                         "name":  "塑料箱",
+                                         "sound":  "plastic"
+                                     },
+                    "plasticbox_4":  {
+                                         "@class":  "Plasticbox4Block",
+                                         "slots":  27,
+                                         "name":  "塑料箱",
+                                         "sound":  "plastic"
+                                     },
+                    "redluggage":  {
+                                       "@class":  "RedluggageBlock",
+                                       "slots":  27,
+                                       "name":  "红色行李箱",
+                                       "sound":  "luggage"
+                                   },
+                    "remains_1":  {
+                                      "@class":  "Remains1Block",
+                                      "slots":  9,
+                                      "name":  "遗体",
+                                      "sound":  "corpse"
+                                  },
+                    "remains_10":  {
+                                       "@class":  "Remains10Block",
+                                       "slots":  9,
+                                       "name":  "遗体",
+                                       "sound":  "corpse"
+                                   },
+                    "remains_1010":  {
+                                         "@class":  "Remains1010Block",
+                                         "slots":  9,
+                                         "name":  "遗体",
+                                         "sound":  "corpse"
+                                     },
+                    "remains_101010":  {
+                                           "@class":  "Remains101010Block",
+                                           "slots":  9,
+                                           "name":  "遗体",
+                                           "sound":  "corpse"
+                                       },
+                    "remains_11":  {
+                                       "@class":  "Remains11Block",
+                                       "slots":  9,
+                                       "name":  "遗体",
+                                       "sound":  "corpse"
+                                   },
+                    "remains_111":  {
+                                        "@class":  "Remains111Block",
+                                        "slots":  9,
+                                        "name":  "遗体",
+                                        "sound":  "corpse"
+                                    },
+                    "remains_2":  {
+                                      "@class":  "Remains2Block",
+                                      "slots":  9,
+                                      "name":  "遗体",
+                                      "sound":  "corpse"
+                                  },
+                    "remains_22":  {
+                                       "@class":  "Remains22Block",
+                                       "slots":  9,
+                                       "name":  "遗体",
+                                       "sound":  "corpse"
+                                   },
+                    "remains_222":  {
+                                        "@class":  "Remains222Block",
+                                        "slots":  9,
+                                        "name":  "遗体",
+                                        "sound":  "corpse"
+                                    },
+                    "remains_3":  {
+                                      "@class":  "Remains3Block",
+                                      "slots":  9,
+                                      "name":  "遗体",
+                                      "sound":  "corpse"
+                                  },
+                    "remains_33":  {
+                                       "@class":  "Remains33Block",
+                                       "slots":  9,
+                                       "name":  "遗体",
+                                       "sound":  "corpse"
+                                   },
+                    "remains_333":  {
+                                        "@class":  "Remains333Block",
+                                        "slots":  9,
+                                        "name":  "遗体",
+                                        "sound":  "corpse"
+                                    },
+                    "remains_4":  {
+                                      "@class":  "Remains4Block",
+                                      "slots":  9,
+                                      "name":  "遗体",
+                                      "sound":  "corpse"
+                                  },
+                    "remains_44":  {
+                                       "@class":  "Remains44Block",
+                                       "slots":  9,
+                                       "name":  "遗体",
+                                       "sound":  "corpse"
+                                   },
+                    "remains_444":  {
+                                        "@class":  "Remains444Block",
+                                        "slots":  9,
+                                        "name":  "遗体",
+                                        "sound":  "corpse"
+                                    },
+                    "remains_5":  {
+                                      "@class":  "Remains5Block",
+                                      "slots":  9,
+                                      "name":  "遗体",
+                                      "sound":  "corpse"
+                                  },
+                    "remains_55":  {
+                                       "@class":  "Remains55Block",
+                                       "slots":  9,
+                                       "name":  "遗体",
+                                       "sound":  "corpse"
+                                   },
+                    "remains_555":  {
+                                        "@class":  "Remains555Block",
+                                        "slots":  9,
+                                        "name":  "遗体",
+                                        "sound":  "corpse"
+                                    },
+                    "remains_6":  {
+                                      "@class":  "Remains6Block",
+                                      "slots":  9,
+                                      "name":  "遗体",
+                                      "sound":  "corpse"
+                                  },
+                    "remains_66":  {
+                                       "@class":  "Remains66Block",
+                                       "slots":  9,
+                                       "name":  "遗体",
+                                       "sound":  "corpse"
+                                   },
+                    "remains_666":  {
+                                        "@class":  "Remains666Block",
+                                        "slots":  9,
+                                        "name":  "遗体",
+                                        "sound":  "corpse"
+                                    },
+                    "remains_7":  {
+                                      "@class":  "Remains7Block",
+                                      "slots":  9,
+                                      "name":  "遗体",
+                                      "sound":  "corpse"
+                                  },
+                    "remains_77":  {
+                                       "@class":  "Remains77Block",
+                                       "slots":  9,
+                                       "name":  "遗体",
+                                       "sound":  "corpse"
+                                   },
+                    "remains_777":  {
+                                        "@class":  "Remains777Block",
+                                        "slots":  9,
+                                        "name":  "遗体",
+                                        "sound":  "corpse"
+                                    },
+                    "remains_8":  {
+                                      "@class":  "Remains8Block",
+                                      "slots":  9,
+                                      "name":  "遗体",
+                                      "sound":  "corpse"
+                                  },
+                    "remains_88":  {
+                                       "@class":  "Remains88Block",
+                                       "slots":  9,
+                                       "name":  "遗体",
+                                       "sound":  "corpse"
+                                   },
+                    "remains_888":  {
+                                        "@class":  "Remains888Block",
+                                        "slots":  9,
+                                        "name":  "遗体",
+                                        "sound":  "corpse"
+                                    },
+                    "remains_9":  {
+                                      "@class":  "Remains9Block",
+                                      "slots":  9,
+                                      "name":  "遗体",
+                                      "sound":  "corpse"
+                                  },
+                    "remains_99":  {
+                                       "@class":  "Remains99Block",
+                                       "slots":  9,
+                                       "name":  "遗体",
+                                       "sound":  "corpse"
+                                   },
+                    "remains_999":  {
+                                        "@class":  "Remains999Block",
+                                        "slots":  9,
+                                        "name":  "遗体",
+                                        "sound":  "corpse"
+                                    },
+                    "safe":  {
+                                 "@class":  "SafeBlock",
+                                 "slots":  27,
+                                 "name":  "保险箱",
+                                 "sound":  "metal_door"
+                             },
+                    "shelf":  {
+                                  "@class":  "ShelfBlock",
+                                  "slots":  27,
+                                  "name":  "架子",
+                                  "sound":  "wood_shelf"
+                              },
+                    "shelf_2":  {
+                                    "@class":  "Shelf2Block",
+                                    "slots":  27,
+                                    "name":  "坍塌的架子",
+                                    "sound":  "wood_shelf"
+                                },
+                    "shelf_3":  {
+                                    "@class":  "Shelf3Block",
+                                    "slots":  27,
+                                    "name":  "有物资的架子",
+                                    "sound":  "wood_shelf"
+                                },
+                    "shelf_4":  {
+                                    "@class":  "Shelf4Block",
+                                    "slots":  27,
+                                    "name":  "有物资的架子",
+                                    "sound":  "wood_shelf"
+                                },
+                    "shopping_cart":  {
+                                          "@class":  "ShoppingCartBlock",
+                                          "slots":  27,
+                                          "name":  "购物车",
+                                          "sound":  "cart"
+                                      },
+                    "toolbox":  {
+                                    "@class":  "ToolboxBlock",
+                                    "slots":  18,
+                                    "name":  "工具箱",
+                                    "sound":  "metal_lid"
+                                },
+                    "trashbag":  {
+                                     "@class":  "TrashbagBlock",
+                                     "slots":  9,
+                                     "name":  "垃圾袋",
+                                     "sound":  "luggage"
+                                 },
+                    "trashbag_2":  {
+                                       "@class":  "Trashbag2Block",
+                                       "slots":  9,
+                                       "name":  "垃圾袋",
+                                       "sound":  "luggage"
+                                   },
+                    "trashbag_3":  {
+                                       "@class":  "Trashbag3Block",
+                                       "slots":  9,
+                                       "name":  "垃圾袋",
+                                       "sound":  "luggage"
+                                   },
+                    "trashcan":  {
+                                     "@class":  "TrashcanBlock",
+                                     "slots":  27,
+                                     "name":  "垃圾桶",
+                                     "sound":  "metal_lid"
+                                 },
+                    "trashcan_2":  {
+                                       "@class":  "Trashcan2Block",
+                                       "slots":  27,
+                                       "name":  "垃圾桶",
+                                       "sound":  "metal_lid"
+                                   },
+                    "trashcan_3":  {
+                                       "@class":  "Trashcan3Block",
+                                       "slots":  27,
+                                       "name":  "垃圾桶(打开)",
+                                       "sound":  "metal_lid"
+                                   },
+                    "trashcan_4":  {
+                                       "@class":  "Trashcan4Block",
+                                       "slots":  27,
+                                       "name":  "垃圾桶",
+                                       "sound":  "metal_lid"
+                                   },
+                    "vendingmachine":  {
+                                           "@class":  "VendingmachineBlock",
+                                           "slots":  27,
+                                           "name":  "售货机",
+                                           "sound":  "vault"
+                                       },
+                    "vendingmachine_2":  {
+                                             "@class":  "Vendingmachine2Block",
+                                             "slots":  27,
+                                             "name":  "售货机",
+                                             "sound":  "vault"
+                                         },
+                    "vendingmachine_3":  {
+                                             "@class":  "Vendingmachine3Block",
+                                             "slots":  27,
+                                             "name":  "售货机",
+                                             "sound":  "vault"
+                                         },
+                    "vendingmachine_4":  {
+                                             "@class":  "Vendingmachine4Block",
+                                             "slots":  27,
+                                             "name":  "售货机",
+                                             "sound":  "vault"
+                                         },
+                    "washingmachine":  {
+                                           "@class":  "WashingmachineBlock",
+                                           "slots":  9,
+                                           "name":  "洗衣机",
+                                           "sound":  "metal_door"
+                                       },
+                    "waterdispenser":  {
+                                           "@class":  "WaterdispenserBlock",
+                                           "slots":  9,
+                                           "name":  "饮水机",
+                                           "sound":  "appliance"
+                                       },
+                    "weaponbox":  {
+                                      "@class":  "WeaponboxBlock",
+                                      "slots":  27,
+                                      "name":  "武器箱",
+                                      "sound":  "wood_crate"
+                                  },
+                    "woodencabinet":  {
+                                          "@class":  "WoodencabinetBlock",
+                                          "slots":  27,
+                                          "name":  "木柜",
+                                          "sound":  "wood_cabinet"
+                                      },
+                    "woodencabinet_2":  {
+                                            "@class":  "Woodencabinet2Block",
+                                            "slots":  27,
+                                            "name":  "木柜(打开)",
+                                            "sound":  "wood_cabinet"
+                                        },
+                    "woodencrate":  {
+                                        "@class":  "WoodencrateBlock",
+                                        "slots":  27,
+                                        "name":  "木箱",
+                                        "sound":  "wood_crate"
+                                    },
+                    "woodendrawer":  {
+                                         "@class":  "WoodendrawerBlock",
+                                         "slots":  18,
+                                         "name":  "木抽屉",
+                                         "sound":  "wood_drawer"
+                                     },
+                    "woodendrawer_2":  {
+                                           "@class":  "Woodendrawer2Block",
+                                           "slots":  18,
+                                           "name":  "木抽屉(打开)",
+                                           "sound":  "wood_drawer"
+                                       }
+                }
+}

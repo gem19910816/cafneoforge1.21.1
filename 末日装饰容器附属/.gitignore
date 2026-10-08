@@ -1,0 +1,13 @@
+# gradle / build outputs
+build/
+.gradle/
+run/
+out/
+*.log
+
+dist/
+testserver/
+report/
+libs/
+build-manual/
+
