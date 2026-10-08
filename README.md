@@ -8,7 +8,6 @@
 | [末日装饰 (Doomsday Decoration)](末日装饰/) | 1.20.1 Forge 1.1.3 | 1.21.1 NeoForge | [jar](末日装饰/doomsday_decoration-1.1.3-neoforge-1.21.1.jar) |
 | [铳械弹药统一 (Ammo Unify)](铳械弹药统一/) | —（1.21.1 **新实现**，非移植） | 1.21.1 NeoForge | [jar](铳械弹药统一/ammo_unify-1.0.0.jar) |
 | [全球市场 (Global Market)](全球市场/) | 1.20.1 Forge（原 `MOD/global-market`） | 1.21.1 NeoForge | [jar](全球市场/gearsandflesh_market-1.0.0.jar) |
-| [真实空投 (Realistic Airdrop)](真实空投/) | 1.20.1 Forge 1.1.0-beta | 1.21.1 NeoForge | [jar](真实空投/dyairdrop-1.4.1.jar) |
 | [稀薄的空气 (Thin Air)](稀薄的空气/) | 1.20.1 Forge（原 Thin Air / fuzs） | 1.21.1 NeoForge | [jar](稀薄的空气/thinair-1.21.1-neoforge-21.1.1-port.jar) |
 | [僵尸游戏 (ZombieGame:Reborn)](僵尸游戏/) | 1.20.1 Forge 2.1.0 | 1.21.1 NeoForge | [jar](僵尸游戏/zombiegamereborn-2.1.0.jar) |
 | [急救护理 (SelfAid)](急救护理/) | —（1.21.1 **新实现**，非移植） | 1.21.1 NeoForge | [jar](急救护理/selfaid-1.0.0.jar) |
@@ -74,33 +73,6 @@ Tacz-Unidict（TACZ：铳械协议）。后者依赖的 TaCZ 弹药机制在 1.1
 
 ## 特别标注：需要前置模组
 
-### [真实空投 (Realistic Airdrop)](真实空投/) — 1.21.1 移植 + 重构
-
-从 1.20.1 Forge 版 `dyairdrop-1.1.0-1.20.1-beta.jar`（作者 Ian，MCreator 制作）移植并重构。
-运输机按设定高度与距离飞越玩家上空投下补给箱，箱内按等级抽取战利品并可设密码锁，空投会吸引敌人前来抢夺；
-另配 6 把信号枪手动召唤空投。
-
-- **前置**：GeckoLib for NeoForge 1.21.1 **4.x**（构建期从官方 Maven 拉取，仓库不再附带 jar）。
-  **不装 GeckoLib 会直接加载失败**。
-- **可选**：`zombiekit`（末日生存工具包）1.21.1 版。原模组自带 20 个引用它的掉落表，
-  未安装时这批表会解析失败（仅日志提示，不影响启动与 `dyairdrop` 自身功能）。
-- **兼容性**：方块 / 物品 / 实体 / 菜单的注册 ID 与 1.20.1 版完全一致，`assets/` 与 `data/` 已与 1:1 原版 jar
-  逐文件 SHA256 比对（0 差异），`config/dyairdrop.toml` 的分区与配置项名未变，旧存档与旧配置文件可直接沿用。
-- **重构（1.2.0 → 1.4.0）**：密码面板改为**服务端权威**（修掉「多人开不了箱」与其它模组在容器 / 键位上的冲突）；
-  Xaero 地图标记从「调用并不存在的命令 \ddwaypointxaero\（永久静默失败）」改为服务端下发 + 客户端反射加**临时路点**，
-  小地图与世界地图都生效，箱子被搜空 / 移除时自动回收；**MCreator 的 \procedures\ 包已整个删除**
-  （53 个过程类 → 0），全部逻辑收敛为 `FlightService` / `PlaneTicker` / `ChestTicker` / `CrateTicker` /
-  `FlareService` / `AirdropScheduler` / `EnemySpawner` / `LetterPanel` / `LetterPanelConfirm` /
-  `PanelOpener` / `StructureLocator` 等服务类，源码从 260 个类 / 18,028 行降到 188 个类 / 12,271 行；
-  顺带修掉 `/setairdropcode` 参数丢失、`/locatetag` 的 NPE、信号弹失败提示显示语言键等 bug。
-  逐条对照与验证记录见 [真实空投/重构说明.md](真实空投/重构说明.md)。
-- **构建**：`cd 真实空投 && ./gradlew build`（JDK 21，产物 `build/libs/dyairdrop-1.4.0.jar`）。
-- **服务器建议**：`Performance.forceload` 默认 `true`（会为飞机飞行路径强制加载区块），
-  原作注释亦标「服务器慎用」，服务器上建议按需关闭。
-- **验证状态**：编译 / 构建通过；开发环境专用服务器三次冒烟加载通过
-  （\Done (4.369s)!\ / \(3.562s)!\ / \(3.649s)!\，0 条与重构代码相关的 ERROR）。
-  **玩法主流程（空投触发、密码面板、敌人抢夺、飞机飞行路径）与多人并发尚未实机验证**。
-- **许可**：**MIT 全开源**（原作者已把模组交给 gem19910816 接手），详见 `真实空投/LICENSE`。
 ### [稀薄的空气 (Thin Air)](稀薄的空气/) — 1.21.1 移植
 
 从 1.20.1 Forge 版 Thin Air（作者 fuzs，含 1.20.4 分支）移植。空气按区域划分品质，
