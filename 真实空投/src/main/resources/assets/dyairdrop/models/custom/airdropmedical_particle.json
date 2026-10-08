@@ -1,0 +1,7 @@
+
+{
+  "parent": "dyairdrop:displaysettings/grechest3",
+  "textures": {
+    "particle": "dyairdrop:block/gre"
+  }
+}

@@ -1,0 +1,7 @@
+
+{
+  "parent": "dyairdrop:displaysettings/safeopen.item",
+  "textures": {
+    "particle": "dyairdrop:block/safe"
+  }
+}

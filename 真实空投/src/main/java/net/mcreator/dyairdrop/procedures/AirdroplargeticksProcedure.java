@@ -1,0 +1,150 @@
+package net.mcreator.dyairdrop.procedures;
+
+import net.mcreator.dyairdrop.configuration.AirdropconfigConfiguration;
+import net.minecraft.commands.CommandSource;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.phys.Vec3;
+
+public class AirdroplargeticksProcedure {
+   public AirdroplargeticksProcedure() {
+   }
+
+   public static void execute(LevelAccessor world, double x, double y, double z) {
+      double i = 0.0;
+      if ((new Object() {
+         public double getValue(LevelAccessor world, BlockPos pos, String tag) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
+         }
+      }).getValue(world, BlockPos.containing(x, y, z), "timer") < 0.0) {
+         if (!world.isClientSide()) {
+            BlockPos _bp = BlockPos.containing(x, y, z);
+            BlockEntity _blockEntity = world.getBlockEntity(_bp);
+            BlockState _bs = world.getBlockState(_bp);
+            if (_blockEntity != null) {
+               _blockEntity.getPersistentData().putDouble("timer", 0.0);
+            }
+
+            if (world instanceof Level _level) {
+               _level.sendBlockUpdated(_bp, _bs, _bs, 3);
+            }
+         }
+      } else if ((new Object() {
+         public double getValue(LevelAccessor world, BlockPos pos, String tag) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
+         }
+      }).getValue(world, BlockPos.containing(x, y, z), "timer") >= 20000.0) {
+         world.setBlock(BlockPos.containing(x, y, z), Blocks.AIR.defaultBlockState(), 3);
+      } else if (!world.isClientSide()) {
+         BlockPos _bpx = BlockPos.containing(x, y, z);
+         BlockEntity _blockEntityx = world.getBlockEntity(_bpx);
+         BlockState _bsx = world.getBlockState(_bpx);
+         if (_blockEntityx != null) {
+            _blockEntityx.getPersistentData().putDouble("timer", (new Object() {
+               public double getValue(LevelAccessor world, BlockPos pos, String tag) {
+                  BlockEntity blockEntity = world.getBlockEntity(pos);
+                  return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
+               }
+            }).getValue(world, BlockPos.containing(x, y, z), "timer") + 1.0);
+         }
+
+         if (world instanceof Level _level) {
+            _level.sendBlockUpdated(_bpx, _bsx, _bsx, 3);
+         }
+      }
+
+      if ((new Object() {
+         public double getValue(LevelAccessor world, BlockPos pos, String tag) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
+         }
+      }).getValue(world, BlockPos.containing(x, y, z), "timer") == 1.0 && !world.isClientSide()) {
+         BlockPos _bpxx = BlockPos.containing(x, y, z);
+         BlockEntity _blockEntityxx = world.getBlockEntity(_bpxx);
+         BlockState _bsxx = world.getBlockState(_bpxx);
+         if (_blockEntityxx != null) {
+            _blockEntityxx.getPersistentData().putBoolean("s", true);
+         }
+
+         if (world instanceof Level _level) {
+            _level.sendBlockUpdated(_bpxx, _bsxx, _bsxx, 3);
+         }
+      }
+
+      if ((new Object() {
+         public double getValue(LevelAccessor world, BlockPos pos, String tag) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
+         }
+      }).getValue(world, BlockPos.containing(x, y, z), "timer") % 80.0 == 0.0 && (new Object() {
+         public double getValue(LevelAccessor world, BlockPos pos, String tag) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
+         }
+      }).getValue(world, BlockPos.containing(x, y, z), "timer") <= 3000.0 && (new Object() {
+         public boolean getValue(LevelAccessor world, BlockPos pos, String tag) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            return blockEntity != null ? blockEntity.getPersistentData().getBoolean(tag) : false;
+         }
+      }).getValue(world, BlockPos.containing(x, y, z), "s") && world instanceof ServerLevel _level) {
+         _level.getServer()
+            .getCommands()
+            .performPrefixedCommand(
+               new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null)
+                  .withSuppressedOutput(),
+               "particle dyairdrop:signalsmoke " + x + " " + (y + 17.0) + " " + z + " 2 6 2 0 2000 force"
+            );
+      }
+
+      if ((new Object() {
+            public double getValue(LevelAccessor world, BlockPos pos, String tag) {
+               BlockEntity blockEntity = world.getBlockEntity(pos);
+               return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
+            }
+         }).getValue(world, BlockPos.containing(x, y, z), "timer") / 1200.0 == (Double)AirdropconfigConfiguration.ENEMYARRIVETIME.get()
+         && (Boolean)AirdropconfigConfiguration.ENABLEENEMIES.get()) {
+         SelectsummonpositionProcedure.execute(world, x, y, z);
+      }
+
+      if ((new Object() {
+            public double getValue(LevelAccessor world, BlockPos pos, String tag) {
+               BlockEntity blockEntity = world.getBlockEntity(pos);
+               return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
+            }
+         }).getValue(world, BlockPos.containing(x, y, z), "timer") >= (double)Math.round((Double)AirdropconfigConfiguration.AIRDROPSTOLENTIME.get() * 1200.0)
+         && (new Object() {
+            public boolean getValue(LevelAccessor world, BlockPos pos, String tag) {
+               BlockEntity blockEntity = world.getBlockEntity(pos);
+               return blockEntity != null ? blockEntity.getPersistentData().getBoolean(tag) : false;
+            }
+         }).getValue(world, BlockPos.containing(x, y, z), "s")
+         && world.getEntitiesOfClass(
+               Player.class,
+               AABB.ofSize(
+                  new Vec3(x, y, z),
+                  (double)Math.round((Double)AirdropconfigConfiguration.DISTANCE.get() * 2.0),
+                  (double)Math.round((Double)AirdropconfigConfiguration.DISTANCE.get() * 2.0),
+                  (double)Math.round((Double)AirdropconfigConfiguration.DISTANCE.get() * 2.0)
+               ),
+               e -> true
+            )
+            .isEmpty()) {
+         world.setBlock(BlockPos.containing(x, y, z), Blocks.AIR.defaultBlockState(), 3);
+         if (!world.isClientSide() && world.getServer() != null) {
+            world.getServer().getPlayerList().broadcastSystemMessage(Component.literal(Component.translatable("message.airdropstolen").getString()), false);
+         }
+      }
+   }
+}

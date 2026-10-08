@@ -1,0 +1,7 @@
+
+{
+  "parent": "dyairdrop:displaysettings/airdroplarge",
+  "textures": {
+    "particle": "dyairdrop:block/largeairdrop"
+  }
+}

@@ -8,6 +8,7 @@
 | [末日装饰 (Doomsday Decoration)](末日装饰/) | 1.20.1 Forge 1.1.3 | 1.21.1 NeoForge | [jar](末日装饰/doomsday_decoration-1.1.3-neoforge-1.21.1.jar) |
 | [铳械弹药统一 (Ammo Unify)](铳械弹药统一/) | —（1.21.1 **新实现**，非移植） | 1.21.1 NeoForge | [jar](铳械弹药统一/ammo_unify-1.0.0.jar) |
 | [全球市场 (Global Market)](全球市场/) | 1.20.1 Forge（原 `MOD/global-market`） | 1.21.1 NeoForge | [jar](全球市场/gearsandflesh_market-1.0.0.jar) |
+| [真实空投 (Realistic Airdrop)](真实空投/) | 1.20.1 Forge 1.1.0-beta | 1.21.1 NeoForge | [jar](真实空投/dyairdrop-1.1.0.jar) |
 | [稀薄的空气 (Thin Air)](稀薄的空气/) | 1.20.1 Forge（原 Thin Air / fuzs） | 1.21.1 NeoForge | [jar](稀薄的空气/thinair-1.21.1-neoforge-21.1.1-port.jar) |
 | [僵尸游戏 (ZombieGame:Reborn)](僵尸游戏/) | 1.20.1 Forge 2.1.0 | 1.21.1 NeoForge | [jar](僵尸游戏/zombiegamereborn-2.1.0.jar) |
 | [急救护理 (SelfAid)](急救护理/) | —（1.21.1 **新实现**，非移植） | 1.21.1 NeoForge | [jar](急救护理/selfaid-1.0.0.jar) |
@@ -72,6 +73,37 @@ Tacz-Unidict（TACZ：铳械协议）。后者依赖的 TaCZ 弹药机制在 1.1
   详见其 `移植说明.md` 第五节。
 
 ## 特别标注：需要前置模组
+
+### [真实空投 (Realistic Airdrop)](真实空投/) — 1.21.1 移植（1:1）
+
+从 1.20.1 Forge 版 `dyairdrop-1.1.0-1.20.1-beta.jar`（作者 Ian，MCreator 制作）**1:1 移植**。
+运输机按设定高度与距离飞越玩家上空投下补给箱，箱内按等级抽取战利品并可设密码锁，
+空投会吸引敌人前来抢夺；另配 6 把信号枪手动召唤武器 / 医疗 / 小型空投。
+
+- **前置**：GeckoLib for NeoForge 1.21.1 **4.9.3+**（构建期从 GeckoLib 官方 Maven 拉取，
+  仓库不附带该 jar）。**不装 GeckoLib 会直接加载失败**。
+- **可选**：`zombiekit` 1.21.1 版。原模组自带 20 张引用它的掉落表，未安装时这批表会解析失败
+  （仅日志提示，不影响启动与 `dyairdrop` 自身功能）。
+- **保留项**：方块 / 物品 / 实体 / 菜单 / 音效的注册 ID 与 1.20.1 版完全一致，
+  `assets/` 176 个文件原样保留（贴图、模型、geo、动画、音效、语言逐字节未改），
+  `config/dyairdrop.toml` 的分区与键名未变 → 旧存档、投影与旧配置文件可直接沿用。
+  `data/` 已按 1.21 规范单数化，配方与战利品表结构同步升级。
+- **本次修掉的两个原版 BUG**：
+  1. **密码面板**：原版把面板文本框只存在客户端 `guistate` 里，
+     `ButtoncheckProcedure` / `SetpwProcedure` / `OpProcedure` 在**专用服务器**上读到空串，
+     导致「密码永远验证不了 / 管理员无法设置密码」。已改为按钮包携带文本框内容
+     （本地有控件时仍优先用控件，单人行为与原版一致）。
+  2. **小地图标记**：原版执行一条**并不存在的指令** `addwaypointxaero`
+     （仓库内全部 jar 中除本模组自身外无人提供），因此 Xaero 小地图上永远没有空投标记。
+     已改为先检测该指令是否存在（不存在就静默跳过），并按 Xaero 自己的
+     `xaero-waypoint:` 分享格式下发系统消息，**只装 Xaero 小地图即可点击添加路点**；
+     同时修掉召唤指令里的 `ForgeData` → `NeoForgeData`（不改则地图标记开关永远读不到）。
+- **验证状态**：`javac 21` 编译 **0 error**（260 个源文件）；NeoForge 21.1.255 官方专用服务器
+  实测 `Done (0.601s)!`、**与本模组相关 ERROR 0 条**，并用数据包 load 函数断言
+  15 种方块 `setblock`、7 种实体 `summon`、战利品表 `loot spawn`、物品 / 配方 / 进度全部通过。
+  **客户端渲染与 Xaero 点击提示未实机目视**（本次风险最高的是
+  `ImageButton → 自绘 TextureButton` 与 `renderBackground` 参数变化），
+  详见其 `移植说明.md` 第五节。
 
 ### [稀薄的空气 (Thin Air)](稀薄的空气/) — 1.21.1 移植
 

@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "dyairdrop:airdroplarge",
+    "dyairdrop:airdropmedical",
+    "dyairdrop:airdropweapon",
+    "dyairdrop:airdropsmall",
+    "dyairdrop:safe_2",
+    "dyairdrop:safe",
+    "dyairdrop:lockedairdroplarge",
+    "dyairdrop:lockedairdroplargeopen",
+    "dyairdrop:safeopen",
+    "dyairdrop:lockedairdropweapon",
+    "dyairdrop:lockedairdropmedicalopen",
+    "dyairdrop:lockedairdropweaponopen",
+    "dyairdrop:lockedairdropsmall",
+    "dyairdrop:lockedairdropsmallopen"
+  ]
+}

@@ -1,0 +1,136 @@
+package net.mcreator.dyairdrop.procedures;
+
+import net.minecraft.commands.CommandSource;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.phys.Vec3;
+
+public class AirdropsmallticksProcedure {
+   public AirdropsmallticksProcedure() {
+   }
+
+   public static void execute(LevelAccessor world, double x, double y, double z) {
+      double i = 0.0;
+      String table = "";
+      if ((new Object() {
+         public double getValue(LevelAccessor world, BlockPos pos, String tag) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
+         }
+      }).getValue(world, BlockPos.containing(x, y, z), "timer") < 0.0) {
+         if (!world.isClientSide()) {
+            BlockPos _bp = BlockPos.containing(x, y, z);
+            BlockEntity _blockEntity = world.getBlockEntity(_bp);
+            BlockState _bs = world.getBlockState(_bp);
+            if (_blockEntity != null) {
+               _blockEntity.getPersistentData().putDouble("timer", 0.0);
+            }
+
+            if (world instanceof Level _level) {
+               _level.sendBlockUpdated(_bp, _bs, _bs, 3);
+            }
+         }
+      } else if ((new Object() {
+         public double getValue(LevelAccessor world, BlockPos pos, String tag) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
+         }
+      }).getValue(world, BlockPos.containing(x, y, z), "timer") >= 20000.0) {
+         world.setBlock(BlockPos.containing(x, y, z), Blocks.AIR.defaultBlockState(), 3);
+      } else if (!world.isClientSide()) {
+         BlockPos _bpx = BlockPos.containing(x, y, z);
+         BlockEntity _blockEntityx = world.getBlockEntity(_bpx);
+         BlockState _bsx = world.getBlockState(_bpx);
+         if (_blockEntityx != null) {
+            _blockEntityx.getPersistentData().putDouble("timer", (new Object() {
+               public double getValue(LevelAccessor world, BlockPos pos, String tag) {
+                  BlockEntity blockEntity = world.getBlockEntity(pos);
+                  return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
+               }
+            }).getValue(world, BlockPos.containing(x, y, z), "timer") + 1.0);
+         }
+
+         if (world instanceof Level _level) {
+            _level.sendBlockUpdated(_bpx, _bsx, _bsx, 3);
+         }
+      }
+
+      if ((new Object() {
+         public double getValue(LevelAccessor world, BlockPos pos, String tag) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
+         }
+      }).getValue(world, BlockPos.containing(x, y, z), "timer") % 80.0 == 0.0 && (new Object() {
+         public double getValue(LevelAccessor world, BlockPos pos, String tag) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
+         }
+      }).getValue(world, BlockPos.containing(x, y, z), "timer") <= 6000.0 && world instanceof ServerLevel _level) {
+         _level.getServer()
+            .getCommands()
+            .performPrefixedCommand(
+               new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null)
+                  .withSuppressedOutput(),
+               "particle dyairdrop:signalsmoke " + x + " " + (y + 17.0) + " " + z + " 2 6 2 0 2000 force"
+            );
+      }
+
+      if ((new Object() {
+         public double getValue(LevelAccessor world, BlockPos pos, String tag) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            return blockEntity != null ? blockEntity.getPersistentData().getDouble(tag) : -1.0;
+         }
+      }).getValue(world, BlockPos.containing(x, y, z), "timer") == 1200.0) {
+         if (world instanceof ServerLevel _level) {
+            Entity entityToSpawn = EntityType.PILLAGER.spawn(_level, BlockPos.containing(x, y + 1.0, z), MobSpawnType.MOB_SUMMONED);
+            if (entityToSpawn != null) {
+               entityToSpawn.setYRot(200.0F);
+               entityToSpawn.setYBodyRot(200.0F);
+               entityToSpawn.setYHeadRot(200.0F);
+               entityToSpawn.setDeltaMovement(0.5, 0.0, 0.5);
+            }
+         }
+
+         if (world instanceof ServerLevel _levelx) {
+            Entity entityToSpawn = EntityType.PILLAGER.spawn(_levelx, BlockPos.containing(x, y + 1.0, z), MobSpawnType.MOB_SUMMONED);
+            if (entityToSpawn != null) {
+               entityToSpawn.setYRot(200.0F);
+               entityToSpawn.setYBodyRot(200.0F);
+               entityToSpawn.setYHeadRot(200.0F);
+               entityToSpawn.setDeltaMovement(0.5, 0.0, -0.5);
+            }
+         }
+
+         if (world instanceof ServerLevel _levelxx) {
+            Entity entityToSpawn = EntityType.PILLAGER.spawn(_levelxx, BlockPos.containing(x, y + 1.0, z), MobSpawnType.MOB_SUMMONED);
+            if (entityToSpawn != null) {
+               entityToSpawn.setYRot(200.0F);
+               entityToSpawn.setYBodyRot(200.0F);
+               entityToSpawn.setYHeadRot(200.0F);
+               entityToSpawn.setDeltaMovement(-0.5, 0.0, 0.5);
+            }
+         }
+
+         if (world instanceof ServerLevel _levelxxx) {
+            Entity entityToSpawn = EntityType.PILLAGER.spawn(_levelxxx, BlockPos.containing(x, y + 1.0, z), MobSpawnType.MOB_SUMMONED);
+            if (entityToSpawn != null) {
+               entityToSpawn.setYRot(200.0F);
+               entityToSpawn.setYBodyRot(200.0F);
+               entityToSpawn.setYHeadRot(200.0F);
+               entityToSpawn.setDeltaMovement(-0.5, 0.0, 0.5);
+            }
+         }
+      }
+   }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "dyairdrop:custom/lockedairdropweapon_particle"
+    },
+    "facing=east": {
+      "model": "dyairdrop:custom/lockedairdropweapon_particle",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "dyairdrop:custom/lockedairdropweapon_particle",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "dyairdrop:custom/lockedairdropweapon_particle",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "planesound": {
+    "subtitle": "subtitles.planesound",
+    "sounds": [
+      {
+        "name": "dyairdrop:plane-sound",
+        "stream": false
+      }
+    ]
+  },
+  "pwcorrect": {
+    "subtitle": "subtitles.pwcorrect",
+    "sounds": [
+      {
+        "name": "dyairdrop:pwcorrect",
+        "stream": false
+      }
+    ]
+  },
+  "pwwrong": {
+    "subtitle": "subtitles.pwwrong",
+    "sounds": [
+      {
+        "name": "dyairdrop:pwwrong",
+        "stream": false
+      }
+    ]
+  },
+  "check": {
+    "subtitle": "subtitles.check",
+    "sounds": [
+      {
+        "name": "dyairdrop:input",
+        "stream": false
+      }
+    ]
+  }
+}

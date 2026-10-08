@@ -1,0 +1,20 @@
+package net.mcreator.dyairdrop.block.renderer;
+
+import net.mcreator.dyairdrop.block.entity.LockedairdroplargeopenTileEntity;
+import net.mcreator.dyairdrop.block.model.LockedairdroplargeopenBlockModel;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.resources.ResourceLocation;
+import software.bernie.geckolib.renderer.GeoBlockRenderer;
+import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer;
+
+public class LockedairdroplargeopenTileRenderer extends GeoBlockRenderer<LockedairdroplargeopenTileEntity> {
+   public LockedairdroplargeopenTileRenderer() {
+      super(new LockedairdroplargeopenBlockModel());
+      this.addRenderLayer(new AutoGlowingGeoLayer(this));
+   }
+
+   public RenderType getRenderType(LockedairdroplargeopenTileEntity animatable, ResourceLocation texture, MultiBufferSource bufferSource, float partialTick) {
+      return RenderType.entityTranslucent(this.getTextureLocation(animatable));
+   }
+}
