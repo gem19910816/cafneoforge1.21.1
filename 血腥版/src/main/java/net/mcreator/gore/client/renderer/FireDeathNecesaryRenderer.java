@@ -1,0 +1,27 @@
+package net.mcreator.gore.client.renderer;
+
+import net.mcreator.gore.entity.FireDeathNecesaryEntity;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
+import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
+import net.minecraft.resources.ResourceLocation;
+
+public class FireDeathNecesaryRenderer extends HumanoidMobRenderer<FireDeathNecesaryEntity, HumanoidModel<FireDeathNecesaryEntity>> {
+   public FireDeathNecesaryRenderer(Context context) {
+      super(context, new HumanoidModel(context.bakeLayer(ModelLayers.PLAYER)), 0.0F);
+      this.addLayer(
+         new HumanoidArmorLayer(
+            this,
+            new HumanoidModel(context.bakeLayer(ModelLayers.PLAYER_INNER_ARMOR)),
+            new HumanoidModel(context.bakeLayer(ModelLayers.PLAYER_OUTER_ARMOR)),
+            context.getModelManager()
+         )
+      );
+   }
+
+   public ResourceLocation getTextureLocation(FireDeathNecesaryEntity entity) {
+      return ResourceLocation.parse("gore_edition:textures/entities/void.png");
+   }
+}

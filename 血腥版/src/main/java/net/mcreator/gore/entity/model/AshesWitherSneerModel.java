@@ -1,0 +1,32 @@
+package net.mcreator.gore.entity.model;
+
+import net.mcreator.gore.entity.AshesWitherSneerEntity;
+import net.minecraft.resources.ResourceLocation;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.cache.object.GeoBone;
+import software.bernie.geckolib.constant.DataTickets;
+import software.bernie.geckolib.model.GeoModel;
+import software.bernie.geckolib.model.data.EntityModelData;
+
+public class AshesWitherSneerModel extends GeoModel<AshesWitherSneerEntity> {
+   public ResourceLocation getAnimationResource(AshesWitherSneerEntity entity) {
+      return ResourceLocation.fromNamespaceAndPath("gore_edition", "animations/ashes_wither_sneer.animation.json");
+   }
+
+   public ResourceLocation getModelResource(AshesWitherSneerEntity entity) {
+      return ResourceLocation.fromNamespaceAndPath("gore_edition", "geo/ashes_wither_sneer.geo.json");
+   }
+
+   public ResourceLocation getTextureResource(AshesWitherSneerEntity entity) {
+      return ResourceLocation.fromNamespaceAndPath("gore_edition", "textures/entities/" + entity.getTexture() + ".png");
+   }
+
+   public void setCustomAnimations(AshesWitherSneerEntity animatable, long instanceId, AnimationState animationState) {
+      GeoBone head = this.getAnimationProcessor().getBone("true");
+      if (head != null) {
+         EntityModelData entityData = (EntityModelData)animationState.getData(DataTickets.ENTITY_MODEL_DATA);
+         head.setRotX(entityData.headPitch() * (float) (Math.PI / 180.0));
+         head.setRotY(entityData.netHeadYaw() * (float) (Math.PI / 180.0));
+      }
+   }
+}

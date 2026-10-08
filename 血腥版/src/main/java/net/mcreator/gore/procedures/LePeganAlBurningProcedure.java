@@ -1,0 +1,174 @@
+package net.mcreator.gore.procedures;
+
+import javax.annotation.Nullable;
+import net.mcreator.gore.configuration.GoreEditionConfigurationFileConfiguration;
+import net.mcreator.gore.configuration.GoreEditionModeSettingsConfiguration;
+import net.mcreator.gore.configuration.GoreEditionSoundsConfigurationConfiguration;
+import net.mcreator.gore.init.GoreEditionModParticleTypes;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.neoforged.bus.api.Event;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+
+@EventBusSubscriber
+public class LePeganAlBurningProcedure {
+   @SubscribeEvent
+   public static void onEntityAttacked(LivingIncomingDamageEvent event) {
+      if (event != null && event.getEntity() != null) {
+         execute(
+            event,
+            event.getEntity().level(),
+            event.getEntity().getX(),
+            event.getEntity().getY(),
+            event.getEntity().getZ(),
+            event.getSource(),
+            event.getEntity()
+         );
+      }
+   }
+
+   public static void execute(LevelAccessor world, double x, double y, double z, DamageSource damagesource, Entity entity) {
+      execute(null, world, x, y, z, damagesource, entity);
+   }
+
+   private static void execute(@Nullable Event event, LevelAccessor world, double x, double y, double z, DamageSource damagesource, Entity entity) {
+      if (damagesource != null
+         && entity != null
+         && ((String)GoreEditionModeSettingsConfiguration.BHURT.get()).equals("FAshes")
+         && entity.isOnFire()
+         && !damagesource.is(DamageTypes.IN_FIRE)
+         && !damagesource.is(DamageTypes.ON_FIRE)
+         && !damagesource.is(DamageTypes.LAVA)) {
+         if (world instanceof ServerLevel _level) {
+            _level.sendParticles(
+               (SimpleParticleType)GoreEditionModParticleTypes.FIRE_PARTICLE.get(),
+               x,
+               y + (Double)GoreEditionConfigurationFileConfiguration.CENTER_Y_MOB.get(),
+               z,
+               (int)(
+                  Math.pow((Double)GoreEditionConfigurationFileConfiguration.PARTICLE_MULTIPLICATOR.get() * 3.0, 2.0)
+                     * (Double)GoreEditionConfigurationFileConfiguration.FIRE_PARTICLES_REDUCTOR.get()
+               ),
+               0.1,
+               0.4,
+               0.1,
+               (Double)GoreEditionConfigurationFileConfiguration.PARTICLE_SPEED_MULTIPLICATOR.get() / 1.3
+            );
+         }
+
+         if (world instanceof ServerLevel _level) {
+            _level.sendParticles(
+               ParticleTypes.LAVA,
+               x,
+               y + (Double)GoreEditionConfigurationFileConfiguration.CENTER_Y_MOB.get(),
+               z,
+               (int)(
+                  Math.pow((Double)GoreEditionConfigurationFileConfiguration.PARTICLE_MULTIPLICATOR.get() * 2.0, 2.0)
+                     * (Double)GoreEditionConfigurationFileConfiguration.FIRE_PARTICLES_REDUCTOR.get()
+               ),
+               0.1,
+               0.4,
+               0.1,
+               (Double)GoreEditionConfigurationFileConfiguration.PARTICLE_SPEED_MULTIPLICATOR.get() / 1.3
+            );
+         }
+
+         if (world instanceof ServerLevel _level) {
+            _level.sendParticles(
+               (SimpleParticleType)GoreEditionModParticleTypes.ASHES_PARTICLES.get(),
+               x,
+               y + (Double)GoreEditionConfigurationFileConfiguration.CENTER_Y_MOB.get(),
+               z,
+               (int)(
+                  Math.pow((Double)GoreEditionConfigurationFileConfiguration.PARTICLE_MULTIPLICATOR.get() * 3.0, 2.0)
+                     * (Double)GoreEditionConfigurationFileConfiguration.FIRE_PARTICLES_REDUCTOR.get()
+               ),
+               0.1,
+               0.2,
+               0.1,
+               (Double)GoreEditionConfigurationFileConfiguration.PARTICLE_SPEED_MULTIPLICATOR.get()
+            );
+         }
+
+         if (world instanceof Level _level) {
+            if (!_level.isClientSide()) {
+               _level.playSound(
+                  null,
+                  BlockPos.containing(x, y, z),
+                  (SoundEvent)BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("gore_edition:gore_external_burning_hurt_sound")),
+                  SoundSource.AMBIENT,
+                  (float)((Double)GoreEditionSoundsConfigurationConfiguration.GORE_EXTERNAL_BURNING_HURT_SOUND.get()).doubleValue(),
+                  1.0F
+               );
+            } else {
+               _level.playLocalSound(
+                  x,
+                  y,
+                  z,
+                  (SoundEvent)BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("gore_edition:gore_external_burning_hurt_sound")),
+                  SoundSource.AMBIENT,
+                  (float)((Double)GoreEditionSoundsConfigurationConfiguration.GORE_EXTERNAL_BURNING_HURT_SOUND.get()).doubleValue(),
+                  1.0F,
+                  false
+               );
+            }
+         }
+
+         if (damagesource.is(DamageTypes.ARROW) || damagesource.is(DamageTypes.MOB_PROJECTILE)) {
+            if (world instanceof Level _levelx) {
+               if (!_levelx.isClientSide()) {
+                  _levelx.playSound(
+                     null,
+                     BlockPos.containing(x, y, z),
+                     (SoundEvent)BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("gore_edition:gore.skeleton_50_sound")),
+                     SoundSource.AMBIENT,
+                     (float)((Double)GoreEditionSoundsConfigurationConfiguration.GORE_SKELETON_50_SOUND.get()).doubleValue(),
+                     1.0F
+                  );
+               } else {
+                  _levelx.playLocalSound(
+                     x,
+                     y,
+                     z,
+                     (SoundEvent)BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("gore_edition:gore.skeleton_50_sound")),
+                     SoundSource.AMBIENT,
+                     (float)((Double)GoreEditionSoundsConfigurationConfiguration.GORE_SKELETON_50_SOUND.get()).doubleValue(),
+                     1.0F,
+                     false
+                  );
+               }
+            }
+
+            if (world instanceof ServerLevel _levelxx) {
+               _levelxx.sendParticles(
+                  (SimpleParticleType)GoreEditionModParticleTypes.ASHES_PARTICLES.get(),
+                  x,
+                  y + (Double)GoreEditionConfigurationFileConfiguration.CENTER_Y_MOB.get(),
+                  z,
+                  (int)(
+                     Math.pow((Double)GoreEditionConfigurationFileConfiguration.PARTICLE_MULTIPLICATOR.get() * 3.0, 2.0)
+                        * (Double)GoreEditionConfigurationFileConfiguration.FIRE_PARTICLES_REDUCTOR.get()
+                  ),
+                  0.1,
+                  0.2,
+                  0.1,
+                  (Double)GoreEditionConfigurationFileConfiguration.PARTICLE_SPEED_MULTIPLICATOR.get()
+               );
+            }
+         }
+      }
+   }
+}

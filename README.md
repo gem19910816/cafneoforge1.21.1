@@ -16,6 +16,7 @@
 | [绿葡萄护甲 (LesRaisins Armor)](绿葡萄护甲/) | 1.20.1 Forge 0.1.4.4 | 1.21.1 NeoForge | [jar](绿葡萄护甲/lrarmor-0.1.4.4.jar) |
 | [CAF 生存核心 (CAF Survival Core)](CAF生存核心/) | 1.20.1 Forge（原 Tarkov Stamina / ChaosZ Pack） | 1.21.1 NeoForge | [jar](CAF生存核心/tarkov_stamina-1.21.1-neoforge-1.0.0-port.jar) |
 | [CAF草药 (Crop Expansion)](CAF草药/) | 1.20.1 Forge（原 `1.20.1forge/药草作物`） | 1.21.1 NeoForge | [jar](CAF草药/crop_expansion-1.21.1-neoforge-1.0.0.jar) |
+| [血腥版 (Gore Edition)](血腥版/) | 1.20.1 Forge 0.5 alpha 4d | 1.21.1 NeoForge | [jar](血腥版/gore_edition-0.5-neoforge-1.21.1.jar) |
 
 ## 说明
 
@@ -208,3 +209,33 @@ Tacz-Unidict（TACZ：铳械协议）。后者依赖的 TaCZ 弹药机制在 1.1
   **客户端（`runClient` 从未启动——HUD 从 `IGuiOverlay` 改为 `LayeredDraw.Layer`，是本次风险最高的一处）、
   背包 GUI、Curios 背部渲染、玩法主流程、旧存档兼容、多人并发均尚未实机验证**，
   详见其 `移植说明.md` 第三、四节。
+
+### [血腥版 (Gore Edition)](血腥版/) — 1.21.1 移植
+
+从 1.20.1 Forge 版 `minecraft_gore_edition-0.5-forge-1.20.1d.jar`（Modrinth 上的 0.5 alpha 4d，
+作者 NekroPlaga，MCreator 制作）移植。血腥演出模组：受伤 / 死亡时按材质生成血液、骨屑、肉块粒子，
+僵尸、骷髅、蜘蛛等会变成断肢、无头、趴伏、解肢等多种尸体形态，另有尸检、灰烬维度、新武器与附魔。
+
+- **前置**：GeckoLib for NeoForge 1.21.1 **4.9.3+**。上游 `mods.toml` 标为 optional（为了让服务器端
+  可以不装），但**客户端不装会看不到任何模型**——97 个渲染器、77 个模型、72 个 `.animation.json`
+  全部走 GeckoLib。可选 PlayerAnimator 2.0.4+1.21.1。
+- **保留项**：`mod_id` 仍是 `gore_edition`，方块 / 物品 / 实体注册 ID 与 1.20.1 版完全一致，
+  `assets/` 逐字节原样搬移，旧存档、投影、蓝图可继续使用。
+- **命名空间（容易踩的坑）**：1.20.1 发行版把模组**自己的 26 个标签**放在 `forge:` 命名空间，
+  代码里也按 `forge:ge_corpses` 等查询。本次**保持它们在 `forge:`**，只把
+  `data/forge/loot_modifiers/global_loot_modifiers.json` 按 NeoForge 要求迁到 `data/neoforge/`。
+  若把这些标签一并改名成 `neoforge:`，代码里所有 `forge:ge_*` 查询会**静默失效**（不报错，但尸体判定、
+  免疫判定、按材质分类的死亡演出全部失灵）。
+- **修掉的三个致命问题**：① `@EventBusSubscriber` 漏 Dist 限定导致专用服务器启动崩；
+  ② 3 个 `Tier#getIncorrectBlocksForDrops()` 返回 `null` 导致数据包加载崩（`bindTags` NPE）；
+  ③ 玩家变量对空物品栈调 `ItemStack#save` 导致**一进世界就断线**
+  （`ClosedChannelException`，1.21 对空栈直接抛 `Cannot encode empty ItemStack`）。
+- **验证状态**：`javac 21` 编译 915 个源文件（1231 个类）**0 error**；
+  NeoForge 21.1.255 专用服务器实测 `Done (0.587s)!`，**与本模组相关 ERROR 0 条**；
+  数据包断言覆盖方块 / 物品 / 实体 / 战利品表 / 状态效果 / 附魔 / 4 个注册表标签，全部通过；
+  另用 `ge_regression` 探针模组对「登录即崩」那条链路做了回归测试（空栈抛异常确认、修复后
+  `writeNBT` 正常、非空栈往返无损）；资源静态校验 0 缺失模型 / 0 悬空引用 / 0 旧目录名。
+  **客户端渲染效果（尸体形态、粒子、GeckoLib 动画）未在带图形界面的客户端里逐项目视**，
+  详见其 `移植说明.md`。
+- **与作者重写版的区别**：作者另有自己用代码重写的 NeoForge 版本（0.5.1，包名
+  `gore_edition.content.*`）。那个不是本移植的产物，**两者互不兼容、不要同时安装**。
