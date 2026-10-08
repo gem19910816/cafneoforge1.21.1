@@ -10,12 +10,15 @@ import com.mojang.brigadier.context.CommandContext;
 
 import net.gem19910816.dyairdrop.DyairdropMod;
 import net.gem19910816.dyairdrop.configuration.AirdropconfigConfiguration;
+import net.gem19910816.dyairdrop.init.DyairdropModEntities;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.Vec3;
@@ -56,6 +59,8 @@ public final class FlightService {
     private static final String AIRDROP_PREFIX = "dyairdrop:";
     /** 起飞延迟：与原实现一致（60 tick）。 */
     private static final int LAUNCH_DELAY_TICKS = 60;
+    /** 实体持久化数据键：要不要给这个空投打地图标记（1.21.1 的持久化数据存在 {@code NeoForgeData} 里，由代码直接写）。 */
+    private static final String TAG_MAP = "dymap";
     private static final double SOUND_HEIGHT = 74.0;
 
     private FlightService() {
@@ -84,14 +89,42 @@ public final class FlightService {
                 : blockId;
         String customName = nameHead + "," + lootTable + "," + new DecimalFormat("##").format(length);
         Vec3 summonPos = new Vec3(Math.round(x - length), Math.round(height), Math.round(z));
-        String extraNbt = map ? ",ForgeData:{dymap:1b}" : "";
+        DyairdropMod.queueServerWork(LAUNCH_DELAY_TICKS, () -> spawnPlane(world, entityId, customName, summonPos, map));
+    }
 
-        DyairdropMod.queueServerWork(LAUNCH_DELAY_TICKS, () -> {
-            if (world instanceof ServerLevel serverLevel) {
-                Commands.run(serverLevel, summonPos.x, summonPos.y, summonPos.z,
-                        "summon " + entityId + " ~ ~ ~ {CustomName:'{\"text\":\"" + customName + "\"}'" + extraNbt + "}");
-            }
-        });
+    /**
+     * 生成飞机（在代码里创建实体，而不是用 {@code summon} 命令）。
+     *
+     * <p>为什么不用命令：1.20.1 时代用 {@code summon ... {CustomName:..., ForgeData:{dymap:1b}}} 传递
+     * 「名字（箱子类型,战利品表,距离）」和「是否打地图标记」。但 NeoForge 1.21.1 已把实体持久化数据改名：
+     * 写入用 {@code NeoForgeData}、读取只认 {@code NeoForgeData}（旧 {@code ForgeData} 不再被读），
+     * 于是 {@code dymap} 永远写不进去 —— 地图标记因此从不出现。
+     * 另外命令一旦有语法/权限问题会被 {@code withSuppressedOutput()} 吞掉，属于"静默失败"。
+     * 现在直接创建实体、直接写数据，并记录日志。
+     */
+    private static void spawnPlane(LevelAccessor world, String entityId, String customName, Vec3 pos, boolean map) {
+        if (!(world instanceof ServerLevel level)) {
+            return;
+        }
+        EntityType<?> type = forceload() ? DyairdropModEntities.TRANSPORTPLANE.get() : DyairdropModEntities.PLANE.get();
+        Entity plane = type.create(level);
+        if (plane == null) {
+            DyairdropMod.LOGGER.error("[dyairdrop] 创建飞机实体失败: {}（注册表返回 null）", entityId);
+            return;
+        }
+        plane.moveTo(pos.x, pos.y, pos.z, 0.0F, 0.0F);
+        plane.setCustomName(Component.literal(customName));
+        if (map) {
+            plane.getPersistentData().putBoolean(TAG_MAP, true);
+        }
+        // 飞机起点在 x - length（最远 512 格），那个区块可能还没加载；先把它载入，避免实体加入失败
+        level.getChunkAt(BlockPos.containing(pos));
+        if (level.addFreshEntity(plane)) {
+            DyairdropMod.LOGGER.info("[dyairdrop] 空投飞机已生成: {} @ [{}, {}, {}]（名字 {}, 打地图标记 {}）",
+                    entityId, (long) pos.x, (long) pos.y, (long) pos.z, customName, map);
+        } else {
+            DyairdropMod.LOGGER.error("[dyairdrop] 飞机实体加入世界失败: {} @ [{}, {}, {}]", entityId, (long) pos.x, (long) pos.y, (long) pos.z);
+        }
     }
 
     /** {@code /setairdrop random …}：在玩家周围随机漂移，然后按 {@code free} 的语义投放。 */

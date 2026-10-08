@@ -2,12 +2,15 @@ package net.gem19910816.dyairdrop.core;
 
 import java.util.Locale;
 
+import net.gem19910816.dyairdrop.DyairdropMod;
 import net.gem19910816.dyairdrop.compat.map.MapMarkerService;
 import net.gem19910816.dyairdrop.configuration.AirdropconfigConfiguration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -17,6 +20,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 
 /**
  * 空投木箱（下落中的实体）的每 tick 逻辑：落地后变成真正的箱子，可选打地图标记，然后销毁自己。
@@ -87,8 +91,10 @@ public final class CrateTicker {
         if (blockId.contains(LOCKED_MARKER)) {
             placeLockedChest(world, pos, blockId, lootTable);
         } else {
-            Commands.run(world, x, landingY, z, "setblock ~ ~ ~ " + blockId + "{LootTable:\"" + lootTable + "\"} destroy");
+            placeLootChest(world, pos, blockId, lootTable);
         }
+
+        DyairdropMod.LOGGER.info("[dyairdrop] 空投已落地成箱: {} @ [{}, {}, {}]（战利品表 {}）", blockId, pos.getX(), pos.getY(), pos.getZ(), lootTable);
 
         if (data.getBoolean(TAG_MAP)) {
             addMapMarker(world, pos, blockId);
@@ -120,6 +126,41 @@ public final class CrateTicker {
             level.updateNeighborsAt(pos, level.getBlockState(pos).getBlock());
         }
         Nbt.setString(world, pos, "loot", lootTable);
+    }
+
+    /**
+     * 普通（不锁）的箱子：先按原实现 {@code setblock … destroy} 的语义掉落被替换掉的方块，
+     * 再放上空投箱并把战利品表写进容器方块实体。
+     *
+     * <p>原实现走 {@code setblock} 命令，一旦命令解析失败会被静默吞掉、箱子凭空消失；
+     * 这里改为代码放置，失败时在日志里明确报出来。
+     */
+    private static void placeLootChest(LevelAccessor world, BlockPos pos, String blockId, String lootTable) {
+        if (world instanceof Level level && !level.isClientSide()) {
+            level.destroyBlock(pos, true);
+        }
+        Block block = BuiltInRegistries.BLOCK.get(ResourceLocation.parse(blockId.toLowerCase(Locale.ENGLISH)));
+        world.setBlock(pos, block.defaultBlockState(), 3);
+        setLootTable(world, pos, lootTable);
+    }
+
+    /** 把战利品表写到容器方块实体（等价于命令里的 {@code {LootTable:"…"}}）。 */
+    private static void setLootTable(LevelAccessor world, BlockPos pos, String lootTable) {
+        if (!(world.getBlockEntity(pos) instanceof RandomizableContainerBlockEntity container)) {
+            DyairdropMod.LOGGER.error("[dyairdrop] {} 没有容器方块实体，战利品表 {} 未写入（箱子会是空的）", blockIdOf(pos, world), lootTable);
+            return;
+        }
+        ResourceLocation table = ResourceLocation.tryParse(lootTable);
+        if (table == null) {
+            DyairdropMod.LOGGER.error("[dyairdrop] 战利品表 id 非法: {}", lootTable);
+            return;
+        }
+        container.setLootTable(ResourceKey.create(Registries.LOOT_TABLE, table), world.getRandom().nextLong());
+        container.setChanged();
+    }
+
+    private static String blockIdOf(BlockPos pos, LevelAccessor world) {
+        return BuiltInRegistries.BLOCK.getKey(world.getBlockState(pos).getBlock()).toString();
     }
 
     /** 按箱子类型登记地图标记，显示名沿用「对应物品的显示名」这一原行为。 */

@@ -10,7 +10,7 @@ Minecraft **1.21.1 / NeoForge** 版。从 1.20.1 Forge 版 `dyairdrop-1.1.0-1.20
 
 ## 安装
 
-1. 把 `dyairdrop-1.4.0.jar` 放进 `mods/`。
+1. 把 `dyairdrop-1.4.1.jar` 放进 `mods/`。
 2. **前置**：GeckoLib for NeoForge 1.21.1（**4.x**）。本模组在 `neoforge.mods.toml` 里声明了对它的依赖，
    不装会直接加载失败；构建时从 GeckoLib 官方 Maven 拉取，仓库里不再附带 jar。
 3. 可选：`zombiekit`（末日生存工具包）1.21.1 版。装了之后 `data/zombiekit/` 下的 20 个专属掉落表才会生效。
@@ -71,7 +71,7 @@ Minecraft **1.21.1 / NeoForge** 版。从 1.20.1 Forge 版 `dyairdrop-1.1.0-1.20
 需要 **JDK 21**。
 
 ```bash
-./gradlew build        # 产物 → build/libs/dyairdrop-1.4.0.jar
+./gradlew build        # 产物 → build/libs/dyairdrop-1.4.1.jar
 ./gradlew runServer    # 开发环境专用服务器
 ./gradlew runClient    # 开发环境客户端
 ```
@@ -98,6 +98,14 @@ Minecraft **1.21.1 / NeoForge** 版。从 1.20.1 Forge 版 `dyairdrop-1.1.0-1.20
 兼容契约（注册 ID / NBT 键 / 配置键 / 战利品表路径全部不变）、诊断证据与阶段计划见
 [`重构说明.md`](重构说明.md)；`dyairdrop-1.1.0-port-1to1` 标签保存着重构前的 1:1 版本。
 
+### 1.4.1 修复：地图标记开关失效（实机复现后定位）
+
+NeoForge 1.21.1 把实体持久化数据的 NBT 键从 `ForgeData` 改成了 `NeoForgeData`，且**只读新键**。
+飞机/木箱原先用 `summon … {ForgeData:{dymap:1b}}` 传「要不要打地图标记」，于是这个开关永远写不进去，
+表现为：信号枪提示「空投召唤成功」，但小地图/世界地图上永远不出现空投路点。
+
+现改为**代码直接生成实体并直接写数据**（飞机、木箱、落地成箱都不再依赖命令），并在关键步骤打日志
+（`[dyairdrop] 空投飞机已生成` / `空投木箱已投下` / `空投已落地成箱`），任何一步失败都能在日志里看到。
 ### 1.4.0：MCreator 过程层彻底消失
 
 **原本 53 个 `*Procedure` 静态类、18,028 行、260 个类，现在 `procedures` 包已被整个删除**——所有逻辑按职责

@@ -1,10 +1,13 @@
 package net.gem19910816.dyairdrop.core;
 
+import net.gem19910816.dyairdrop.DyairdropMod;
+import net.gem19910816.dyairdrop.init.DyairdropModEntities;
 import net.minecraft.commands.arguments.EntityAnchorArgument.Anchor;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.Vec3;
@@ -48,6 +51,8 @@ public final class PlaneTicker {
     private static final double TRAIL_LENGTH = 1.4;
     private static final double TRAIL_OFFSET_SCALE = 0.5;
     private static final String TRAIL_PARTICLE_TEMPLATE = "particle cloud ";
+    /** 名字里第一段带这个标记表示落点要放「带锁」的箱子。 */
+    private static final String LOCKED_MARKER = "locked";
     /** 名字里没有第三段时的兜底落点。 */
     private static final String FALLBACK_BLOCK = "dyairdrop:airdroplarge";
     private static final String FALLBACK_LOOT = "dyairdrop:largeairdrop1";
@@ -127,24 +132,47 @@ public final class PlaneTicker {
         plane.setDeltaMovement(new Vec3(SPEED, 0.0, 0.0));
     }
 
-    /** 到达落点：按名字里的第一段（blockid）召唤对应类型的空投箱。 */
+    /**
+     * 到达落点：按名字里的第一段（blockid）生成对应类型的空投木箱。
+     *
+     * <p>与 {@link FlightService} 同因：不再用 {@code summon} 命令 + {@code ForgeData}
+     * （NeoForge 1.21.1 只读 {@code NeoForgeData}，命令里的 {@code ForgeData} 会被忽略，
+     * 木箱拿不到「打地图标记」的开关 → 地图上永远不出现空投路点），
+     * 改为代码直接生成实体并写数据，同时记录日志以便排查。
+     */
     private static void dropCrate(LevelAccessor world, double x, double y, double z, CompoundTag data) {
+        if (!(world instanceof ServerLevel level)) {
+            return;
+        }
         String name = data.getString(TAG_NAME);
         String[] parts = name.split(",", 3);
-        String blockId = parts.length > 2 ? parts[0] : FALLBACK_BLOCK;
-        String entityId = airdropEntityFor(blockId.replace("locked", ""));
-        String extraNbt = data.getBoolean(TAG_MAP) ? ",ForgeData:{dymap:1b}" : "";
-        Commands.run(world, Math.round(x), Math.round(y), Math.round(z),
-                "summon " + entityId + " ~ ~ ~ {CustomName:'{\"text\":\"" + name + "\"}'" + extraNbt + "}");
+        String blockId = (parts.length > 2 ? parts[0] : FALLBACK_BLOCK).replace(LOCKED_MARKER, "");
+        Entity crate = crateTypeFor(blockId).create(level);
+        if (crate == null) {
+            DyairdropMod.LOGGER.error("[dyairdrop] 创建空投木箱失败: {}（注册表返回 null）", blockId);
+            return;
+        }
+        crate.moveTo(x, y, z, 0.0F, 0.0F);
+        crate.setCustomName(Component.literal(name));
+        boolean map = data.getBoolean(TAG_MAP);
+        if (map) {
+            crate.getPersistentData().putBoolean(TAG_MAP, true);
+        }
+        if (level.addFreshEntity(crate)) {
+            DyairdropMod.LOGGER.info("[dyairdrop] 空投木箱已投下: {} @ [{}, {}, {}]（名字 {}, 打地图标记 {}）",
+                    blockId, Math.round(x), Math.round(y), Math.round(z), name, map);
+        } else {
+            DyairdropMod.LOGGER.error("[dyairdrop] 空投木箱加入世界失败: {} @ [{}, {}, {}]", blockId, Math.round(x), Math.round(y), Math.round(z));
+        }
     }
 
-    /** 方块 id → 空投实体 id（与原实现的 if/else 链一致）。 */
-    private static String airdropEntityFor(String blockId) {
+    /** 方块 id → 空投木箱实体类型（与原实现的 if/else 链一致）。 */
+    private static EntityType<?> crateTypeFor(String blockId) {
         return switch (blockId) {
-            case "dyairdrop:airdropsmall" -> "dyairdrop:smallairdrop";
-            case "dyairdrop:airdropweapon" -> "dyairdrop:weaponairdrop";
-            case "dyairdrop:airdropmedical" -> "dyairdrop:medicalairdrop";
-            default -> "dyairdrop:airdrop";
+            case "dyairdrop:airdropsmall" -> DyairdropModEntities.SMALLAIRDROP.get();
+            case "dyairdrop:airdropweapon" -> DyairdropModEntities.WEAPONAIRDROP.get();
+            case "dyairdrop:airdropmedical" -> DyairdropModEntities.MEDICALAIRDROP.get();
+            default -> DyairdropModEntities.AIRDROP.get();
         };
     }
 
