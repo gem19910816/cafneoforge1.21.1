@@ -1,6 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
 import net.mcreator.dyairdrop.DyairdropMod;
+import net.mcreator.dyairdrop.compat.CrateCompat;
 import net.mcreator.dyairdrop.network.DyairdropModVariables;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;

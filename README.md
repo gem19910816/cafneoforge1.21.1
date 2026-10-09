@@ -117,7 +117,7 @@ Tacz-Unidict（TACZ：铳械协议）。后者依赖的 TaCZ 弹药机制在 1.1
   `assets/` 176 个文件原样保留（贴图、模型、geo、动画、音效、语言逐字节未改），
   `config/dyairdrop.toml` 的分区与键名未变 → 旧存档、投影与旧配置文件可直接沿用。
   `data/` 已按 1.21 规范单数化，配方与战利品表结构同步升级。
-- **本次修掉的两个原版 BUG**：
+- **本次修掉的三个原版 BUG**：
   1. **密码面板**：原版把面板文本框只存在客户端 `guistate` 里，
      `ButtoncheckProcedure` / `SetpwProcedure` / `OpProcedure` 在**专用服务器**上读到空串，
      导致「密码永远验证不了 / 管理员无法设置密码」。已改为按钮包携带文本框内容
@@ -127,11 +127,19 @@ Tacz-Unidict（TACZ：铳械协议）。后者依赖的 TaCZ 弹药机制在 1.1
      已改为先检测该指令是否存在（不存在就静默跳过），并按 Xaero 自己的
      `xaero-waypoint:` 分享格式下发系统消息，**只装 Xaero 小地图即可点击添加路点**；
      同时修掉召唤指令里的 `ForgeData` → `NeoForgeData`（不改则地图标记开关永远读不到）。
-- **验证状态**：`javac 21` 编译 **0 error**（260 个源文件）；NeoForge 21.1.255 官方专用服务器
-  实测 `Done (0.601s)!`、**与本模组相关 ERROR 0 条**，并用数据包 load 函数断言
-  15 种方块 `setblock`、7 种实体 `summon`、战利品表 `loot spawn`、物品 / 配方 / 进度全部通过。
-  **客户端渲染与 Xaero 点击提示未实机目视**（本次风险最高的是
-  `ImageButton → 自绘 TextureButton` 与 `renderBackground` 参数变化），
+  3. **与并发区块 / 方块实体模组冲突（如 C2ME）**：MCreator 的界面在发包后还会**在客户端本地
+     再执行一遍**服务端过程，于是客户端也在 `world.setBlock` 换箱子（等于在客户端销毁 / 重建带
+     方块实体的方块）；而且换箱走的是 `performPrefixedCommand("setblock … replace")`，
+     把指令通道上的所有模组都拉进了密码面板流程；定时步骤还不检查区块是否仍加载。
+     现在：客户端不再执行这些事务（只发包），换箱改为服务端 + 区块检查的方块 API
+     （新增 `compat/CrateCompat`），落地放置箱子也改为仅服务端。
+     代价：解锁 / 设置密码 / 设置战利品需等约 1 tick 的往返才看到反馈。
+- **验证状态**：`javac 21` 编译 **0 error**（261 个源文件）；NeoForge 21.1.255 官方专用服务器
+  实测 `Done (0.8s)!`、**与本模组相关 ERROR 0 条**，并用数据包 load 函数断言
+  15 种方块 `setblock`、7 种实体 `summon`、战利品表 `loot spawn`、物品 / 配方 / 进度全部通过；
+  第 3 项的换箱路径另用一次性自检版 jar 实机跑过
+  （`lockedairdroplarge → lockedairdroplargeopen` + 战利品表写入成功、无 `open` 变体与未加载区块均安全返回）。
+  **客户端渲染、Xaero 点击提示，以及「装了 C2ME 的真实多人客户端」下的原始冲突场景未实机复现**，
   详见其 `移植说明.md` 第五节。
 
 ### [稀薄的空气 (Thin Air)](稀薄的空气/) — 1.21.1 移植

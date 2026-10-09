@@ -1,6 +1,7 @@
 package net.mcreator.dyairdrop.procedures;
 
 import net.mcreator.dyairdrop.DyairdropMod;
+import net.mcreator.dyairdrop.compat.CrateCompat;
 import net.mcreator.dyairdrop.network.DyairdropModVariables;
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
@@ -389,63 +390,20 @@ public class CheckProcedure {
                               BlockState _bsx = world.getBlockState(_pos);
                               if (_bsx.getBlock().getStateDefinition().getProperty("animation") instanceof IntegerProperty _integerProp
                                  && _integerProp.getPossibleValues().contains(_value)) {
-                                 world.setBlock(_pos, (BlockState)_bsx.setValue(_integerProp, _value), 3);
+                                 CrateCompat.setBlockAnimation(world, _pos, _value);
                               }
 
                               DyairdropMod.queueServerWork(
                                  20,
                                  () -> {
-                                    if (world instanceof ServerLevel _levelxxx) {
-                                       _levelxxx.getServer()
-                                          .getCommands()
-                                          .performPrefixedCommand(
-                                             new CommandSourceStack(
-                                                   CommandSource.NULL,
-                                                   new Vec3(x, y, z),
-                                                   Vec2.ZERO,
-                                                   _levelxxx,
-                                                   4,
-                                                   "",
-                                                   Component.literal(""),
-                                                   _levelxxx.getServer(),
-                                                   null
-                                                )
-                                                .withSuppressedOutput(),
-                                             "setblock ~ ~ ~ "
-                                                + BuiltInRegistries.BLOCK.getKey(world.getBlockState(BlockPos.containing(x, y, z)).getBlock()).toString()
-                                                + "open[facing="
-                                                + (new Object() {
-                                                      public Direction getDirection(BlockState _bs) {
-                                                         if (_bs.getBlock().getStateDefinition().getProperty("facing") instanceof DirectionProperty _dp) {
-                                                            return (Direction)_bs.getValue(_dp);
-                                                         } else {
-                                                            if (_bs.getBlock().getStateDefinition().getProperty("axis") instanceof EnumProperty _ep
-                                                               && _ep.getPossibleValues().toArray()[0] instanceof Axis) {
-                                                               return Direction.fromAxisAndDirection((Axis)_bs.getValue(_ep), AxisDirection.POSITIVE);
-                                                            }
-
-                                                            return Direction.NORTH;
-                                                         }
-                                                      }
-                                                   })
-                                                   .getDirection(world.getBlockState(BlockPos.containing(x, y, z)))
-                                                + "]{LootTable:\""
-                                                + (new Object() {
-                                                   public String getValue(LevelAccessor world, BlockPos pos, String tag) {
-                                                      BlockEntity blockEntity = world.getBlockEntity(pos);
-                                                      return blockEntity != null ? blockEntity.getPersistentData().getString(tag) : "";
-                                                   }
-                                                }).getValue(world, BlockPos.containing(x, y, z), "loot")
-                                                + "\"} replace"
-                                          );
-                                    }
+                                    CrateCompat.openCrate(world, BlockPos.containing(x, y, z));
 
                                     int _valuex = 2;
                                     BlockPos _posx = BlockPos.containing(x, y, z);
                                     BlockState _bsxx = world.getBlockState(_posx);
                                     if (_bsxx.getBlock().getStateDefinition().getProperty("animation") instanceof IntegerProperty _integerPropx
                                        && _integerPropx.getPossibleValues().contains(_valuex)) {
-                                       world.setBlock(_posx, (BlockState)_bsxx.setValue(_integerPropx, _valuex), 3);
+                                       CrateCompat.setBlockAnimation(world, _posx, _valuex);
                                     }
                                  }
                               );

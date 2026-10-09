@@ -209,7 +209,6 @@ public class PannelREScreen extends AbstractContainerScreen<PannelREMenu> {
          48,
          e -> {
             net.neoforged.neoforge.network.PacketDistributor.sendToServer(new PannelREButtonMessage(6, this.x, this.y, this.z));
-            PannelREButtonMessage.handleButtonAction(this.entity, 6, this.x, this.y, this.z);
          }
       );
       guistate.put("button:imagebutton_check", this.imagebutton_check);

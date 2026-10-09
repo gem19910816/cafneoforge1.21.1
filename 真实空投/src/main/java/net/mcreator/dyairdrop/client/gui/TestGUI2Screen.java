@@ -237,14 +237,12 @@ public class TestGUI2Screen extends AbstractContainerScreen<TestGUI2Menu> {
       this.addRenderableWidget(this.button_0);
       this.button_empty = Button.builder(Component.translatable("gui.dyairdrop.test_gui_2.button_empty"), e -> {
          net.neoforged.neoforge.network.PacketDistributor.sendToServer(new TestGUI2ButtonMessage(11, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-         TestGUI2ButtonMessage.handleButtonAction(this.entity, 11, this.x, this.y, this.z);
       }).bounds(this.leftPos + 91, this.topPos + 133, 20, 20).build();
       guistate.put("button:button_empty", this.button_empty);
       this.addRenderableWidget(this.button_empty);
       this.button_op = Button.builder(Component.translatable("gui.dyairdrop.test_gui_2.button_op"), e -> {
          if (OpshowProcedure.execute(this.entity)) {
             net.neoforged.neoforge.network.PacketDistributor.sendToServer(new TestGUI2ButtonMessage(12, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-            TestGUI2ButtonMessage.handleButtonAction(this.entity, 12, this.x, this.y, this.z);
          }
       }).bounds(this.leftPos + 154, this.topPos + 120, 27, 20).build(builder -> new Button(builder) {
             public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
@@ -258,7 +256,6 @@ public class TestGUI2Screen extends AbstractContainerScreen<TestGUI2Menu> {
       this.button_pw = Button.builder(Component.translatable("gui.dyairdrop.test_gui_2.button_pw"), e -> {
          if (OpshowProcedure.execute(this.entity)) {
             net.neoforged.neoforge.network.PacketDistributor.sendToServer(new TestGUI2ButtonMessage(13, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-            TestGUI2ButtonMessage.handleButtonAction(this.entity, 13, this.x, this.y, this.z);
          }
       }).bounds(this.leftPos + 154, this.topPos + 102, 18, 20).build(builder -> new Button(builder) {
             public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
@@ -272,7 +269,6 @@ public class TestGUI2Screen extends AbstractContainerScreen<TestGUI2Menu> {
       this.button_tpw = Button.builder(Component.translatable("gui.dyairdrop.test_gui_2.button_tpw"), e -> {
          if (OpshowProcedure.execute(this.entity)) {
             net.neoforged.neoforge.network.PacketDistributor.sendToServer(new TestGUI2ButtonMessage(14, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-            TestGUI2ButtonMessage.handleButtonAction(this.entity, 14, this.x, this.y, this.z);
          }
       }).bounds(this.leftPos + 154, this.topPos + 84, 19, 20).build(builder -> new Button(builder) {
             public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {

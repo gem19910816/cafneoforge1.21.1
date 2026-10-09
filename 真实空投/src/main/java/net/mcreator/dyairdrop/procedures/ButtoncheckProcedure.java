@@ -3,6 +3,7 @@ package net.mcreator.dyairdrop.procedures;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import net.mcreator.dyairdrop.DyairdropMod;
+import net.mcreator.dyairdrop.compat.CrateCompat;
 import net.mcreator.dyairdrop.configuration.AirdropconfigConfiguration;
 import net.mcreator.dyairdrop.network.DyairdropModVariables;
 import net.minecraft.commands.CommandSource;
@@ -369,56 +370,14 @@ public class ButtoncheckProcedure {
                         BlockState _bsxxx = world.getBlockState(_pos);
                         if (_bsxxx.getBlock().getStateDefinition().getProperty("animation") instanceof IntegerProperty _integerProp
                            && _integerProp.getPossibleValues().contains(_value)) {
-                           world.setBlock(_pos, (BlockState)_bsxxx.setValue(_integerProp, _value), 3);
+                           CrateCompat.setBlockAnimation(world, _pos, _value);
                         }
                      }
                   );
                   DyairdropMod.queueServerWork(
                      84,
                      () -> {
-                        if (world instanceof ServerLevel _levelx) {
-                           _levelx.getServer()
-                              .getCommands()
-                              .performPrefixedCommand(
-                                 new CommandSourceStack(
-                                       CommandSource.NULL,
-                                       new Vec3(x, y, z),
-                                       Vec2.ZERO,
-                                       _levelx,
-                                       4,
-                                       "",
-                                       Component.literal(""),
-                                       _levelx.getServer(),
-                                       null
-                                    )
-                                    .withSuppressedOutput(),
-                                 "setblock ~ ~ ~ "
-                                    + BuiltInRegistries.BLOCK.getKey(world.getBlockState(BlockPos.containing(x, y, z)).getBlock()).toString()
-                                    + "open[facing="
-                                    + (new Object() {
-                                       public Direction getDirection(BlockState _bs) {
-                                          if (_bs.getBlock().getStateDefinition().getProperty("facing") instanceof DirectionProperty _dp) {
-                                             return (Direction)_bs.getValue(_dp);
-                                          } else {
-                                             if (_bs.getBlock().getStateDefinition().getProperty("axis") instanceof EnumProperty _ep
-                                                && _ep.getPossibleValues().toArray()[0] instanceof Axis) {
-                                                return Direction.fromAxisAndDirection((Axis)_bs.getValue(_ep), AxisDirection.POSITIVE);
-                                             }
-
-                                             return Direction.NORTH;
-                                          }
-                                       }
-                                    }).getDirection(world.getBlockState(BlockPos.containing(x, y, z)))
-                                    + "]{LootTable:\""
-                                    + (new Object() {
-                                       public String getValue(LevelAccessor world, BlockPos pos, String tag) {
-                                          BlockEntity blockEntity = world.getBlockEntity(pos);
-                                          return blockEntity != null ? blockEntity.getPersistentData().getString(tag) : "";
-                                       }
-                                    }).getValue(world, BlockPos.containing(x, y, z), "loot")
-                                    + "\"} replace"
-                              );
-                        }
+                        CrateCompat.openCrate(world, BlockPos.containing(x, y, z));
                      }
                   );
                } else {

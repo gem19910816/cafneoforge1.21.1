@@ -71,12 +71,15 @@ public class MobairdropticksProcedure {
             }
 
             if (blockid.contains("locked")) {
-               world.setBlock(
-                  BlockPos.containing(x, ay, z),
-                  ((Block)BuiltInRegistries.BLOCK.get(ResourceLocation.parse(blockid.toLowerCase(Locale.ENGLISH)))).defaultBlockState(),
-                  3
-               );
-               if (world instanceof Level _level) {
+               // world mutation: server only (the client also ticks this entity)
+               if (!world.isClientSide()) {
+                  world.setBlock(
+                     BlockPos.containing(x, ay, z),
+                     ((Block)BuiltInRegistries.BLOCK.get(ResourceLocation.parse(blockid.toLowerCase(Locale.ENGLISH)))).defaultBlockState(),
+                     3
+                  );
+               }
+               if (world instanceof Level _level && !_level.isClientSide()) {
                   _level.updateNeighborsAt(BlockPos.containing(x, ay, z), _level.getBlockState(BlockPos.containing(x, ay, z)).getBlock());
                }
 

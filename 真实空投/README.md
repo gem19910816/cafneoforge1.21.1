@@ -40,12 +40,40 @@ Minecraft **1.21.1 / NeoForge** 版。从 1.20.1 Forge 版 `dyairdrop-1.1.0-1.20
 
 | 命令 | 权限 | 说明 |
 |---|---|---|
-| `/setairdrop` | OP | 在指定坐标/存档召唤一次空投 |
-| `/reairdrop` | OP | 重放上一次空投 |
-| `/setairdroploot <等级> <战利品表>` | OP | 指定某个等级空投用的战利品表 |
-| `/setairdropcode <密码>` | OP | 设置空投密码 |
+| `/setairdrop free <x> <z> <height> <length> <blockid> <loot_table> <pin> [<map>]` | OP 2 | 在指定坐标召唤一次空投；`pin=true` 生成**带数字密码锁**的箱子，`map=true` 附带小地图标记 |
+| `/setairdrop random <player> <height> <length> <driftmin> <driftmax> <blockid> <loot_table> <pin> [<map>]` | OP 2 | 在玩家附近随机偏移处召唤一次空投 |
+| `/airdrop <player> <blockid> <pin>` ／ `/airdrop world <player> <blockid> <pin>` | OP 2 | 直接把空投投给某玩家（同样有 `pin`） |
+| `/reairdrop` | OP 2 | 重放上一次空投 |
+| `/setairdroploot <player> <blockid> <loot>` | OP 4 | 给指定玩家套用某个方块 / 战利品表组合 |
 | `/locatetag <结构标签>` | OP 4 | 定位指定结构标签的最近结构 |
-| `/testcode` | OP | 调试用 |
+| `/testcode <pos>` | OP | 调试用：把该坐标的 X 值广播出来（原版遗留，无实际用途） |
+
+### 带数字密码的空投怎么刷
+
+密码锁由 `pin` 参数控制：**`pin=true`** 就会在落地时把箱子换成 `locked*` 系列（带数字键盘面板）。
+
+```
+/setairdrop free 100 -200 200 262 dyairdrop:airdroplarge   dyairdrop:chests/largeairdrop1   true
+/setairdrop free 100 -200 200 262 dyairdrop:airdropmedical dyairdrop:chests/medicalairdrop3 true true
+/setairdrop random Steve 200 262 50 100 dyairdrop:airdropweapon dyairdrop:chests/weaponairdrop2 true
+/airdrop Steve dyairdrop:airdropsmall true
+```
+
+- `x z height length` 依次是「世界 X、世界 Z、飞行高度、飞行距离」，`height` 取值 0~320、`length` 取值 0~512。
+- `blockid` 填**不带 `locked` 前缀**的原方块：`dyairdrop:airdroplarge` / `airdropmedical` / `airdropweapon` / `airdropsmall`；
+  代码会自己加 `locked` 前缀（写成 `dyairdrop:lockedairdroplarge` 会变成 `lockedlocked…`）。
+- 战利品表 ID 形如 `dyairdrop:chests/largeairdrop1`~`5`、`medicalairdrop1`~`5`、`weaponairdrop1`~`5`、`smallairdrop1`~`5`。
+- 服务器里**没有** `/setairdropcode` 这条命令（1.20.1 原版也没有，旧文档写错了）：密码只能通过面板设置，
+  或在创造模式下由面板显示出来。
+
+### 密码怎么来 / 怎么改
+
+| 情况 | 说明 |
+|---|---|
+| 新生成、还没人设过 | 方块 NBT 里没有 `key`；第一次有人按面板的「确认」键时，服务端**随机生成 6 位数字密码**并写进 `key` |
+| 想知道当前密码 | 创造模式下打开面板会把密码显示在聊天栏；也可以 `/data get block <x> <y> <z> NeoForgeData.key`（1.20.1 是 `ForgeData`） |
+| 想自己设密码 | 数字键盘输入 6 位，按**「设置密码」**按钮；长度不是 6 会提示「长度错误」 |
+| 管理员想改某个箱子的战利品 | 按**「设置战利品」**按钮，或 `/setairdroploot` |
 
 ---
 
@@ -72,8 +100,9 @@ Minecraft **1.21.1 / NeoForge** 版。从 1.20.1 Forge 版 `dyairdrop-1.1.0-1.20
   旧存档、投影、蓝图可继续使用。
 - 数据包目录已按 1.21 规范单数化（`loot_table` / `recipe` / `advancement` / `tags/block`），
   配方 `result.item` 与战利品表条目 `name` 已改成 1.21 的写法。
-- 本次移植修掉了原版的两个 BUG（密码面板在专用服务器上不可用、小地图标记永远不出现），
-  详见 [`移植说明.md`](移植说明.md)。
+- 本次移植修掉了原版的三个 BUG——密码面板在专用服务器上不可用、小地图标记永远不出现、
+  使用密码面板时与并发区块 / 方块实体类模组（如 C2ME）冲突，
+  详见 [`移植说明.md`](移植说明.md) 第四节。
 
 ---
 
