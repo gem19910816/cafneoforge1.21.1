@@ -1,7 +1,0 @@
-{
-  "name": "ammo_unify.ammo.shell_barrel.name",
-  "display": "ammo_unify:shell_barrel_display",
-  "tooltip": "ammo_unify.ammo.shell_barrel.tooltip",
-  "stack_size": 16,
-  "sort": 5
-}

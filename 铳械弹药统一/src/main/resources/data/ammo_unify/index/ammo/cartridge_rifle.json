@@ -1,7 +1,0 @@
-{
-  "name": "ammo_unify.ammo.cartridge_rifle.name",
-  "display": "ammo_unify:cartridge_rifle_display",
-  "tooltip": "ammo_unify.ammo.cartridge_rifle.tooltip",
-  "stack_size": 64,
-  "sort": 2
-}
