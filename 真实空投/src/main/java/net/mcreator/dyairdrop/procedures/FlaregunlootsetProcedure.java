@@ -22,6 +22,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.neoforged.fml.ModList;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.mcreator.dyairdrop.compat.SideCompat;
 
 public class FlaregunlootsetProcedure {
    public FlaregunlootsetProcedure() {
@@ -50,7 +51,7 @@ public class FlaregunlootsetProcedure {
                   1.0F,
                   1.0F
                );
-            } else {
+            } else if (SideCompat.isClientThread()) {
                _level.playLocalSound(
                   x,
                   y,

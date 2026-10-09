@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.mcreator.dyairdrop.compat.SideCompat;
 
 public class FancyairdropguiopenProcedure {
    public FancyairdropguiopenProcedure() {
@@ -70,7 +71,7 @@ public class FancyairdropguiopenProcedure {
                   1.0F,
                   1.0F
                );
-            } else {
+            } else if (SideCompat.isClientThread()) {
                _level.playLocalSound(
                   x, y, z, (SoundEvent)BuiltInRegistries.SOUND_EVENT.get(ResourceLocation.parse("block.chest.open")), SoundSource.BLOCKS, 1.0F, 1.0F, false
                );

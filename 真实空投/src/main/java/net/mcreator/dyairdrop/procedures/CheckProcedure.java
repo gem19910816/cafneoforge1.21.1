@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.mcreator.dyairdrop.compat.SideCompat;
 
 public class CheckProcedure {
    public CheckProcedure() {
@@ -98,7 +99,7 @@ public class CheckProcedure {
                                  1.0F,
                                  1.0F
                               );
-                           } else {
+                           } else if (SideCompat.isClientThread()) {
                               _levelx.playLocalSound(
                                  x,
                                  y,
@@ -145,7 +146,7 @@ public class CheckProcedure {
                                  1.0F,
                                  1.0F
                               );
-                           } else {
+                           } else if (SideCompat.isClientThread()) {
                               _levelx.playLocalSound(
                                  x,
                                  y,
@@ -192,7 +193,7 @@ public class CheckProcedure {
                                  1.0F,
                                  1.0F
                               );
-                           } else {
+                           } else if (SideCompat.isClientThread()) {
                               _levelx.playLocalSound(
                                  x,
                                  y,
@@ -239,7 +240,7 @@ public class CheckProcedure {
                                  1.0F,
                                  1.0F
                               );
-                           } else {
+                           } else if (SideCompat.isClientThread()) {
                               _levelx.playLocalSound(
                                  x,
                                  y,
@@ -286,7 +287,7 @@ public class CheckProcedure {
                                  1.0F,
                                  1.0F
                               );
-                           } else {
+                           } else if (SideCompat.isClientThread()) {
                               _levelx.playLocalSound(
                                  x,
                                  y,
@@ -333,7 +334,7 @@ public class CheckProcedure {
                                  1.0F,
                                  1.0F
                               );
-                           } else {
+                           } else if (SideCompat.isClientThread()) {
                               _levelx.playLocalSound(
                                  x,
                                  y,
@@ -360,7 +361,7 @@ public class CheckProcedure {
                                        1.0F,
                                        1.0F
                                     );
-                                 } else {
+                                 } else if (SideCompat.isClientThread()) {
                                     _levelxx.playLocalSound(
                                        x,
                                        y,

@@ -35,6 +35,7 @@ import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.mcreator.dyairdrop.network.PanelText;
+import net.mcreator.dyairdrop.compat.SideCompat;
 
 public class ButtoncheckProcedure {
    public ButtoncheckProcedure() {
@@ -146,7 +147,7 @@ public class ButtoncheckProcedure {
                               5.0F,
                               1.0F
                            );
-                        } else {
+                        } else if (SideCompat.isClientThread()) {
                            _levelx.playLocalSound(
                               x,
                               y,
@@ -173,7 +174,7 @@ public class ButtoncheckProcedure {
                                     5.0F,
                                     1.0F
                                  );
-                              } else {
+                              } else if (SideCompat.isClientThread()) {
                                  _levelxx.playLocalSound(
                                     x,
                                     y,
@@ -200,7 +201,7 @@ public class ButtoncheckProcedure {
                                           5.0F,
                                           1.0F
                                        );
-                                    } else {
+                                    } else if (SideCompat.isClientThread()) {
                                        _levelxxx.playLocalSound(
                                           x,
                                           y,
@@ -227,7 +228,7 @@ public class ButtoncheckProcedure {
                                                 5.0F,
                                                 1.0F
                                              );
-                                          } else {
+                                          } else if (SideCompat.isClientThread()) {
                                              _levelxxxx.playLocalSound(
                                                 x,
                                                 y,
@@ -254,7 +255,7 @@ public class ButtoncheckProcedure {
                                                       5.0F,
                                                       1.0F
                                                    );
-                                                } else {
+                                                } else if (SideCompat.isClientThread()) {
                                                    _levelxxxxx.playLocalSound(
                                                       x,
                                                       y,
@@ -281,7 +282,7 @@ public class ButtoncheckProcedure {
                                                             5.0F,
                                                             1.0F
                                                          );
-                                                      } else {
+                                                      } else if (SideCompat.isClientThread()) {
                                                          _levelxxxxxx.playLocalSound(
                                                             x,
                                                             y,
@@ -351,7 +352,7 @@ public class ButtoncheckProcedure {
                                  5.0F,
                                  1.0F
                               );
-                           } else {
+                           } else if (SideCompat.isClientThread()) {
                               _levelx.playLocalSound(
                                  x,
                                  y,
@@ -398,7 +399,7 @@ public class ButtoncheckProcedure {
                                  1.0F,
                                  1.0F
                               );
-                           } else {
+                           } else if (SideCompat.isClientThread()) {
                               _levelx.playLocalSound(
                                  x,
                                  y,
