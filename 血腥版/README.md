@@ -92,6 +92,42 @@
 `models/item/third_hand.json` 引用的贴图名含空格（`coffin_orb (copia 1)`）在 1.21 不是合法资源位置，
 已指向 `coffin_orb`。
 
+### 修掉的一处不必要的语义收窄：16 个刷怪修饰符的「任意群系」
+
+1.20.1 原包 20 个生物群系修饰符里有 16 个用 Forge 的「任意群系」选择器：
+
+```json
+{ "type": "forge:add_spawns", "biomes": { "type": "forge:any" }, "spawners": [ ... ] }
+```
+
+上一版移植把 `{"type": "forge:any"}` 换成了 `"#minecraft:is_overworld"`，
+于是这 16 项刷怪从「任意群系（含所有维度）」被收窄成「只在主世界群系」。
+
+对照实验（NeoForge 21.1.255 实机）：
+
+| 写法 | 结果 |
+|---|---|
+| `{"type": "forge:any"}` | 解析**失败**（命名空间已迁走） |
+| `{"type": "neoforge:any"}` | 解析**通过**（`NeoForgeMod` 内注册，与 Forge 的 `forge:any` 对应） |
+| `"#minecraft:is_overworld"` | 解析通过 |
+| `spawners` 用对象 / 数组 | 两种都解析通过 |
+
+已改回 `{"type": "neoforge:any"}`，恢复原版语义；`spawners` 保留数组写法（NeoForge 两种都接受）。
+受影响的是 `zombie_about_to_die`、`husk_about_to_die`、`disarmed_husk/zombie`、
+`headless_drowned/husk/zombie`、`exploded_head_spider`、`horizontally|vertically_cutted_spider`、
+`severed_legs_skeleton`、`severed_legs_and_arm_husk/zombie`、`severedlegs_husk/zombie`、`spiral_tornado`。
+
+### SRG / Forge 残留核查（`m_128471_` 这类）
+
+1.20.1 的 Forge 包用的是 SRG 成员名（`m_128471_` 即 `CompoundTag#getBoolean`）。实测：
+
+| 检查项 | 1.20.1 原 jar | 本移植 jar |
+|---|---|---|
+| `m_*` / `f_*` 等 SRG 成员引用 | 1078 个 class | **0** |
+| `net.minecraftforge.*` 引用 | 658 个 class | **0** |
+| 需要改名的 Forge 注册 ID（`add_spawns` / `add_features` / `fluid_container` / `item/bucket_drip` / `loot_table_id`） | 25 处 | 已全部改为 `neoforge:` |
+| 模组**自有**的 19 个标签 ID（`forge:ge_*` 等） | 19 个 | 19 个，**故意保留**（代码与数据必须一致，已游戏内验证） |
+
 ## 原模组自带的问题（未改动，保持原样，1.20.1 版即如此）
 
 1. **两个孤立战利品表**：`data/gore_edition/loot_table/blocks/voidstone.json` 与
