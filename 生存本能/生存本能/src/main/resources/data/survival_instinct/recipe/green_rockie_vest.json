@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "a a",
+    "bcb",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "survival_instinct:tier_ii_kevlar"
+    },
+    "b": {
+      "item": "survival_instinct:body_armor_plate_i"
+    },
+    "c": {
+      "item": "minecraft:green_dye"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:green_rockie_armor_chestplate"
+  }
+}

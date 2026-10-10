@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": {
+    "item": "survival_instinct:smithing_template_prototype"
+  },
+  "base": {
+    "item": "survival_instinct:desert_juggernaut_chestplate"
+  },
+  "addition": {
+    "item": "survival_instinct:exo_chestplate"
+  },
+  "result": {
+    "id": "survival_instinct:exo_heavy_desert_chestplate"
+  }
+}

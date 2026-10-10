@@ -1,0 +1,51 @@
+PASS bag simulated insertion
+PASS bag original one-item slot limit
+PASS bag nesting rejected
+PASS shulker nesting rejected
+PASS bag data component round trip
+PASS bag menu valid while held
+PASS bag shift-click extraction persists
+PASS bag shift-click distributes items without duplication
+PASS opened bag cannot shift-click itself
+PASS bag hotbar swap blocked
+PASS bag menu invalidates when held stack changes
+PASS bag simulated insertion
+PASS bag original one-item slot limit
+PASS bag nesting rejected
+PASS shulker nesting rejected
+PASS bag data component round trip
+PASS bag menu valid while held
+PASS bag shift-click extraction persists
+PASS bag shift-click distributes items without duplication
+PASS opened bag cannot shift-click itself
+PASS bag hotbar swap blocked
+PASS bag menu invalidates when held stack changes
+PASS container stack count round trip: Block{survival_instinct:refrigerator}
+PASS original sided extraction restriction: Block{survival_instinct:refrigerator}
+PASS unopened loot table retained: Block{survival_instinct:refrigerator}
+PASS container stack count round trip: Block{survival_instinct:cash_register}
+PASS original sided extraction restriction: Block{survival_instinct:cash_register}
+PASS unopened loot table retained: Block{survival_instinct:cash_register}
+PASS container stack count round trip: Block{survival_instinct:trash_can}
+PASS original sided extraction restriction: Block{survival_instinct:trash_can}
+PASS unopened loot table retained: Block{survival_instinct:trash_can}
+PASS mixed-color heavy set retains bonus
+PASS equipment effect reused rather than replaced every tick
+PASS stale bleeding counter recovers
+PASS structure loads: survival_instinct:aged_apartment
+PASS structure loads: survival_instinct:bus_station
+PASS structure loads: survival_instinct:facility
+PASS structure loads: survival_instinct:fire_station
+PASS structure loads: survival_instinct:gas_station
+PASS structure loads: survival_instinct:hardware_store
+PASS structure loads: survival_instinct:military_camp
+PASS structure loads: survival_instinct:mini_market
+PASS structure loads: survival_instinct:old_road
+PASS structure loads: survival_instinct:pharmacy
+PASS structure loads: survival_instinct:suburban_house
+PASS structure loads: survival_instinct:survivor_camp
+PASS structure loads: survival_instinct:survivor_house
+PASS structure loads: survival_instinct:the_farm
+PASS all 14 original structure templates load
+PASS repaired plank recipe loads
+SERVER VERIFICATION PASSED

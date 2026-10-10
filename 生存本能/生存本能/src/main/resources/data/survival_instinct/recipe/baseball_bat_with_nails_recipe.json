@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "survival_instinct:nail"
+    },
+    {
+      "item": "survival_instinct:nail"
+    },
+    {
+      "item": "survival_instinct:baseball_bat_sword"
+    },
+    {
+      "item": "survival_instinct:nail"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:b_aseball_bat_with_nails_sword"
+  }
+}

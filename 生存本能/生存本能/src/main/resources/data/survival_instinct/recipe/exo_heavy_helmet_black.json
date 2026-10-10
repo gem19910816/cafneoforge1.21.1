@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": {
+    "item": "survival_instinct:smithing_template_prototype"
+  },
+  "base": {
+    "item": "survival_instinct:black_juggernaut_helmet"
+  },
+  "addition": {
+    "item": "survival_instinct:exo_helmet"
+  },
+  "result": {
+    "id": "survival_instinct:exo_heavy_black_helmet"
+  }
+}

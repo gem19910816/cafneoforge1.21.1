@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "  a",
+    " bc",
+    "b  "
+  ],
+  "key": {
+    "a": {
+      "item": "survival_instinct:kitchen_knife"
+    },
+    "b": {
+      "item": "minecraft:stick"
+    },
+    "c": {
+      "item": "survival_instinct:cloth"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:lance_with_knife"
+  }
+}

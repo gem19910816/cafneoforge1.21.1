@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aba",
+    "cdc",
+    "efe"
+  ],
+  "key": {
+    "a": {
+      "tag": "minecraft:coals"
+    },
+    "b": {
+      "item": "survival_instinct:steellium"
+    },
+    "c": {
+      "item": "survival_instinct:sulfur_dust"
+    },
+    "d": {
+      "item": "survival_instinct:gasoline_can"
+    },
+    "e": {
+      "item": "survival_instinct:aluminium"
+    },
+    "f": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:polyethylene_sheet"
+  }
+}

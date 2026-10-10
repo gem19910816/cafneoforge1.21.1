@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aba",
+    "a a"
+  ],
+  "key": {
+    "a": {
+      "item": "survival_instinct:steellium"
+    },
+    "b": {
+      "item": "survival_instinct:exo_component"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:exo_boots"
+  }
+}

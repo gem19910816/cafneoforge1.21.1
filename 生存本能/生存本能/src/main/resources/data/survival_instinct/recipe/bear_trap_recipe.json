@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "a a",
+    "bcb"
+  ],
+  "key": {
+    "a": {
+      "item": "survival_instinct:steellium_nugget"
+    },
+    "b": {
+      "item": "survival_instinct:steellium"
+    },
+    "c": {
+      "item": "minecraft:heavy_weighted_pressure_plate"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:bear_trap"
+  }
+}

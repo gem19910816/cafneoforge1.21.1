@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "neoforge:meat"
+    },
+    {
+      "tag": "neoforge:meat"
+    },
+    {
+      "item": "survival_instinct:can"
+    },
+    {
+      "tag": "neoforge:meat"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:meat_can"
+  }
+}

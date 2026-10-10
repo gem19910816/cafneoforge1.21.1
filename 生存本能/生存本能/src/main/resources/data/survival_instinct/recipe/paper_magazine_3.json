@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "a"
+  ],
+  "key": {
+    "a": {
+      "item": "survival_instinct:dungeons_and_combat_magazine"
+    }
+  },
+  "result": {
+    "count": 3,
+    "id": "minecraft:paper"
+  }
+}

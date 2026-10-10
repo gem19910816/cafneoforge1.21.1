@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "survival_instinct:tier_i_kevlar"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "survival_instinct:steellium"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "id": "survival_instinct:tier_ii_kevlar"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "survival_instinct:cloth"
+    },
+    {
+      "item": "minecraft:gunpowder"
+    },
+    {
+      "item": "survival_instinct:coins"
+    },
+    {
+      "item": "survival_instinct:batteries"
+    },
+    {
+      "item": "survival_instinct:can"
+    },
+    {
+      "item": "survival_instinct:electronic_scrap"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:homemade_impact_bomb"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " a ",
+    "aba",
+    " a "
+  ],
+  "key": {
+    "a": {
+      "item": "survival_instinct:steellium"
+    },
+    "b": {
+      "item": "minecraft:blue_stained_glass_pane"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:armored_panel"
+  }
+}

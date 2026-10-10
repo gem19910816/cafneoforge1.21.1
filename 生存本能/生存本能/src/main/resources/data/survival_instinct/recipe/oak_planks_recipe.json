@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "aa",
+    "aa"
+  ],
+  "key": {
+    "a": {
+      "item": "survival_instinct:plank_sword"
+    }
+  },
+  "result": {
+    "count": 2,
+    "id": "minecraft:oak_planks"
+  }
+}

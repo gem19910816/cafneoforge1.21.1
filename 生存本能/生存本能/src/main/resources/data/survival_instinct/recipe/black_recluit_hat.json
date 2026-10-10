@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "aaa",
+    "aba"
+  ],
+  "key": {
+    "a": {
+      "item": "survival_instinct:tier_i_kevlar"
+    },
+    "b": {
+      "item": "minecraft:black_dye"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:black_recluit_armor_helmet"
+  }
+}

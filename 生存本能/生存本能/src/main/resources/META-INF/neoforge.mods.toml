@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="Academic Free License v3.0"
+
+[[mods]]
+modId="survival_instinct"
+version="1.0.2-port.1"
+displayName="Survival Instinct (Unofficial NeoForge Port)"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/survival-instinct"
+authors="tohir (original author), independent unofficial port"
+credits="Original mod by tohir, created using MCreator. Original code and artwork attribution retained."
+description='''Independent compatibility port of Survival Instinct 1.0.2 to NeoForge 1.21.1. Not an official release or author-endorsed build. See META-INF/CREDITS.txt for provenance and licensing caveats.'''
+
+[[dependencies.survival_instinct]]
+modId="neoforge"
+type="required"
+versionRange="[21.1.252,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.survival_instinct]]
+modId="minecraft"
+type="required"
+versionRange="[1.21.1,1.21.2)"
+ordering="NONE"
+side="BOTH"

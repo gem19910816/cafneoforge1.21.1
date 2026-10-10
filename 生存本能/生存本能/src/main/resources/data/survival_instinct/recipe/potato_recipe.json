@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "a"
+  ],
+  "key": {
+    "a": {
+      "item": "survival_instinct:potato_package"
+    }
+  },
+  "result": {
+    "count": 4,
+    "id": "minecraft:potato"
+  }
+}

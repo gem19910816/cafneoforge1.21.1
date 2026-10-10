@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aa",
+    "aa"
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:beetroot_seeds"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:beetroot_seeds_package"
+  }
+}

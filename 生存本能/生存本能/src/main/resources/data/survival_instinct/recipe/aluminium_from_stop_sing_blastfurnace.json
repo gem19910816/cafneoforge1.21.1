@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "experience": 1,
+  "cookingtime": 100,
+  "ingredient": {
+    "item": "survival_instinct:greataxe_stop_sign"
+  },
+  "result": {
+    "id": "survival_instinct:aluminium"
+  }
+}

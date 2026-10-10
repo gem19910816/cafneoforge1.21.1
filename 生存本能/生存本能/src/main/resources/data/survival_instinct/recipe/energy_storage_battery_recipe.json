@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aba",
+    "cdc",
+    "ebe"
+  ],
+  "key": {
+    "a": {
+      "item": "survival_instinct:electronic_scrap"
+    },
+    "b": {
+      "item": "survival_instinct:aluminium"
+    },
+    "c": {
+      "item": "survival_instinct:batteries"
+    },
+    "d": {
+      "item": "survival_instinct:can"
+    },
+    "e": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:energy_storage_battery"
+  }
+}

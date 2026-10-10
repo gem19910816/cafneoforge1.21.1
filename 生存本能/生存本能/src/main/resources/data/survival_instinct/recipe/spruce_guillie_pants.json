@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "aaa",
+    "aba",
+    "a a"
+  ],
+  "key": {
+    "a": {
+      "item": "survival_instinct:tier_ii_kevlar"
+    },
+    "b": {
+      "item": "minecraft:spruce_leaves"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:spruce_guillie_leggings"
+  }
+}

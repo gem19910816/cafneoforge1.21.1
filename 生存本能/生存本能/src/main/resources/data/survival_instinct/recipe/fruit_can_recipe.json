@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "minecraft:fruit"
+    },
+    {
+      "tag": "minecraft:fruit"
+    },
+    {
+      "item": "survival_instinct:can"
+    },
+    {
+      "tag": "minecraft:fruit"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:fruit_can"
+  }
+}

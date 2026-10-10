@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "neoforge:disassembler"
+    },
+    {
+      "item": "survival_instinct:glaive_circular_saw"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:circular_saw"
+  }
+}

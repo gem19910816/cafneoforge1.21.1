@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "bcb",
+    "bbb"
+  ],
+  "key": {
+    "a": {
+      "item": "survival_instinct:cloth"
+    },
+    "b": {
+      "item": "survival_instinct:empty_bottle"
+    },
+    "c": {
+      "item": "survival_instinct:gasoline_can"
+    }
+  },
+  "result": {
+    "count": 5,
+    "id": "survival_instinct:molotov_cocktail"
+  }
+}

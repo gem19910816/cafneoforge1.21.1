@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "aa",
+    "bb"
+  ],
+  "key": {
+    "a": {
+      "item": "survival_instinct:plank_sword"
+    },
+    "b": {
+      "item": "survival_instinct:nail"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:barricade"
+  }
+}

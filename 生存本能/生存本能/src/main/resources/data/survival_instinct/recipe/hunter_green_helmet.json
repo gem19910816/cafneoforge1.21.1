@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "survival_instinct:green_rockie_armor_helmet"
+    },
+    {
+      "item": "survival_instinct:night_vision_goggles_helmet"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:green_hunter_helmet"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "experience": 1,
+  "cookingtime": 100,
+  "ingredient": {
+    "item": "survival_instinct:raw_steellium"
+  },
+  "result": {
+    "id": "survival_instinct:steellium"
+  }
+}

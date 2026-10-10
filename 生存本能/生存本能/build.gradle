@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id 'net.neoforged.moddev' version '2.0.148'
+}
+group = 'net.mcreator.survivalinstinct'
+version = '1.0.2-port.1'
+base { archivesName = 'survival-instinct-neoforge-1.21.1' }
+java {
+    toolchain { languageVersion = JavaLanguageVersion.of(21) }
+    withSourcesJar()
+}
+if (project.hasProperty('verifyPort')) {
+    sourceSets.main.java.srcDir 'src/verification/java'
+}
+neoForge {
+    version = '21.1.252'
+    runs {
+        client {
+            client()
+            if (project.hasProperty('verifyPort')) systemProperty 'survivalinstinct.verifyClient', 'true'
+        }
+        server {
+            server()
+            programArgument '--nogui'
+            if (project.hasProperty('verifyPort')) {
+                systemProperty 'survivalinstinct.verifyServer', 'true'
+                systemProperty 'survivalinstinct.keepTestServer', project.hasProperty('keepTestServer').toString()
+            }
+        }
+    }
+    mods { survival_instinct { sourceSet sourceSets.main } }
+}
+repositories { mavenCentral() }
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.compilerArgs.addAll(['-Xmaxerrs', '1000'])
+}
+tasks.named('jar', Jar).configure {
+    includeEmptyDirs = false
+    exclude 'net/mcreator/survivalinstinct/verification/**'
+}

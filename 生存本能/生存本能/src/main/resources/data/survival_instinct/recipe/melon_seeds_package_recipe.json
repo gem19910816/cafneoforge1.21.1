@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aa",
+    "aa"
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:melon_seeds"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:melon_seeds_package"
+  }
+}

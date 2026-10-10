@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " a ",
+    "aba",
+    " a "
+  ],
+  "key": {
+    "a": {
+      "item": "survival_instinct:tier_ii_kevlar"
+    },
+    "b": {
+      "item": "survival_instinct:polyethylene_sheet"
+    }
+  },
+  "result": {
+    "count": 4,
+    "id": "survival_instinct:body_armor_plate_ii"
+  }
+}

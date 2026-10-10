@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "a a",
+    "bbb",
+    "a a"
+  ],
+  "key": {
+    "a": {
+      "item": "survival_instinct:steellium_nugget"
+    },
+    "b": {
+      "item": "survival_instinct:steellium"
+    }
+  },
+  "result": {
+    "count": 6,
+    "id": "survival_instinct:wire"
+  }
+}

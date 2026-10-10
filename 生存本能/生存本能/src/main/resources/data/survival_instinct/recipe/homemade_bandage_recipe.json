@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aa"
+  ],
+  "key": {
+    "a": {
+      "item": "survival_instinct:cloth"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:homemade_bandage"
+  }
+}

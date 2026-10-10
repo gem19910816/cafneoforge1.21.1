@@ -1,0 +1,13 @@
+Survival Instinct - Unofficial NeoForge 1.21.1 Port
+
+Original author: tohir
+Original mod: Survival Instinct 1.0.2 for Minecraft Forge 1.20.1
+Original project: https://www.curseforge.com/minecraft/mc-mods/survival-instinct
+Original tooling credit: MCreator
+
+Original code, artwork, textures, structures and sounds belong to their respective authors.
+This independent compatibility port is not an official release or an endorsement by the original author.
+Original JAR metadata declares: Academic Free License v3.0.
+The project webpage has a conflicting All Rights Reserved label.
+No author permission has been obtained or implied by this port. Attribution is not a substitute for permission.
+Public redistribution requires resolving the conflicting declarations and satisfying the applicable license.

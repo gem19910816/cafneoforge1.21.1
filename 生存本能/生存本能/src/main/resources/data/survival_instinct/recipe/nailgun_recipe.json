@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "ab ",
+    "cdd",
+    "d  "
+  ],
+  "key": {
+    "a": {
+      "item": "survival_instinct:cloth"
+    },
+    "b": {
+      "item": "survival_instinct:nails_box"
+    },
+    "c": {
+      "item": "survival_instinct:propane"
+    },
+    "d": {
+      "item": "survival_instinct:steellium"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:nailgun"
+  }
+}

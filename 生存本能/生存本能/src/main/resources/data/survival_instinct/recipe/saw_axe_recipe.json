@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "  a",
+    " b ",
+    "b  "
+  ],
+  "key": {
+    "a": {
+      "item": "survival_instinct:circular_saw"
+    },
+    "b": {
+      "item": "survival_instinct:steellium_pipe_mace"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:saw_axe"
+  }
+}

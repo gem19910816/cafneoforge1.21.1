@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aba",
+    "aca"
+  ],
+  "key": {
+    "a": {
+      "item": "survival_instinct:steellium"
+    },
+    "b": {
+      "item": "survival_instinct:energy_storage_battery"
+    },
+    "c": {
+      "item": "survival_instinct:exo_component"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:exo_helmet"
+  }
+}

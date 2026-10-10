@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "aba"
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:stick"
+    },
+    "b": {
+      "item": "survival_instinct:wire"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:wire_trap"
+  }
+}

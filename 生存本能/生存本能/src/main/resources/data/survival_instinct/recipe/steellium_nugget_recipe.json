@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "a"
+  ],
+  "key": {
+    "a": {
+      "item": "survival_instinct:steellium"
+    }
+  },
+  "result": {
+    "count": 9,
+    "id": "survival_instinct:steellium_nugget"
+  }
+}

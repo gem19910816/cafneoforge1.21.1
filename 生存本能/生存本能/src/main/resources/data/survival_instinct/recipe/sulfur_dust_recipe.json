@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "a"
+  ],
+  "key": {
+    "a": {
+      "item": "survival_instinct:sulfur"
+    }
+  },
+  "result": {
+    "count": 3,
+    "id": "survival_instinct:sulfur_dust"
+  }
+}

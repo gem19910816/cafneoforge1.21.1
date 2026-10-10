@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aa",
+    "aa"
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:wheat_seeds"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:wheat_seeds_package"
+  }
+}

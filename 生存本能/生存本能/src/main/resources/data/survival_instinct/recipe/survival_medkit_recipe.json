@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "abc",
+    "def",
+    "ggh"
+  ],
+  "key": {
+    "a": {
+      "item": "survival_instinct:analgesic"
+    },
+    "b": {
+      "item": "survival_instinct:adrenaline_syringe"
+    },
+    "c": {
+      "item": "survival_instinct:bandage"
+    },
+    "d": {
+      "item": "survival_instinct:blood_syringe"
+    },
+    "e": {
+      "item": "survival_instinct:empty_bag"
+    },
+    "f": {
+      "item": "survival_instinct:morphine_syringe"
+    },
+    "g": {
+      "item": "survival_instinct:antibiotics"
+    },
+    "h": {
+      "item": "survival_instinct:alcohol_wipes"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "survival_instinct:survival_medkit"
+  }
+}
