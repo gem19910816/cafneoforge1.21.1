@@ -143,7 +143,32 @@
    `height_ge_normal_entities` 与 `hell_orb` 两个标签的 `values` 是空数组。
 5. 若干无人引用的遗留文件（`models/block/HellPortalFrame.json` 大写、`* (copia 1).png`、
    `acid_effect (old).png`、`sounds/flesh eater.txt`、`blockbench/`、`geo/*.bbmodel` 等），
-   因为没有任何 blockstate / 模型引用，Minecraft 不会加载，只是占体积。
+   部分文件不会被实体引用，但资源扫描仍可能报告非法路径；Geo/动画 JSON
+   尤其会被 GeckoLib 自动扫描。已确认的客户端重载问题见下方补丁说明。
+
+## 2026-10-10 客户端资源重载补丁
+
+修正 `geo/` 和 `animations/` 下四个 `skeleton_corpse_without_*_arm_II`
+文件名，改为合法的小写 `_ii`。原发布 JAR 中另有大写
+`exarracK_hydra.animation.json`，保留为 `exarrack_hydra_legacy.animation.json`，
+不覆盖实际使用的 `exarrack_hydra.animation.json`；这两份动画同时同步到源码。
+发布 JAR 已更新，本次仅修改资源路径，1231 个 Java 类逐字节未变。
+
+2026-10-10 15:52 的整合包日志确认：切换资源包时，GeckoLib 扫描到大写模型路径，
+随后读取失败。Lightspeed 2.0.2hotfix 的异常隔离将失败转换为成功，
+但未释放资源准备屏障，可能使其他监听器一直等待。
+因此，“没有实体引用的文件不会被加载”不适用于 GeckoLib 的目录扫描。
+这些非法文件名在 1.20.1 原包中也存在；并未证明旧版加载器会容忍它们，
+也不能据此归咎于 GeckoLib 本体。
+
+检查：Geo/动画 JSON 路径合法、JSON 可解析、源码与发布包对应资源内容一致、
+所有原代码类未变。补丁后客户端启动并进入世界已有日志记录；
+**切换资源包完成仍未实机确认**。脚步声音效问题不在本补丁的验证范围内。
+若使用上述 Lightspeed 版本，可关闭其 `isolateModdedResourceReloadFailures`
+以免吞掉加载异常；这是整合包配置，不包含在本仓库的 Gore JAR 中。
+
+资源回归检查：在本目录运行 `pwsh -File tools/verify-resource-reload.ps1`。
+本次发布包在原 JAR 上应用资源补丁，未重新编译 Java。
 
 ## 许可
 
