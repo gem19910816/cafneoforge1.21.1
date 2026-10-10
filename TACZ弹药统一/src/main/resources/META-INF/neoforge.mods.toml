@@ -1,0 +1,36 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "${mod_license}"
+[[mods]]
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
+authors = "${mod_authors}"
+description = '''${mod_description}'''
+displayURL = "https://github.com/Scarasol/Tacz-Unidict"
+[[mixins]]
+config = "tud.mixins.json"
+[[dependencies.tacz_unidict]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1.252,)"
+ordering = "NONE"
+side = "BOTH"
+[[dependencies.tacz_unidict]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1]"
+ordering = "NONE"
+side = "BOTH"
+[[dependencies.tacz_unidict]]
+modId = "tacz"
+type = "required"
+versionRange = "[1.1.8-hotfix-r7]"
+ordering = "AFTER"
+side = "BOTH"
+[[dependencies.tacz_unidict]]
+modId = "ammo_unify"
+type = "incompatible"
+versionRange = "[0,)"
+ordering = "NONE"
+side = "BOTH"
