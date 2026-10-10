@@ -30,8 +30,16 @@ repositories {
 
 dependencies {
     // Optional at runtime, but required to compile the animated renderers / procedures.
-    compileOnly "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
-    compileOnly "maven.modrinth:playeranimator:${playeranimator_version}"
+    if (project.hasProperty('geckolib_jar')) {
+        compileOnly files(project.property('geckolib_jar'))
+    } else {
+        compileOnly "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
+    }
+    if (project.hasProperty('playeranimator_jar')) {
+        compileOnly files(project.property('playeranimator_jar'))
+    } else {
+        compileOnly "maven.modrinth:playeranimator:${playeranimator_version}"
+    }
 }
 
 var generateModMetadata = tasks.register('generateModMetadata', ProcessResources) {

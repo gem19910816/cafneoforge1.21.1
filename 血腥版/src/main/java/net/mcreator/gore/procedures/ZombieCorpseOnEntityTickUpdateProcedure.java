@@ -13,6 +13,9 @@ import net.minecraft.world.level.LevelAccessor;
 
 public class ZombieCorpseOnEntityTickUpdateProcedure {
    public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
+      if (entity instanceof ZombieCorpseEntity corpse && corpse.getPersistentData().getBoolean("gore_downed")) {
+         tickDownedCorpse(corpse);
+      }
       if (entity != null && entity.getPersistentData().getBoolean("fast_death")) {
          if (entity.getPersistentData().getDouble("tiimer") == 0.0 && entity instanceof ZombieCorpseEntity) {
             ((ZombieCorpseEntity)entity).setAnimation("zombie.fast_cut");
@@ -47,5 +50,30 @@ public class ZombieCorpseOnEntityTickUpdateProcedure {
             entity.kill();
          }
       }
+   }
+
+   private static void tickDownedCorpse(ZombieCorpseEntity corpse) {
+      int ticks = corpse.getPersistentData().getInt("gore_downed_ticks");
+      if (ticks == 48) {
+         corpse.setAnimation("empty");
+      }
+      if (ticks > 0) {
+         corpse.getPersistentData().putInt("gore_downed_ticks", ticks - 1);
+      }
+      if (ticks > 0) {
+         return;
+      }
+
+      if (corpse.level() instanceof net.minecraft.server.level.ServerLevel level
+         && corpse.getPersistentData().hasUUID("gore_downed_corpse")) {
+         Entity original = level.getEntity(corpse.getPersistentData().getUUID("gore_downed_corpse"));
+         if (original instanceof net.minecraft.world.entity.Mob mob && !mob.isRemoved()) {
+            mob.setNoAi(corpse.getPersistentData().getBoolean("gore_downed_old_no_ai"));
+            mob.setInvisible(corpse.getPersistentData().getBoolean("gore_downed_old_invisible"));
+            mob.getPersistentData().remove("gore_downed");
+            mob.getPersistentData().remove("gore_downed_corpse");
+         }
+      }
+      corpse.remove(Entity.RemovalReason.DISCARDED);
    }
 }
