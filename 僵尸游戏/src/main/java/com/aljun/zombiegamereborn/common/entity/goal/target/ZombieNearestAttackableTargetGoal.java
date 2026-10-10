@@ -1,5 +1,6 @@
 package com.aljun.zombiegamereborn.common.entity.goal.target;
 
+import com.aljun.zombiegamereborn.common.entity.awareness.AwarenessManager;
 import com.aljun.zombiegamereborn.utils.ZombieUtils;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -93,6 +94,9 @@ public class ZombieNearestAttackableTargetGoal extends TargetGoal {
 
     @Override
     public boolean canUse() {
+        if (AwarenessManager.isTargetDistracted(this.mob, this.mob.level().getGameTime())) {
+            return false;
+        }
         if (this.randomInterval > 0 && this.mob.getRandom().nextInt(this.randomInterval) != 0) {
             return false;
         }
@@ -114,6 +118,14 @@ public class ZombieNearestAttackableTargetGoal extends TargetGoal {
      */
     @Override
     public void tick() {
+        long now = this.mob.level().getGameTime();
+        if (AwarenessManager.shouldInterruptTarget(this.mob, now)) {
+            AwarenessManager.distractTarget(this.mob, now);
+            this.mob.setTarget(null);
+            this.target = null;
+            this.matchedEntry = null;
+            return;
+        }
         super.tick();
 
         if (--this.recheckCooldown > 0) return;
@@ -216,6 +228,9 @@ public class ZombieNearestAttackableTargetGoal extends TargetGoal {
 
     @Override
     public boolean canContinueToUse() {
+        if (AwarenessManager.isTargetDistracted(this.mob, this.mob.level().getGameTime())) {
+            return false;
+        }
         LivingEntity livingentity = this.mob.getTarget();
         if (livingentity == null) return false;
         if (!livingentity.isAlive()) return false;
