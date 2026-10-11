@@ -221,7 +221,7 @@ public final class ZombieDownedRenderHandler {
       float duration = state != null ? state.duration() : staggerDuration(marker);
       float elapsed = state != null ? state.elapsed(entity.level().getGameTime(), partialTick)
          : duration - marker.getDuration() + partialTick;
-      float yaw = marker.getAmplifier() * (360.0F / 256.0F);
+      float yaw = marker == null ? 0.0F : marker.getAmplifier() * (360.0F / 256.0F);
       float direction = state != null ? state.direction() : Mth.wrapDegrees(entity.yBodyRot - yaw);
       Vector3f root = ZombieShoveAnimation.directional(false, direction, "root", "rotation", elapsed / duration);
       applyRootRotation(stack, root, state != null ? state.bodyYaw() : entity.yBodyRot);
