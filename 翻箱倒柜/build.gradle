@@ -1,0 +1,130 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'net.neoforged.moddev' version '2.0.148'
+}
+
+if (providers.gradleProperty('portTests').isPresent()) {
+    sourceSets.main.java.srcDir 'src/portTest/java'
+}
+
+neoForge {
+    version = neo_version
+    runs {
+        client {
+            client()
+            if (providers.gradleProperty('portTests').isPresent()) {
+                systemProperty 'rummage.portClientTests', 'true'
+                programArgument '--quickPlaySingleplayer'
+                programArgument 'PortTest'
+            }
+        }
+        server {
+            server()
+            programArgument '--nogui'
+            if (providers.gradleProperty('portTests').isPresent()) {
+                systemProperty 'rummage.portTests', 'true'
+            }
+        }
+        gameTestServer {
+            type = 'gameTestServer'
+        }
+        data {
+            data()
+            programArgument '--mod'
+            programArgument project.mod_id
+            programArgument '--all'
+            programArgument '--output'
+            programArgument file('src/generated/resources/').absolutePath
+            programArgument '--existing'
+            programArgument file('src/main/resources/').absolutePath
+        }
+    }
+    mods {
+        rummage {
+            sourceSet sourceSets.main
+        }
+        item_rarity {
+            sourceSet project(':item-rarity').sourceSets.main
+        }
+    }
+}
+
+version = mod_version
+group = mod_group_id
+
+base { archivesName = mod_id }
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+repositories {
+    flatDir { dir 'libs' }
+    maven {
+        url = 'https://www.cursemaven.com'
+        content { includeGroup 'curse.maven' }
+    }
+    maven {
+        url = 'https://maven.blamejared.com'
+        content { includeGroup 'noobanidus.mods.lootr' }
+    }
+}
+
+dependencies {
+    implementation project(':item-rarity')
+    compileOnly files(
+            'libs/petiteinventory-neoforge.jar',
+            'libs/corpse-neoforge.jar',
+            'libs/lootr-neoforge.jar'
+    )
+    if (providers.gradleProperty('compatTests').isPresent()) {
+        runtimeOnly files('libs/corpse-neoforge.jar', 'libs/lootr-neoforge.jar', 'libs/petiteinventory-neoforge.jar',
+                'libs/sophisticated-core.jar', 'libs/sophisticated-backpacks.jar')
+    }
+}
+
+tasks.withType(ProcessResources).configureEach {
+    var replaceProperties = [
+            minecraft_version      : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+            mod_authors             : mod_authors,
+            mod_description        : mod_description
+    ]
+    inputs.properties replaceProperties
+    filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties
+    }
+}
+
+tasks.named('jar', Jar).configure {
+    exclude 'com/scarasol/rummage/porttest/**'
+    from('LICENSE')
+    from('CREDITS.txt')
+    manifest {
+        attributes([
+                'Specification-Title'     : mod_id,
+                'Specification-Vendor'    : mod_authors,
+                'Specification-Version'   : '1',
+                'Implementation-Title'    : project.name,
+                'Implementation-Version'  : project.jar.archiveVersion,
+                'Implementation-Vendor'   : mod_authors,
+                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+publishing {
+    publications {
+        register('mavenJava', MavenPublication) { from components.java }
+    }
+    repositories {
+        maven { url = "file://${project.projectDir}/mcmodsrepo" }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }

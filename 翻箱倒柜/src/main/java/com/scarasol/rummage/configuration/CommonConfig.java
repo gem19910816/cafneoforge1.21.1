@@ -1,0 +1,249 @@
+package com.scarasol.rummage.configuration;
+
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import net.minecraft.core.registries.BuiltInRegistries;
+
+import javax.annotation.Nullable;
+import java.util.*;
+
+/**
+ * @author Scarasol
+ */
+public class CommonConfig {
+    public static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
+    public static final ModConfigSpec SPEC;
+
+    // 基础配置项
+    public static final ModConfigSpec.ConfigValue<Double> RUMMAGE_TIME;
+    public static final ModConfigSpec.ConfigValue<String> RUMMAGE_SOUND;
+    public static final ModConfigSpec.ConfigValue<Boolean> CHAIN_RUMMAGING;
+    public static final ModConfigSpec.ConfigValue<Double> DESTROY_CHANCE;
+
+    // 新增：创造模式配置项
+    public static final ModConfigSpec.ConfigValue<Boolean> CREATIVE_RUMMAGE;
+
+    // 黑名单配置项
+    public static final ModConfigSpec.ConfigValue<List<? extends String>> RUMMAGE_BLACKLIST;
+
+    // 兼容配置项 (Item Rarity)
+    public static final ModConfigSpec.ConfigValue<List<? extends String>> RARITY_BASED_RUMMAGE_TIMES;
+    public static final ModConfigSpec.ConfigValue<List<? extends String>> RARITY_BASED_RUMMAGE_SOUND;
+    public static final ModConfigSpec.ConfigValue<List<? extends String>> RARITY_BASED_DESTROY_CHANCE;
+
+    // 兼容配置项 (Sona)
+    public static final ModConfigSpec.ConfigValue<Boolean> SONA_EXPOSURE;
+
+    // 兼容配置项 (Corpse)
+    public static final ModConfigSpec.ConfigValue<Boolean> RUMMAGE_OWN_CORPSE;
+
+    // 运行时缓存 Map/Set
+    private static final Map<String, Double> RARITY_BASED_RUMMAGE_TIMES_MAP = new HashMap<>();
+    private static final Map<String, SoundEvent> RARITY_BASED_RUMMAGE_SOUND_MAP = new HashMap<>();
+    private static final Map<String, Double> RARITY_BASED_DESTROY_CHANCE_MAP = new HashMap<>();
+
+    private static final Set<ResourceLocation> RUMMAGE_BLACKLIST_SET = new HashSet<>();
+
+    private static SoundEvent RUMMAGE_SOUND_EVENT = null;
+
+    // 懒加载与重载标记
+    private static boolean loaded = false;
+
+    static {
+        // --- 通用设置 ---
+        RUMMAGE_TIME = BUILDER.comment(
+                "Time required to rummage for an item.",
+                "The speed multiplier for each player can be individually adjusted via the /rummage command."
+        ).defineInRange("Rummage Time (Sec)", 0.8D, 0, 5000);
+
+        RUMMAGE_SOUND = BUILDER.comment(
+                "The default sound played when an item is rummaged successfully."
+        ).define("Rummage Sound", "rummage:normal_deltaforce");
+
+        CHAIN_RUMMAGING = BUILDER.comment(
+                "Whether to enable chain rummaging for all players.",
+                "If set to false, chain rummaging can only be enabled for specific players via the /rummage command or by modifying the entity attribute."
+        ).define("Chain Rummaging", true);
+
+        DESTROY_CHANCE = BUILDER.comment(
+                "The probability of each item being destroyed if the container is broken before rummaging is complete.",
+                "The probability multiplier for each player can be individually adjusted via the /rummage command."
+        ).defineInRange("Destroy Chance", 0.05D, 0, 1);
+
+        // 新增：创造模式翻找
+        CREATIVE_RUMMAGE = BUILDER.comment(
+                "Whether players in Creative Mode need to rummage for items."
+        ).define("Creative Rummage", true);
+
+        // --- 黑名单设置 ---
+        List<String> defaultBlacklist = new ArrayList<>();
+        defaultBlacklist.add("minecraft:ender_chest");
+        RUMMAGE_BLACKLIST = BUILDER.comment(
+                "A list of container block/entity IDs that should bypass the rummaging mechanic.",
+                "Format: 'modid:container_id' (e.g., 'minecraft:chest')."
+        ).defineList("Rummage Blacklist", defaultBlacklist, obj -> obj instanceof String);
+
+        // --- 兼容设置: Item Rarity ---
+        BUILDER.push("Compat - Item Rarity");
+
+        // 1. 默认时间配置
+        List<String> defaultTimes = new ArrayList<>();
+        defaultTimes.add("uncommon, 1.2");
+        defaultTimes.add("rare, 1.8");
+        defaultTimes.add("epic, 2.5");
+        defaultTimes.add("legendary, 4.0");
+        defaultTimes.add("artifact, 5.0");
+
+        RARITY_BASED_RUMMAGE_TIMES = BUILDER.comment(
+                "Rummage durations for different item rarities when Item Rarity is installed.",
+                "Format: 'rarity_id, duration' (e.g., 'epic, 4.0' means epic items take 4 seconds to rummage).",
+                "You can specify a minimum rarity threshold for each player via the /rummage command, below which items do not need to be rummaged."
+        ).defineList("Rarity-Based Rummage Times", defaultTimes, obj -> obj instanceof String);
+
+        // 2. 默认声音配置
+        List<String> defaultSounds = new ArrayList<>();
+        defaultSounds.add("uncommon, rummage:uncommon_deltaforce");
+        defaultSounds.add("rare, rummage:rare_deltaforce");
+        defaultSounds.add("epic, rummage:epic_deltaforce");
+        defaultSounds.add("legendary, rummage:legendary_deltaforce");
+        defaultSounds.add("artifact, rummage:artifact_deltaforce");
+
+        RARITY_BASED_RUMMAGE_SOUND = BUILDER.comment(
+                "Sound effects played upon completing a rummage for different item rarities when Item Rarity is installed.",
+                "Format: 'rarity_id, sound_location' (e.g., 'epic, minecraft:example_sound' means epic items play that sound when found)."
+        ).defineList("Rarity-Based Rummage Sound", defaultSounds, obj -> obj instanceof String);
+
+        // 3. 默认损毁概率配置
+        List<String> defaultChances = new ArrayList<>();
+        defaultChances.add("uncommon, 0.1");
+        defaultChances.add("rare, 0.25");
+        defaultChances.add("epic, 0.5");
+        defaultChances.add("legendary, 0.7");
+        defaultChances.add("artifact, 0.8");
+
+        RARITY_BASED_DESTROY_CHANCE = BUILDER.comment(
+                "Destruction probabilities for different item rarities when Item Rarity is installed.",
+                "Format: 'rarity_id, chance' (e.g., 'epic, 0.2' means epic items have a 20% chance to be destroyed)."
+        ).defineList("Rarity-Based Destroy Chance", defaultChances, obj -> obj instanceof String);
+
+        BUILDER.pop();
+
+        BUILDER.push("Compat - Sona Survival 101");
+        SONA_EXPOSURE = BUILDER.comment(
+                "If true, rummaging items will grant the Exposure effect.",
+                "If Petite Inventory is also installed, larger items will grant a higher level of Exposure.",
+                "If this is set to true, you can still allow specific players to rummage silently (bypassing the effect) via the /rummage command."
+        ).define("Sona Exposure", true);
+        BUILDER.pop();
+
+        BUILDER.push("Compat - Corpse");
+        RUMMAGE_OWN_CORPSE = BUILDER.comment(
+                "If true, players will need to rummage their own corpses."
+        ).define("Rummage Own Corpse", false);
+        BUILDER.pop();
+
+        SPEC = BUILDER.build();
+    }
+
+    public static void markDirty() {
+        loaded = false;
+    }
+
+    private static void ensureLoaded() {
+        if (!loaded) {
+            init();
+            loaded = true;
+        }
+    }
+
+    private static void init() {
+        RARITY_BASED_RUMMAGE_TIMES_MAP.clear();
+        RARITY_BASED_RUMMAGE_SOUND_MAP.clear();
+        RARITY_BASED_DESTROY_CHANCE_MAP.clear();
+        RUMMAGE_BLACKLIST_SET.clear();
+
+        ResourceLocation defaultSoundLoc = ResourceLocation.tryParse(RUMMAGE_SOUND.get());
+        if (defaultSoundLoc != null) {
+            RUMMAGE_SOUND_EVENT = BuiltInRegistries.SOUND_EVENT.get(defaultSoundLoc);
+        } else {
+            RUMMAGE_SOUND_EVENT = null;
+        }
+
+        // 解析黑名单
+        for (String entry : RUMMAGE_BLACKLIST.get()) {
+            ResourceLocation loc = ResourceLocation.tryParse(entry.trim());
+            if (loc != null) {
+                RUMMAGE_BLACKLIST_SET.add(loc);
+            }
+        }
+
+        // 解析翻找时间
+        for (String entry : RARITY_BASED_RUMMAGE_TIMES.get()) {
+            String[] parts = entry.split(",");
+            if (parts.length >= 2) {
+                try {
+                    RARITY_BASED_RUMMAGE_TIMES_MAP.put(parts[0].trim(), Double.parseDouble(parts[1].trim()));
+                } catch (NumberFormatException ignored) {}
+            }
+        }
+
+        // 解析翻找音效
+        for (String entry : RARITY_BASED_RUMMAGE_SOUND.get()) {
+            String[] parts = entry.split(",");
+            if (parts.length >= 2) {
+                String rarity = parts[0].trim();
+                ResourceLocation loc = ResourceLocation.tryParse(parts[1].trim());
+                if (loc != null) {
+                    SoundEvent sound = BuiltInRegistries.SOUND_EVENT.get(loc);
+                    if (sound != null) {
+                        RARITY_BASED_RUMMAGE_SOUND_MAP.put(rarity, sound);
+                    }
+                }
+            }
+        }
+
+        // 解析损毁概率
+        for (String entry : RARITY_BASED_DESTROY_CHANCE.get()) {
+            String[] parts = entry.split(",");
+            if (parts.length >= 2) {
+                try {
+                    RARITY_BASED_DESTROY_CHANCE_MAP.put(parts[0].trim(), Double.parseDouble(parts[1].trim()));
+                } catch (NumberFormatException ignored) {}
+            }
+        }
+    }
+
+    // --- 数据获取接口 ---
+
+    /**
+     * 判断指定 ID 是否在黑名单中
+     */
+    public static boolean isBlacklisted(@Nullable ResourceLocation id) {
+        if (id == null) return false;
+        ensureLoaded();
+        return RUMMAGE_BLACKLIST_SET.contains(id);
+    }
+
+    public static double getRummageTime(String rarityId) {
+        ensureLoaded();
+        return RARITY_BASED_RUMMAGE_TIMES_MAP.getOrDefault(rarityId, RUMMAGE_TIME.get());
+    }
+
+    @Nullable
+    public static SoundEvent getRummageSound(String rarityId) {
+        ensureLoaded();
+        return RARITY_BASED_RUMMAGE_SOUND_MAP.getOrDefault(rarityId, RUMMAGE_SOUND_EVENT);
+    }
+
+    public static double getDestroyChance(String rarityId) {
+        ensureLoaded();
+        return RARITY_BASED_DESTROY_CHANCE_MAP.getOrDefault(rarityId, DESTROY_CHANCE.get());
+    }
+
+    @Nullable
+    public static SoundEvent getBaseRummageSound() {
+        ensureLoaded();
+        return RUMMAGE_SOUND_EVENT;
+    }
+}
