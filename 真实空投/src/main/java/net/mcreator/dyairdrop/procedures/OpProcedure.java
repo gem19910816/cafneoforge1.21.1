@@ -23,7 +23,7 @@ public class OpProcedure {
             BlockState _bs = world.getBlockState(_bp);
             if (_blockEntity != null) {
                _blockEntity.getPersistentData()
-                  .putString("loot", PanelText.from(guistate).strip());
+                  .putString("loot", PanelText.from(guistate, entity).strip());
             }
 
             if (world instanceof Level _level) {
@@ -35,7 +35,7 @@ public class OpProcedure {
             _player.displayClientMessage(
                Component.literal(
                   Component.translatable("message.setloot").getString()
-                     + PanelText.from(guistate).strip()
+                     + PanelText.from(guistate, entity).strip()
                ),
                false
             );

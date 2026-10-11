@@ -59,6 +59,8 @@
   "block.dyairdrop.airdroplarge": "大型空投",
   "block.dyairdrop.safe": "保险箱",
   "message.lengtherror": "长度错误！密码必须为六位！",
+  "message.passwordwrong": "密码错误！",
+  "message.passwordcorrect": "解锁成功！",
   "block.dyairdrop.lockedairdroplarge": "上锁的大型空投",
   "gui.dyairdrop.panel.label_processing": "处理中..",
   "gui.dyairdrop.test_gui_2.label_correct": "success!",

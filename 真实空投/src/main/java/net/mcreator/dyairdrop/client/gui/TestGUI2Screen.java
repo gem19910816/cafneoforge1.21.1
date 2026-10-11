@@ -171,67 +171,56 @@ public class TestGUI2Screen extends AbstractContainerScreen<TestGUI2Menu> {
       this.addWidget(this.password_panel);
       this.button_2 = Button.builder(Component.translatable("gui.dyairdrop.test_gui_2.button_2"), e -> {
          net.neoforged.neoforge.network.PacketDistributor.sendToServer(new TestGUI2ButtonMessage(0, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-         TestGUI2ButtonMessage.handleButtonAction(this.entity, 0, this.x, this.y, this.z);
       }).bounds(this.leftPos + 55, this.topPos + 52, 21, 20).build();
       guistate.put("button:button_2", this.button_2);
       this.addRenderableWidget(this.button_2);
       this.button_1 = Button.builder(Component.translatable("gui.dyairdrop.test_gui_2.button_1"), e -> {
          net.neoforged.neoforge.network.PacketDistributor.sendToServer(new TestGUI2ButtonMessage(1, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-         TestGUI2ButtonMessage.handleButtonAction(this.entity, 1, this.x, this.y, this.z);
       }).bounds(this.leftPos + 19, this.topPos + 52, 20, 20).build();
       guistate.put("button:button_1", this.button_1);
       this.addRenderableWidget(this.button_1);
       this.button_3 = Button.builder(Component.translatable("gui.dyairdrop.test_gui_2.button_3"), e -> {
          net.neoforged.neoforge.network.PacketDistributor.sendToServer(new TestGUI2ButtonMessage(2, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-         TestGUI2ButtonMessage.handleButtonAction(this.entity, 2, this.x, this.y, this.z);
       }).bounds(this.leftPos + 91, this.topPos + 52, 20, 20).build();
       guistate.put("button:button_3", this.button_3);
       this.addRenderableWidget(this.button_3);
       this.button_4 = Button.builder(Component.translatable("gui.dyairdrop.test_gui_2.button_4"), e -> {
          net.neoforged.neoforge.network.PacketDistributor.sendToServer(new TestGUI2ButtonMessage(3, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-         TestGUI2ButtonMessage.handleButtonAction(this.entity, 3, this.x, this.y, this.z);
       }).bounds(this.leftPos + 19, this.topPos + 79, 20, 20).build();
       guistate.put("button:button_4", this.button_4);
       this.addRenderableWidget(this.button_4);
       this.button_5 = Button.builder(Component.translatable("gui.dyairdrop.test_gui_2.button_5"), e -> {
          net.neoforged.neoforge.network.PacketDistributor.sendToServer(new TestGUI2ButtonMessage(4, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-         TestGUI2ButtonMessage.handleButtonAction(this.entity, 4, this.x, this.y, this.z);
       }).bounds(this.leftPos + 55, this.topPos + 79, 21, 20).build();
       guistate.put("button:button_5", this.button_5);
       this.addRenderableWidget(this.button_5);
       this.button_6 = Button.builder(Component.translatable("gui.dyairdrop.test_gui_2.button_6"), e -> {
          net.neoforged.neoforge.network.PacketDistributor.sendToServer(new TestGUI2ButtonMessage(5, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-         TestGUI2ButtonMessage.handleButtonAction(this.entity, 5, this.x, this.y, this.z);
       }).bounds(this.leftPos + 91, this.topPos + 79, 20, 20).build();
       guistate.put("button:button_6", this.button_6);
       this.addRenderableWidget(this.button_6);
       this.button_7 = Button.builder(Component.translatable("gui.dyairdrop.test_gui_2.button_7"), e -> {
          net.neoforged.neoforge.network.PacketDistributor.sendToServer(new TestGUI2ButtonMessage(6, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-         TestGUI2ButtonMessage.handleButtonAction(this.entity, 6, this.x, this.y, this.z);
       }).bounds(this.leftPos + 19, this.topPos + 106, 20, 20).build();
       guistate.put("button:button_7", this.button_7);
       this.addRenderableWidget(this.button_7);
       this.button_8 = Button.builder(Component.translatable("gui.dyairdrop.test_gui_2.button_8"), e -> {
          net.neoforged.neoforge.network.PacketDistributor.sendToServer(new TestGUI2ButtonMessage(7, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-         TestGUI2ButtonMessage.handleButtonAction(this.entity, 7, this.x, this.y, this.z);
       }).bounds(this.leftPos + 55, this.topPos + 106, 21, 20).build();
       guistate.put("button:button_8", this.button_8);
       this.addRenderableWidget(this.button_8);
       this.button_9 = Button.builder(Component.translatable("gui.dyairdrop.test_gui_2.button_9"), e -> {
          net.neoforged.neoforge.network.PacketDistributor.sendToServer(new TestGUI2ButtonMessage(8, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-         TestGUI2ButtonMessage.handleButtonAction(this.entity, 8, this.x, this.y, this.z);
       }).bounds(this.leftPos + 91, this.topPos + 106, 20, 20).build();
       guistate.put("button:button_9", this.button_9);
       this.addRenderableWidget(this.button_9);
       this.button_x = Button.builder(Component.translatable("gui.dyairdrop.test_gui_2.button_x"), e -> {
          net.neoforged.neoforge.network.PacketDistributor.sendToServer(new TestGUI2ButtonMessage(9, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-         TestGUI2ButtonMessage.handleButtonAction(this.entity, 9, this.x, this.y, this.z);
       }).bounds(this.leftPos + 19, this.topPos + 133, 20, 20).build();
       guistate.put("button:button_x", this.button_x);
       this.addRenderableWidget(this.button_x);
       this.button_0 = Button.builder(Component.translatable("gui.dyairdrop.test_gui_2.button_0"), e -> {
          net.neoforged.neoforge.network.PacketDistributor.sendToServer(new TestGUI2ButtonMessage(10, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-         TestGUI2ButtonMessage.handleButtonAction(this.entity, 10, this.x, this.y, this.z);
       }).bounds(this.leftPos + 55, this.topPos + 133, 21, 20).build();
       guistate.put("button:button_0", this.button_0);
       this.addRenderableWidget(this.button_0);
@@ -247,7 +236,7 @@ public class TestGUI2Screen extends AbstractContainerScreen<TestGUI2Menu> {
       }).bounds(this.leftPos + 154, this.topPos + 120, 27, 20).build(builder -> new Button(builder) {
             public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
                if (OpshowProcedure.execute(TestGUI2Screen.this.entity)) {
-                  super.render(guiGraphics, gx, gy, ticks);
+                  super.renderWidget(guiGraphics, gx, gy, ticks);
                }
             }
          });
@@ -260,7 +249,7 @@ public class TestGUI2Screen extends AbstractContainerScreen<TestGUI2Menu> {
       }).bounds(this.leftPos + 154, this.topPos + 102, 18, 20).build(builder -> new Button(builder) {
             public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
                if (OpshowProcedure.execute(TestGUI2Screen.this.entity)) {
-                  super.render(guiGraphics, gx, gy, ticks);
+                  super.renderWidget(guiGraphics, gx, gy, ticks);
                }
             }
          });
@@ -273,7 +262,7 @@ public class TestGUI2Screen extends AbstractContainerScreen<TestGUI2Menu> {
       }).bounds(this.leftPos + 154, this.topPos + 84, 19, 20).build(builder -> new Button(builder) {
             public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
                if (OpshowProcedure.execute(TestGUI2Screen.this.entity)) {
-                  super.render(guiGraphics, gx, gy, ticks);
+                  super.renderWidget(guiGraphics, gx, gy, ticks);
                }
             }
          });

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 import net.mcreator.dyairdrop.init.DyairdropModMenus;
+import net.mcreator.dyairdrop.compat.PasswordUtil;
 import net.mcreator.dyairdrop.procedures.PannelREshutProcedure;
 import net.mcreator.dyairdrop.procedures.PannelREticksProcedure;
 import net.minecraft.core.BlockPos;
@@ -82,6 +83,12 @@ public class PannelREMenu extends AbstractContainerMenu implements Supplier<Map<
    public void removed(Player playerIn) {
       super.removed(playerIn);
       PannelREshutProcedure.execute(this.entity);
+      if (!this.world.isClientSide()) {
+         String valid = PasswordUtil.blockString(this.world, new BlockPos(this.x, this.y, this.z), "valid");
+         if (valid.equals(playerIn.getDisplayName().getString()) || "shutdown".equals(valid)) {
+            PasswordUtil.setBlockString(this.world, new BlockPos(this.x, this.y, this.z), "valid", "");
+         }
+      }
    }
 
    public Map<Integer, Slot> get() {

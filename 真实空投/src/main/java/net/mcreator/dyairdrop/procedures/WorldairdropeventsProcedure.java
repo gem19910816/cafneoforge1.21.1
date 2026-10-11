@@ -1,11 +1,11 @@
 package net.mcreator.dyairdrop.procedures;
 
-import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.List;
 import net.mcreator.dyairdrop.configuration.AirdropconfigConfiguration;
-import net.minecraft.world.entity.Entity;
+import net.mcreator.dyairdrop.world.AirdropScheduleData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
@@ -17,41 +17,32 @@ public class WorldairdropeventsProcedure {
 
    @SubscribeEvent
    public static void onWorldTick(LevelTickEvent.Post event) {
-               execute(event, event.getLevel());
+      if (event.getLevel() instanceof ServerLevel level) {
+         execute(level);
+      }
    }
 
-   public static void execute(LevelAccessor world) {
-      execute(null, world);
-   }
+   public static void execute(ServerLevel world) {
+      if (!(Boolean)AirdropconfigConfiguration.ENABLEAIRDROPEVENTS.get()
+         || !world.dimension().equals(Level.OVERWORLD)) {
+         return;
+      }
 
-   private static void execute(@Nullable Event event, LevelAccessor world) {
-      Entity player = null;
-      String loottable = "";
-      String modid = "";
-      String worldlist = "";
-      String drifts = "";
-      double gap = 0.0;
-      double now = 0.0;
-      double level = 0.0;
-      double coefficient = 0.0;
-      double position = 0.0;
-      double height = 0.0;
-      double drift = 0.0;
-      double driftmin = 0.0;
-      double driftmax = 0.0;
-      if ((Boolean)AirdropconfigConfiguration.ENABLEAIRDROPEVENTS.get() && (world instanceof Level _lvl ? _lvl.dimension() : Level.OVERWORLD) == Level.OVERWORLD) {
-         if ((Double)AirdropconfigConfiguration.GAP.get() < 1.0) {
-            coefficient = 1.0;
-         } else {
-            coefficient = (double)Math.round((Double)AirdropconfigConfiguration.GAP.get());
-         }
+      double configuredDays = AirdropconfigConfiguration.GAP.get();
+      long daysBetween = Double.isFinite(configuredDays) ? Math.round(configuredDays) : 10L;
+      daysBetween = Math.min(Long.MAX_VALUE / 24000L, Math.max(1L, daysBetween));
+      long interval = daysBetween * 24000L;
+      if (!AirdropScheduleData.get(world).poll(world.getGameTime(), interval)) {
+         return;
+      }
 
-         gap = coefficient * 24000.0;
-         now = (double)Math.abs(world.dayTime() - 100L);
-         level = now / gap;
-         if (level >= 1.0 && now % gap == 0.0) {
-            RandomworldairdropProcedure.execute(world);
-         }
+      List<String> dimensions = Arrays.stream(AirdropconfigConfiguration.AVAILABLEWORLD.get().split(","))
+         .map(String::trim).filter(id -> !id.isEmpty()).toList();
+      // A global event has one clock. Other dimensions contribute eligible players,
+      // and an empty server skips this opportunity without a burst on the next login.
+      if (world.getServer().getPlayerList().getPlayers().stream()
+         .anyMatch(player -> dimensions.contains(player.level().dimension().location().toString()))) {
+         RandomworldairdropProcedure.execute(world);
       }
    }
 }

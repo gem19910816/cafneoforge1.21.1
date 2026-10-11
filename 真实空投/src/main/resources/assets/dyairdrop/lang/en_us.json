@@ -59,6 +59,8 @@
   "block.dyairdrop.airdroplarge": "Lockedairdroplarge",
   "block.dyairdrop.safe": "Safe",
   "message.lengtherror": "The password must be six digits long!",
+  "message.passwordwrong": "Incorrect password!",
+  "message.passwordcorrect": "Unlocked!",
   "block.dyairdrop.lockedairdroplarge": "Lockedairdroplarge",
   "gui.dyairdrop.panel.label_processing": "processing",
   "gui.dyairdrop.test_gui_2.label_correct": "success!",

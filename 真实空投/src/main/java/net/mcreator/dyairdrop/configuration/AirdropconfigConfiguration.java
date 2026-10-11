@@ -36,7 +36,7 @@ public class AirdropconfigConfiguration {
    static {
       BUILDER.push("worldevents");
       ENABLEAIRDROPEVENTS = BUILDER.comment("是否启用全局空投事件").define("enable", true);
-      GAP = BUILDER.comment("每次空投的时间间隔，以天为单位").define("gap", 10.0);
+      GAP = BUILDER.comment("每次空投的实际运行间隔，以天为单位（1天=24000 tick）；首次等待完整间隔，睡觉和修改昼夜时间不加速").define("gap", 10.0);
       MAXLEVEL = BUILDER.comment("空投的最大等级（需要和对应空投文件的数量一致）").define("maxlevel", 5.0);
       ENABLELOCK = BUILDER.comment("全局空投是否需要密码解锁？").define("enablelock", false);
       DRIFT = BUILDER.comment("空投预计位置距离玩家的距离范围").define("drift", "50,100");
