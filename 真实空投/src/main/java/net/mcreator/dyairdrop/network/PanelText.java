@@ -2,6 +2,9 @@ package net.mcreator.dyairdrop.network;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import net.minecraft.world.entity.Entity;
 
 /**
  * MCreator keeps GUI text-box state in the screen's static {@code guistate} map, which
@@ -13,20 +16,52 @@ import java.util.Map;
  * single-player behaviour byte-for-byte identical to the original mod.
  */
 public class PanelText {
-   private static final Map<String, String> LAST = new HashMap<>();
+   private static final Map<UUID, String> LAST = new ConcurrentHashMap<>();
 
    public PanelText() {
    }
 
    public static void set(String text) {
-      LAST.put("text:password_panel", text == null ? "" : text);
+      set((UUID)null, text);
+   }
+
+   public static void set(Entity entity, String text) {
+      set(entity == null ? null : entity.getUUID(), text);
+   }
+
+   public static void set(UUID playerId, String text) {
+      if (playerId != null) {
+         LAST.put(playerId, text == null ? "" : text);
+      }
    }
 
    public static String get() {
-      return LAST.getOrDefault("text:password_panel", "");
+      return get((UUID)null);
+   }
+
+   public static String get(Entity entity) {
+      return get(entity == null ? null : entity.getUUID());
+   }
+
+   public static String get(UUID playerId) {
+      return playerId == null ? "" : LAST.getOrDefault(playerId, "");
    }
 
    public static String from(HashMap<?, ?> guistate) {
+      return from(guistate, null);
+   }
+
+   public static String from(HashMap<?, ?> guistate, Entity entity) {
+      // A packet carries the authoritative value from the player's screen. On
+      // an integrated server the static MCreator guistate can also contain a
+      // client EditBox, so prefer the per-player packet cache whenever it has
+      // been populated instead of reading a potentially stale widget.
+      if (entity != null) {
+         UUID playerId = entity.getUUID();
+         if (LAST.containsKey(playerId)) {
+            return LAST.getOrDefault(playerId, "");
+         }
+      }
       if (guistate != null) {
          Object widget = guistate.get("text:password_panel");
          if (widget != null) {
@@ -39,6 +74,6 @@ public class PanelText {
             }
          }
       }
-      return get();
+      return get(entity);
    }
 }

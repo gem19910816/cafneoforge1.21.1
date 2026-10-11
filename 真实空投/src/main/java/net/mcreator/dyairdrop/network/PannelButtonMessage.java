@@ -1,6 +1,7 @@
 package net.mcreator.dyairdrop.network;
 
 import java.util.HashMap;
+import net.mcreator.dyairdrop.compat.PasswordUtil;
 import net.mcreator.dyairdrop.procedures.Button0Procedure;
 import net.mcreator.dyairdrop.procedures.Button1Procedure;
 import net.mcreator.dyairdrop.procedures.Button2Procedure;
@@ -24,6 +25,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class PannelButtonMessage implements CustomPacketPayload {
@@ -41,7 +43,7 @@ public class PannelButtonMessage implements CustomPacketPayload {
          buf.writeInt(message.x);
          buf.writeInt(message.y);
          buf.writeInt(message.z);
-         buf.writeUtf(message.text);
+         buf.writeUtf(message.text, 32);
       },
       buf -> new PannelButtonMessage(buf.readInt(), buf.readInt(), buf.readInt(), buf.readInt(), buf.readUtf())
    );
@@ -63,61 +65,77 @@ public class PannelButtonMessage implements CustomPacketPayload {
    }
 
    public static void handle(PannelButtonMessage message, IPayloadContext context) {
-      PanelText.set(message.text);
       context.enqueueWork(() -> {
          Player entity = context.player();
-         if (entity != null) {
+         if (entity instanceof ServerPlayer) {
+            String input = PasswordUtil.normalizeDigits(message.text);
+            PanelText.set(entity, input);
+            // The old generated buttons appended to a server-side capability
+            // while the text box lived only on the client. Copy the submitted
+            // value first so typed input and keypad input use one source of truth.
+            if (message.buttonID <= 14) {
+               DyairdropModVariables.with(entity, variables -> {
+                  variables.password = input;
+                  variables.syncPlayerVariables(entity);
+               });
+            }
             handleButtonAction(entity, message.buttonID, message.x, message.y, message.z);
          }
       });
    }
 
    public static void handleButtonAction(Player entity, int buttonID, int x, int y, int z) {
+      if (!(entity instanceof ServerPlayer) || entity.level().isClientSide()
+         || !(entity.containerMenu instanceof PannelMenu menu)
+         || menu.x != x || menu.y != y || menu.z != z) {
+         return;
+      }
       Level world = entity.level();
       HashMap guistate = PannelMenu.guistate;
       if (world.hasChunkAt(new BlockPos(x, y, z))) {
+         String input = PasswordUtil.normalizeDigits(PanelText.get(entity));
          if (buttonID == 0) {
-            Button2Procedure.execute(entity, guistate);
+            setNumericInput(entity, input);
          }
 
          if (buttonID == 1) {
-            Button1Procedure.execute(entity, guistate);
+            setNumericInput(entity, input);
          }
 
          if (buttonID == 2) {
-            Button3Procedure.execute(entity, guistate);
+            setNumericInput(entity, input);
          }
 
          if (buttonID == 3) {
-            Button4Procedure.execute(entity, guistate);
+            setNumericInput(entity, input);
          }
 
          if (buttonID == 4) {
-            Button5Procedure.execute(entity, guistate);
+            setNumericInput(entity, input);
          }
 
          if (buttonID == 5) {
-            Button6Procedure.execute(entity, guistate);
+            setNumericInput(entity, input);
          }
 
          if (buttonID == 6) {
-            Button7Procedure.execute(entity, guistate);
+            setNumericInput(entity, input);
          }
 
          if (buttonID == 7) {
-            Button8Procedure.execute(entity, guistate);
+            setNumericInput(entity, input);
          }
 
          if (buttonID == 8) {
-            Button9Procedure.execute(entity, guistate);
+            setNumericInput(entity, input);
          }
 
          if (buttonID == 9) {
-            ButtondelateProcedure.execute(entity, guistate);
+            setNumericInput(entity, "");
          }
 
          if (buttonID == 10) {
-            Button0Procedure.execute(entity, guistate);
+            setNumericInput(entity, input);
          }
 
          if (buttonID == 11) {
@@ -136,6 +154,15 @@ public class PannelButtonMessage implements CustomPacketPayload {
             TestpwProcedure.execute(world, (double)x, (double)y, (double)z, entity);
          }
       }
+   }
+
+   private static void setNumericInput(Player entity, String input) {
+      DyairdropModVariables.with(entity, variables -> {
+         variables.password = input.length() > 6 ? input.substring(0, 6) : input;
+         variables.showlight = 0.0;
+         variables.pw = "";
+         variables.syncPlayerVariables(entity);
+      });
    }
 
 }

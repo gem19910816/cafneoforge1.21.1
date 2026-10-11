@@ -151,7 +151,6 @@ public class PannelRE2Screen extends AbstractContainerScreen<PannelRE2Menu> {
       this.imagebutton_a1 = new TextureButton(
          this.leftPos + 31, this.topPos + 29, 39, 22, 0, 0, 22, ResourceLocation.parse("dyairdrop:textures/screens/atlas/imagebutton_a1.png"), 39, 44, e -> {
             net.neoforged.neoforge.network.PacketDistributor.sendToServer(new PannelRE2ButtonMessage(0, this.x, this.y, this.z));
-            PannelRE2ButtonMessage.handleButtonAction(this.entity, 0, this.x, this.y, this.z);
          }
       );
       guistate.put("button:imagebutton_a1", this.imagebutton_a1);
@@ -159,7 +158,6 @@ public class PannelRE2Screen extends AbstractContainerScreen<PannelRE2Menu> {
       this.imagebutton_b1 = new TextureButton(
          this.leftPos + 31, this.topPos + 59, 39, 22, 0, 0, 22, ResourceLocation.parse("dyairdrop:textures/screens/atlas/imagebutton_b1.png"), 39, 44, e -> {
             net.neoforged.neoforge.network.PacketDistributor.sendToServer(new PannelRE2ButtonMessage(1, this.x, this.y, this.z));
-            PannelRE2ButtonMessage.handleButtonAction(this.entity, 1, this.x, this.y, this.z);
          }
       );
       guistate.put("button:imagebutton_b1", this.imagebutton_b1);
@@ -167,7 +165,6 @@ public class PannelRE2Screen extends AbstractContainerScreen<PannelRE2Menu> {
       this.imagebutton_c1 = new TextureButton(
          this.leftPos + 31, this.topPos + 88, 39, 22, 0, 0, 22, ResourceLocation.parse("dyairdrop:textures/screens/atlas/imagebutton_c1.png"), 39, 44, e -> {
             net.neoforged.neoforge.network.PacketDistributor.sendToServer(new PannelRE2ButtonMessage(2, this.x, this.y, this.z));
-            PannelRE2ButtonMessage.handleButtonAction(this.entity, 2, this.x, this.y, this.z);
          }
       );
       guistate.put("button:imagebutton_c1", this.imagebutton_c1);
@@ -175,7 +172,6 @@ public class PannelRE2Screen extends AbstractContainerScreen<PannelRE2Menu> {
       this.imagebutton_d1 = new TextureButton(
          this.leftPos + 99, this.topPos + 29, 39, 22, 0, 0, 22, ResourceLocation.parse("dyairdrop:textures/screens/atlas/imagebutton_d1.png"), 39, 44, e -> {
             net.neoforged.neoforge.network.PacketDistributor.sendToServer(new PannelRE2ButtonMessage(3, this.x, this.y, this.z));
-            PannelRE2ButtonMessage.handleButtonAction(this.entity, 3, this.x, this.y, this.z);
          }
       );
       guistate.put("button:imagebutton_d1", this.imagebutton_d1);
@@ -183,7 +179,6 @@ public class PannelRE2Screen extends AbstractContainerScreen<PannelRE2Menu> {
       this.imagebutton_e1 = new TextureButton(
          this.leftPos + 99, this.topPos + 59, 39, 22, 0, 0, 22, ResourceLocation.parse("dyairdrop:textures/screens/atlas/imagebutton_e1.png"), 39, 44, e -> {
             net.neoforged.neoforge.network.PacketDistributor.sendToServer(new PannelRE2ButtonMessage(4, this.x, this.y, this.z));
-            PannelRE2ButtonMessage.handleButtonAction(this.entity, 4, this.x, this.y, this.z);
          }
       );
       guistate.put("button:imagebutton_e1", this.imagebutton_e1);
@@ -191,7 +186,6 @@ public class PannelRE2Screen extends AbstractContainerScreen<PannelRE2Menu> {
       this.imagebutton_f1 = new TextureButton(
          this.leftPos + 99, this.topPos + 88, 39, 22, 0, 0, 22, ResourceLocation.parse("dyairdrop:textures/screens/atlas/imagebutton_f1.png"), 39, 44, e -> {
             net.neoforged.neoforge.network.PacketDistributor.sendToServer(new PannelRE2ButtonMessage(5, this.x, this.y, this.z));
-            PannelRE2ButtonMessage.handleButtonAction(this.entity, 5, this.x, this.y, this.z);
          }
       );
       guistate.put("button:imagebutton_f1", this.imagebutton_f1);

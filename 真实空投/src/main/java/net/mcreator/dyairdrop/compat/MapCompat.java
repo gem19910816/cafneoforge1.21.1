@@ -18,7 +18,8 @@ import net.minecraft.server.level.ServerPlayer;
  * <ol>
  *   <li>the original helper command, but only when it actually exists in the command
  *       dispatcher (so nothing is logged when it does not);</li>
- *   <li>Xaero's own waypoint sharing format, <code>xaero-waypoint:name:symbol:x:y:z:color:rotation:yaw</code>,
+ *   <li>Xaero's own waypoint sharing format, including the internal dimension field,
+ *       <code>xaero-waypoint:name:symbol:x:y:z:color:rotation:yaw:dimension</code>,
  *       sent as a system chat message. Xaero's Minimap turns that message into a
  *       clickable "add waypoint" entry, so the airdrop shows up on the minimap with
  *       nothing but Xaero's Minimap installed.</li>
@@ -70,10 +71,12 @@ public class MapCompat {
          + y + ":"
          + z + ":"
          + Math.max(0, colorIndex) + ":"
-         + "false:0";
+         + "false:0:Internal-" + level.dimension().location().getPath();
       Component component = Component.literal(message);
       for (ServerPlayer player : server.getPlayerList().getPlayers()) {
-         player.sendSystemMessage(component);
+         if (player.level() == level) {
+            player.sendSystemMessage(component);
+         }
       }
    }
 

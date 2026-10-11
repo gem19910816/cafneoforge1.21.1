@@ -3,7 +3,9 @@ package net.mcreator.dyairdrop.command;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
+import com.mojang.brigadier.builder.ArgumentBuilder;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.context.CommandContext;
 import net.mcreator.dyairdrop.procedures.Flycode2neoProcedure;
 import net.mcreator.dyairdrop.procedures.Flycode2neomapProcedure;
 import net.mcreator.dyairdrop.procedures.Flycode3neoProcedure;
@@ -11,196 +13,63 @@ import net.mcreator.dyairdrop.procedures.Flycode3neomapProcedure;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
-import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.common.util.FakePlayerFactory;
-import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
 
 @EventBusSubscriber
 public class SetairdropCommand {
-   public SetairdropCommand() {
+   private SetairdropCommand() {
    }
 
    @SubscribeEvent
    public static void registerCommand(RegisterCommandsEvent event) {
-      event.getDispatcher()
-         .register(
-            (LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal(
-                              "setairdrop"
-                           )
-                           .requires(s -> s.hasPermission(2)))
-                        .then(
-                           Commands.literal("free")
-                              .then(
-                                 Commands.argument("x", DoubleArgumentType.doubleArg())
-                                    .then(
-                                       Commands.argument("z", DoubleArgumentType.doubleArg())
-                                          .then(
-                                             Commands.argument("height", DoubleArgumentType.doubleArg(0.0, 320.0))
-                                                .then(
-                                                   Commands.argument("length", DoubleArgumentType.doubleArg(0.0, 512.0))
-                                                      .then(
-                                                         Commands.argument("blockid", StringArgumentType.string())
-                                                            .then(
-                                                               Commands.argument("loot_table", StringArgumentType.string())
-                                                                  .then(Commands.argument("pin", BoolArgumentType.bool()).executes(arguments -> {
-                                                                     Level world = ((CommandSourceStack)arguments.getSource()).getUnsidedLevel();
-                                                                     double x = ((CommandSourceStack)arguments.getSource()).getPosition().x();
-                                                                     double y = ((CommandSourceStack)arguments.getSource()).getPosition().y();
-                                                                     double z = ((CommandSourceStack)arguments.getSource()).getPosition().z();
-                                                                     Entity entity = ((CommandSourceStack)arguments.getSource()).getEntity();
-                                                                     if (entity == null && world instanceof ServerLevel _servLevel) {
-                                                                        entity = FakePlayerFactory.getMinecraft(_servLevel);
-                                                                     }
+      LiteralArgumentBuilder<CommandSourceStack> root = Commands.literal("setairdrop")
+         .requires(source -> source.hasPermission(2));
 
-                                                                     Direction direction = Direction.DOWN;
-                                                                     if (entity != null) {
-                                                                        direction = entity.getDirection();
-                                                                     }
+      ArgumentBuilder<CommandSourceStack, ?> freePin = Commands.argument("pin", BoolArgumentType.bool())
+         .executes(context -> executeFree(context, false));
+      freePin.then(Commands.argument("map", BoolArgumentType.bool()).executes(context -> executeFree(context, true)));
+      ArgumentBuilder<CommandSourceStack, ?> freeLoot = Commands.argument("loot_table", StringArgumentType.string()).then(freePin);
+      ArgumentBuilder<CommandSourceStack, ?> freeBlock = Commands.argument("blockid", StringArgumentType.string()).then(freeLoot);
+      ArgumentBuilder<CommandSourceStack, ?> freeLength = Commands.argument("length", DoubleArgumentType.doubleArg(0.0, 512.0)).then(freeBlock);
+      ArgumentBuilder<CommandSourceStack, ?> freeHeight = Commands.argument("height", DoubleArgumentType.doubleArg(0.0, 320.0)).then(freeLength);
+      ArgumentBuilder<CommandSourceStack, ?> freeZ = Commands.argument("z", DoubleArgumentType.doubleArg()).then(freeHeight);
+      root.then(Commands.literal("free").then(Commands.argument("x", DoubleArgumentType.doubleArg()).then(freeZ)));
 
-                                                                     Flycode2neoProcedure.execute(world, arguments);
-                                                                     return 0;
-                                                                  }))
-                                                            )
-                                                      )
-                                                )
-                                          )
-                                    )
-                              )
-                        ))
-                     .then(
-                        Commands.literal("random")
-                           .then(
-                              Commands.argument("player", EntityArgument.player())
-                                 .then(
-                                    Commands.argument("height", DoubleArgumentType.doubleArg(0.0, 320.0))
-                                       .then(
-                                          Commands.argument("length", DoubleArgumentType.doubleArg(0.0, 512.0))
-                                             .then(
-                                                Commands.argument("driftmin", DoubleArgumentType.doubleArg(0.0))
-                                                   .then(
-                                                      Commands.argument("driftmax", DoubleArgumentType.doubleArg(0.0))
-                                                         .then(
-                                                            Commands.argument("blockid", StringArgumentType.string())
-                                                               .then(
-                                                                  Commands.argument("loot_table", StringArgumentType.string())
-                                                                     .then(Commands.argument("pin", BoolArgumentType.bool()).executes(arguments -> {
-                                                                        Level world = ((CommandSourceStack)arguments.getSource()).getUnsidedLevel();
-                                                                        double x = ((CommandSourceStack)arguments.getSource()).getPosition().x();
-                                                                        double y = ((CommandSourceStack)arguments.getSource()).getPosition().y();
-                                                                        double z = ((CommandSourceStack)arguments.getSource()).getPosition().z();
-                                                                        Entity entity = ((CommandSourceStack)arguments.getSource()).getEntity();
-                                                                        if (entity == null && world instanceof ServerLevel _servLevel) {
-                                                                           entity = FakePlayerFactory.getMinecraft(_servLevel);
-                                                                        }
+      ArgumentBuilder<CommandSourceStack, ?> randomPin = Commands.argument("pin", BoolArgumentType.bool())
+         .executes(context -> executeRandom(context, false));
+      randomPin.then(Commands.argument("map", BoolArgumentType.bool()).executes(context -> executeRandom(context, true)));
+      ArgumentBuilder<CommandSourceStack, ?> randomLoot = Commands.argument("loot_table", StringArgumentType.string()).then(randomPin);
+      ArgumentBuilder<CommandSourceStack, ?> randomBlock = Commands.argument("blockid", StringArgumentType.string()).then(randomLoot);
+      ArgumentBuilder<CommandSourceStack, ?> randomDriftMax = Commands.argument("driftmax", DoubleArgumentType.doubleArg(0.0)).then(randomBlock);
+      ArgumentBuilder<CommandSourceStack, ?> randomDriftMin = Commands.argument("driftmin", DoubleArgumentType.doubleArg(0.0)).then(randomDriftMax);
+      ArgumentBuilder<CommandSourceStack, ?> randomLength = Commands.argument("length", DoubleArgumentType.doubleArg(0.0, 512.0)).then(randomDriftMin);
+      ArgumentBuilder<CommandSourceStack, ?> randomHeight = Commands.argument("height", DoubleArgumentType.doubleArg(0.0, 320.0)).then(randomLength);
+      ArgumentBuilder<CommandSourceStack, ?> randomPlayer = Commands.argument("player", EntityArgument.player()).then(randomHeight);
+      root.then(Commands.literal("random").then(randomPlayer));
 
-                                                                        Direction direction = Direction.DOWN;
-                                                                        if (entity != null) {
-                                                                           direction = entity.getDirection();
-                                                                        }
+      event.getDispatcher().register(root);
+   }
 
-                                                                        Flycode3neoProcedure.execute(world, x, y, z, arguments);
-                                                                        return 0;
-                                                                     }))
-                                                               )
-                                                         )
-                                                   )
-                                             )
-                                       )
-                                 )
-                           )
-                     ))
-                  .then(
-                     Commands.literal("free")
-                        .then(
-                           Commands.argument("x", DoubleArgumentType.doubleArg())
-                              .then(
-                                 Commands.argument("z", DoubleArgumentType.doubleArg())
-                                    .then(
-                                       Commands.argument("height", DoubleArgumentType.doubleArg(0.0, 320.0))
-                                          .then(
-                                             Commands.argument("length", DoubleArgumentType.doubleArg(0.0, 512.0))
-                                                .then(
-                                                   Commands.argument("blockid", StringArgumentType.string())
-                                                      .then(
-                                                         Commands.argument("loot_table", StringArgumentType.string())
-                                                            .then(
-                                                               Commands.argument("pin", BoolArgumentType.bool())
-                                                                  .then(Commands.argument("map", BoolArgumentType.bool()).executes(arguments -> {
-                                                                     Level world = ((CommandSourceStack)arguments.getSource()).getUnsidedLevel();
-                                                                     double x = ((CommandSourceStack)arguments.getSource()).getPosition().x();
-                                                                     double y = ((CommandSourceStack)arguments.getSource()).getPosition().y();
-                                                                     double z = ((CommandSourceStack)arguments.getSource()).getPosition().z();
-                                                                     Entity entity = ((CommandSourceStack)arguments.getSource()).getEntity();
-                                                                     if (entity == null && world instanceof ServerLevel _servLevel) {
-                                                                        entity = FakePlayerFactory.getMinecraft(_servLevel);
-                                                                     }
+   private static int executeFree(CommandContext<CommandSourceStack> context, boolean map) {
+      if (map) {
+         Flycode2neomapProcedure.execute(context.getSource().getUnsidedLevel(), context);
+      } else {
+         Flycode2neoProcedure.execute(context.getSource().getUnsidedLevel(), context);
+      }
+      return 1;
+   }
 
-                                                                     Direction direction = Direction.DOWN;
-                                                                     if (entity != null) {
-                                                                        direction = entity.getDirection();
-                                                                     }
-
-                                                                     Flycode2neomapProcedure.execute(world, arguments);
-                                                                     return 0;
-                                                                  }))
-                                                            )
-                                                      )
-                                                )
-                                          )
-                                    )
-                              )
-                        )
-                  ))
-               .then(
-                  Commands.literal("random")
-                     .then(
-                        Commands.argument("player", EntityArgument.player())
-                           .then(
-                              Commands.argument("height", DoubleArgumentType.doubleArg(0.0, 320.0))
-                                 .then(
-                                    Commands.argument("length", DoubleArgumentType.doubleArg(0.0, 512.0))
-                                       .then(
-                                          Commands.argument("driftmin", DoubleArgumentType.doubleArg(0.0))
-                                             .then(
-                                                Commands.argument("driftmax", DoubleArgumentType.doubleArg(0.0))
-                                                   .then(
-                                                      Commands.argument("blockid", StringArgumentType.string())
-                                                         .then(
-                                                            Commands.argument("loot_table", StringArgumentType.string())
-                                                               .then(
-                                                                  Commands.argument("pin", BoolArgumentType.bool())
-                                                                     .then(Commands.argument("map", BoolArgumentType.bool()).executes(arguments -> {
-                                                                        Level world = ((CommandSourceStack)arguments.getSource()).getUnsidedLevel();
-                                                                        double x = ((CommandSourceStack)arguments.getSource()).getPosition().x();
-                                                                        double y = ((CommandSourceStack)arguments.getSource()).getPosition().y();
-                                                                        double z = ((CommandSourceStack)arguments.getSource()).getPosition().z();
-                                                                        Entity entity = ((CommandSourceStack)arguments.getSource()).getEntity();
-                                                                        if (entity == null && world instanceof ServerLevel _servLevel) {
-                                                                           entity = FakePlayerFactory.getMinecraft(_servLevel);
-                                                                        }
-
-                                                                        Direction direction = Direction.DOWN;
-                                                                        if (entity != null) {
-                                                                           direction = entity.getDirection();
-                                                                        }
-
-                                                                        Flycode3neomapProcedure.execute(world, x, y, z, arguments);
-                                                                        return 0;
-                                                                     }))
-                                                               )
-                                                         )
-                                                   )
-                                             )
-                                       )
-                                 )
-                           )
-                     )
-               )
-         );
+   private static int executeRandom(CommandContext<CommandSourceStack> context, boolean map) {
+      double x = context.getSource().getPosition().x();
+      double y = context.getSource().getPosition().y();
+      double z = context.getSource().getPosition().z();
+      if (map) {
+         Flycode3neomapProcedure.execute(context.getSource().getUnsidedLevel(), x, y, z, context);
+      } else {
+         Flycode3neoProcedure.execute(context.getSource().getUnsidedLevel(), x, y, z, context);
+      }
+      return 1;
    }
 }

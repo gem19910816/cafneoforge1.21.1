@@ -24,6 +24,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class TestGUI2ButtonMessage implements CustomPacketPayload {
@@ -63,16 +64,21 @@ public class TestGUI2ButtonMessage implements CustomPacketPayload {
    }
 
    public static void handle(TestGUI2ButtonMessage message, IPayloadContext context) {
-      PanelText.set(message.text);
       context.enqueueWork(() -> {
          Player entity = context.player();
-         if (entity != null) {
+         if (entity instanceof ServerPlayer) {
+            PanelText.set(entity, message.text);
             handleButtonAction(entity, message.buttonID, message.x, message.y, message.z);
          }
       });
    }
 
    public static void handleButtonAction(Player entity, int buttonID, int x, int y, int z) {
+      if (!(entity instanceof ServerPlayer) || entity.level().isClientSide()
+         || !(entity.containerMenu instanceof TestGUI2Menu menu)
+         || menu.x != x || menu.y != y || menu.z != z) {
+         return;
+      }
       Level world = entity.level();
       HashMap guistate = TestGUI2Menu.guistate;
       if (world.hasChunkAt(new BlockPos(x, y, z))) {

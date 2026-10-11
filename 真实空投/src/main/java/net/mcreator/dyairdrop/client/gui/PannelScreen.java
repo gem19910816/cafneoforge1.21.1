@@ -170,68 +170,57 @@ public class PannelScreen extends AbstractContainerScreen<PannelMenu> {
       guistate.put("text:password_panel", this.password_panel);
       this.addWidget(this.password_panel);
       this.button_2 = Button.builder(Component.translatable("gui.dyairdrop.panel.button_2"), e -> {
-         net.neoforged.neoforge.network.PacketDistributor.sendToServer(new PannelButtonMessage(0, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-         PannelButtonMessage.handleButtonAction(this.entity, 0, this.x, this.y, this.z);
+         this.sendNumericButton(0, '2');
       }).bounds(this.leftPos + 55, this.topPos + 52, 21, 20).build();
       guistate.put("button:button_2", this.button_2);
       this.addRenderableWidget(this.button_2);
       this.button_1 = Button.builder(Component.translatable("gui.dyairdrop.panel.button_1"), e -> {
-         net.neoforged.neoforge.network.PacketDistributor.sendToServer(new PannelButtonMessage(1, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-         PannelButtonMessage.handleButtonAction(this.entity, 1, this.x, this.y, this.z);
+         this.sendNumericButton(1, '1');
       }).bounds(this.leftPos + 19, this.topPos + 52, 20, 20).build();
       guistate.put("button:button_1", this.button_1);
       this.addRenderableWidget(this.button_1);
       this.button_3 = Button.builder(Component.translatable("gui.dyairdrop.panel.button_3"), e -> {
-         net.neoforged.neoforge.network.PacketDistributor.sendToServer(new PannelButtonMessage(2, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-         PannelButtonMessage.handleButtonAction(this.entity, 2, this.x, this.y, this.z);
+         this.sendNumericButton(2, '3');
       }).bounds(this.leftPos + 91, this.topPos + 52, 20, 20).build();
       guistate.put("button:button_3", this.button_3);
       this.addRenderableWidget(this.button_3);
       this.button_4 = Button.builder(Component.translatable("gui.dyairdrop.panel.button_4"), e -> {
-         net.neoforged.neoforge.network.PacketDistributor.sendToServer(new PannelButtonMessage(3, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-         PannelButtonMessage.handleButtonAction(this.entity, 3, this.x, this.y, this.z);
+         this.sendNumericButton(3, '4');
       }).bounds(this.leftPos + 19, this.topPos + 79, 20, 20).build();
       guistate.put("button:button_4", this.button_4);
       this.addRenderableWidget(this.button_4);
       this.button_5 = Button.builder(Component.translatable("gui.dyairdrop.panel.button_5"), e -> {
-         net.neoforged.neoforge.network.PacketDistributor.sendToServer(new PannelButtonMessage(4, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-         PannelButtonMessage.handleButtonAction(this.entity, 4, this.x, this.y, this.z);
+         this.sendNumericButton(4, '5');
       }).bounds(this.leftPos + 55, this.topPos + 79, 21, 20).build();
       guistate.put("button:button_5", this.button_5);
       this.addRenderableWidget(this.button_5);
       this.button_6 = Button.builder(Component.translatable("gui.dyairdrop.panel.button_6"), e -> {
-         net.neoforged.neoforge.network.PacketDistributor.sendToServer(new PannelButtonMessage(5, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-         PannelButtonMessage.handleButtonAction(this.entity, 5, this.x, this.y, this.z);
+         this.sendNumericButton(5, '6');
       }).bounds(this.leftPos + 91, this.topPos + 79, 20, 20).build();
       guistate.put("button:button_6", this.button_6);
       this.addRenderableWidget(this.button_6);
       this.button_7 = Button.builder(Component.translatable("gui.dyairdrop.panel.button_7"), e -> {
-         net.neoforged.neoforge.network.PacketDistributor.sendToServer(new PannelButtonMessage(6, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-         PannelButtonMessage.handleButtonAction(this.entity, 6, this.x, this.y, this.z);
+         this.sendNumericButton(6, '7');
       }).bounds(this.leftPos + 19, this.topPos + 106, 20, 20).build();
       guistate.put("button:button_7", this.button_7);
       this.addRenderableWidget(this.button_7);
       this.button_8 = Button.builder(Component.translatable("gui.dyairdrop.panel.button_8"), e -> {
-         net.neoforged.neoforge.network.PacketDistributor.sendToServer(new PannelButtonMessage(7, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-         PannelButtonMessage.handleButtonAction(this.entity, 7, this.x, this.y, this.z);
+         this.sendNumericButton(7, '8');
       }).bounds(this.leftPos + 55, this.topPos + 106, 21, 20).build();
       guistate.put("button:button_8", this.button_8);
       this.addRenderableWidget(this.button_8);
       this.button_9 = Button.builder(Component.translatable("gui.dyairdrop.panel.button_9"), e -> {
-         net.neoforged.neoforge.network.PacketDistributor.sendToServer(new PannelButtonMessage(8, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-         PannelButtonMessage.handleButtonAction(this.entity, 8, this.x, this.y, this.z);
+         this.sendNumericButton(8, '9');
       }).bounds(this.leftPos + 91, this.topPos + 106, 20, 20).build();
       guistate.put("button:button_9", this.button_9);
       this.addRenderableWidget(this.button_9);
       this.button_x = Button.builder(Component.translatable("gui.dyairdrop.panel.button_x"), e -> {
-         net.neoforged.neoforge.network.PacketDistributor.sendToServer(new PannelButtonMessage(9, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-         PannelButtonMessage.handleButtonAction(this.entity, 9, this.x, this.y, this.z);
+         this.sendNumericButton(9, '\0');
       }).bounds(this.leftPos + 19, this.topPos + 133, 20, 20).build();
       guistate.put("button:button_x", this.button_x);
       this.addRenderableWidget(this.button_x);
       this.button_0 = Button.builder(Component.translatable("gui.dyairdrop.panel.button_0"), e -> {
-         net.neoforged.neoforge.network.PacketDistributor.sendToServer(new PannelButtonMessage(10, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
-         PannelButtonMessage.handleButtonAction(this.entity, 10, this.x, this.y, this.z);
+         this.sendNumericButton(10, '0');
       }).bounds(this.leftPos + 55, this.topPos + 133, 21, 20).build();
       guistate.put("button:button_0", this.button_0);
       this.addRenderableWidget(this.button_0);
@@ -245,11 +234,13 @@ public class PannelScreen extends AbstractContainerScreen<PannelMenu> {
             net.neoforged.neoforge.network.PacketDistributor.sendToServer(new PannelButtonMessage(12, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
          }
       }).bounds(this.leftPos + 136, this.topPos + 120, 54, 20).build(builder -> new Button(builder) {
-            public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
-               if (OpshowProcedure.execute(PannelScreen.this.entity)) {
-                  super.render(guiGraphics, gx, gy, ticks);
-               }
-            }
+             public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
+                if (OpshowProcedure.execute(PannelScreen.this.entity)) {
+                   // Call the protected widget renderer directly. Calling render() here
+                   // dispatches back to this override and causes a StackOverflowError.
+                   super.renderWidget(guiGraphics, gx, gy, ticks);
+                }
+             }
          });
       guistate.put("button:button_op", this.button_op);
       this.addRenderableWidget(this.button_op);
@@ -258,11 +249,11 @@ public class PannelScreen extends AbstractContainerScreen<PannelMenu> {
             net.neoforged.neoforge.network.PacketDistributor.sendToServer(new PannelButtonMessage(13, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
          }
       }).bounds(this.leftPos + 136, this.topPos + 102, 54, 20).build(builder -> new Button(builder) {
-            public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
-               if (OpshowProcedure.execute(PannelScreen.this.entity)) {
-                  super.render(guiGraphics, gx, gy, ticks);
-               }
-            }
+             public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
+                if (OpshowProcedure.execute(PannelScreen.this.entity)) {
+                   super.renderWidget(guiGraphics, gx, gy, ticks);
+                }
+             }
          });
       guistate.put("button:button_pw", this.button_pw);
       this.addRenderableWidget(this.button_pw);
@@ -271,13 +262,27 @@ public class PannelScreen extends AbstractContainerScreen<PannelMenu> {
             net.neoforged.neoforge.network.PacketDistributor.sendToServer(new PannelButtonMessage(14, this.x, this.y, this.z, this.password_panel != null ? this.password_panel.getValue() : ""));
          }
       }).bounds(this.leftPos + 136, this.topPos + 84, 54, 20).build(builder -> new Button(builder) {
-            public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
-               if (OpshowProcedure.execute(PannelScreen.this.entity)) {
-                  super.render(guiGraphics, gx, gy, ticks);
-               }
-            }
+             public void renderWidget(GuiGraphics guiGraphics, int gx, int gy, float ticks) {
+                if (OpshowProcedure.execute(PannelScreen.this.entity)) {
+                   super.renderWidget(guiGraphics, gx, gy, ticks);
+                }
+             }
          });
       guistate.put("button:button_save", this.button_save);
       this.addRenderableWidget(this.button_save);
+   }
+
+   private void sendNumericButton(int buttonId, char digit) {
+      String value = this.password_panel == null ? "" : this.password_panel.getValue();
+      value = net.mcreator.dyairdrop.compat.PasswordUtil.normalizeDigits(value);
+      if (digit == '\0') {
+         value = "";
+      } else if (value.length() < 6) {
+         value += digit;
+      }
+      if (this.password_panel != null) {
+         this.password_panel.setValue(value);
+      }
+      net.neoforged.neoforge.network.PacketDistributor.sendToServer(new PannelButtonMessage(buttonId, this.x, this.y, this.z, value));
    }
 }
