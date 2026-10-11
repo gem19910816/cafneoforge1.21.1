@@ -1,0 +1,64 @@
+package com.scarasol.itemrarity;
+
+import com.mojang.logging.LogUtils;
+import com.scarasol.itemrarity.configuration.CommonConfig;
+import com.scarasol.itemrarity.data.RarityManager;
+import com.scarasol.itemrarity.network.NetworkHandler;
+import com.scarasol.itemrarity.util.ConfigUpdater;
+import com.scarasol.itemrarity.util.ItemStackUtil;
+import com.scarasol.itemrarity.util.io.ModGson;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent;
+import org.slf4j.Logger;
+
+/**
+ * @author Scarasol
+ */
+@Mod(ItemRarityMod.MODID)
+public class ItemRarityMod {
+
+    public static final String MODID = "item_rarity";
+
+    public static final Logger LOGGER = LogUtils.getLogger();
+
+
+    public ItemRarityMod(IEventBus modEventBus, ModContainer modContainer) {
+        // 1. 注册 COMMON 类型的配置文件
+        modContainer.registerConfig(ModConfig.Type.COMMON, CommonConfig.SPEC);
+
+        modEventBus.addListener(this::register);
+        modEventBus.addListener(this::registerClient);
+
+        // 2. 绑定模组加载完成事件 (用于执行后台自动下载)
+        modEventBus.addListener(this::onLoadComplete);
+
+        modEventBus.addListener(NetworkHandler::register);
+    }
+
+    public void register(FMLCommonSetupEvent event) {
+        RarityManager.initRegister();
+        ItemStackUtil.registerGetter();
+        ModGson.INSTANCE.register();
+    }
+
+    public void registerClient(FMLClientSetupEvent event) {
+        ItemStackUtil.registerClientGetter();
+    }
+
+    // 3. 处理自动下载逻辑
+    public void onLoadComplete(final FMLLoadCompleteEvent event) {
+        event.enqueueWork(() -> {
+            // 当模组加载到达尾声，检查配置并决定是否执行自动下载
+            if (CommonConfig.AUTO_DOWNLOAD.get()) {
+                // 直接调用底层核心方法：传入 false 代表“不覆盖”，null 代表“后台静默（无玩家执行源）”
+                ConfigUpdater.executeAllDownload(false, null);
+            }
+        });
+    }
+}

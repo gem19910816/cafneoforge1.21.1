@@ -1,0 +1,31 @@
+{
+  "required": true,
+  "package": "com.scarasol.rummage.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "plugin": "com.scarasol.rummage.mixin.plugin.MixinPlugin",
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8",
+  "mixins": [
+    "AbstractContainerMenuMixin",
+    "AbstractMinecartContainerMixin",
+    "ChestBoatMixin",
+    "ContainersMixin",
+    "InvWrapperMixin",
+    "RandomizableContainerBlockEntityMixin",
+    "SidedInvWrapperMixin",
+    "SlotItemHandlerMixin",
+    "SlotMixin",
+    "VanillaHopperItemHandlerMixin",
+    "accessor.CompoundContainerAccessor",
+    "accessor.SidedInvWrapperAccessor",
+    "corpse.CorpseEntityMixin",
+    "corpse.CorpseInventoryContainerMixin",
+    "corpse.ItemListInventoryMixin",
+    "lootr.LootrInventoryMixin"
+  ],
+  "client": [
+    "AbstractContainerScreenMixin"
+  ]
+}

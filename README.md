@@ -18,6 +18,8 @@
 | [血腥版 (Gore Edition)](血腥版/) | 1.20.1 Forge 0.5 alpha 4d | 1.21.1 NeoForge | [jar](血腥版/gore_edition-0.5-neoforge-1.21.1.jar) |
 | [TACZ弹药统一 (Tacz: UniDict)](TACZ弹药统一/) | Tacz-Unidict 2.0.1（非官方移植） | 1.21.1 NeoForge 21.1.252 | [源码与构建说明](TACZ弹药统一/README.md) |
 | [生存本能 (Survival Instinct)](生存本能/) | 1.20.1 Forge 1.0.2（原作者 tohir） | 1.21.1 NeoForge | [jar](生存本能/survival-instinct-neoforge-1.21.1-1.0.2-port.1.jar) |
+| [万象棱镜 (Item-Rarity)](万象棱镜/) | 1.20.1 Forge 1.2.0（原作者 Scarasol） | 1.21.1 NeoForge | [jar](万象棱镜/item_rarity-1.2.0-neoforge.jar) |
+| [翻箱倒柜 (Rummage)](翻箱倒柜/) | 1.20.1 Forge 1.1.1（需万象棱镜，原作者 Scarasol） | 1.21.1 NeoForge | [jar](翻箱倒柜/rummage-1.1.1-neoforge.jar) |
 
 ## 说明
 
