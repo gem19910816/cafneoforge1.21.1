@@ -14,6 +14,6 @@ public class HorizontallyCuttedHuskModel extends GeoModel<HorizontallyCuttedHusk
    }
 
    public ResourceLocation getTextureResource(HorizontallyCuttedHuskEntity entity) {
-      return ResourceLocation.fromNamespaceAndPath("gore_edition", "textures/entities/" + entity.getTexture() + ".png");
+      return net.mcreator.gore.client.ZombieAppearanceClient.corpseTexture(entity, entity.getTexture());
    }
 }

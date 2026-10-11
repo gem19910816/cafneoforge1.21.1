@@ -104,6 +104,7 @@ public class XKeyPressedProcedure {
                         MobSpawnType.MOB_SUMMONED
                      );
                   if (entityToSpawn != null) {
+                     ZombieAppearanceTransfer.inherit(entityToSpawn, nearestZombie(world, x, y, z));
                      entityToSpawn.setYRot(world.getRandom().nextFloat() * 360.0F);
                   }
                }
@@ -182,6 +183,7 @@ public class XKeyPressedProcedure {
                         MobSpawnType.MOB_SUMMONED
                      );
                   if (entityToSpawn != null) {
+                     ZombieAppearanceTransfer.inherit(entityToSpawn, nearestHusk(world, x, y, z));
                      entityToSpawn.setYRot(world.getRandom().nextFloat() * 360.0F);
                   }
                }
@@ -422,5 +424,17 @@ public class XKeyPressedProcedure {
             }
          }
       }
+   }
+
+   private static ZombieAboutToDieEntity nearestZombie(LevelAccessor world, double x, double y, double z) {
+      return world.getEntitiesOfClass(ZombieAboutToDieEntity.class,
+            AABB.ofSize(new Vec3(x, y, z), 1.2, 1.2, 1.2), e -> true)
+         .stream().min(Comparator.comparingDouble(e -> e.distanceToSqr(x, y, z))).orElse(null);
+   }
+
+   private static HuskAboutToDieEntity nearestHusk(LevelAccessor world, double x, double y, double z) {
+      return world.getEntitiesOfClass(HuskAboutToDieEntity.class,
+            AABB.ofSize(new Vec3(x, y, z), 1.2, 1.2, 1.2), e -> true)
+         .stream().min(Comparator.comparingDouble(e -> e.distanceToSqr(x, y, z))).orElse(null);
    }
 }

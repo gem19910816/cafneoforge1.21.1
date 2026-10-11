@@ -1,6 +1,7 @@
 package net.mcreator.gore.init;
 
 import net.mcreator.gore.configuration.GeSpiralsConfiguration;
+import net.mcreator.gore.configuration.ZombieShoveConfiguration;
 import net.mcreator.gore.configuration.GoreEditionConfigurationFileConfiguration;
 import net.mcreator.gore.configuration.GoreEditionModeSettingsConfiguration;
 import net.mcreator.gore.configuration.GoreEditionOtherConfigurationsConfiguration;
@@ -25,6 +26,7 @@ public class GoreEditionModConfigs {
          ModLoadingContext.get().getActiveContainer().registerConfig(Type.COMMON, GoreEditionModeSettingsConfiguration.SPEC, "GE-SWITCHES.toml");
          ModLoadingContext.get().getActiveContainer().registerConfig(Type.COMMON, GoreEditionOtherConfigurationsConfiguration.SPEC, "GE-TRASH.toml");
          ModLoadingContext.get().getActiveContainer().registerConfig(Type.COMMON, GeSpiralsConfiguration.SPEC, "GE-SPIRALS.toml");
+         ModLoadingContext.get().getActiveContainer().registerConfig(Type.SERVER, ZombieShoveConfiguration.SPEC, "GE-SHOVE.toml");
       });
    }
 }

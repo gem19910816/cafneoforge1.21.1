@@ -14,6 +14,6 @@ public class ZombieWithoutLegsAndArmCorpseModel extends GeoModel<ZombieWithoutLe
    }
 
    public ResourceLocation getTextureResource(ZombieWithoutLegsAndArmCorpseEntity entity) {
-      return ResourceLocation.fromNamespaceAndPath("gore_edition", "textures/entities/" + entity.getTexture() + ".png");
+      return net.mcreator.gore.client.ZombieAppearanceClient.corpseTexture(entity, entity.getTexture());
    }
 }

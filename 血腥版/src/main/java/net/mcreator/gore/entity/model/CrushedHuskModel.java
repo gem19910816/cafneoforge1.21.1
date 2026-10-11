@@ -14,6 +14,6 @@ public class CrushedHuskModel extends GeoModel<CrushedHuskEntity> {
    }
 
    public ResourceLocation getTextureResource(CrushedHuskEntity entity) {
-      return ResourceLocation.fromNamespaceAndPath("gore_edition", "textures/entities/" + entity.getTexture() + ".png");
+      return net.mcreator.gore.client.ZombieAppearanceClient.corpseTexture(entity, entity.getTexture());
    }
 }

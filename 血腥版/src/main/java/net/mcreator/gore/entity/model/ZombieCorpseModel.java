@@ -14,13 +14,6 @@ public class ZombieCorpseModel extends GeoModel<ZombieCorpseEntity> {
    }
 
    public ResourceLocation getTextureResource(ZombieCorpseEntity entity) {
-      String texture = entity.getTexture();
-      int separator = texture.indexOf(":textures/");
-      if (separator > 0) {
-         String namespace = texture.substring(0, separator);
-         String path = texture.substring(separator + 1) + ".png";
-         return ResourceLocation.fromNamespaceAndPath(namespace, path);
-      }
-      return ResourceLocation.fromNamespaceAndPath("gore_edition", "textures/entities/" + texture + ".png");
+      return net.mcreator.gore.client.ZombieAppearanceClient.corpseTexture(entity, entity.getTexture());
    }
 }

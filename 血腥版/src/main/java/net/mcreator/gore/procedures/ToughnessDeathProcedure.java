@@ -62,6 +62,7 @@ public class ToughnessDeathProcedure {
                      Entity entityToSpawn = ((EntityType)GoreEditionModEntities.DISARMED_ZOMBIE.get())
                         .spawn(_level, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
                      if (entityToSpawn != null) {
+                        ZombieAppearanceTransfer.inherit(entityToSpawn, entity);
                         entityToSpawn.setYRot(entity.getYRot());
                         entityToSpawn.setYBodyRot(entity.getYRot());
                         entityToSpawn.setYHeadRot(entity.getYRot());
@@ -73,6 +74,7 @@ public class ToughnessDeathProcedure {
                      Entity entityToSpawn = ((EntityType)GoreEditionModEntities.HEADLESS_ZOMBIE.get())
                         .spawn(_levelx, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
                      if (entityToSpawn != null) {
+                        ZombieAppearanceTransfer.inherit(entityToSpawn, entity);
                         entityToSpawn.setYRot(entity.getYRot());
                         entityToSpawn.setYBodyRot(entity.getYRot());
                         entityToSpawn.setYHeadRot(entity.getYRot());
@@ -84,6 +86,7 @@ public class ToughnessDeathProcedure {
                      Entity entityToSpawn = ((EntityType)GoreEditionModEntities.SEVEREDLEGS_ZOMBIE.get())
                         .spawn(_levelxx, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
                      if (entityToSpawn != null) {
+                        ZombieAppearanceTransfer.inherit(entityToSpawn, entity);
                         entityToSpawn.setYRot(entity.getYRot());
                         entityToSpawn.setYBodyRot(entity.getYRot());
                         entityToSpawn.setYHeadRot(entity.getYRot());
@@ -95,6 +98,7 @@ public class ToughnessDeathProcedure {
                      Entity entityToSpawn = ((EntityType)GoreEditionModEntities.SEVERED_LEGS_AND_ARM_ZOMBIE.get())
                         .spawn(_levelxxx, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
                      if (entityToSpawn != null) {
+                        ZombieAppearanceTransfer.inherit(entityToSpawn, entity);
                         entityToSpawn.setYRot(entity.getYRot());
                         entityToSpawn.setYBodyRot(entity.getYRot());
                         entityToSpawn.setYHeadRot(entity.getYRot());
@@ -106,6 +110,7 @@ public class ToughnessDeathProcedure {
                      Entity entityToSpawn = ((EntityType)GoreEditionModEntities.SEVEREDLEGS_ZOMBIE.get())
                         .spawn(_levelxxxx, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
                      if (entityToSpawn != null) {
+                        ZombieAppearanceTransfer.inherit(entityToSpawn, entity);
                         entityToSpawn.setYRot(entity.getYRot());
                         entityToSpawn.setYBodyRot(entity.getYRot());
                         entityToSpawn.setYHeadRot(entity.getYRot());
@@ -118,6 +123,7 @@ public class ToughnessDeathProcedure {
                   Entity entityToSpawn = ((EntityType)GoreEditionModEntities.HORIZONTALLY_CUTTED_ZOMBIE.get())
                      .spawn(_levelxxxxx, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
                   if (entityToSpawn != null) {
+                     ZombieAppearanceTransfer.inherit(entityToSpawn, entity);
                      entityToSpawn.setYRot(entity.getYRot());
                      entityToSpawn.setYBodyRot(entity.getYRot());
                      entityToSpawn.setYHeadRot(entity.getYRot());
@@ -129,6 +135,7 @@ public class ToughnessDeathProcedure {
                   Entity entityToSpawn = ((EntityType)GoreEditionModEntities.CRUSHED_ZOMBIE.get())
                      .spawn(_levelxxxxxx, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
                   if (entityToSpawn != null) {
+                     ZombieAppearanceTransfer.inherit(entityToSpawn, entity);
                      entityToSpawn.setYRot(entity.getYRot());
                      entityToSpawn.setYBodyRot(entity.getYRot());
                      entityToSpawn.setYHeadRot(entity.getYRot());
@@ -140,6 +147,7 @@ public class ToughnessDeathProcedure {
                   Entity entityToSpawn = ((EntityType)GoreEditionModEntities.VERTICAL_CUTTED_ZOMBIE.get())
                      .spawn(_levelxxxxxxx, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
                   if (entityToSpawn != null) {
+                     ZombieAppearanceTransfer.inherit(entityToSpawn, entity);
                      entityToSpawn.setYRot(entity.getYRot());
                      entityToSpawn.setYBodyRot(entity.getYRot());
                      entityToSpawn.setYHeadRot(entity.getYRot());
@@ -154,6 +162,7 @@ public class ToughnessDeathProcedure {
                      Entity entityToSpawn = ((EntityType)GoreEditionModEntities.DISARMED_HUSK.get())
                         .spawn(_levelxxxxxxxx, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
                      if (entityToSpawn != null) {
+                        ZombieAppearanceTransfer.inherit(entityToSpawn, entity);
                         entityToSpawn.setYRot(world.getRandom().nextFloat() * 360.0F);
                      }
                   }
@@ -162,6 +171,7 @@ public class ToughnessDeathProcedure {
                      Entity entityToSpawn = ((EntityType)GoreEditionModEntities.HEADLESS_HUSK.get())
                         .spawn(_levelxxxxxxxxx, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
                      if (entityToSpawn != null) {
+                        ZombieAppearanceTransfer.inherit(entityToSpawn, entity);
                         entityToSpawn.setYRot(world.getRandom().nextFloat() * 360.0F);
                      }
                   }
@@ -170,6 +180,7 @@ public class ToughnessDeathProcedure {
                      Entity entityToSpawn = ((EntityType)GoreEditionModEntities.SEVEREDLEGS_HUSK.get())
                         .spawn(_levelxxxxxxxxxx, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
                      if (entityToSpawn != null) {
+                        ZombieAppearanceTransfer.inherit(entityToSpawn, entity);
                         entityToSpawn.setYRot(world.getRandom().nextFloat() * 360.0F);
                      }
                   }
@@ -178,6 +189,7 @@ public class ToughnessDeathProcedure {
                      Entity entityToSpawn = ((EntityType)GoreEditionModEntities.SEVERED_LEGS_AND_ARM_HUSK.get())
                         .spawn(_levelxxxxxxxxxxx, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
                      if (entityToSpawn != null) {
+                        ZombieAppearanceTransfer.inherit(entityToSpawn, entity);
                         entityToSpawn.setYRot(world.getRandom().nextFloat() * 360.0F);
                      }
                   }
@@ -186,6 +198,7 @@ public class ToughnessDeathProcedure {
                      Entity entityToSpawn = ((EntityType)GoreEditionModEntities.SEVEREDLEGS_HUSK.get())
                         .spawn(_levelxxxxxxxxxxxx, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
                      if (entityToSpawn != null) {
+                        ZombieAppearanceTransfer.inherit(entityToSpawn, entity);
                         entityToSpawn.setYRot(world.getRandom().nextFloat() * 360.0F);
                      }
                   }
@@ -195,6 +208,7 @@ public class ToughnessDeathProcedure {
                   Entity entityToSpawn = ((EntityType)GoreEditionModEntities.HORIZONTALLY_CUTTED_HUSK.get())
                      .spawn(_levelxxxxxxxxxxxxx, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
                   if (entityToSpawn != null) {
+                     ZombieAppearanceTransfer.inherit(entityToSpawn, entity);
                      entityToSpawn.setYRot(world.getRandom().nextFloat() * 360.0F);
                   }
                }
@@ -203,6 +217,7 @@ public class ToughnessDeathProcedure {
                   Entity entityToSpawn = ((EntityType)GoreEditionModEntities.CRUSHED_HUSK.get())
                      .spawn(_levelxxxxxxxxxxxxxx, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
                   if (entityToSpawn != null) {
+                     ZombieAppearanceTransfer.inherit(entityToSpawn, entity);
                      entityToSpawn.setYRot(world.getRandom().nextFloat() * 360.0F);
                   }
                }
@@ -211,6 +226,7 @@ public class ToughnessDeathProcedure {
                   Entity entityToSpawn = ((EntityType)GoreEditionModEntities.VERTICALCUTTED_HUSK.get())
                      .spawn(_levelxxxxxxxxxxxxxxx, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
                   if (entityToSpawn != null) {
+                     ZombieAppearanceTransfer.inherit(entityToSpawn, entity);
                      entityToSpawn.setYRot(world.getRandom().nextFloat() * 360.0F);
                   }
                }

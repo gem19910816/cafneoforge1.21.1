@@ -85,6 +85,7 @@ public class WhenEntityIsDeathSpawnCorpseProcedure {
                   _entity.yHeadRotO = _entity.getYRot();
                }
 
+               ZombieAppearanceTransfer.inherit(entityinstance, entity);
                _serverLevelx.addFreshEntity(entityinstance);
             }
          }
@@ -105,6 +106,7 @@ public class WhenEntityIsDeathSpawnCorpseProcedure {
                   _entity.yHeadRotO = _entity.getYRot();
                }
 
+               ZombieAppearanceTransfer.inherit(entityinstance, entity);
                _serverLevelxx.addFreshEntity(entityinstance);
             }
          }
@@ -125,6 +127,7 @@ public class WhenEntityIsDeathSpawnCorpseProcedure {
                   _entity.yHeadRotO = _entity.getYRot();
                }
 
+               ZombieAppearanceTransfer.inherit(entityinstance, entity);
                _serverLevelxxx.addFreshEntity(entityinstance);
             }
          }
@@ -145,6 +148,7 @@ public class WhenEntityIsDeathSpawnCorpseProcedure {
                   _entity.yHeadRotO = _entity.getYRot();
                }
 
+               ZombieAppearanceTransfer.inherit(entityinstance, entity);
                _serverLevelxxxx.addFreshEntity(entityinstance);
             }
          }
@@ -165,6 +169,7 @@ public class WhenEntityIsDeathSpawnCorpseProcedure {
                   _entity.yHeadRotO = _entity.getYRot();
                }
 
+               ZombieAppearanceTransfer.inherit(entityinstance, entity);
                _serverLevelxxxxx.addFreshEntity(entityinstance);
             }
          }
@@ -185,6 +190,7 @@ public class WhenEntityIsDeathSpawnCorpseProcedure {
                   _entity.yHeadRotO = _entity.getYRot();
                }
 
+               ZombieAppearanceTransfer.inherit(entityinstance, entity);
                _serverLevelxxxxxx.addFreshEntity(entityinstance);
             }
          }
@@ -205,6 +211,7 @@ public class WhenEntityIsDeathSpawnCorpseProcedure {
                   _entity.yHeadRotO = _entity.getYRot();
                }
 
+               ZombieAppearanceTransfer.inherit(entityinstance, entity);
                _serverLevelxxxxxxx.addFreshEntity(entityinstance);
             }
          }
@@ -225,6 +232,7 @@ public class WhenEntityIsDeathSpawnCorpseProcedure {
                   _entity.yHeadRotO = _entity.getYRot();
                }
 
+               ZombieAppearanceTransfer.inherit(entityinstance, entity);
                _serverLevelxxxxxxxx.addFreshEntity(entityinstance);
             }
          }
@@ -245,6 +253,7 @@ public class WhenEntityIsDeathSpawnCorpseProcedure {
                   _entity.yHeadRotO = _entity.getYRot();
                }
 
+               ZombieAppearanceTransfer.inherit(entityinstance, entity);
                _serverLevelxxxxxxxxx.addFreshEntity(entityinstance);
             }
          }
@@ -265,6 +274,7 @@ public class WhenEntityIsDeathSpawnCorpseProcedure {
                   _entity.yHeadRotO = _entity.getYRot();
                }
 
+               ZombieAppearanceTransfer.inherit(entityinstance, entity);
                _serverLevelxxxxxxxxxx.addFreshEntity(entityinstance);
             }
          }

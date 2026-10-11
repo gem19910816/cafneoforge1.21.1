@@ -19,6 +19,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.mcreator.gore.client.ZombieAnimationCompat;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -39,6 +40,7 @@ public class SetupAnimationsProcedure {
    public static void onClientSetup(FMLClientSetupEvent event) {
       PlayerAnimationFactory.ANIMATION_DATA_FACTORY
          .registerFactory(ResourceLocation.fromNamespaceAndPath("gore_edition", "player_animation"), 1000, SetupAnimationsProcedure::registerPlayerAnimations);
+      event.enqueueWork(ZombieAnimationCompat::registerEmfPauseCondition);
    }
 
    private static IAnimation registerPlayerAnimations(AbstractClientPlayer player) {

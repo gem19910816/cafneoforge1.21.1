@@ -2,6 +2,7 @@ package net.mcreator.gore.init;
 
 import net.mcreator.gore.potion.AcidEffectMobEffect;
 import net.mcreator.gore.potion.DeafnessMobEffect;
+import net.mcreator.gore.potion.ZombieDownedMobEffect;
 import net.mcreator.gore.potion.DeformityMobEffect;
 import net.mcreator.gore.potion.ExplosiveMobEffect;
 import net.mcreator.gore.potion.VulnerabilityMobEffect;
@@ -17,4 +18,6 @@ public class GoreEditionModMobEffects {
    public static final DeferredHolder<MobEffect, MobEffect> EXPLODING = REGISTRY.register("exploding", () -> new ExplosiveMobEffect());
    public static final DeferredHolder<MobEffect, MobEffect> SPIRAL_TWIST = REGISTRY.register("spiral_twist", () -> new DeformityMobEffect());
    public static final DeferredHolder<MobEffect, MobEffect> DEAFNESS = REGISTRY.register("deafness", () -> new DeafnessMobEffect());
+   public static final DeferredHolder<MobEffect, MobEffect> ZOMBIE_DOWNED = REGISTRY.register("zombie_downed", ZombieDownedMobEffect::new);
+   public static final DeferredHolder<MobEffect, MobEffect> ZOMBIE_STAGGERED = REGISTRY.register("zombie_staggered", ZombieDownedMobEffect::new);
 }

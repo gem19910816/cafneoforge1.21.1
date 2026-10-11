@@ -14,6 +14,6 @@ public class HeadlessHuskCorpseModel extends GeoModel<HeadlessHuskCorpseEntity> 
    }
 
    public ResourceLocation getTextureResource(HeadlessHuskCorpseEntity entity) {
-      return ResourceLocation.fromNamespaceAndPath("gore_edition", "textures/entities/" + entity.getTexture() + ".png");
+      return net.mcreator.gore.client.ZombieAppearanceClient.corpseTexture(entity, entity.getTexture());
    }
 }

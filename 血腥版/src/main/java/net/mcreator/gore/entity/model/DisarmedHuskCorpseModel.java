@@ -14,6 +14,6 @@ public class DisarmedHuskCorpseModel extends GeoModel<DisarmedHuskCorpseEntity> 
    }
 
    public ResourceLocation getTextureResource(DisarmedHuskCorpseEntity entity) {
-      return ResourceLocation.fromNamespaceAndPath("gore_edition", "textures/entities/" + entity.getTexture() + ".png");
+      return net.mcreator.gore.client.ZombieAppearanceClient.corpseTexture(entity, entity.getTexture());
    }
 }

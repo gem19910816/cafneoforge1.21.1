@@ -18,7 +18,7 @@ public class DisarmedZombieModel extends GeoModel<DisarmedZombieEntity> {
    }
 
    public ResourceLocation getTextureResource(DisarmedZombieEntity entity) {
-      return ResourceLocation.fromNamespaceAndPath("gore_edition", "textures/entities/" + entity.getTexture() + ".png");
+      return net.mcreator.gore.client.ZombieAppearanceClient.corpseTexture(entity, entity.getTexture());
    }
 
    public void setCustomAnimations(DisarmedZombieEntity animatable, long instanceId, AnimationState animationState) {

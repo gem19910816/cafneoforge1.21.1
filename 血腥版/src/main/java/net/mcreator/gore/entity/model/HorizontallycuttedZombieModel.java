@@ -14,6 +14,6 @@ public class HorizontallycuttedZombieModel extends GeoModel<HorizontallycuttedZo
    }
 
    public ResourceLocation getTextureResource(HorizontallycuttedZombieEntity entity) {
-      return ResourceLocation.fromNamespaceAndPath("gore_edition", "textures/entities/" + entity.getTexture() + ".png");
+      return net.mcreator.gore.client.ZombieAppearanceClient.corpseTexture(entity, entity.getTexture());
    }
 }

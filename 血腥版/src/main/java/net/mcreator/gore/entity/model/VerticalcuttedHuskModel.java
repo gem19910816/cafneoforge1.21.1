@@ -14,6 +14,6 @@ public class VerticalcuttedHuskModel extends GeoModel<VerticalcuttedHuskEntity> 
    }
 
    public ResourceLocation getTextureResource(VerticalcuttedHuskEntity entity) {
-      return ResourceLocation.fromNamespaceAndPath("gore_edition", "textures/entities/" + entity.getTexture() + ".png");
+      return net.mcreator.gore.client.ZombieAppearanceClient.corpseTexture(entity, entity.getTexture());
    }
 }

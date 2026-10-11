@@ -14,6 +14,6 @@ public class HeadlessZombieModel extends GeoModel<HeadlessZombieEntity> {
    }
 
    public ResourceLocation getTextureResource(HeadlessZombieEntity entity) {
-      return ResourceLocation.fromNamespaceAndPath("gore_edition", "textures/entities/" + entity.getTexture() + ".png");
+      return net.mcreator.gore.client.ZombieAppearanceClient.corpseTexture(entity, entity.getTexture());
    }
 }
