@@ -41,6 +41,11 @@ public final class ZombieDownedRenderHandler {
       }
 
       MobEffectInstance effect = entity.getEffect(GoreEditionModMobEffects.ZOMBIE_DOWNED);
+      MobEffectInstance stagger = entity.getEffect(GoreEditionModMobEffects.ZOMBIE_STAGGERED);
+      ZombieShovePoseClient.Pose state = ZombieShovePoseClient.get(entity);
+      if (effect == null && stagger == null && state == null) {
+         return;
+      }
       if (effect == null) {
          applyStagger(stack, entity, partialTick);
          return;
@@ -51,9 +56,9 @@ public final class ZombieDownedRenderHandler {
    }
 
    public static void freezeFacing(LivingEntity entity) {
-      if (!entity.hasEffect(GoreEditionModMobEffects.ZOMBIE_DOWNED)
-         && !entity.hasEffect(GoreEditionModMobEffects.ZOMBIE_STAGGERED)) return;
       ZombieShovePoseClient.Pose pose = ZombieShovePoseClient.get(entity);
+      if (pose == null && !entity.hasEffect(GoreEditionModMobEffects.ZOMBIE_DOWNED)
+         && !entity.hasEffect(GoreEditionModMobEffects.ZOMBIE_STAGGERED)) return;
       if (pose != null) {
          entity.yBodyRot = pose.bodyYaw();
          entity.yBodyRotO = pose.bodyYaw();
@@ -64,7 +69,7 @@ public final class ZombieDownedRenderHandler {
       MobEffectInstance effect = entity.getEffect(GoreEditionModMobEffects.ZOMBIE_DOWNED);
       MobEffectInstance stagger = entity.getEffect(GoreEditionModMobEffects.ZOMBIE_STAGGERED);
       ZombieShovePoseClient.Pose state = ZombieShovePoseClient.get(entity);
-      if (!isZombieTarget(entity) || (effect == null && stagger == null)) {
+      if (!isZombieTarget(entity) || (effect == null && stagger == null && state == null)) {
          return null;
       }
       ZombieAnimationCompat.evaluateBasePose(model, entity);
@@ -81,11 +86,13 @@ public final class ZombieDownedRenderHandler {
          : effect == null ? staggerDuration(stagger) : ZombiePushProcedure.DOWNED_TOTAL_TICKS;
       float elapsed = state != null ? state.elapsed(entity.level().getGameTime(), partialTick)
          : duration - marker.getDuration() + partialTick;
-      float seconds = effect == null ? elapsed / duration : elapsed / 20.0F;
+      boolean downed = effect != null
+         || (stagger == null && state != null
+            && state.duration() == ZombiePushProcedure.DOWNED_TOTAL_TICKS);
+      float seconds = downed ? elapsed / 20.0F : elapsed / duration;
       float direction = state != null ? state.direction()
          : Mth.wrapDegrees(entity.yBodyRot - marker.getAmplifier() * (360.0F / 256.0F));
       float weight = ZombieShoveAnimation.weight(elapsed, duration);
-      boolean downed = effect != null;
       posePart(model.head, downed, direction, "head", seconds, weight);
       posePart(model.body, downed, direction, "body", seconds, weight);
       posePart(model.leftArm, downed, direction, "leftArm", seconds, weight);
@@ -202,10 +209,15 @@ public final class ZombieDownedRenderHandler {
 
    private static void applyStagger(PoseStack stack, LivingEntity entity, float partialTick) {
       MobEffectInstance marker = entity.getEffect(GoreEditionModMobEffects.ZOMBIE_STAGGERED);
-      if (marker == null) {
+      ZombieShovePoseClient.Pose state = ZombieShovePoseClient.get(entity);
+      if (marker == null && state == null) {
          return;
       }
-      ZombieShovePoseClient.Pose state = ZombieShovePoseClient.get(entity);
+      if (marker == null && state.duration() == ZombiePushProcedure.DOWNED_TOTAL_TICKS) {
+         applyPose(stack, entity, partialTick,
+            state.elapsed(entity.level().getGameTime(), partialTick));
+         return;
+      }
       float duration = state != null ? state.duration() : staggerDuration(marker);
       float elapsed = state != null ? state.elapsed(entity.level().getGameTime(), partialTick)
          : duration - marker.getDuration() + partialTick;
