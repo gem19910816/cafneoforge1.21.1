@@ -1,0 +1,23 @@
+allprojects {
+    afterEvaluate {
+        def sourcePath = new File(gradle.startParameter.initScripts.last().parentFile, 'ShovePoseCheck.java')
+        def compileCheck = tasks.register('compileShoveCheck', JavaCompile) {
+            dependsOn tasks.named('classes')
+            source sourcePath
+            classpath = sourceSets.main.output + sourceSets.main.compileClasspath
+            destinationDirectory = layout.buildDirectory.dir('shove-check')
+            javaCompiler = javaToolchains.compilerFor {
+                languageVersion = JavaLanguageVersion.of(21)
+            }
+        }
+        tasks.register('verifyShovePose', JavaExec) {
+            dependsOn compileCheck
+            mainClass = 'ShovePoseCheck'
+            classpath = files(layout.buildDirectory.dir('shove-check')) +
+                sourceSets.main.output + sourceSets.main.compileClasspath
+            javaLauncher = javaToolchains.launcherFor {
+                languageVersion = JavaLanguageVersion.of(21)
+            }
+        }
+    }
+}

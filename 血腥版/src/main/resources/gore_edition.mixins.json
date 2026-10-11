@@ -1,0 +1,10 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.mcreator.gore.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": ["ZombieShoveRendererMixin"],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
