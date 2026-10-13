@@ -8,13 +8,13 @@
 | [末日装饰 (Doomsday Decoration)](末日装饰/) | 1.20.1 Forge 1.1.3 | 1.21.1 NeoForge | [jar](末日装饰/doomsday_decoration-1.1.3-neoforge-1.21.1.jar) |
 | [末日装饰容器附属 (Doomsday Containers)](末日装饰容器附属/) | —（**附属**，需末日装饰） | 1.21.1 NeoForge | [jar](末日装饰容器附属/doomsdaycontainers-1.0.0.jar) |
 | [全球市场 (Global Market)](全球市场/) | 1.20.1 Forge（原 `MOD/global-market`） | 1.21.1 NeoForge | [jar](全球市场/gearsandflesh_market-1.0.0.jar) |
-| [真实空投 (Realistic Airdrop)](真实空投/) | 1.20.1 Forge 1.1.0-beta | 1.21.1 NeoForge | [jar](真实空投/dyairdrop-1.1.0.jar) |
+| [真实空投 (Realistic Airdrop)](真实空投/) | 1.20.1 Forge 1.1.0-beta | 1.21.1 NeoForge | [jar](真实空投/dyairdrop-1.4.0.jar) |
 | [稀薄的空气 (Thin Air)](稀薄的空气/) | 1.20.1 Forge（原 Thin Air / fuzs） | 1.21.1 NeoForge | [jar](稀薄的空气/thinair-1.21.1-neoforge-21.1.1-port.jar) |
 | [僵尸游戏 (ZombieGame:Reborn)](僵尸游戏/) | 1.20.1 Forge 2.1.0 | 1.21.1 NeoForge | [jar](僵尸游戏/zombiegamereborn-2.1.0.jar) |
 | [急救护理 (SelfAid)](急救护理/) | —（1.21.1 **新实现**，非移植） | 1.21.1 NeoForge | [jar](急救护理/selfaid-1.0.0.jar) |
 | [绿葡萄护甲 (LesRaisins Armor)](绿葡萄护甲/) | 1.20.1 Forge 0.1.4.4 | 1.21.1 NeoForge | [jar](绿葡萄护甲/lrarmor-0.1.4.4.jar) |
 | [CAF 生存核心 (CAF Survival Core)](CAF生存核心/) | 1.20.1 Forge（原 Tarkov Stamina / ChaosZ Pack） | 1.21.1 NeoForge | [jar](CAF生存核心/tarkov_stamina-1.21.1-neoforge-1.0.0-port.jar) |
-| [CAF草药 (Crop Expansion)](CAF草药/) | 1.20.1 Forge（原 `1.20.1forge/药草作物`） | 1.21.1 NeoForge | [jar](CAF草药/crop_expansion-1.21.1-neoforge-1.0.0.jar) |
+| [CAF草药 (Crop Expansion)](CAF草药/) | 1.20.1 Forge（原 `1.20.1forge/药草作物`） | 1.21.1 NeoForge | [jar](CAF草药/%5BCAF%E8%8D%89%E8%8D%AF%5DCAF_Herbs-1.21.1-neoforge-1.0.3.jar) |
 | [血腥版 (Gore Edition)](血腥版/) | 1.20.1 Forge 0.5 alpha 4d | 1.21.1 NeoForge | [jar](血腥版/gore_edition-0.5-neoforge-1.21.1.jar) |
 | [TACZ弹药统一 (Tacz: UniDict)](TACZ弹药统一/) | Tacz-Unidict 2.0.1（非官方移植） | 1.21.1 NeoForge 21.1.252 | [源码与构建说明](TACZ弹药统一/README.md) |
 | [生存本能 (Survival Instinct)](生存本能/) | 1.20.1 Forge 1.0.2（原作者 tohir） | 1.21.1 NeoForge | [jar](生存本能/survival-instinct-neoforge-1.21.1-1.0.2-port.1.jar) |

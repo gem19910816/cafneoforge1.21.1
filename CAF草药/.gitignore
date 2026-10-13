@@ -1,5 +1,26 @@
+# 构建产物
 build/
+out/
+bin/
+
+# Gradle
 .gradle/
+
+# 运行 / 日志
 run/
 logs/
+*.log
+
+# 编译中间件
 *.class
+
+# 本机路径容器 —— 禁止入库（规范 4.2）
+local.properties
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath

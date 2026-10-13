@@ -8,7 +8,9 @@
   （取同一贴图的底部切片），整体像小麦但更立体。
 - 高度逐级递增：3 → 15 单位（一格 = 16）。
 
-    PYTHONPATH=/opt/model-skill/lib python3 make_models.py
+用法（`bbmodel` 模块由外部提供，把它所在目录塞进 PYTHONPATH）：
+
+    PYTHONPATH=<bbmodel 模块所在目录> python3 make_models.py
 """
 import random
 

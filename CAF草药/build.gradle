@@ -3,23 +3,46 @@ plugins {
     id 'net.neoforged.moddev' version '2.0.107'
 }
 
-version = project.mod_version
+// ---------------------------------------------------------------------------
+// 版本号 = 主.次.修订
+//   主.次 来自 gradle.properties 的 mod_version；
+//   修订位来自 build_number.properties，每次构建成功后自动 +1（规范 5.1）。
+// ---------------------------------------------------------------------------
+def buildNumberFile = file('build_number.properties')
+
+// 从 properties 里取 buildNumber= 的值。
+// ⚠ 不能直接对整份文件做 text.trim().toInteger()：文件里一旦有注释行就会抛
+//   NumberFormatException，被 catch 静默退回 1，表现为"版本号怎么都不涨"。
+def readBuildNumber = {
+    if (!buildNumberFile.exists()) {
+        return 1
+    }
+    def m = (buildNumberFile.text =~ /(?m)^\s*buildNumber\s*=\s*(\d+)\s*$/)
+    return m.find() ? m.group(1).toInteger() : 1
+}
+
+def buildNumber = readBuildNumber()
+
+version = "${project.mod_version}.${buildNumber}"
 group = project.mod_group
 
 base {
-    // 纯 ASCII 的 jar 名（规范：jar 名必须含纯 ASCII 段，纯英文最稳妥）
-    archivesName = "${project.mod_id}-${project.minecraft_version}-neoforge"
+    // 纯 ASCII 段 + 中文前缀（规范 3.2.2：jar 名必须含纯 ASCII 段）。
+    // 英文名取中文工程名「CAF草药」的英文翻译 CAF_Herbs（规范 3.1.3），不用 mod_id。
+    // 中文前缀来自 gradle.properties 的 \uXXXX 转义，避免在脚本里写中文。
+    archivesName = "${project.mod_archive_prefix}${project.mod_name_en}-${project.minecraft_version}-neoforge"
 }
 
 java {
+    // 规范 4.2：不写 org.gradle.java.installations.paths，用 toolchain 声明让 Gradle 自己找
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
-// 提示行刻意保持纯 ASCII：Gradle 脚本的字符集取决于平台默认编码，
+// 提示行刻意保持纯 ASCII：Gradle 脚本字符集取决于平台默认编码，
 // 中文在这里可能被按 GBK 误解码、在控制台显示成乱码（不影响构建，但没必要）。
-println ">>> [crop_expansion] building ${project.mod_id} ${project.version} (NeoForge ${project.neo_version})"
+println ">>> [${project.mod_name_en}] building ${project.mod_id} ${project.version} (NeoForge ${project.neo_version})"
 
 neoForge {
     version = project.neo_version
@@ -41,7 +64,7 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 processResources {
-    // 把 gradle.properties 里的版本变量注入 neoforge.mods.toml
+    // 把版本变量注入 neoforge.mods.toml（mod_version 用完整的三位版本号）
     inputs.property 'version', project.version
     filteringCharset = 'UTF-8'
     filesMatching('META-INF/neoforge.mods.toml') {
@@ -50,6 +73,7 @@ processResources {
                 'mod_version'            : project.version,
                 'mod_display_name'       : project.mod_display_name,
                 'mod_authors'            : project.mod_authors,
+                'mod_license'            : project.mod_license,
                 'minecraft_version_range': project.minecraft_version_range,
                 'neo_version_range'      : project.neo_version_range,
                 'loader_version_range'   : project.loader_version_range
@@ -67,5 +91,25 @@ jar {
                 'Implementation-Version': project.version,
                 'Implementation-Vendor' : project.mod_authors
         ])
+    }
+}
+
+// ---------------------------------------------------------------------------
+// 构建成功后修订位 +1（规范 5.1）
+// ---------------------------------------------------------------------------
+tasks.named('build') {
+    finalizedBy 'incrementBuildNumber'
+}
+
+tasks.register('incrementBuildNumber') {
+    doLast {
+        def next = buildNumber + 1
+        // 保持 buildNumber= 键名与说明，别写成裸数字（那样就不是自描述的 properties 了）
+        buildNumberFile.text = """# 版本号修订位计数器（规范 5.1）
+# 版本号 = 主.次.修订，其中「修订」由本文件提供，每次构建成功后自动 +1。
+# 本值 = 下一次构建要用的修订位。
+buildNumber=${next}
+"""
+        println ">>> build ${project.version} done; next build will be ${project.mod_version}.${next}"
     }
 }
