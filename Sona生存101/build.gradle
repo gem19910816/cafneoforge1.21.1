@@ -1,0 +1,33 @@
+plugins {
+    id 'java-library'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+def gameDir = 'E:/PCL/.minecraft/versions/齿腐新版本'
+def mcLibDir = 'E:/PCL/.minecraft/libraries'
+def nfDir = mcLibDir + '/net/neoforged/neoforge/21.1.252'
+
+dependencies {
+    compileOnly files("$nfDir/neoforge-21.1.252-client.jar")
+    compileOnly files("$nfDir/neoforge-21.1.252-universal.jar")
+    compileOnly files("E:/port/tools/mc-1.21.1-mojmap-at.jar")
+    compileOnly fileTree(dir: mcLibDir, include: '**/*.jar')
+    compileOnly fileTree(dir: 'E:/port/libs', include: '*.jar')
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+    options.compilerArgs += ['-Xmaxerrs', '10000', '-Xmaxwarns', '10000']
+}
+
+jar {
+    archiveBaseName = 'Sona'
+    archiveVersion = '1.5.1-neoforge-1.21.1'
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}

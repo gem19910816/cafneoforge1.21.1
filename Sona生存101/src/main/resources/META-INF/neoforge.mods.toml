@@ -1,0 +1,29 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="MIT License"
+
+[[mixins]]
+config="sona.mixins.json"
+
+[[mods]]
+modId="sona"
+version="1.5.1"
+displayName="Sona Survival 101"
+authors="Scarasol, Kyoko, 白久谷, 阿琦, lan2418, 轩影LHXQing, Konn_gara"
+description='''This is a mod adding a range of survival elements and effects.
+Thanks for playing. (NeoForge 1.21.1 port)'''
+logoFile="sona.png"
+
+[[dependencies.sona]]
+modId="neoforge"
+mandatory=true
+versionRange="[21.1,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.sona]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.21.1,1.22)"
+ordering="NONE"
+side="BOTH"

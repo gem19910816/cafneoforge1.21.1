@@ -1,0 +1,41 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="The GNU General Public License v3.0"
+
+[[mixins]]
+config="zombiekit.mixins.json"
+
+[[mods]]
+modId="zombiekit"
+version="2.1.8"
+displayName="Zombie Survival Kit"
+authors="Scarasol, Kyoko, 白久谷, 阿琦, lan2418, 轩影LHXQing, Konn_gara"
+description='''This is a mod adding a range of survival tools. (NeoForge 1.21.1 port)'''
+
+[[dependencies.zombiekit]]
+modId="neoforge"
+mandatory=true
+versionRange="[21.1,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.zombiekit]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.21.1,1.22)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.zombiekit]]
+modId="sona"
+mandatory=true
+versionRange="[1.5.1,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.zombiekit]]
+modId="geckolib"
+mandatory=true
+versionRange="[4,)"
+ordering="NONE"
+side="BOTH"

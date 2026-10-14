@@ -21,6 +21,9 @@
 | [万象棱镜 (Item-Rarity)](万象棱镜/) | 1.20.1 Forge 1.2.0（原作者 Scarasol） | 1.21.1 NeoForge | [jar](万象棱镜/item_rarity-1.2.0-neoforge.jar) |
 | [翻箱倒柜 (Rummage)](翻箱倒柜/) | 1.20.1 Forge 1.1.1（需万象棱镜，原作者 Scarasol） | 1.21.1 NeoForge | [jar](翻箱倒柜/rummage-1.1.1-neoforge.jar) |
 
+| [Sona生存101 (Sona Survival 101)](Sona生存101/) | 1.20.1 Forge 1.5.1（原作者 Scarasol 等） | 1.21.1 NeoForge | [jar](Sona生存101/Sona-1.5.1-neoforge-1.21.1.jar) |
+| [僵尸生存套件 (Zombie Survival Kit)](僵尸生存套件/) | 1.20.1 Forge 2.1.8（原作者 Scarasol 等，需 Sona生存101） | 1.21.1 NeoForge | [jar](僵尸生存套件/Zombie_Survival_Kit-2.1.8-neoforge-1.21.1.jar) |
+
 ## 说明
 
 - **移植**条目均保持方块/物品注册 ID 与美术资源不变，只做 API 与数据包格式的版本适配。
