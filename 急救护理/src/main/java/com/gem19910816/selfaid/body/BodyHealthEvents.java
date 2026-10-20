@@ -33,6 +33,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 public final class BodyHealthEvents {
 
     private static final Random RANDOM = new Random();
+    private static final double[] DAMAGE_PART_WEIGHTS = { 0.05D, 0.45D, 0.125D, 0.125D, 0.125D, 0.125D };
 
     private static boolean enabled() {
         return SelfAidConfig.ENABLE_SYSTEM.get();
@@ -126,14 +127,14 @@ public final class BodyHealthEvents {
 
     private static BodyPart weightedRandom() {
         double total = 0.0D;
-        for (BodyPart part : BodyPart.VALUES) {
-            total += part.maxHealthFraction();
+        for (double weight : DAMAGE_PART_WEIGHTS) {
+            total += weight;
         }
         double roll = RANDOM.nextDouble() * total;
-        for (BodyPart part : BodyPart.VALUES) {
-            roll -= part.maxHealthFraction();
+        for (int i = 0; i < BodyPart.VALUES.length; i++) {
+            roll -= DAMAGE_PART_WEIGHTS[i];
             if (roll <= 0.0D) {
-                return part;
+                return BodyPart.VALUES[i];
             }
         }
         return BodyPart.TORSO;
