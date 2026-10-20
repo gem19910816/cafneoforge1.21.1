@@ -6,11 +6,14 @@ issueTrackerURL = "https://mcreator.net"
 [[mods]]
 modId = "${mod_id}"
 version = "${mod_version}"
-displayName = "${mod_name}"
+displayName = "${mod_name} + 末日容器"
 displayURL = "https://mcreator.net"
 authors = "${mod_authors}"
 credits = "Created using mod maker MCreator - https://mcreator.net/about"
 description = '''${mod_description}'''
+
+[[mixins]]
+config = "doomsdaycontainers.mixins.json"
 
 [[dependencies.${mod_id}]]
 modId = "neoforge"

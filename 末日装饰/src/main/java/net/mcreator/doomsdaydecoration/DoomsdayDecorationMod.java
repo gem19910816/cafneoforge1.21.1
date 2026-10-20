@@ -38,6 +38,7 @@ public class DoomsdayDecorationMod {
         DoomsdayDecorationModItems.REGISTRY.register(modEventBus);
         DoomsdayDecorationModTabs.REGISTRY.register(modEventBus);
         modEventBus.addListener(this::registerCapabilities);
+        com.carrion.doomsdaycontainers.DoomsdayContainers.register(modEventBus);
     }
 
     /**

@@ -32,6 +32,8 @@ public final class ContainerTargets {
 
     /** 方块 -> 格子数 */
     private static final Map<Block, Integer> SLOTS = new IdentityHashMap<>();
+    /** 方块 -> 注册表 id，用于运行时读取世界级配置。 */
+    private static final Map<Block, ResourceLocation> IDS = new IdentityHashMap<>();
     /** 方块 -> 方块实体类型 */
     private static final Map<Block, BlockEntityType<GenericContainerBlockEntity>> TYPES = new IdentityHashMap<>();
     /** 原版方块 id -> 方块实体类型（有序，方便日志/遍历） */
@@ -102,6 +104,7 @@ public final class ContainerTargets {
             }
             Block block = BuiltInRegistries.BLOCK.get(id);
             SLOTS.put(block, slots);
+            IDS.put(block, id);
             CONFIGURED.put(id, slots);
             ContainerSounds.register(block, soundCategory, soundOpen, soundClose);
             SOUND_CATEGORIES.add(ContainerSounds.categoryOf(block));
@@ -146,7 +149,8 @@ public final class ContainerTargets {
     // ------------------------------------------------------------------ 查询
 
     public static boolean isTarget(Block block) {
-        return SLOTS.containsKey(block);
+        ResourceLocation id = IDS.get(block);
+        return id != null && ContainerConfig.isEnabled(id);
     }
 
     public static int slotsFor(Block block) {

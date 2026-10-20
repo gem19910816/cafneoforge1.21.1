@@ -30,6 +30,7 @@ public final class ContainerHooks {
 
     /** BlockBehaviour#getMenuProvider —— 旁观者等原版/NeoForge 路径也会走这里。 */
     public static MenuProvider getMenuProvider(Block self, BlockState state, Level level, BlockPos pos) {
+        if (!ContainerTargets.isTarget(self)) return null;
         return menuProviderAt(level, pos);
     }
 
@@ -39,6 +40,7 @@ public final class ContainerHooks {
      */
     public static InteractionResult useWithoutItem(Block self, BlockState state, Level level, BlockPos pos,
                                                    Player player, BlockHitResult hit) {
+        if (!ContainerTargets.isTarget(self)) return InteractionResult.PASS;
         if (player.isShiftKeyDown()) return InteractionResult.PASS;
         if (level.isClientSide) {
             // 客户端先给出"成功"的预测，避免手部回弹；真正的界面由服务端下发
@@ -71,11 +73,12 @@ public final class ContainerHooks {
 
     /** BlockBehaviour#hasAnalogOutputSignal */
     public static boolean hasAnalogOutputSignal(Block self, BlockState state) {
-        return true;
+        return ContainerTargets.isTarget(self);
     }
 
     /** BlockBehaviour#getAnalogOutputSignal —— 比较器按装满程度输出。 */
     public static int getAnalogOutputSignal(Block self, BlockState state, Level level, BlockPos pos) {
+        if (!ContainerTargets.isTarget(self)) return 0;
         BlockEntity be = level.getBlockEntity(pos);
         return be instanceof net.minecraft.world.Container container
                 ? AbstractContainerMenu.getRedstoneSignalFromContainer(container)
