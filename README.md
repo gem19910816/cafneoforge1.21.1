@@ -14,6 +14,7 @@
 | [急救护理 (SelfAid)](急救护理/) | —（1.21.1 **新实现**，非移植） | 1.21.1 NeoForge | [jar](急救护理/selfaid-1.0.0.jar) |
 | [绿葡萄护甲 (LesRaisins Armor)](绿葡萄护甲/) | 1.20.1 Forge 0.1.4.4 | 1.21.1 NeoForge | [jar](绿葡萄护甲/lrarmor-0.1.4.4.jar) |
 | [CAF 生存核心 (CAF Survival Core)](CAF生存核心/) | 1.20.1 Forge（原 Tarkov Stamina / ChaosZ Pack） | 1.21.1 NeoForge | [jar](CAF生存核心/tarkov_stamina-1.21.1-neoforge-1.0.0-port.jar) |
+| [MCphone CAF 手机](MCphone/) | november521/mcphone 1.11.2 + CAF 手机应用 | 1.21.1 NeoForge | [源码与集成说明](MCphone/CAF-INTEGRATION.md) |
 | [CAF草药 (Crop Expansion)](CAF草药/) | 1.20.1 Forge（原 `1.20.1forge/药草作物`） | 1.21.1 NeoForge | [jar](CAF草药/%5BCAF%E8%8D%89%E8%8D%AF%5DCAF_Herbs-1.21.1-neoforge-1.0.3.jar) |
 | [血腥版 (Gore Edition)](血腥版/) | 1.20.1 Forge 0.5 alpha 4d | 1.21.1 NeoForge | [jar](血腥版/gore_edition-0.5-neoforge-1.21.1.jar) |
 | [TACZ弹药统一 (Tacz: UniDict)](TACZ弹药统一/) | Tacz-Unidict 2.0.1（非官方移植） | 1.21.1 NeoForge 21.1.252 | [源码与构建说明](TACZ弹药统一/README.md) |
